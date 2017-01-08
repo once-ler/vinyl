@@ -1,0 +1,3 @@
+webpack/*
+karma.conf.js
+src/**/__tests__/**/*.js

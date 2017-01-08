@@ -1,0 +1,13 @@
+[ignore]
+.*/dist/.*
+.*/coverage/.*
+.*/resources/.*
+.*/node_modules/flow-bin/.*
+
+[libs]
+./resources/interfaces
+flow-typed
+
+[options]
+suppress_comment=.*\\$FlowFixMe
+suppress_comment=.*\\$FlowInvalidInputTest
