@@ -5,44 +5,35 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: {
-    main: './src/index.js',
+    app: [ './src/index.js' ],
+    vendor: ['axios', 'inferno', 'inferno-compat', 'inferno-component', 'inferno-router', 'inferno-create-element', 'inferno-redux', 'redux', 'rxjs', 'redux-observable']
   },
   output: {
-    filename: '[chunkhash].[name].js',
-    path: './build',
+    filename: '[name]-[chunkhash].js',
+    chunkFilename: '[name]-[chunkhash].js',
+    path: path.resolve(__dirname, '../dist')
   },
+  progress: true,
   resolve: {
-    extensions: ['.js', '.json', '.jsx', ''],
+    modulesDirectories: [
+      'src',
+      'node_modules'
+    ],
+    extensions: ['', '.js', '.json', '.jsx'],
     alias: {
-      // Support React Native Web
-      // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
       'react': 'inferno-compat',
       'react-dom': 'inferno-compat'      
     }
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader?modules'
-      }
-    ]
-  },
+  },  
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor' // Specify the common bundle's name.
-    }),
+    // new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
-      },
-      '__DEVTOOLS__': false
+      }
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
@@ -50,7 +41,22 @@ module.exports = {
       }
     }),
     new HtmlWebpackPlugin({
-      template: 'static/index.html',
+      title: 'vinyl',
+      filename: 'index.html',
+      template: 'static/index.html'
     }),
-  ]
+  ],
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader?modules'
+      }
+    ]
+  }
 };

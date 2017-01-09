@@ -1,11 +1,11 @@
 {
   "presets": ["es2015", "stage-0"],
   "plugins": [
+    "transform-runtime",
     "babel-plugin-syntax-jsx",
     "babel-plugin-inferno",
     "transform-class-properties",
     "transform-flow-strip-types",
-    "transform-async-to-generator", 
-    "transform-runtime"
+    "transform-async-to-generator"    
     ]
 }

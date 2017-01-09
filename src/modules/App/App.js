@@ -25,7 +25,10 @@ class App extends Component {
     return (
       <div>
         <IndexLink to="/">Brand</IndexLink>
-          <button key={10} onClick={linkEvent(this, this.handleLogout)}>
+          <button>
+            <Link to="/protected">Protected</Link>
+          </button>
+          <button onClick={linkEvent(this, this.handleLogout)}>
             <Link to="/logout">Logout</Link>
           </button>
         <div>

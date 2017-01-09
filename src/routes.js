@@ -3,6 +3,7 @@ import { IndexRoute, Route } from 'inferno-router';
 import { isLoaded as isAuthLoaded } from './modules/auth';
 import App from './modules/App/App';
 import Home from './modules/Home/Home';
+import Protected from './modules/Protected/Protected';
 import NotFound from './modules/NotFound/NotFound';
 
 export default (store: any) => {
@@ -27,7 +28,7 @@ export default (store: any) => {
       { /* Home (main) route */ }
       <IndexRoute component={Home} />
       { /* Routes requiring login */ }
-      <Route path="/protected" onEnter={requireLogin} >
+      <Route path="/protected" onEnter={requireLogin} component={Protected} >
         { /*  */ }
       </Route>
       { /* Catch all route */ }

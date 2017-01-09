@@ -5,16 +5,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: [
-    'webpack-hot-middleware/client',
     './src/index.js'
   ],
   output: {
-    filename: '[name].js',
-    chunkFilename: '[name].chunk.js',
+    filename: '[name]-[hash].js',
+    chunkFilename: '[name]-[chunkhash].js',
     path: path.resolve(__dirname, '../static/dist')
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx', ''],
+    modulesDirectories: [
+      'src',
+      'node_modules'
+    ],
+    extensions: ['', '.js', '.json', '.jsx'],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -22,18 +25,6 @@ module.exports = {
       'react': 'inferno-compat',
       'react-dom': 'inferno-compat'      
     }
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader?modules'
-      }
-    ]
   },
   performance: {
     maxAssetSize: 1000000,
@@ -59,16 +50,25 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
-      },
-      __CLIENT__: true,
-      __SERVER__: false,
-      __DEVELOPMENT__: true,
-      __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
+      }
     }),
     new HtmlWebpackPlugin({
       title: 'vinyl',
       filename: 'index.html',
       template: 'static/index.html',
     }),
-  ]
+  ],
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/, 
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader?modules'
+      }
+    ]
+  }
 };
