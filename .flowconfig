@@ -3,9 +3,11 @@
 .*/coverage/.*
 .*/resources/.*
 .*/node_modules/flow-bin/.*
+.*/styled-components/src/.*
 
 [libs]
 ./resources/interfaces
+./node_modules/styled-components/flow-typed
 flow-typed
 
 [options]

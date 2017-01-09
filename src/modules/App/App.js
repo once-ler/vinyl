@@ -1,3 +1,4 @@
+/* @flow */
 /* eslint no-unused-vars: 0 */
 import Inferno, { linkEvent } from 'inferno';
 import Component from 'inferno-component';

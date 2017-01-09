@@ -1,5 +1,5 @@
 /* eslint no-undef: 0, flowtype/no-weak-types: 0, max-len: 0 */
-import { createStore as _createStore, applyMiddleware, compose } from 'redux';
+import { createStore as _createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import reducer from './modules/reducer';
 import rootEpic from './modules/epic';
