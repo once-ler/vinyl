@@ -4,6 +4,7 @@
 .*/resources/.*
 .*/node_modules/flow-bin/.*
 .*/styled-components/src/.*
+.*/node_modules/rx-web-js/.*
 
 [libs]
 ./resources/interfaces

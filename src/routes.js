@@ -3,16 +3,18 @@ import { IndexRoute, Route } from 'inferno-router';
 import { isLoaded as isAuthLoaded } from './modules/auth';
 import App from './modules/App/App';
 import Home from './modules/Home/Home';
+import Login from './modules/Login/Login';
 import Protected from './modules/Protected/Protected';
 import NotFound from './modules/NotFound/NotFound';
 
 export default (store: any) => {
-  const requireLogin = (nextState, router) => {
+  const requireLogin = nextState => {
+    const { router } = nextState;
     function checkAuth() {
       const { auth: { user } } = store.getState();
       if (!user) {
         // oops, not logged in, so can't be here!
-        router.push('/login');
+        router.replace('/login');
       }
     }
 
@@ -31,6 +33,7 @@ export default (store: any) => {
       <Route path="/protected" onEnter={requireLogin} component={Protected} >
         { /*  */ }
       </Route>
+      <Route path="/login" component={Login} />
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />
     </Route>

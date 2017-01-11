@@ -25,9 +25,8 @@ type Action = {
 };
 type State = any;
 
-// Force loaded: true so it won't use deprecated promise for now
 const initialState = {
-  loaded: true
+  loaded: false
 };
 
 export default function reducer(state: State = initialState, action: Action = { type: '' }) {
