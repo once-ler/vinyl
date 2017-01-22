@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint no-implicit-coercion: 0, no-extra-boolean-cast: 0 */
 import styled, { css } from 'styled-components';
-import { getAlign } from '../Setting/Setting';
+import { getAlign, growBasis } from '../Setting/Setting';
 
 const rowFuncs = {
   gutter: ({ column, gutter, unit }) => {
@@ -74,7 +74,6 @@ const rowFuncs = {
 
 const Row = styled.div `
   display  : flex;
-  flex     : 0 1 auto;
   flex-wrap: nowrap;
   min-width: 100%;
 
@@ -99,6 +98,12 @@ const Row = styled.div `
   ${p => p.padding && `
     padding: ${p.padding};
   `}
+
+  ${p => p.growBasis && `
+    flex: typeof p.growBasis === 'number' ? p.growBasis : (growBasis[p.growBasis] || 'none')
+  }
+
+  ${p => !p.hasOwnProperty('growBasis') && `flex: 0 1 auto`}
 `;
 
 Row.defaultProps = {
