@@ -1,5 +1,5 @@
 /* @flow */
-/* eslint no-implicit-coercion: 0, no-extra-boolean-cast: 0 */
+/* eslint no-implicit-coercion: 0, no-extra-boolean-cast: 0, max-len: 0 */
 import styled, { css } from 'styled-components';
 import { getAlign, growBasis } from '../Setting/Setting';
 
@@ -98,12 +98,6 @@ const Row = styled.div `
   ${p => p.padding && `
     padding: ${p.padding};
   `}
-
-  ${p => p.growBasis && `
-    flex: typeof p.growBasis === 'number' ? p.growBasis : (growBasis[p.growBasis] || 'none')
-  }
-
-  ${p => !p.hasOwnProperty('growBasis') && `flex: 0 1 auto`}
 `;
 
 Row.defaultProps = {
@@ -111,4 +105,21 @@ Row.defaultProps = {
   unit: 'px'
 };
 
-export default Row;
+const Cell = styled.div `
+  ${ props => (
+    Object.keys(rowFuncs)
+      .map( n => !!props[n] ? rowFuncs[n](props) : false )
+      .filter( v => v )
+  )}
+
+  ${p => p.growBasis && `
+    flex: ${typeof p.growBasis === 'number' ? p.growBasis : (growBasis[p.growBasis] || 'none')}
+    `
+  }
+`;
+
+Cell.defaultProps = {
+  flex: '0 1 auto'
+};
+
+export { Row, Cell };

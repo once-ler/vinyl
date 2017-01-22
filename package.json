@@ -9,7 +9,7 @@
     "clean": "rimraf dist",
     "lint": "eslint src",
     "postinstall": "flow-typed install",
-    "start": "webpack-dev-server --quiet --config webpack/dev.config.js --host 0.0.0.0 --port 3000",
+    "start": "webpack-dev-server --colors --inline --hot --no-info --config webpack/dev.config.js --host 0.0.0.0 --port 3000",
     "test": "npm run check && npm run build && npm run testonly",
     "testonly": "mocha --require resources/mocha-bootload src/**/__tests__/**/*.js"
   },
