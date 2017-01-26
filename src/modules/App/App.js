@@ -3,8 +3,17 @@
 import Inferno, { linkEvent } from 'inferno';
 import Component from 'inferno-component';
 import { connect } from 'inferno-redux';
-import { IndexLink, Link } from 'inferno-router';
+import { Link } from 'inferno-router';
+import styled from 'styled-components';
 import { logout } from '../../modules/auth';
+
+const BetterLink = styled(Link) `
+  color: sandybrown;
+  display: block;
+  padding: 0.5em 0;
+  cursor: pointer;
+  text-decoration: none;
+`;
 
 class App extends Component {
   componentWillReceiveProps(nextProps) {
@@ -25,13 +34,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <IndexLink to="/">Brand</IndexLink>
-          <button>
-            <Link to="/protected">Protected</Link>
-          </button>
-          <button onClick={linkEvent(this, this.handleLogout)}>
-            <Link to="/logout">Logout</Link>
-          </button>
+        <BetterLink to="/">Brand</BetterLink>
+        <BetterLink to="/protected">Protected</BetterLink>
+        <BetterLink to="/logout" onClick={linkEvent(this, this.handleLogout)}>Logout</BetterLink>
         <div>
           {this.props.children}
         </div>
