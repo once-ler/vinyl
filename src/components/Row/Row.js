@@ -39,6 +39,27 @@ const rowFuncs = {
   `,
   wrap: () => `
     flex-wrap: wrap;
+    align-content: stretch;
+  `,
+  wrapStart: () => `
+    flex-wrap: wrap;
+    align-content: flex-start;
+  `,
+  wrapCenter: () => `
+    flex-wrap: wrap;
+    align-content: flex-center;
+  `,
+  wrapEnd: () => `
+    flex-wrap: wrap;
+    align-content: flex-end;
+  `,
+  wrapBetween: () => `
+    flex-wrap: wrap;
+    align-content: space-between;
+  `,
+  wrapAround: () => `
+    flex-wrap: wrap;
+    align-content: space-around;
   `,
   top: () => `
     align-items: flex-start;
@@ -66,9 +87,30 @@ const rowFuncs = {
   `,
   between: () => `
     justify-content: space-between;
+  `
+};
+
+const cellFuncs = {
+  order: (val: number) => css `
+    order: ${val}
+  `,
+  margin: () => `
+    margin: auto;
   `,
   stretch: () => `
     align-self: stretch;
+  `,
+  start: () => `
+    align-self: flex-start;
+  `,
+  end: () => `
+    align-self: flex-end;
+  `,
+  center: () => `
+    align-self: center;
+  `,
+  baseline: () => `
+    align-self: baseline;
   `
 };
 

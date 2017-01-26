@@ -3,7 +3,7 @@ import Inferno, { linkEvent } from 'inferno';
 import Component from 'inferno-component';
 
 class Login extends Component {
-  submit(instance, event) {
+  submit(instance: Login, event: Event) {
     event.preventDefault();
     const store = instance.context.store;
     const state = store.getState();
