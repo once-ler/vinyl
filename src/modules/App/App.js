@@ -6,6 +6,7 @@ import { connect } from 'inferno-redux';
 import { Link } from 'inferno-router';
 import styled from 'styled-components';
 import { logout } from '../../modules/auth';
+import { Row, Cell } from '../../components/Row/Row';
 
 const BetterLink = styled(Link) `
   color: sandybrown;
@@ -13,6 +14,11 @@ const BetterLink = styled(Link) `
   padding: 0.5em 0;
   cursor: pointer;
   text-decoration: none;
+`;
+
+const NavCell = styled(Cell) `
+  width: 100px;
+  min-height: 100px;
 `;
 
 class App extends Component {
@@ -34,12 +40,22 @@ class App extends Component {
   render() {
     return (
       <div>
+      <Row wrapBetween>
+        <NavCell margin>
         <BetterLink to="/">Brand</BetterLink>
+        </NavCell>
+        <NavCell margin>
         <BetterLink to="/protected">Protected</BetterLink>
+        </NavCell>
+        <NavCell>
         <BetterLink to="/logout" onClick={linkEvent(this, this.handleLogout)}>Logout</BetterLink>
+        </NavCell>                
+      </Row>
+      <Row>
         <div>
           {this.props.children}
         </div>
+      </Row>
       </div>
     );
   }
