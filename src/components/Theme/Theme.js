@@ -1,7 +1,7 @@
 export const greenTheme = {
   name: 'Green',
-  main: 'mediumseagreen',
-  secondary: 'tomato'
+  main: 'slategray',
+  secondary: 'rosybrown'
 };
 
 export const redTheme = {
