@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint no-implicit-coercion: 0, no-extra-boolean-cast: 0, max-len: 0 */
 import styled, { css } from 'styled-components';
-import { getAlign, growBasis } from '../Setting/Setting';
+import { getAlign } from '../Setting/Setting';
 
 const rowFuncs = {
   gutter: ({ column, gutter, unit }) => {
@@ -90,35 +90,10 @@ const rowFuncs = {
   `
 };
 
-const cellFuncs = {
-  order: (val: number) => css `
-    order: ${val}
-  `,
-  margin: () => `
-    margin: auto;
-  `,
-  stretch: () => `
-    align-self: stretch;
-  `,
-  start: () => `
-    align-self: flex-start;
-  `,
-  end: () => `
-    align-self: flex-end;
-  `,
-  center: () => `
-    align-self: center;
-  `,
-  baseline: () => `
-    align-self: baseline;
-  `
-};
-
 const Row = styled.div `
   display  : flex;
   flex-wrap: nowrap;
-  min-width: 100%;
-
+  
   ${ props => (
     Object.keys(rowFuncs)
       .map( n => !!props[n] ? rowFuncs[n](props) : false )
@@ -147,21 +122,4 @@ Row.defaultProps = {
   unit: 'px'
 };
 
-const Cell = styled.div `
-  ${ props => (
-    Object.keys(rowFuncs)
-      .map( n => !!props[n] ? rowFuncs[n](props) : false )
-      .filter( v => v )
-  )}
-
-  ${p => p.growBasis && `
-    flex: ${typeof p.growBasis === 'number' ? p.growBasis : (growBasis[p.growBasis] || 'none')}
-    `
-  }
-`;
-
-Cell.defaultProps = {
-  flex: '0 1 auto'
-};
-
-export { Row, Cell };
+export default Row;

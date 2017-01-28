@@ -1,7 +1,9 @@
 export const greenTheme = {
   name: 'Green',
   main: 'slategray',
-  secondary: 'rosybrown'
+  secondary: 'rosybrown',
+  fontFamily: 'Georgia, serif',
+  backgroundColor: 'papayawhip'
 };
 
 export const redTheme = {

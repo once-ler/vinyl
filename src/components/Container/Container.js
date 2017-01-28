@@ -3,9 +3,15 @@ import Inferno from 'inferno';
 import { connect } from 'inferno-redux';
 import styled, { ThemeProvider } from 'styled-components';
 import { greenTheme } from '../Theme/Theme';
+import ResponsiveRow from '../Row/ResponsiveRow';
 
-const DefaultContainer = styled.div `\
-  font-family: Georgia, serif;
+const DefaultContainer = styled.div `
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  font-family: ${props => props.theme.fontFamily};
+  background-color: ${props => props.theme.backgroundColor};
 `;
 
 const Container = props => {

@@ -3,14 +3,14 @@ import {css} from 'styled-components';
 // sm-md: 14em
 // lg: 48em
 const sizes = {
-  laptop: 1200,
-  tablet: 768,
+  laptop: 800,
+  tablet: 600,
   phablet: 376
 };
 
 export const media = Object.keys(sizes).reduce((accumulator, label) => {
   accumulator[label] = (...args) => css`
-    @media (min-width: ${sizes[label]}px) {
+    @media (max-width: ${sizes[label]}px) {
       ${css(...args)}
     }
   `;
@@ -19,7 +19,7 @@ export const media = Object.keys(sizes).reduce((accumulator, label) => {
 
 export const growBasis = {
   auto: 'none',
-  fit: '1',
+  fit: '1 100%',
   full: '0 0 99%',
   halves: '0 0 49.4%',
   thirds: '0 0 32.4%',
