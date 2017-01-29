@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { Form as SimplerForm, Field } from 'simpler-redux-form';
 import Input from '../../components/Input/Input';
 import Label from '../../components/Label/Label';
+import Fieldset from '../../components/Fieldset/Fieldset';
+import Legend from '../../components/Legend/Legend';
 import FormComponent from '../../components/Form/Form';
 import FormCell from '../../components/Cell/FormCell';
 import Row from '../../components/Row/Row';
@@ -40,7 +42,8 @@ const Form = props => {
     <Container>
       <FormComponent
         onSubmit={submit(submitAction)}>
-        <Row wrap between>
+        <Row><Legend>Personal</Legend></Row>
+        <Row>
         <Field
           name="firstName"
           component={ValidatedInput}
@@ -66,6 +69,29 @@ const Form = props => {
           label="Phone Number"
           growBasis={2}
           placeholder="Enter phone number"/>
+        </Row>
+        <Row>
+        <Field
+          name="homeAddress"
+          component={ValidatedInput}
+          type="text"
+          label="Home Address"
+          growBasis={4}
+          placeholder="Enter home address"/>
+        <Field
+          name="homeState"
+          component={ValidatedInput}
+          type="text"
+          label="Home State"
+          growBasis={1}
+          placeholder="Enter home state"/>
+        <Field
+          name="homeZip"
+          component={ValidatedInput}
+          type="text"
+          label="Home Zip"
+          growBasis={2}
+          placeholder="Enter home zip"/>
         </Row>
       </FormComponent>
       <h1>{error}</h1>

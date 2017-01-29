@@ -1,8 +1,9 @@
 /* @flow */
+import Inferno from 'inferno';
 import styled from 'styled-components';
+import Row from '../Row/Row';
 
-const Form = styled.form `
-  display: flex;
+const DefaultForm = styled.form `
   height: 100%;
   width: 100%;
   background-color: #fefefe;
@@ -16,5 +17,9 @@ const Form = styled.form `
     box-sizing: border-box;
   }
 `;
+
+const Form = props => (
+  <Row wrap><DefaultForm>{props.children}</DefaultForm></Row>
+);
 
 export default Form;
