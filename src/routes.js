@@ -1,10 +1,12 @@
 /* eslint no-unused-vars:0 */
+import Inferno from 'inferno';
 import { IndexRoute, Route } from 'inferno-router';
 import { isLoaded as isAuthLoaded } from './modules/auth';
 import App from './modules/App/App';
 import Home from './modules/Home/Home';
 import Login from './modules/Login/Login';
 import Protected from './modules/Protected/Protected';
+import Form from './modules/Form/Form';
 import NotFound from './modules/NotFound/NotFound';
 
 export default (store: any) => {
@@ -33,6 +35,7 @@ export default (store: any) => {
       <Route path="/protected" onEnter={requireLogin} component={Protected} >
         { /*  */ }
       </Route>
+      <Route path="/form" component={Form} />
       <Route path="/login" component={Login} />
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />

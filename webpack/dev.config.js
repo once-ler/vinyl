@@ -23,7 +23,8 @@ module.exports = {
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
       'react': 'inferno-compat',
-      'react-dom': 'inferno-compat'      
+      'react-dom': 'inferno-compat',
+      'react-redux': 'inferno-redux'      
     }
   },
   performance: {
@@ -62,7 +63,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules/, 
+        exclude: /node_modules(?!\/simpler-redux-form)/, 
         loader: 'babel-loader'
       },
       {

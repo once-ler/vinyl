@@ -55,6 +55,9 @@ class App extends Component {
           <NavCell margin>
           <BetterLink to="/protected">Protected</BetterLink>
           </NavCell>
+          <NavCell margin>
+          <BetterLink to="/form">Form</BetterLink>
+          </NavCell>
           <NavCell>
           <BetterLink to="/logout" onClick={linkEvent(this, this.handleLogout)}>Logout</BetterLink>
           </NavCell>

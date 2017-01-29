@@ -23,7 +23,8 @@ module.exports = {
     alias: {
       'react-native': 'react-native-web',
       'react': 'inferno-compat',
-      'react-dom': 'inferno-compat'      
+      'react-dom': 'inferno-compat',
+      'react-redux': 'inferno-redux'
     }
   },  
   plugins: [

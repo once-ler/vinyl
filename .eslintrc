@@ -10,7 +10,7 @@
   "plugins": [
     "babel",
     "flowtype",
-    "eslint-plugin-react"
+    "eslint-plugin-inferno"
   ],
 
   "parserOptions": {
