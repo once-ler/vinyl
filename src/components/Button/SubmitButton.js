@@ -4,7 +4,7 @@ import Button from './Button';
 const SubmitButton = ({busy, children}) => (
   <Button
     type="submit"
-    disabled={busy}>
+    disabled={busy}
   >{children}
   </Button>
 );
