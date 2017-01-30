@@ -18,8 +18,11 @@ const DefaultForm = styled.form `
   }
 `;
 
-const Form = props => (
-  <Row wrap><DefaultForm>{props.children}</DefaultForm></Row>
-);
+const Form = props => {
+  const { children, ...rest } = props;
+  return (
+    <Row wrap><DefaultForm {...rest}>{children}</DefaultForm></Row>
+  );
+};
 
 export default Form;

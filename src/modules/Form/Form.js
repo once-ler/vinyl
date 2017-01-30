@@ -4,8 +4,10 @@ import Inferno from 'inferno';
 import Component from 'inferno-component';
 import { connect } from 'inferno-redux';
 import styled from 'styled-components';
-import { Form as SimplerForm, Field } from 'simpler-redux-form';
+import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
 import Input from '../../components/Input/Input';
+import ValidatedInput from '../../components/Input/ValidatedInput';
+import SubmitButton from '../../components/Button/SubmitButton';
 import Label from '../../components/Label/Label';
 import Fieldset from '../../components/Fieldset/Fieldset';
 import Legend from '../../components/Legend/Legend';
@@ -19,17 +21,6 @@ import ResponsiveCell from '../../components/Cell/ResponsiveCell';
 import { media } from '../../components/Setting/Setting';
 
 const submitAction = data => (dispatch, getState) => dispatch({ type: 'SUBMIT_REQUEST', data });
-
-const ValidatedInput = props => {
-  const { error, indicateInvalid, label, growBasis, ...rest } = props;
-  return (
-    <FormCell growBasis={growBasis}>
-      <Label>{label}</Label>
-      <Input {...rest}></Input>
-      { indicateInvalid && <div className="error">{error}</div> }
-    </FormCell>
-  );
-};
 
 const validateFirstName = firstName => !firstName ? 'First name is required.' : undefined;
 const validateLastName = lastName => !lastName ? 'Last name is required.' : undefined;
@@ -93,33 +84,14 @@ const Form = props => {
           growBasis={2}
           placeholder="Enter home zip"/>
         </Row>
+        <Row>
+        <Submit component={ SubmitButton }>Save</Submit>
+        </Row>
       </FormComponent>
       <h1>{error}</h1>
     </Container>
   );
 };
-
-class Form2 extends Component {
-  render() {
-    const { phone, submit, error } = this.props;
-
-    return (
-      <Row>
-        <form
-          onSubmit={submit(submitAction)}>
-          <Field
-            name="phone"
-            component={ValidatedInput}
-            value={phone}
-            validate={validatePhone}
-            type="tel"
-            placeholder="Enter phone number"/>
-        </form>
-        <h1>{error}</h1>
-      </Row>
-    );
-  }
-}
 
 const connectedComponent = connect(
   state => ({
