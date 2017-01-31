@@ -10,9 +10,6 @@ const Label = styled.label `
   display: block;
   margin-bottom: 4px;
   cursor: text;
-  &:hover {
-    color: #262626;
-  }
 `;
 
 export default Label;

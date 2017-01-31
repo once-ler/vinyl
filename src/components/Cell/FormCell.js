@@ -16,6 +16,10 @@ const FormCell = styled(Cell) `
     display: table;
     clear: both;
   }
+  :focus {
+    background-color: #fffad4;
+    cursor: text;
+  }
 `;
 
 export default FormCell;
