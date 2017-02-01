@@ -7,11 +7,14 @@ import { Link } from 'inferno-router';
 import styled from 'styled-components';
 import { logout } from '../../modules/auth';
 import Row from '../../components/Row/Row';
-import Cell from '../../components/Cell/Cell';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
+import NavRow from '../../components/Row/NavRow';
+import Cell from '../../components/Cell/Cell';
 import ResponsiveCell from '../../components/Cell/ResponsiveCell';
+import NavCell from '../../components/Cell/NavCell';
 import Container from '../../components/Container/Container';
 import { media } from '../../components/Setting/Setting';
+import { makeActive } from './Action';
 
 const BetterLink = styled(Link) `
   color: sandybrown;
@@ -20,13 +23,6 @@ const BetterLink = styled(Link) `
   cursor: pointer;
   text-decoration: none;
   color: ${props => props.theme.main};  
-`;
-
-const NavCell = styled(ResponsiveCell) `
-  min-width: 120px;
-  min-height: 60px;
-  background-color: ${props => props.theme.secondary};
-  margin: 10px;
 `;
 
 class App extends Component {
@@ -40,28 +36,23 @@ class App extends Component {
     }
   }
 
-  handleLogout = (instance, event) => {
-    event.preventDefault();
-    instance.props.logout();
-  }
-
   render() {
     return (
       <Container>
-        <ResponsiveRow wrap end>
+        <NavRow wrap end>
           <NavCell margin>
-          <BetterLink to="/">Home</BetterLink>
+          <BetterLink to="/" onClick={makeActive(this.context.router.location.pathname)}>Home</BetterLink>
           </NavCell>
           <NavCell margin>
-          <BetterLink to="/protected">Protected</BetterLink>
+          <BetterLink to="/protected" onClick={makeActive(this.context.router.location.pathname)}>Protected</BetterLink>
           </NavCell>
           <NavCell margin>
-          <BetterLink to="/form">Form</BetterLink>
+          <BetterLink to="/form" onClick={makeActive(this.context.router.location.pathname)}>Form</BetterLink>
           </NavCell>
           <NavCell>
-          <BetterLink to="/logout" onClick={linkEvent(this, this.handleLogout)}>Logout</BetterLink>
+          <BetterLink to="/logout" onclick={logout()}>Logout</BetterLink>
           </NavCell>
-        </ResponsiveRow>
+        </NavRow>
         <ResponsiveRow>
           {this.props.children}
         </ResponsiveRow>
@@ -72,5 +63,5 @@ class App extends Component {
 
 export default connect(
   state => ({ user: state.auth.user }),
-  { logout }
+  { logout, makeActive }
 )(App);
