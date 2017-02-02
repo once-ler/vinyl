@@ -1,19 +1,39 @@
+/* @flow */
 import Inferno from 'inferno';
 import { connect } from 'inferno-redux';
 import styled from 'styled-components';
-import ResponsiveCell from './ResponsiveCell';
+import Cell from './Cell';
+import { media } from '../Setting/Setting';
 
-const NavCell = styled(ResponsiveCell) `
+const DefaultCell = styled(Cell) `
   min-width: 120px;
   min-height: 60px;
   background-color: ${props => props.theme.secondary};
   margin: 10px;
-  order: ${props => props.active === props.children.props.to ? -1 : undefined};
+  ${media.tablet `
+    flex: 1 100%;
+    max-width: 80%;
+    align-self: flex-start;
+    `
+  }
+  order: ${props => props.order};
 `;
 
-// console.log(<NavCell />);
-this.context.store.getState().routing.locationBeforeTransitions.pathname
+const NavCell = props => {
+  const { children, routing, ...rest } = props;
+  const newProps = {
+    ...rest,
+    order:
+    routing.locationBeforeTransitions
+    &&
+    routing.locationBeforeTransitions.pathname === props.children.props.to
+    ? -1 : undefined
+  }; 
+  return (
+    <DefaultCell {...newProps}>{children}</DefaultCell>
+  );
+};
 
 export default connect(
-  state => ({ active: state.nav.active })
+  state => ({ routing: state.routing })
 )(NavCell);
