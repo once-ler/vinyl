@@ -11,6 +11,9 @@ const NavCell = styled(ResponsiveCell) `
   order: ${props => props.active === props.children.props.to ? -1 : undefined};
 `;
 
+// console.log(<NavCell />);
+this.context.store.getState().routing.locationBeforeTransitions.pathname
+
 export default connect(
   state => ({ active: state.nav.active })
 )(NavCell);

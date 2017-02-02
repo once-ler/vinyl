@@ -1,8 +1,8 @@
 /* @flow */
 import Inferno from 'inferno';
 import { Router } from 'inferno-router';
-import createBrowserHistory from 'history/createBrowserHistory';
 import { Provider } from 'inferno-redux';
+import createBrowserHistory from 'history/createBrowserHistory';
 import createStore from './createStore';
 import getRoutes from './routes';
 

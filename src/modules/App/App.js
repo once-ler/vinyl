@@ -14,7 +14,7 @@ import ResponsiveCell from '../../components/Cell/ResponsiveCell';
 import NavCell from '../../components/Cell/NavCell';
 import Container from '../../components/Container/Container';
 import { media } from '../../components/Setting/Setting';
-import { makeActive } from './Action';
+// import { makeActive } from './Action';
 
 const BetterLink = styled(Link) `
   color: sandybrown;
@@ -41,13 +41,13 @@ class App extends Component {
       <Container>
         <NavRow wrap end>
           <NavCell margin>
-          <BetterLink to="/" onClick={makeActive(this.context.router.location.pathname)}>Home</BetterLink>
+          <BetterLink to="/">Home</BetterLink>
           </NavCell>
           <NavCell margin>
-          <BetterLink to="/protected" onClick={makeActive(this.context.router.location.pathname)}>Protected</BetterLink>
+          <BetterLink to="/protected">Protected</BetterLink>
           </NavCell>
           <NavCell margin>
-          <BetterLink to="/form" onClick={makeActive(this.context.router.location.pathname)}>Form</BetterLink>
+          <BetterLink to="/form">Form</BetterLink>
           </NavCell>
           <NavCell>
           <BetterLink to="/logout" onclick={logout()}>Logout</BetterLink>
@@ -63,5 +63,5 @@ class App extends Component {
 
 export default connect(
   state => ({ user: state.auth.user }),
-  { logout, makeActive }
+  { logout }
 )(App);

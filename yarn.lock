@@ -46,6 +46,12 @@ align-text@^0.1.1, align-text@^0.1.3:
     longest "^1.0.1"
     repeat-string "^1.5.2"
 
+amator@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/amator/-/amator-1.0.1.tgz#0fd3663fef5f3334d088cf68a70ba74398aa0e26"
+  dependencies:
+    bezier-easing "^2.0.3"
+
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
@@ -374,12 +380,12 @@ babel-plugin-check-es2015-constants@^6.3.13:
   dependencies:
     babel-runtime "^6.0.0"
 
-babel-plugin-inferno@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-inferno/-/babel-plugin-inferno-1.5.0.tgz#9beb329562ca5312a6b444b998d17e4bac842f79"
+babel-plugin-inferno@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-inferno/-/babel-plugin-inferno-1.7.0.tgz#c9817dd3590d5af87f83c66e3b9403aa732e7776"
   dependencies:
     babel-plugin-syntax-jsx "^6.18.0"
-    inferno-vnode-flags "^1.0.7"
+    inferno-vnode-flags "^1"
 
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
@@ -788,7 +794,7 @@ babel-register@^6.18.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.20.0, babel-runtime@^6.9.0, babel-runtime@^6.9.1:
+babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.20.0, babel-runtime@^6.6.1, babel-runtime@^6.9.0, babel-runtime@^6.9.1:
   version "6.20.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.20.0.tgz#87300bdcf4cd770f09bf0048c64204e17806d16f"
   dependencies:
@@ -849,6 +855,10 @@ bcrypt-pbkdf@^1.0.0:
   resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.0.tgz#3ca76b85241c7170bf7d9703e7b9aa74630040d4"
   dependencies:
     tweetnacl "^0.14.3"
+
+bezier-easing@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/bezier-easing/-/bezier-easing-2.0.3.tgz#cb493fddb7f8920ecca00973344ce0518885f17e"
 
 big.js@^3.1.3:
   version "3.1.3"
@@ -1527,13 +1537,15 @@ eslint-plugin-import@^2.2.0:
     minimatch "^3.0.3"
     pkg-up "^1.0.0"
 
-eslint-plugin-react@^6.9.0:
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-6.9.0.tgz#54c2e9906b76f9d10142030bdc34e9d6840a0bb2"
+eslint-plugin-inferno@^6.9.1:
+  version "6.9.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-inferno/-/eslint-plugin-inferno-6.9.2.tgz#6df460cf3bb4674a4ca1ce136d3c8302b87dd88a"
   dependencies:
     array.prototype.find "^2.0.1"
     doctrine "^1.2.2"
+    has "^1.0.1"
     jsx-ast-utils "^1.3.4"
+    object.assign "^4.0.4"
 
 eslint@^3.13.0:
   version "3.13.0"
@@ -2012,6 +2024,10 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
+hoist-non-react-statics@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
+
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -2112,44 +2128,43 @@ indexof@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
 
-inferno-compat@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/inferno-compat/-/inferno-compat-1.1.1.tgz#a0e6265345b5764f2daa9193cd745586ca56678f"
+inferno-compat@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/inferno-compat/-/inferno-compat-1.2.2.tgz#abf4716e3814079cfd503ebb6505450c183b2065"
   dependencies:
-    inferno "1.1.1"
-    inferno-component "1.1.1"
+    inferno "1.2.2"
+    inferno-component "1.2.2"
     inferno-transition-group "1.1.1"
-    proptypes "0.14.3"
-    rc-css-transition-group "2.1.4"
+    rc-css-transition-group-modern "^2.1.6"
 
-inferno-component@1.1.1, inferno-component@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/inferno-component/-/inferno-component-1.1.1.tgz#33ea8c12f388f227795a10d6f1a517a353ecee7e"
+inferno-component@1.2.2, inferno-component@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/inferno-component/-/inferno-component-1.2.2.tgz#aa0a1dd790d644805be3f2221c87aaa404792ebb"
   dependencies:
-    inferno "1.1.1"
+    inferno "1.2.2"
 
-inferno-create-element@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/inferno-create-element/-/inferno-create-element-1.1.1.tgz#f569aeb78dbaabe738fabb0254b20ff9ee5c4678"
+inferno-create-element@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/inferno-create-element/-/inferno-create-element-1.2.2.tgz#99296b0e34965d799f4f6b6459ba7dec4b6a3b57"
   dependencies:
-    inferno "1.1.1"
+    inferno "1.2.2"
 
-inferno-redux@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/inferno-redux/-/inferno-redux-1.1.1.tgz#1be11b697436b320f6dd859040d169c63c30e245"
+inferno-redux@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/inferno-redux/-/inferno-redux-1.2.2.tgz#37ba738339bea0b30253355a3300e802aaa70407"
   dependencies:
-    inferno "1.1.1"
-    inferno-component "1.1.1"
-    inferno-create-element "1.1.1"
+    inferno "1.2.2"
+    inferno-component "1.2.2"
+    inferno-create-element "1.2.2"
     redux "*"
 
-inferno-router@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/inferno-router/-/inferno-router-1.1.1.tgz#974e2ee13d2ba01e0011576af0f4ec1e07a1e947"
+inferno-router@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/inferno-router/-/inferno-router-1.2.2.tgz#68f8740c5d6df9731569a73e4b5fe19d28acfdfc"
   dependencies:
-    inferno "1.1.1"
-    inferno-component "1.1.1"
-    inferno-create-element "1.1.1"
+    inferno "1.2.2"
+    inferno-component "1.2.2"
+    inferno-create-element "1.2.2"
 
 inferno-transition-group@1.1.1:
   version "1.1.1"
@@ -2157,15 +2172,15 @@ inferno-transition-group@1.1.1:
   dependencies:
     inferno "^1.1.1"
 
-inferno-vnode-flags@^1.0.7:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/inferno-vnode-flags/-/inferno-vnode-flags-1.1.1.tgz#3e914a54372b08da1b6daa58757bbbb0d3f6e6f0"
+inferno-vnode-flags@^1:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/inferno-vnode-flags/-/inferno-vnode-flags-1.2.2.tgz#b223aab6876bf63effa2663815d1d06c3ba25732"
   dependencies:
-    inferno "1.1.1"
+    inferno "1.2.2"
 
-inferno@1.1.1, inferno@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/inferno/-/inferno-1.1.1.tgz#4432a162435fb5fa855cea5b905206fb8b011ee2"
+inferno@1.2.2, inferno@^1.1.1, inferno@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/inferno/-/inferno-1.2.2.tgz#0094e4ed428db30184bfa348a5aa38211945e67d"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -2828,9 +2843,17 @@ object-hash@^1.1.4:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-1.1.5.tgz#bdd844e030d0861b692ca175c6cab6868ec233d7"
 
-object-keys@^1.0.8:
+object-keys@^1.0.10, object-keys@^1.0.8:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.0.11.tgz#c54601778ad560f1142ce0e01bcca8b56d13426d"
+
+object.assign@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/object.assign/-/object.assign-4.0.4.tgz#b1c9cc044ef1b9fe63606fc141abbb32e14730cc"
+  dependencies:
+    define-properties "^1.1.2"
+    function-bind "^1.1.0"
+    object-keys "^1.0.10"
 
 object.omit@^2.0.0:
   version "2.0.1"
@@ -3015,10 +3038,6 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-proptypes@0.14.3:
-  version "0.14.3"
-  resolved "https://registry.yarnpkg.com/proptypes/-/proptypes-0.14.3.tgz#948d47f0ef1b501e34d934e42b39d60d26a8bf9d"
-
 proxy-addr@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-1.1.2.tgz#b4cc5f22610d9535824c123aef9d3cf73c40ba37"
@@ -3084,9 +3103,9 @@ range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
-rc-css-transition-group@2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/rc-css-transition-group/-/rc-css-transition-group-2.1.4.tgz#3bb6cbf33033b9b452065a98fb24efe18405fc82"
+rc-css-transition-group-modern@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/rc-css-transition-group-modern/-/rc-css-transition-group-modern-2.1.6.tgz#e34d63752110ee2ccf5185cd6ba4c774cfdf1bb7"
 
 rc@~1.1.6:
   version "1.1.6"
@@ -3097,13 +3116,9 @@ rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
-react@^15.4.2:
-  version "15.4.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
-  dependencies:
-    fbjs "^0.8.4"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
+react-router-redux@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-4.0.7.tgz#9b1fde4e70106c50f47214e12bdd888cfb96e2a6"
 
 readable-stream@1.0:
   version "1.0.34"
@@ -3334,6 +3349,12 @@ rxjs@^5.0.3:
   dependencies:
     symbol-observable "^1.0.1"
 
+scroll-into-view-if-needed@^1.0.2:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-1.0.6.tgz#2523698eae2ecf6a164c7ae20a5ded7b62545f16"
+  dependencies:
+    amator "^1.0.1"
+
 semver@~5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
@@ -3446,6 +3467,14 @@ should@^11.1.2:
 signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+simpler-redux-form@^0.3.9:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/simpler-redux-form/-/simpler-redux-form-0.3.9.tgz#cd8b55fe012a9497d4258baffd11c2badfce7a59"
+  dependencies:
+    babel-runtime "^6.6.1"
+    hoist-non-react-statics "^1.2.0"
+    scroll-into-view-if-needed "^1.0.2"
 
 slash@^1.0.0:
   version "1.0.0"
