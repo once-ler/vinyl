@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint max-len: 0 */
 import Inferno from 'inferno';
 import { connect } from 'inferno-redux';
 import styled from 'styled-components';
@@ -14,9 +15,10 @@ const DefaultCell = styled(Cell) `
     flex: 1 100%;
     max-width: 80%;
     align-self: flex-start;
+    order: ${props => props.order};
     `
   }
-  order: ${props => props.order};
+  order: 0;
 `;
 
 const NavCell = props => {
@@ -24,11 +26,10 @@ const NavCell = props => {
   const newProps = {
     ...rest,
     order:
-    routing.locationBeforeTransitions
-    &&
-    routing.locationBeforeTransitions.pathname === props.children.props.to
-    ? -1 : undefined
-  }; 
+    routing.locationBeforeTransitions &&
+    routing.locationBeforeTransitions.pathname === props.children.props.to ? -1 : undefined
+  };
+
   return (
     <DefaultCell {...newProps}>{children}</DefaultCell>
   );

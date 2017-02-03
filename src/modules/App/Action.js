@@ -1,26 +1,27 @@
 /* @flow */
-const NAV_ACTIVE = 'NAV_ACTIVE';
+const NAV_UPDATE = 'NAV_UPDATE';
 
 const initialState = {
-  active: '/'
+  toggle: false
 };
 
 const nav = (state = initialState, action) => {
   switch (action.type) {
-    case NAV_ACTIVE:
+    case NAV_UPDATE:
       return {
-        ...action
+        ...state,
+        ...action,
+        toggle: !state.toggle
       };
     default:
       return state;
   }
 };
 
-export const makeActive = key => {
-  console.log(key);
+export const update = data => {
   return {
-    type: NAV_ACTIVE,
-    active: key
+    type: NAV_UPDATE,
+    ...data
   };
 };
 

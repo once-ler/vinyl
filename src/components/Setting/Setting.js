@@ -2,7 +2,7 @@ import {css} from 'styled-components';
 
 // sm-md: 14em
 // lg: 48em
-const sizes = {
+export const sizes = {
   laptop: 800,
   tablet: 600,
   phablet: 376
@@ -10,7 +10,7 @@ const sizes = {
 
 export const media = Object.keys(sizes).reduce((accumulator, label) => {
   accumulator[label] = (...args) => css`
-    @media (max-width: ${sizes[label]}px) {
+    @media only screen and (max-width: ${sizes[label]}px) {
       ${css(...args)}
     }
   `;

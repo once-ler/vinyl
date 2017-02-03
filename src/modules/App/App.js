@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <NavRow wrap end>
+        <NavRow wrap end dispatch={this.context.store.dispatch}>
           <NavCell margin>
           <BetterLink to="/">Home</BetterLink>
           </NavCell>
