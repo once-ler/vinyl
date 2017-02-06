@@ -5,7 +5,7 @@ import { media } from '../Setting/Setting';
 
 const ResponsiveRow = styled(Row) `
   ${media.laptop `justify-content: space-around;`}
-  ${media.phablet `flex-flow: column wrap; padding: 0;`}
+  ${media.tablet `flex-flow: column wrap; padding: 0;`}
 `;
 
 export default ResponsiveRow;

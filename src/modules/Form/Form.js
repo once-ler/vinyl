@@ -33,8 +33,8 @@ const Form = props => {
     <Container>
       <FormComponent
         onSubmit={submit(submitAction)}>
-        <Row><Legend>Personal</Legend></Row>
-        <Row>
+        <ResponsiveRow><Legend>Personal</Legend></ResponsiveRow>
+        <ResponsiveRow>
         <Field
           name="firstName"
           component={ValidatedInput}
@@ -60,8 +60,8 @@ const Form = props => {
           label="Phone Number"
           growBasis={2}
           placeholder="Enter phone number"/>
-        </Row>
-        <Row>
+        </ResponsiveRow>
+        <ResponsiveRow>
         <Field
           name="homeAddress"
           component={ValidatedInput}
@@ -83,10 +83,10 @@ const Form = props => {
           label="Home Zip"
           growBasis={2}
           placeholder="Enter home zip"/>
-        </Row>
-        <Row>
+        </ResponsiveRow>
+        <ResponsiveRow middle center>
         <Submit component={ SubmitButton }>Save</Submit>
-        </Row>
+        </ResponsiveRow>
       </FormComponent>
       <h1>{error}</h1>
     </Container>
