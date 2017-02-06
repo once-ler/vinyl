@@ -107,8 +107,4 @@ const connectedComponent = connect(
   { submitAction }
 )(Form);
 
-const withFormComponent = SimplerForm({id: 'profile'})(connectedComponent);
-
-// withFormComponent.componentDidUpdate = (lastProps, nextProps) => {};
-
-export default withFormComponent;
+export default SimplerForm({id: 'profile'})(connectedComponent);

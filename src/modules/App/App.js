@@ -14,7 +14,7 @@ import ResponsiveCell from '../../components/Cell/ResponsiveCell';
 import NavCell from '../../components/Cell/NavCell';
 import Container from '../../components/Container/Container';
 import { media } from '../../components/Setting/Setting';
-// import { makeActive } from './Action';
+import { reset as resetNavigation } from './Action';
 
 const BetterLink = styled(Link) `
   color: sandybrown;
@@ -34,6 +34,14 @@ class App extends Component {
       // logout
       this.context.router.push('/');
     }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    const { nav } = this.context.store.getState();
+    // Collapse responsive nav once user has selected next link.
+    if (!nav.collapse) {
+      this.context.store.dispatch(resetNavigation());
+    } 
   }
 
   render() {

@@ -1,27 +1,32 @@
 /* @flow */
-const NAV_UPDATE = 'NAV_UPDATE';
+const NAV_COLLAPSE = 'NAV_COLLAPSE';
 
 const initialState = {
-  toggle: false
+  collapse: false
 };
 
 const nav = (state = initialState, action) => {
   switch (action.type) {
-    case NAV_UPDATE:
+    case NAV_COLLAPSE:
       return {
-        ...state,
-        ...action,
-        toggle: !state.toggle
+        collapse: !state.collapse,
+        ...action
       };
     default:
       return state;
   }
 };
 
-export const update = data => {
+export const toggle = () => {
   return {
-    type: NAV_UPDATE,
-    ...data
+    type: NAV_COLLAPSE
+  };
+};
+
+export const reset = () => {
+  return {
+    type: NAV_COLLAPSE,
+    collapse: true
   };
 };
 
