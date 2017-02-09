@@ -32,12 +32,12 @@ const NormalCell = styled(Cell) `
 export default (...props: any[]) => (
   <Container>
     <h1>Home</h1>
-    <HomeRow wrap between>
+    <HomeRow wrap between center>
       <HomeCell margin>Test</HomeCell>
       <HomeCell margin>Test</HomeCell>
       <HomeCell margin>Test</HomeCell>
     </HomeRow>
-    <HomeRow wrapBetween center>
+    <HomeRow wrapCenter center>
       <HomeCell>Test</HomeCell>
       <HomeCell>Test</HomeCell>
       <HomeCell>Test</HomeCell>

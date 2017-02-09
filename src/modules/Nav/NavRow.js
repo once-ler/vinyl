@@ -4,10 +4,10 @@ import Inferno from 'inferno';
 import { connect } from 'inferno-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
-import Row from './Row';
-import NavIcon from '../Icon/NavIcon';
-import { media } from '../Setting/Setting';
-import { toggle } from '../../modules/App/Action';
+import Row from '../../components/Row/Row';
+import NavIcon from '../../components/Icon/NavIcon';
+import { media } from '../../components/Setting/Setting';
+import { toggle } from './Action';
 
 const DefaultRow = styled(Row) `
   ${media.tablet `

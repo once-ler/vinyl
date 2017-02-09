@@ -8,13 +8,14 @@ import styled from 'styled-components';
 import { logout } from '../../modules/auth';
 import Row from '../../components/Row/Row';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
-import NavRow from '../../components/Row/NavRow';
+// import NavRow from '../../components/Row/NavRow';
 import Cell from '../../components/Cell/Cell';
 import ResponsiveCell from '../../components/Cell/ResponsiveCell';
-import NavCell from '../../components/Cell/NavCell';
+// import NavCell from '../../components/Cell/NavCell';
 import Container from '../../components/Container/Container';
 import { media } from '../../components/Setting/Setting';
-import { reset as resetNavigation } from './Action';
+// import { reset as resetNavigation } from './Action';
+import { NavRow, NavCell, navAction } from '../Nav';
 
 const BetterLink = styled(Link) `
   color: sandybrown;
@@ -40,8 +41,8 @@ class App extends Component {
     const { nav } = this.context.store.getState();
     // Collapse responsive nav once user has selected next link.
     if (!nav.collapse) {
-      this.context.store.dispatch(resetNavigation());
-    } 
+      this.context.store.dispatch(navAction.reset());
+    }
   }
 
   render() {

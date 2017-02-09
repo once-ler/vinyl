@@ -3,8 +3,8 @@
 import Inferno from 'inferno';
 import { connect } from 'inferno-redux';
 import styled from 'styled-components';
-import Cell from './Cell';
-import { media } from '../Setting/Setting';
+import Cell from '../../components/Cell/Cell';
+import { media } from '../../components/Setting/Setting';
 
 const DefaultCell = styled(Cell) `
   min-width: 120px;
