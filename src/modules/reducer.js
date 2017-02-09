@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { reducer as form } from 'simpler-redux-form';
 import auth from './auth';
-import nav from './App/Action';
+import nav from './Nav/Action';
 import profile from './Form/Action';
 
 export default combineReducers({
