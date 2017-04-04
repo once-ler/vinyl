@@ -1,6 +1,6 @@
 /* @flow */
-import Inferno from 'inferno';
-import { connect } from 'inferno-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
 import { greenTheme } from '../Theme/Theme';
 import ResponsiveRow from '../Row/ResponsiveRow';

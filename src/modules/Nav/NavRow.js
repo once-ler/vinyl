@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint max-len: 0 */
-import Inferno from 'inferno';
-import { connect } from 'inferno-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import Row from '../../components/Row/Row';

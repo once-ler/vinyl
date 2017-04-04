@@ -17,15 +17,7 @@ module.exports = {
       'src',
       'node_modules'
     ],
-    extensions: ['', '.js', '.json', '.jsx'],
-    alias: {
-      // Support React Native Web
-      // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-      'react-native': 'react-native-web',
-      'react': 'inferno-compat',
-      'react-dom': 'inferno-compat',
-      'react-redux': 'inferno-redux'      
-    }
+    extensions: ['', '.js', '.json', '.jsx']
   },
   performance: {
     maxAssetSize: 1000000,

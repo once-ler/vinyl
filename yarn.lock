@@ -2128,57 +2128,13 @@ indexof@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
 
-inferno-compat@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/inferno-compat/-/inferno-compat-1.2.2.tgz#abf4716e3814079cfd503ebb6505450c183b2065"
-  dependencies:
-    inferno "1.2.2"
-    inferno-component "1.2.2"
-    inferno-transition-group "1.1.1"
-    rc-css-transition-group-modern "^2.1.6"
-
-inferno-component@1.2.2, inferno-component@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/inferno-component/-/inferno-component-1.2.2.tgz#aa0a1dd790d644805be3f2221c87aaa404792ebb"
-  dependencies:
-    inferno "1.2.2"
-
-inferno-create-element@1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/inferno-create-element/-/inferno-create-element-1.2.2.tgz#99296b0e34965d799f4f6b6459ba7dec4b6a3b57"
-  dependencies:
-    inferno "1.2.2"
-
-inferno-redux@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/inferno-redux/-/inferno-redux-1.2.2.tgz#37ba738339bea0b30253355a3300e802aaa70407"
-  dependencies:
-    inferno "1.2.2"
-    inferno-component "1.2.2"
-    inferno-create-element "1.2.2"
-    redux "*"
-
-inferno-router@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/inferno-router/-/inferno-router-1.2.2.tgz#68f8740c5d6df9731569a73e4b5fe19d28acfdfc"
-  dependencies:
-    inferno "1.2.2"
-    inferno-component "1.2.2"
-    inferno-create-element "1.2.2"
-
-inferno-transition-group@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/inferno-transition-group/-/inferno-transition-group-1.1.1.tgz#cf91eb574491da20dfbf0e558869a0c8a77d1ff1"
-  dependencies:
-    inferno "^1.1.1"
-
 inferno-vnode-flags@^1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/inferno-vnode-flags/-/inferno-vnode-flags-1.2.2.tgz#b223aab6876bf63effa2663815d1d06c3ba25732"
   dependencies:
     inferno "1.2.2"
 
-inferno@1.2.2, inferno@^1.1.1, inferno@^1.2.2:
+inferno@1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/inferno/-/inferno-1.2.2.tgz#0094e4ed428db30184bfa348a5aa38211945e67d"
 
@@ -3103,10 +3059,6 @@ range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
-rc-css-transition-group-modern@^2.1.6:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/rc-css-transition-group-modern/-/rc-css-transition-group-modern-2.1.6.tgz#e34d63752110ee2ccf5185cd6ba4c774cfdf1bb7"
-
 rc@~1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.1.6.tgz#43651b76b6ae53b5c802f1151fa3fc3b059969c9"
@@ -3119,6 +3071,14 @@ rc@~1.1.6:
 react-router-redux@^4.0.7:
   version "4.0.7"
   resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-4.0.7.tgz#9b1fde4e70106c50f47214e12bdd888cfb96e2a6"
+
+react@^15.4.2:
+  version "15.4.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
+  dependencies:
+    fbjs "^0.8.4"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
 
 readable-stream@1.0:
   version "1.0.34"
@@ -3180,7 +3140,7 @@ redux-observable@^0.12.2:
   version "0.12.2"
   resolved "https://registry.yarnpkg.com/redux-observable/-/redux-observable-0.12.2.tgz#4bc1657c7eedace577e114b74ffe6f6fb2b36ccf"
 
-redux@*, redux@^3.6.0:
+redux@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.6.0.tgz#887c2b3d0b9bd86eca2be70571c27654c19e188d"
   dependencies:

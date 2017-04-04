@@ -1,5 +1,5 @@
 /* @flow */
-import Inferno from 'inferno';
+import React from 'react';
 
 export default () => (
   <div>

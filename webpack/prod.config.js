@@ -6,7 +6,7 @@ module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: {
     app: [ './src/index.js' ],
-    vendor: ['axios', 'inferno', 'inferno-compat', 'inferno-component', 'inferno-router', 'inferno-create-element', 'inferno-redux', 'redux', 'rxjs', 'redux-observable']
+    vendor: ['axios', 'react', 'react-dom', 'react-router', 'react-redux', 'redux', 'rxjs', 'redux-observable']
   },
   output: {
     filename: '[name]-[chunkhash].js',
@@ -19,13 +19,7 @@ module.exports = {
       'src',
       'node_modules'
     ],
-    extensions: ['', '.js', '.json', '.jsx'],
-    alias: {
-      'react-native': 'react-native-web',
-      'react': 'inferno-compat',
-      'react-dom': 'inferno-compat',
-      'react-redux': 'inferno-redux'
-    }
+    extensions: ['', '.js', '.json', '.jsx']
   },  
   plugins: [
     // new webpack.optimize.OccurenceOrderPlugin(),

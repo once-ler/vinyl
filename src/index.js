@@ -1,26 +1,24 @@
 /* @flow */
-import Inferno from 'inferno';
-import { Router } from 'inferno-router';
-import { Provider } from 'inferno-redux';
+import React from 'react';
+import {render} from 'react-dom';
+import { Router, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import createStore from './createStore';
 import getRoutes from './routes';
 
-const browserHistory = createBrowserHistory();
 const store = createStore(browserHistory, window.__data || {});
 const history = syncHistoryWithStore(browserHistory, store);
-// Passing history to Router doesn't work,
-// but still need to use syncHistoryWithStore().
 
 const routes = (
-  <Router history={browserHistory}>
+  <Router history={history}>
     {getRoutes(store)}
   </Router>
 );
 const dest = document.getElementById('root');
 
-Inferno.render(
+render(
   <Provider store={store} key="provider">
     {routes}
   </Provider>,

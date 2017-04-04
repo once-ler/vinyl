@@ -1,27 +1,22 @@
 /* @flow */
-import Inferno, { linkEvent } from 'inferno';
-import Component from 'inferno-component';
+import React from 'react';
+import compose from 'recompose/compose';
+import withHandlers from 'recompose/withHandlers';
 
-class Login extends Component {
-  submit(instance: Login, event: Event) {
-    event.preventDefault();
-    const store = instance.context.store;
-    const state = store.getState();
-    console.log(state);
-    store.dispatch({type: 'LOGIN_REACTION'});
-  }
+const Presentation = ({onSubmit}) => (
+  <div>
+  <h1>Login</h1>
+  <form onSubmit={onSubmit}>
+  <button type="submit">Log in</button>
+  </form>
+  </div>
+);
 
-  render() {
-
-    return (
-      <div>
-      <h1>Login</h1>
-      <form onSubmit={linkEvent(this, this.submit)}>
-      <button type="submit">Log in</button>
-      </form>
-      </div>
-    );
-  }
-}
-
-export default Login;
+export default compose(
+  withHandlers({
+    onSubmit: props => event => {
+      event.preventDefault()
+      props.dispatch({type: 'LOGIN_REACTION'});
+    }
+  })  
+)(Presentation);

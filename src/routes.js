@@ -1,6 +1,6 @@
 /* eslint no-unused-vars:0 */
-import Inferno from 'inferno';
-import { IndexRoute, Route } from 'inferno-router';
+import React from 'react';
+import { IndexRoute, Route } from 'react-router';
 import { isLoaded as isAuthLoaded } from './modules/auth';
 import App from './modules/App/App';
 import Home from './modules/Home/Home';

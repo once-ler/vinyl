@@ -1,8 +1,7 @@
 /* @flow */
 /* eslint max-len: 0 */
-import Inferno from 'inferno';
-import Component from 'inferno-component';
-import { connect } from 'inferno-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
 import Input from '../../components/Input/Input';
