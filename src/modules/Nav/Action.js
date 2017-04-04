@@ -2,10 +2,11 @@
 const NAV_COLLAPSE = 'NAV_COLLAPSE';
 
 const initialState = {
-  collapse: false
+  collapse: true
 };
 
 const nav = (state = initialState, action) => {
+  console.log(action)
   switch (action.type) {
     case NAV_COLLAPSE:
       return {

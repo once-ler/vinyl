@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Cell from '../../components/Cell/Cell';
 import { media } from '../../components/Setting/Setting';
 
-const DefaultCell = styled(Cell) `
+const DefaultCell = styled.div `
   min-width: 120px;
   min-height: 60px;
   background-color: ${props => props.theme.secondary};

@@ -32,7 +32,7 @@ export default props => (
       <BetterLink to="/form">Form</BetterLink>
       </NavCell>
       <NavCell>
-      <BetterLink to="/logout" onclick={logout()}>Logout</BetterLink>
+      <BetterLink to="/logout" onClick={logout}>Logout</BetterLink>
       </NavCell>
     </NavRow>
     <ResponsiveRow>

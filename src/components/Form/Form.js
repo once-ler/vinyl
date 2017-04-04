@@ -1,5 +1,5 @@
 /* @flow */
-import Inferno from 'inferno';
+import React from 'react';
 import styled from 'styled-components';
 import Row from '../Row/Row';
 

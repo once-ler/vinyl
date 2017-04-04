@@ -1,5 +1,6 @@
 /* eslint no-unused-vars:0 */
 import React from 'react';
+import { connect } from 'react-redux';
 import { IndexRoute, Route } from 'react-router';
 import { isLoaded as isAuthLoaded } from './modules/auth';
 import App from './modules/App/App';
@@ -11,6 +12,7 @@ import NotFound from './modules/NotFound/NotFound';
 
 export default (store: any) => {
   const requireLogin = nextState => {
+    console.log(nextState);
     const { router } = nextState;
     function checkAuth() {
       const { auth: { user } } = store.getState();

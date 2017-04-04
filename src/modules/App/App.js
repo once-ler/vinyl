@@ -20,7 +20,6 @@ const connectFunc = connect(
   mapDispatchToProps
 );
 
-/*
 export default compose(
   connectFunc,
   withPropsOnChange(
@@ -29,18 +28,13 @@ export default compose(
       if (!props.nav.collapse) {
         props.dispatch(navAction.reset());
       }
+      /*
       if (props.user) {
         props.router.push('/loginSuccess');
       } else {
         props.router.push('/');
-      }      
+      }
+      */
     }
   )
 )(Presentation);
-*/
-
-export default compose(
-  connectFunc
-)(Presentation);
-
-// export default () => (<h1>Hi</h1>);
