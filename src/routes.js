@@ -11,15 +11,14 @@ import Form from './modules/Form/Form';
 import NotFound from './modules/NotFound/NotFound';
 
 export default (store: any) => {
-  const requireLogin = nextState => {
-    console.log(nextState);
+  const requireLogin = (nextState, replace, cb) => {
     const { router } = nextState;
     function checkAuth() {
       const { auth: { user } } = store.getState();
       if (!user) {
-        // oops, not logged in, so can't be here!
-        router.replace('/login');
+        replace('/login');
       }
+      cb();
     }
 
     if (!isAuthLoaded(store.getState())) {

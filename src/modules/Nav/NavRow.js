@@ -11,7 +11,7 @@ import { toggle } from './Action';
 
 const DefaultRow = styled(Row) `
   ${media.tablet `
-    height: ${props => props.nav.collapse ? '65px' : '100%'};
+    height: ${props => props.nav && props.nav.collapse ? '65px' : '100%'};
     overflow: hidden;
     justify-content: flex-start;    
   `}

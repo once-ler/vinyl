@@ -6,7 +6,6 @@ const initialState = {
 };
 
 const nav = (state = initialState, action) => {
-  console.log(action)
   switch (action.type) {
     case NAV_COLLAPSE:
       return {
