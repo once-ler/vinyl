@@ -18,6 +18,7 @@ import Container from '../../components/Container/Container';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
 import ResponsiveCell from '../../components/Cell/ResponsiveCell';
 import { media } from '../../components/Setting/Setting';
+import FlexGrow from '../../components/FlexGrow/FlexGrow';
 
 const submitAction = data => (dispatch, getState) => dispatch({ type: 'SUBMIT_REQUEST', data });
 
@@ -29,6 +30,7 @@ const Form = props => {
   const { phone, submit, error } = props;
 
   return (
+    <FlexGrow>      
     <Container>
       <FormComponent
         onSubmit={submit(submitAction)}>
@@ -87,8 +89,9 @@ const Form = props => {
         <Submit component={ SubmitButton }>Save</Submit>
         </ResponsiveRow>
       </FormComponent>
-      <h1>{error}</h1>
+      <h1>{error}</h1>      
     </Container>
+    </FlexGrow>
   );
 };
 

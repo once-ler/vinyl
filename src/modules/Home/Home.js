@@ -7,6 +7,7 @@ import Container from '../../components/Container/Container';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
 import ResponsiveCell from '../../components/Cell/ResponsiveCell';
 import { media } from '../../components/Setting/Setting';
+import FlexGrow from '../../components/FlexGrow/FlexGrow';
 
 const HomeRow = styled(ResponsiveRow) `
   min-height: 180px;
@@ -30,6 +31,7 @@ const NormalCell = styled(Cell) `
 `;
 
 export default (...props: any[]) => (
+  <FlexGrow>
   <Container>
     <h1>Home</h1>
     <HomeRow wrap between center>
@@ -51,4 +53,5 @@ export default (...props: any[]) => (
       <NormalCell growBasis={2} stretch>Test</NormalCell>
     </HomeRow>
   </Container>
+  </FlexGrow>
 );
