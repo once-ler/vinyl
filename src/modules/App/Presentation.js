@@ -31,6 +31,9 @@ export default props => (
       <NavCell margin>
       <BetterLink to="/form">Form</BetterLink>
       </NavCell>
+      <NavCell margin>
+      <BetterLink to="/scrollsync">ScrollSync</BetterLink>
+      </NavCell>
       <NavCell>
       <BetterLink to="/logout" onClick={logout}>Logout</BetterLink>
       </NavCell>
