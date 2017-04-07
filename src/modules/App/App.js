@@ -7,6 +7,7 @@ import lifecycle from 'recompose/lifecycle';
 import withPropsOnChange from 'recompose/withPropsOnChange';
 import { navAction } from '../Nav';
 import Presentation from './Presentation';
+import { listAction } from '../ScrollSync';
 
 const mapDispatchToProps = dispatch => ({
   dispatch
@@ -36,6 +37,10 @@ const enhanceWithLifecycle = lifecycle({
     if (!this.props.nav.collapse) {
       this.props.dispatch(navAction.reset());
     }
+  },
+  componentDidMount() {
+    // For tests
+    this.props.dispatch(listAction.add([{a: 1, b: 2}]));
   }
 });
 

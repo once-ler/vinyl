@@ -1,7 +1,19 @@
 /* @flow */
 import React from 'react';
+import {connect} from 'react-redux';
 import compose from 'recompose/compose';
 import withHandlers from 'recompose/withHandlers';
+import {login} from '../auth';
+
+const mapDispatchToState = dispatch => ({
+  dispatch
+});
+
+const connectFunc = connect(
+  state => ({
+  }),
+  mapDispatchToState
+);
 
 const Presentation = ({onSubmit}) => (
   <div>
@@ -13,10 +25,11 @@ const Presentation = ({onSubmit}) => (
 );
 
 export default compose(
+  connectFunc,
   withHandlers({
     onSubmit: props => event => {
       event.preventDefault()
-      props.dispatch({type: 'LOGIN_REACTION'});
+      props.dispatch(login('foo', 'bar'));
     }
   })  
 )(Presentation);

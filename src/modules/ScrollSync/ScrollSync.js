@@ -3,39 +3,8 @@ import {connect} from 'react-redux';
 import defaultProps from 'recompose/defaultProps';
 import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
-import Cell from './Cell';
-import HeaderCell from './HeaderCell';
+import {renderBodyCell, renderLeftSideCell, renderHeaderCell, renderLeftHeaderCell} from './Renderer';
 import Presentation from './Presentation';
-
-const renderBodyCell = ({ columnIndex, key, rowIndex, style }) => {
-  if (columnIndex < 1) return;
-
-  return renderLeftSideCell({ columnIndex, key, rowIndex, style });
-};
-
-const renderLeftSideCell = ({ columnIndex, key, rowIndex, style }) => (
-  <Cell
-    key={key}
-    style={style}
-  >
-    {`R${rowIndex}, C${columnIndex}`}
-  </Cell>
-);
-
-const renderHeaderCell = ({ columnIndex, key, rowIndex, style }) => {
-  if (columnIndex < 1) return;
-
-  return renderLeftHeaderCell({ columnIndex, key, rowIndex, style });
-};
-
-const renderLeftHeaderCell = ({ columnIndex, key, rowIndex, style }) => (
-  <HeaderCell
-    key={key}
-    style={style}
-  >
-    {`C${columnIndex}`}
-  </HeaderCell>
-);
 
 const mapDispatchToState = dispatch => ({
   dispatch
@@ -43,7 +12,7 @@ const mapDispatchToState = dispatch => ({
 
 const connectFunc = connect(
   state => ({
-
+    list: state.resources.list
   }),
   mapDispatchToState
 );

@@ -1,7 +1,8 @@
 /* @flow */
 /* eslint no-unused-vars: 0, max-len: 0, flowtype/no-weak-types: 0 */
-import { Observable } from 'rxjs';
-import { ActionsObservable } from 'redux-observable';
+// import { Observable } from 'rxjs';
+// import { ActionsObservable } from 'redux-observable';
+import { Middleware } from 'rx-web-js/dist/rx-web.min';
 import { Axios } from 'axios';
 import ApiClient from '../helpers/ApiClient';
 
@@ -123,7 +124,7 @@ export function logout() {
 
 export function login(name: string, password: string = '') {
   return {
-    type: LOGIN,
+    type: 'authUser',
     payload: { data: { name, password } }
   };
 }
@@ -155,6 +156,28 @@ function setLogout() {
   };
 }
 
+// GET /posts/1/comments?_start=20&_limit=10 (slice)
+// https://jsonplaceholder.typicode.com/comments
+// https://jsonplaceholder.typicode.com/posts
+export const authUser = new Middleware(
+  'authUser',
+  task => apiClient.post(`https://jsonplaceholder.typicode.com/posts`, {}),
+  (task) => {console.info(task.store.getState());}
+);
+
+export const fetchUser = new Middleware(
+  'fetchUser',
+  task => apiClient.get(`https://jsonplaceholder.typicode.com/users/3`),
+  () => {}
+);
+
+export const logoutUser = new Middleware(
+  'logoutUser',
+  task => apiClient.post(`https://jsonplaceholder.typicode.com/posts`, {}),
+  () => {}
+);
+
+/*
 export const authEpic = (action$: ActionsObservable) =>
   action$.ofType(LOGIN)
     .mergeMap(({ payload }) =>
@@ -178,3 +201,4 @@ export const logoutEpic = (action$: ActionsObservable) =>
         .map(setLogout)
         .catch(error => Observable.of(setError(error)))
     );
+*/

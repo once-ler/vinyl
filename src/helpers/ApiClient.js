@@ -4,18 +4,18 @@ import axios from 'axios';
 
 const methods = [ 'get', 'post', 'put', 'patch', 'del' ];
 
-function formatUrl(path: string): string {
+const formatUrl = (path: string): string => {
+  if (~path.indexOf('jsonplaceholder')) return path;
   const adjustedPath = path[0] !== '/' ? `/${path}` : path;
-  // Prepend `/api` to relative URL, to proxy to API server.
-  return `/api${adjustedPath}`;
-}
+  return adjustedPath;
+};
 
 class _ApiClient extends Object {
   constructor(req: any = {}) {
     super(req);
 
     methods.forEach((method: string) => {
-      this[method] = (path, { params, data, headers } = {}): any => {
+      this[method] = (path, { params, data, headers, query, variables } = {}): any => {
         const cfg = {
           url: formatUrl(path),
           timeout: 20000,
@@ -30,12 +30,6 @@ class _ApiClient extends Object {
           cfg.params = params;
         }
 
-        /*
-        if (__SERVER__ && req.get('cookie')) {
-          cfg.headers = { cookie: req.get('cookie') };
-        }
-        */
-
         if (data) {
           cfg.data = data;
         }
@@ -44,9 +38,20 @@ class _ApiClient extends Object {
           Object.assign(cfg.headers, headers);
         }
 
+        if (query && variables) {
+          cfg.data = {
+            query,
+            variables: {
+              ...variables
+            }
+          };
+        }
+
         return axios(cfg);
       };
     });
+
+
   }
 }
 

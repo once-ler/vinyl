@@ -15,12 +15,15 @@ export default ({
     renderBodyCell,
     renderLeftSideCell,
     renderHeaderCell,
-    renderLeftHeaderCell
+    renderLeftHeaderCell,
+    list
   }) => (
     <ScrollSync>
       {({ clientHeight, clientWidth, onScroll, scrollHeight, scrollLeft, scrollTop, scrollWidth }) => {
         const x = scrollLeft / (scrollWidth - clientWidth)
         const y = scrollTop / (scrollHeight - clientHeight)
+        
+        console.log(list);
 
         return (
           <GridRow>
