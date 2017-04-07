@@ -10,14 +10,15 @@ const DefaultContainer = styled.div `
   height: 100%;
   width: 100%;
   flex-direction: column;
-  font-family: ${props => props.theme.fontFamily};
+  font-family: ${props => props.fontFamily || props.theme.fontFamily};
+  font-size: ${props => props.fontSize || props.theme.fontSize};
   background-color: ${props => props.theme.backgroundColor};
 `;
 
 const Container = props => {
   return (
     <ThemeProvider theme={greenTheme}>
-      <DefaultContainer>{props.children}</DefaultContainer>
+      <DefaultContainer {...props}>{props.children}</DefaultContainer>
     </ThemeProvider>
   );
 };

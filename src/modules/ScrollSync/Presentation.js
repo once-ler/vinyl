@@ -5,7 +5,7 @@ import ScrollSync from '../../components/ScrollSync/ScrollSync';
 
 export default props => (
   <FlexGrow>
-    <Container>
+    <Container fontFamily={props.fontFamily} fontSize={props.fontSize}>
       <ScrollSync {...props}/>
     </Container>
   </FlexGrow>

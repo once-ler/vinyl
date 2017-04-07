@@ -1,29 +1,29 @@
 import React from 'react';
-import { AutoSizer, Grid } from 'react-virtualized';
+import { AutoSizer } from 'react-virtualized';
 import scrollbarSize from 'dom-helpers/util/scrollbarSize'
 import GridColumn from './GridColumn';
 import HeaderGrid from './HeaderGrid';
 import BodyGrid from './BodyGrid';
-import RightSideGridFixedColumn from './RightSideGridFixedColumn';
+import RightSideGridColumn from './RightSideGridColumn';
 
 export default ({
   columnWidth,
   columnCount,
-  rowHeight,
-  overscanColumnCount,
-  renderHeaderCell,
-  scrollLeft,
   height,
-  onScroll,
-  overscanRowCount,
   renderBodyCell,
-  rowCount
+  rowCount,
+  rowHeight,
+  onScroll,
+  overscanColumnCount,
+  overscanRowCount,
+  renderHeaderCell,
+  scrollLeft  
 }) => (
   <GridColumn>
     <AutoSizer disableHeight>
-      {({ width }) => { console.log(width); return (
+      {({ width }) => (
         <div>
-        <RightSideGridFixedColumn width={width - scrollbarSize()} height={rowHeight}>
+        <RightSideGridColumn width={width - scrollbarSize()} height={rowHeight}>
           <HeaderGrid
             columnWidth={columnWidth}
             columnCount={columnCount}
@@ -34,9 +34,10 @@ export default ({
             rowCount={1}
             scrollLeft={scrollLeft}
             width={width - scrollbarSize()}
+            backgroundColor="#f0ffff"
           />
-        </RightSideGridFixedColumn>
-        <RightSideGridFixedColumn width={width} height={height}>
+        </RightSideGridColumn>
+        <RightSideGridColumn width={width} height={height}>
           <BodyGrid
             columnWidth={columnWidth}
             columnCount={columnCount}
@@ -49,9 +50,9 @@ export default ({
             rowCount={rowCount}
             width={width}
           />
-        </RightSideGridFixedColumn>
+        </RightSideGridColumn>
         </div>
-      )}
+        )
       }
     </AutoSizer>
   </GridColumn>

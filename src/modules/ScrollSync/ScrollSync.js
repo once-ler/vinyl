@@ -58,6 +58,8 @@ export default compose(
   withProps({
     columnWidth: 75,
     columnCount: 50,
+    fontFamily: `'Trebuchet MS', Helvetica, sans-serif`,
+    fontSize: '0.8em',
     height: 300,
     overscanColumnCount: 0,
     overscanRowCount: 5,

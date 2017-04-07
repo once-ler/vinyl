@@ -24,6 +24,7 @@ export default ({
       columnWidth={columnWidth}
       rowCount={1}
       columnCount={1}
+      backgroundColor="#f0ffff"
     />
   </LeftSideGridContainer>
 );
