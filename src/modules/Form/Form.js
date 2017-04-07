@@ -31,66 +31,66 @@ const Form = props => {
 
   return (
     <FlexGrow>      
-    <Container>
-      <FormComponent
-        onSubmit={submit(submitAction)}>
-        <ResponsiveRow><Legend>Personal</Legend></ResponsiveRow>
-        <ResponsiveRow>
-        <Field
-          name="firstName"
-          component={ValidatedInput}
-          validate={validateFirstName}
-          type="text"
-          label="First Name"
-          growBasis={3}
-          placeholder="Enter first name"/>
-        <Field
-          name="lastName"
-          component={ValidatedInput}
-          validate={validateLastName}
-          type="text"
-          label="Last Name"
-          growBasis={3}
-          placeholder="Enter last name"/>
-        <Field
-          name="phone"
-          component={ValidatedInput}
-          value={phone}
-          validate={validatePhone}
-          type="tel"
-          label="Phone Number"
-          growBasis={2}
-          placeholder="Enter phone number"/>
-        </ResponsiveRow>
-        <ResponsiveRow>
-        <Field
-          name="homeAddress"
-          component={ValidatedInput}
-          type="text"
-          label="Home Address"
-          growBasis={4}
-          placeholder="Enter home address"/>
-        <Field
-          name="homeState"
-          component={ValidatedInput}
-          type="text"
-          label="Home State"
-          growBasis={1}
-          placeholder="Enter home state"/>
-        <Field
-          name="homeZip"
-          component={ValidatedInput}
-          type="text"
-          label="Home Zip"
-          growBasis={2}
-          placeholder="Enter home zip"/>
-        </ResponsiveRow>
-        <ResponsiveRow middle center>
-        <Submit component={ SubmitButton }>Save</Submit>
-        </ResponsiveRow>
-      </FormComponent>
-      <h1>{error}</h1>      
-    </Container>
+      <Container>
+        <FormComponent
+          onSubmit={submit(submitAction)}>
+          <ResponsiveRow><Legend>Personal</Legend></ResponsiveRow>
+          <ResponsiveRow>
+          <Field
+            name="firstName"
+            component={ValidatedInput}
+            validate={validateFirstName}
+            type="text"
+            label="First Name"
+            growBasis={3}
+            placeholder="Enter first name"/>
+          <Field
+            name="lastName"
+            component={ValidatedInput}
+            validate={validateLastName}
+            type="text"
+            label="Last Name"
+            growBasis={3}
+            placeholder="Enter last name"/>
+          <Field
+            name="phone"
+            component={ValidatedInput}
+            value={phone}
+            validate={validatePhone}
+            type="tel"
+            label="Phone Number"
+            growBasis={2}
+            placeholder="Enter phone number"/>
+          </ResponsiveRow>
+          <ResponsiveRow>
+          <Field
+            name="homeAddress"
+            component={ValidatedInput}
+            type="text"
+            label="Home Address"
+            growBasis={4}
+            placeholder="Enter home address"/>
+          <Field
+            name="homeState"
+            component={ValidatedInput}
+            type="text"
+            label="Home State"
+            growBasis={1}
+            placeholder="Enter home state"/>
+          <Field
+            name="homeZip"
+            component={ValidatedInput}
+            type="text"
+            label="Home Zip"
+            growBasis={2}
+            placeholder="Enter home zip"/>
+          </ResponsiveRow>
+          <ResponsiveRow middle center>
+          <Submit component={ SubmitButton }>Save</Submit>
+          </ResponsiveRow>
+        </FormComponent>
+        <h1>{error}</h1>      
+      </Container>
     </FlexGrow>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import {Grid} from 'react-virtualized';
 import LeftSideGridContainer from './LeftSideGridContainer';
 import LeftSideGridWrapper from './LeftSideGridWrapper';
+import HeaderGrid from './HeaderGrid';
 import scrollbarSize from 'dom-helpers/util/scrollbarSize'
 
 export default ({
@@ -13,7 +14,7 @@ export default ({
   rowCount,
   scrollTop,
   height
-}) => (
+}) => { console.log(height); return (
   <LeftSideGridContainer
     style={{
       position: 'absolute',
@@ -22,7 +23,7 @@ export default ({
     }}
   >
     <LeftSideGridWrapper>
-      <Grid
+      <HeaderGrid
         overscanColumnCount={overscanColumnCount}
         overscanRowCount={overscanRowCount}
         cellRenderer={renderLeftSideCell}
@@ -37,3 +38,4 @@ export default ({
     </LeftSideGridWrapper>
   </LeftSideGridContainer>
 );
+};

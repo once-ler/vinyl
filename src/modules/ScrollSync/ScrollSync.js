@@ -3,9 +3,9 @@ import {connect} from 'react-redux';
 import defaultProps from 'recompose/defaultProps';
 import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
-import ScrollSync from '../../components/ScrollSync/ScrollSync';
 import Cell from './Cell';
 import HeaderCell from './HeaderCell';
+import Presentation from './Presentation';
 
 const renderBodyCell = ({ columnIndex, key, rowIndex, style }) => {
   if (columnIndex < 1) return;
@@ -65,4 +65,4 @@ export default compose(
     rowCount: 100
   }),
   connectFunc
-)(ScrollSync);
+)(Presentation);

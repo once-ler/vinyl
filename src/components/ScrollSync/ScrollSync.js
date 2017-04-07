@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollSync } from 'react-virtualized';
 import GridRow from './GridRow';
 import LeftSideGridFixedColumn from './LeftSideGridFixedColumn';
-import LeftSideGridColumn from './LeftSideGridColumn';
+import LeftSideGrid from './LeftSideGrid';
 import RightSideGrid from './RightSideGrid';
 
 export default ({
@@ -18,6 +18,7 @@ export default ({
     renderHeaderCell,
     renderLeftHeaderCell
   }) => { console.log(rowHeight); return (
+    <div style={{width: '100%'}}>
     <ScrollSync>
       {({ clientHeight, clientWidth, onScroll, scrollHeight, scrollLeft, scrollTop, scrollWidth }) => {
         const x = scrollLeft / (scrollWidth - clientWidth)
@@ -32,7 +33,7 @@ export default ({
               columnWidth={columnWidth}
             />
 
-            <LeftSideGridColumn
+            <LeftSideGrid
               overscanColumnCount={overscanColumnCount}
               overscanRowCount={overscanRowCount}
               renderLeftSideCell={renderLeftSideCell}
@@ -40,7 +41,8 @@ export default ({
               rowHeight={rowHeight}
               rowCount={rowCount}
               scrollTop={scrollTop}
-              columnWidth={columnWidth} 
+              columnWidth={columnWidth}
+              height={height}
             />
 
             <RightSideGrid
@@ -60,5 +62,6 @@ export default ({
         )
       }}
     </ScrollSync>
+    </div>
   );
 };

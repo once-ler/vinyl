@@ -16,16 +16,14 @@ export default ({
       top: 0
     }}
   >
-    <HeaderGrid>
-      <Grid
-        cellRenderer={renderLeftHeaderCell}
-        width={columnWidth}
-        height={rowHeight}
-        rowHeight={rowHeight}
-        columnWidth={columnWidth}
-        rowCount={1}
-        columnCount={1}
-      />
-    </HeaderGrid>
+    <HeaderGrid
+      cellRenderer={renderLeftHeaderCell}
+      width={columnWidth}
+      height={rowHeight}
+      rowHeight={rowHeight}
+      columnWidth={columnWidth}
+      rowCount={1}
+      columnCount={1}
+    />
   </LeftSideGridContainer>
 );
