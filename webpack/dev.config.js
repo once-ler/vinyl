@@ -49,6 +49,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'vinyl',
       filename: 'index.html',
+      favicon: 'static/favicon.ico',
       template: 'static/index.html',
     }),
   ],
@@ -59,6 +60,7 @@ module.exports = {
         exclude: /node_modules(?!\/simpler-redux-form)/, 
         loader: 'babel-loader'
       },
+      { test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file?hash=sha512&digest=hex&name=[hash].[ext]'] },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader?modules'
