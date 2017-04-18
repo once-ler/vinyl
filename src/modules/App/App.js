@@ -17,7 +17,8 @@ const connectFunc = connect(
   state => ({
     nav: state.nav,
     user: state.auth.user,
-    routing: state.routing
+    routing: state.routing,
+    theme: state.theme
   }),
   mapDispatchToProps
 );
@@ -37,6 +38,13 @@ const enhanceWithLifecycle = lifecycle({
     if (!this.props.nav.collapse) {
       this.props.dispatch(navAction.reset());
     }
+  },
+  componentWillMount() {
+    console.log(this.props);
+    document.body.style.backgroundColor = "green";
+  },
+  componentWillUnmount() {
+    document.body.style.backgroundColor = null;
   },
   componentDidMount() {
     // For tests

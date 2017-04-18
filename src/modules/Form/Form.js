@@ -31,7 +31,7 @@ const Form = props => {
 
   return (
     <FlexGrow>      
-      <Container>
+      <Container backgroundColor="#fefefe">
         <FormComponent
           onSubmit={submit(submitAction)}>
           <ResponsiveRow><Legend>Personal</Legend></ResponsiveRow>
@@ -43,7 +43,8 @@ const Form = props => {
             type="text"
             label="First Name"
             growBasis={3}
-            placeholder="Enter first name"/>
+            required={true}
+            />
           <Field
             name="lastName"
             component={ValidatedInput}
@@ -51,7 +52,8 @@ const Form = props => {
             type="text"
             label="Last Name"
             growBasis={3}
-            placeholder="Enter last name"/>
+            required={true}
+            />
           <Field
             name="phone"
             component={ValidatedInput}
@@ -60,7 +62,7 @@ const Form = props => {
             type="tel"
             label="Phone Number"
             growBasis={2}
-            placeholder="Enter phone number"/>
+            />
           </ResponsiveRow>
           <ResponsiveRow>
           <Field
@@ -69,21 +71,21 @@ const Form = props => {
             type="text"
             label="Home Address"
             growBasis={4}
-            placeholder="Enter home address"/>
+            />
           <Field
             name="homeState"
             component={ValidatedInput}
             type="text"
             label="Home State"
             growBasis={1}
-            placeholder="Enter home state"/>
+            />
           <Field
             name="homeZip"
             component={ValidatedInput}
             type="text"
             label="Home Zip"
             growBasis={2}
-            placeholder="Enter home zip"/>
+            />
           </ResponsiveRow>
           <ResponsiveRow middle center>
           <Submit component={ SubmitButton }>Save</Submit>

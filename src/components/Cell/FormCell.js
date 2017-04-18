@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import Cell from './Cell';
 
 const FormCell = styled(Cell) `
-  margin: 0 5px;
+  /* margin: 0 5px; */
   border-bottom: 1px solid #333;
-  padding-bottom: 5px;
+  /* padding-bottom: 5px; */
   width: 100%;
   zoom: 1;
   &::before {
@@ -16,6 +16,7 @@ const FormCell = styled(Cell) `
     content: '';
     display: table;
     clear: both;
+    box-sizing: border-box;
   }
   :focus {
     background-color: #fffad4;

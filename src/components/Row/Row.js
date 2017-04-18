@@ -118,7 +118,7 @@ const Row = styled.div `
 `;
 
 Row.defaultProps = {
-  gutter: 8,
+  gutter: 0,
   unit: 'px'
 };
 

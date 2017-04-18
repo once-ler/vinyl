@@ -12,7 +12,7 @@ const DefaultContainer = styled.div `
   flex-direction: column;
   font-family: ${props => props.fontFamily || props.theme.fontFamily};
   font-size: ${props => props.fontSize || props.theme.fontSize};
-  background-color: ${props => props.theme.backgroundColor};
+  background-color: ${props => props.backgroundColor || props.theme.backgroundColor};
 `;
 
 const Container = props => {
