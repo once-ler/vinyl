@@ -27,7 +27,7 @@ const validateLastName = lastName => !lastName ? 'Last name is required.' : unde
 const validatePhone = phone => !phone ? 'Phone number is required.' : undefined;
 
 const Form = props => {
-  const { phone, submit, error } = props;
+  const { firstName, lastName, phone, homeAddress, homeState, homeZip, submit, error } = props;
 
   return (
     <FlexGrow>      
@@ -39,7 +39,7 @@ const Form = props => {
           <Field
             name="firstName"
             component={ValidatedInput}
-            validate={validateFirstName}
+            value={firstName}
             type="text"
             label="First Name"
             growBasis={3}
@@ -48,6 +48,7 @@ const Form = props => {
           <Field
             name="lastName"
             component={ValidatedInput}
+            value={lastName}
             validate={validateLastName}
             type="text"
             label="Last Name"
@@ -61,6 +62,7 @@ const Form = props => {
             validate={validatePhone}
             type="tel"
             label="Phone Number"
+            required={true}
             growBasis={2}
             />
           </ResponsiveRow>
@@ -68,6 +70,7 @@ const Form = props => {
           <Field
             name="homeAddress"
             component={ValidatedInput}
+            value={homeAddress}
             type="text"
             label="Home Address"
             growBasis={4}
@@ -75,6 +78,7 @@ const Form = props => {
           <Field
             name="homeState"
             component={ValidatedInput}
+            value={homeState}
             type="text"
             label="Home State"
             growBasis={1}
@@ -82,6 +86,7 @@ const Form = props => {
           <Field
             name="homeZip"
             component={ValidatedInput}
+            value={homeZip}
             type="text"
             label="Home Zip"
             growBasis={2}

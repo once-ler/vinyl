@@ -40,8 +40,8 @@ const enhanceWithLifecycle = lifecycle({
     }
   },
   componentWillMount() {
-    console.log(this.props);
-    document.body.style.backgroundColor = "green";
+    const { theme } = this.props;
+    document.body.style.backgroundColor = theme.secondary;
   },
   componentWillUnmount() {
     document.body.style.backgroundColor = null;

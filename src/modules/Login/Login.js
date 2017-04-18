@@ -4,6 +4,9 @@ import {connect} from 'react-redux';
 import compose from 'recompose/compose';
 import withHandlers from 'recompose/withHandlers';
 import {login} from '../auth';
+import CenteredContainer from '../../components/Container/CenteredContainer';
+import CenteredCell from '../../components/Cell/CenteredCell';
+import FlexGrow from '../../components/FlexGrow/FlexGrow';
 
 const mapDispatchToState = dispatch => ({
   dispatch
@@ -16,12 +19,16 @@ const connectFunc = connect(
 );
 
 const Presentation = ({onSubmit}) => (
-  <div>
-  <h1>Login</h1>
-  <form onSubmit={onSubmit}>
-  <button type="submit">Log in</button>
-  </form>
-  </div>
+  <FlexGrow>
+  <CenteredContainer>
+    <CenteredCell>
+      <h1>Login</h1>
+      <form onSubmit={onSubmit}>
+      <button type="submit">Log in</button>
+      </form>
+    </CenteredCell>
+  </CenteredContainer>
+  </FlexGrow>
 );
 
 export default compose(

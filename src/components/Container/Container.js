@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
-import { greenTheme } from '../Theme/Theme';
 import ResponsiveRow from '../Row/ResponsiveRow';
 
 const DefaultContainer = styled.div `
@@ -17,7 +16,7 @@ const DefaultContainer = styled.div `
 
 const Container = props => {
   return (
-    <ThemeProvider theme={greenTheme}>
+    <ThemeProvider theme={props.theme}>
       <DefaultContainer {...props}>{props.children}</DefaultContainer>
     </ThemeProvider>
   );
