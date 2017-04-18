@@ -8,7 +8,8 @@ import Cell from '../../components/Cell/Cell';
 import ResponsiveCell from '../../components/Cell/ResponsiveCell';
 import Container from '../../components/Container/Container';
 import { media } from '../../components/Setting/Setting';
-import { NavRow, NavCell, navAction } from '../Nav';
+import { NavRow, NavCell, LogoCell, navAction } from '../Nav';
+const logoImage = require('../../../static/vinyl.svg');
 
 const BetterLink = styled(Link) `
   color: sandybrown;
@@ -22,6 +23,9 @@ const BetterLink = styled(Link) `
 export default props => (
   <Container>
     <NavRow wrap end>
+      <LogoCell>
+      <img src={logoImage}/>
+      </LogoCell>
       <NavCell margin>
       <BetterLink to="/">Home</BetterLink>
       </NavCell>

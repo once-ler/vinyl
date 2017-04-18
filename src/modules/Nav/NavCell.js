@@ -3,8 +3,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import Cell from '../../components/Cell/Cell';
 import { media } from '../../components/Setting/Setting';
+
+export const LogoCell = styled.div `
+  min-width: 120px;
+  min-height: 60px;
+  background-color: transparent;
+  margin: 10px;
+  ${media.tablet `
+    flex: 1 100%;
+    max-width: 80%;
+    align-self: flex-start;
+    order: ${props => props.order};
+    `
+  }
+  margin-right: auto;
+  order: -1000;
+`;
 
 const DefaultCell = styled.div `
   min-width: 120px;

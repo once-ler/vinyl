@@ -23,7 +23,7 @@ export default ({
         const x = scrollLeft / (scrollWidth - clientWidth)
         const y = scrollTop / (scrollHeight - clientHeight)
         
-        console.log(list);
+        // console.log(list);
 
         return (
           <GridRow>
