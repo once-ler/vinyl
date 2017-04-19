@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
-import { logout } from '../../modules/auth';
+import { logout } from '../../modules/Login/Middleware';
 import Row from '../../components/Row/Row';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
 import Cell from '../../components/Cell/Cell';

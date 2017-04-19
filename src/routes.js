@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { IndexRoute, Route } from 'react-router';
-import { isLoaded as isAuthLoaded } from './modules/auth';
+import { isLoaded as isAuthLoaded } from './modules/Login/Middleware';
 import App from './modules/App/App';
 import Home from './modules/Home/Home';
 import Login from './modules/Login/Login';

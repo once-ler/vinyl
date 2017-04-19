@@ -5,7 +5,8 @@ import Cell from './Cell';
 const FormCell = styled(Cell) `
   /* margin: 0 5px; */
   border-bottom: 1px solid #333;
-  /* padding-bottom: 5px; */
+  border-right: 1px solid #333333;
+  padding-bottom: 8px;
   width: 100%;
   zoom: 1;
   &::before {

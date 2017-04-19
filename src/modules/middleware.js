@@ -1,5 +1,5 @@
 /* @flow */
-import {authUser, fetchUser, logoutUser} from './auth';
+import {authUser, fetchUser, logoutUser} from './Login/Middleware';
 
 export default [
   authUser,

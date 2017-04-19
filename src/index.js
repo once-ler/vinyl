@@ -7,7 +7,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import createStore from './createStore';
 import getRoutes from './routes';
-// import './globalStyles';
+import './globalStyles';
 
 const store = createStore(browserHistory, window.__data || {});
 const history = syncHistoryWithStore(browserHistory, store);

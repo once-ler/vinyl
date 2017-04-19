@@ -1,16 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import toClass from 'recompose/toClass';
 import FormCell from '../Cell/FormCell';
 import Label from '../Label/Label';
+import ErrorLabel from '../Label/ErrorLabel';
 import Input from './Input';
-
-const FieldContainer = styled.div`
-  height: 54px;
-  border-right: 1px solid #333333;
-  display: block;
-  padding: 8px;
-`;
+import FieldContainer from '../Field/FieldContainer';
 
 const ValidatedInput = props => {
   const { error, indicateInvalid, label, growBasis, ...rest } = props;
@@ -19,7 +13,7 @@ const ValidatedInput = props => {
       <FieldContainer>
       <Label>{label}</Label>
       <Input {...rest}></Input>
-      { indicateInvalid && <div className="error">{error}</div> }
+      { indicateInvalid && <ErrorLabel>{error}</ErrorLabel> }
       </FieldContainer>
     </FormCell>
   );
