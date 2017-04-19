@@ -6,12 +6,14 @@ import ResponsiveRow from '../Row/ResponsiveRow';
 
 const DefaultContainer = styled.div `
   display: flex;
-  height: 100%;
-  width: 100%;
   flex-direction: column;
   font-family: ${props => props.fontFamily || props.theme.fontFamily};
   font-size: ${props => props.fontSize || props.theme.fontSize};
   background-color: ${props => props.backgroundColor || props.theme.backgroundColor};
+  padding: ${props => props.padding ? props.padding : undefined}
+  margin: ${props => props.margin ? props.margin : undefined}
+  height: ${props => props.height ? props.height : '100%'}
+  width: ${props => props.width ? props.width : '100%'}
 `;
 
 const Container = props => {

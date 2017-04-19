@@ -1,7 +1,8 @@
 export const greenTheme = {
-  name: 'ElephantAndPiggy',
+  name: 'ElephantAndPiggie',
   main: 'slategray',
   secondary: 'rosybrown',
+  tertiary: 'lightyellow',
   fontFamily: 'Georgia, serif',
   fontSize: '1em',
   backgroundColor: 'papayawhip'

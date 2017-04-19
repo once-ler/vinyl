@@ -10,6 +10,9 @@ import { media } from '../../components/Setting/Setting';
 import { toggle } from './Action';
 
 const DefaultRow = styled(Row) `
+  background-color: ${props => props.theme.tertiary};
+  margin-bottom: 10px;
+  box-shadow: 0 8px 6px -6px #777;
   ${media.tablet `
     height: ${props => props.nav && props.nav.collapse ? '65px' : '100%'};
     overflow: hidden;

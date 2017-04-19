@@ -34,13 +34,6 @@ export function login(name: string) {
 }
 */
 
-// TODO: replace promise with observable
-export function logout() {
-  return {
-    type: LOGOUT
-  };
-}
-
 export function login(name: string, password: string = '') {
   return {
     type: 'authUser',

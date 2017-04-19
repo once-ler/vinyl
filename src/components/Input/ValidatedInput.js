@@ -7,9 +7,9 @@ import Input from './Input';
 import FieldContainer from '../Field/FieldContainer';
 
 const ValidatedInput = props => {
-  const { error, indicateInvalid, label, growBasis, ...rest } = props;
+  const { error, indicateInvalid, label, growBasis, right, ...rest } = props;
   return (
-    <FormCell growBasis={growBasis}>
+    <FormCell growBasis={growBasis} right={right}>
       <FieldContainer>
       <Label>{label}</Label>
       <Input {...rest}></Input>

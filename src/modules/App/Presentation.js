@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
-import { logout } from '../../modules/Login/Middleware';
+import { logout } from '../Login/Action';
 import Row from '../../components/Row/Row';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
 import Cell from '../../components/Cell/Cell';
@@ -37,6 +37,9 @@ export default props => (
       </NavCell>
       <NavCell margin>
       <BetterLink to="/scrollsync">ScrollSync</BetterLink>
+      </NavCell>
+      <NavCell margin>
+      <BetterLink to="/calendar">Calendar</BetterLink>
       </NavCell>
       <NavCell>
       <BetterLink to="/logout" onClick={logout}>Logout</BetterLink>

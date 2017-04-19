@@ -10,6 +10,7 @@ import Protected from './modules/Protected/Protected';
 import Form from './modules/Form/Form';
 import NotFound from './modules/NotFound/NotFound';
 import ScrollSync from './modules/ScrollSync/ScrollSync';
+import Calendar from './modules/Calendar/Calendar';
 
 export default (store: any) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -40,6 +41,7 @@ export default (store: any) => {
       <Route path="/form" component={Form} />
       <Route path="/login" component={Login} />
       <Route path="/scrollsync" component={ScrollSync} />
+      <Route path="/calendar" component={Calendar} />
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />
     </Route>

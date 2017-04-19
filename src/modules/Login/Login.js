@@ -49,7 +49,7 @@ const Presentation = props => {
             component={ValidatedInput}
             type="text"
             label="Username"
-            growBasis={3}
+            growBasis={5}
             validate={validateNotEmpty}
             error={loginError === 'User not found' ? loginError : undefined}
             />
@@ -58,7 +58,7 @@ const Presentation = props => {
             component={ValidatedInput}
             type="password"
             label="Password"
-            growBasis={3}            
+            growBasis={5}            
             validate={validateNotEmpty}
             error={loginError === 'Wrong password' ? loginError : undefined}
             />

@@ -78,3 +78,9 @@ export default function reducer(state: State = initialState, action: Action = { 
       return state;
   }
 }
+
+export function logout(event) {
+  return {
+    type: LOGOUT
+  };
+}

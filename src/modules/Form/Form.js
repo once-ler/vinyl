@@ -2,22 +2,14 @@
 /* eslint max-len: 0 */
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
-import Input from '../../components/Input/Input';
 import ValidatedInput from '../../components/Input/ValidatedInput';
+import BorderedValidatedInput from '../../components/Input/BorderedValidatedInput';
 import SubmitButton from '../../components/Button/SubmitButton';
-import Label from '../../components/Label/Label';
-import Fieldset from '../../components/Fieldset/Fieldset';
 import Legend from '../../components/Legend/Legend';
 import FormComponent from '../../components/Form/Form';
-import FormCell from '../../components/Cell/FormCell';
-import Row from '../../components/Row/Row';
-import Cell from '../../components/Cell/Cell';
 import Container from '../../components/Container/Container';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
-import ResponsiveCell from '../../components/Cell/ResponsiveCell';
-import { media } from '../../components/Setting/Setting';
 import FlexGrow from '../../components/FlexGrow/FlexGrow';
 
 const submitAction = data => (dispatch, getState) => dispatch({ type: 'SUBMIT_REQUEST', data });
@@ -38,7 +30,7 @@ const Form = props => {
           <ResponsiveRow>
           <Field
             name="firstName"
-            component={ValidatedInput}
+            component={BorderedValidatedInput}
             value={firstName}
             type="text"
             label="First Name"
@@ -47,7 +39,7 @@ const Form = props => {
             />
           <Field
             name="lastName"
-            component={ValidatedInput}
+            component={BorderedValidatedInput}
             value={lastName}
             validate={validateLastName}
             type="text"
@@ -69,7 +61,7 @@ const Form = props => {
           <ResponsiveRow>
           <Field
             name="homeAddress"
-            component={ValidatedInput}
+            component={BorderedValidatedInput}
             value={homeAddress}
             type="text"
             label="Home Address"
@@ -77,7 +69,7 @@ const Form = props => {
             />
           <Field
             name="homeState"
-            component={ValidatedInput}
+            component={BorderedValidatedInput}
             value={homeState}
             type="text"
             label="Home State"
