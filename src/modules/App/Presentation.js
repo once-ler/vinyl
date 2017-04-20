@@ -42,6 +42,9 @@ export default props => (
       <BetterLink to="/calendar">Calendar</BetterLink>
       </NavCell>
       <NavCell>
+      <BetterLink to="/oauth2login">Oauth2</BetterLink>
+      </NavCell>
+      <NavCell>
       <BetterLink to="/logout" onClick={logout}>Logout</BetterLink>
       </NavCell>
     </NavRow>

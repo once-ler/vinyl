@@ -6,6 +6,7 @@ import { isLoaded as isAuthLoaded } from './modules/Login/Middleware';
 import App from './modules/App/App';
 import Home from './modules/Home/Home';
 import Login from './modules/Login/Login';
+import Oauth2Login from './modules/Login/Oauth2Login';
 import Protected from './modules/Protected/Protected';
 import Form from './modules/Form/Form';
 import NotFound from './modules/NotFound/NotFound';
@@ -40,6 +41,7 @@ export default (store: any) => {
       </Route>
       <Route path="/form" component={Form} />
       <Route path="/login" component={Login} />
+      <Route path="/oauth2login" component={Oauth2Login} />
       <Route path="/scrollsync" component={ScrollSync} />
       <Route path="/calendar" component={Calendar} />
       { /* Catch all route */ }

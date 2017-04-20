@@ -1,5 +1,7 @@
 /* @flow */
 import React from 'react';
+import {connect} from 'react-redux';
+import compose from 'recompose/compose';
 import styled from 'styled-components';
 import Row from '../../components/Row/Row';
 import Cell from '../../components/Cell/Cell';
@@ -30,10 +32,11 @@ const NormalCell = styled(Cell) `
   border: 1px solid ${props => props.theme.secondary};
 `;
 
-export default (...props: any[]) => (
+const Presentation = props => (
   <FlexGrow>
   <Container>
     <h1>Home</h1>
+    <Row>Oauth2: <div style={{width:'200px', overflow: 'hidden'}}>{JSON.stringify(props.oauth2, null, '  ')}</div></Row>
     <HomeRow wrap between center>
       <HomeCell margin>Test</HomeCell>
       <HomeCell margin>Test</HomeCell>
@@ -55,3 +58,12 @@ export default (...props: any[]) => (
   </Container>
   </FlexGrow>
 );
+
+const connectFunc = connect(
+  state => ({ oauth2: state.oauth2 }),
+  dispatch => ({ dispatch })
+);
+
+export default compose(
+  connectFunc
+)(Presentation);

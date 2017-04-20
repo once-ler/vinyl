@@ -1,7 +1,7 @@
 /* @flow */
-// import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { reducer as form } from 'simpler-redux-form';
+import { authReducer as oauth2 } from 'redux-implicit-oauth2'
 import auth from './Login/Action';
 import theme from './App/Action';
 import nav from './Nav/Action';
@@ -17,5 +17,6 @@ export default {
   nav,
   profile,
   resources,
-  calendar
+  calendar,
+  oauth2
 };
