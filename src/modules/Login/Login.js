@@ -14,14 +14,14 @@ import ValidatedInput from '../../components/Input/ValidatedInput';
 import SubmitButton from '../../components/Button/SubmitButton';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
 
-const mapDispatchToState = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   dispatch,
   submitAction
 });
 
 const connectFunc = connect(
   state => ({ loginError: state.auth.error }),
-  mapDispatchToState
+  mapDispatchToProps
 );
 
 const submitAction = data => (dispatch, getState) => {

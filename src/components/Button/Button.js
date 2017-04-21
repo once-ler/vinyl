@@ -9,7 +9,6 @@ const Button = styled.button`
   border: 4px solid ${props => props.theme.secondary};
   border-radius: 3px;
   cursor: pointer;
-  max-width: 250px;
   type: ${props => props.type || 'button'};
 `;
 

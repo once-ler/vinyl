@@ -18,7 +18,8 @@ export default (store: any) => {
     const { router } = nextState;
     function checkAuth() {
       const { auth: { user } } = store.getState();
-      if (!user) {
+      const { oauth2: { isLoggedIn } } = store.getState();
+      if (!user && !isLoggedIn) {
         replace('/login');
       }
       cb();

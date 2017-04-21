@@ -38,6 +38,10 @@ const Cell = styled.div `
     flex: ${typeof p.growBasis === 'number' ? p.growBasis : (growBasis[p.growBasis] || 'none')}
     `
   }
+
+  ${p => p.width && `width: ${p.width}`}
+
+  ${p => p.maxWidth && `max-width: ${p.maxWidth}`}
 `;
 
 Cell.defaultProps = {

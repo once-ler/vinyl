@@ -8,6 +8,7 @@ const LOGOUT = 'vinyl/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'vinyl/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'vinyl/auth/LOGOUT_FAIL';
 const USER_SET = 'vinyl/auth/USER_SET';
+const UPDATE_OAUTH2_CONFIG = 'UPDATE_OAUTH2_CONFIG';
 
 type Action = {
   type: string,
@@ -17,11 +18,19 @@ type Action = {
 type State = any;
 
 const initialState = {
-  loaded: false
+  loaded: false,
+  client: '',
+  url: ''
 };
 
 export default function reducer(state: State = initialState, action: Action = { type: '' }) {
   switch (action.type) {
+    case UPDATE_OAUTH2_CONFIG:
+      return {
+        ...state,
+        url: action.url,
+        client: action.client
+      }
     case LOAD:
       return {
         ...state,
@@ -84,3 +93,8 @@ export function logout(event) {
     type: LOGOUT
   };
 }
+
+export const updateOauth2Config = config => ({
+  type: UPDATE_OAUTH2_CONFIG,
+  ...config
+});

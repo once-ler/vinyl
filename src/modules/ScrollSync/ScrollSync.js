@@ -6,7 +6,7 @@ import compose from 'recompose/compose';
 import {renderBodyCell, renderLeftSideCell, renderHeaderCell, renderLeftHeaderCell} from './Renderer';
 import Presentation from './Presentation';
 
-const mapDispatchToState = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   dispatch
 });
 
@@ -14,7 +14,7 @@ const connectFunc = connect(
   state => ({
     list: state.resources.list
   }),
-  mapDispatchToState
+  mapDispatchToProps
 );
 
 export default compose(

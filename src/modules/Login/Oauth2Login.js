@@ -5,6 +5,7 @@ import compose from 'recompose/compose';
 import toClass from 'recompose/toClass';
 import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
 import {login, logout} from 'redux-implicit-oauth2';
+import { updateOauth2Config } from './Action';
 import SubmitButton from '../../components/Button/SubmitButton';
 import CenteredContainer from '../../components/Container/CenteredContainer';
 import CenteredCell from '../../components/Cell/CenteredCell';
@@ -14,23 +15,63 @@ import FormComponent from '../../components/Form/Form';
 import ValidatedInput from '../../components/Input/ValidatedInput';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
 
-const provider = 'https://localhost:4444';
-
-let config = {
-  url: `${provider}/dialog/authorize`,
+const config = {
+  url: 'https://localhost:4444/dialog/authorize',
   client: "abc123",
-  redirect: 'http://localhost:3000',
+  redirect: window.location.origin,
   scope: "offline_access"
 };
 
 const validateNotEmpty = input => !input ? 'Required.' : undefined;
 
-const Login = ({ isLoggedIn, login, logout, clientId }) => {
-  console.log(clientId)
+const submitAction = props => data => {
+  const {dispatch, login, updateOauth2Config} = props;
+  
+  const config_ = { ...config, ...data };
+  dispatch({ type: 'LOGIN_FORM_CLEAR_ERROR' });
+  updateOauth2Config(data);
+  login(config_);
+};
+
+const Login = props => {
+  const { url, client, submit, error, loginError, submitAction, isLoggedIn, login, logout } = props;
+
   if (isLoggedIn) {
     return <SubmitButton onClick={logout}>Logout</SubmitButton>
   } else {
-    return <SubmitButton onClick={login}>Login</SubmitButton>
+    return (
+      <FormComponent
+        onSubmit={ submit(submitAction(props)) }>
+        <ResponsiveRow>
+        <Legend>Log in</Legend>
+        </ResponsiveRow>
+        <ResponsiveRow column>
+        <Field
+          name="url"
+          component={ValidatedInput}
+          value={url}
+          placeholder="https://localhost:4444/dialog/authorize"
+          type="text"
+          label="Oauth2 Url"
+          validate={validateNotEmpty}
+          error={loginError === 'Oauth2 Url not found' ? loginError : undefined}
+          margin
+          />
+        <Field
+          name="client"
+          component={ValidatedInput}
+          value={client}
+          type="text"
+          label="Client Id"
+          validate={validateNotEmpty}
+          error={loginError === 'Client Id not found' ? loginError : undefined}
+          />
+        </ResponsiveRow>
+        <ResponsiveRow middle center>
+          <Submit component={ SubmitButton }>Submit</Submit>
+        </ResponsiveRow>        
+      </FormComponent>
+    );
   }
 };
 
@@ -38,36 +79,19 @@ const Presentation = props => (
   <FlexGrow>
     <CenteredContainer backgroundColor="#fefefe">
       <CenteredCell>
-      <div style={{width:'200px', overflow: 'hidden'}}>{JSON.stringify(props.oauth2, null, '  ')}</div>
-      <FormComponent
-        onSubmit={e => e.preventDefault()}>
-        <ResponsiveRow>
-        <Legend>Log in</Legend>
-        </ResponsiveRow>
-        <ResponsiveRow column>
-        <Field
-          name="clientId"
-          component={ValidatedInput}
-          type="text"
-          label="Client Id"
-          growBasis={5}
-          validate={validateNotEmpty}
-          error={props.loginError === 'Client Id not found' ? loginError : undefined}
-          />
-        </ResponsiveRow>
-
-        <ResponsiveRow middle center>
-          <Login {...props} />
-        </ResponsiveRow>
-      </FormComponent>      
+      <div style={{width:'500px', overflow: 'hidden'}}>{JSON.stringify(props.oauth2, null, '  ')}</div>
+      </CenteredCell>
+      <CenteredCell width="80%" maxWidth="500px">
+        <Login {...props} />     
       </CenteredCell>
     </CenteredContainer>
-  </FlexGrow>
-);
+  </FlexGrow>);
 
 const mapDispatchToProps = dispatch => ({
-  login: () => login(config)(dispatch),
+  login: props => login(props)(dispatch),
   logout: () => dispatch(logout()),
+  submitAction,
+  updateOauth2Config: props => dispatch(updateOauth2Config(props)),
   dispatch
 });
 
@@ -76,7 +100,8 @@ const connectFunc = connect(
     oauth2: state.oauth2,
     isLoggedIn: state.oauth2.isLoggedIn,
     loginError: state.auth.error,
-    clientId: state.auth.clientId
+    url: state.auth.url,
+    client: state.auth.client
   }),
   mapDispatchToProps
 );

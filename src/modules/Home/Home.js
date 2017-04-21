@@ -36,7 +36,6 @@ const Presentation = props => (
   <FlexGrow>
   <Container>
     <h1>Home</h1>
-    <Row>Oauth2: <div style={{width:'200px', overflow: 'hidden'}}>{JSON.stringify(props.oauth2, null, '  ')}</div></Row>
     <HomeRow wrap between center>
       <HomeCell margin>Test</HomeCell>
       <HomeCell margin>Test</HomeCell>
