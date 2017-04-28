@@ -8,6 +8,7 @@ import nav from './Nav/Action';
 import profile from './Form/Action';
 import resources from './ScrollSync/Action';
 import calendar from './Calendar/Action';
+import modal from './Modal/Action';
 
 export default {
   routing: routerReducer,
@@ -18,5 +19,6 @@ export default {
   profile,
   resources,
   calendar,
-  oauth2
+  oauth2,
+  modal
 };
