@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import NestedJsonModal from './NestedJsonModal'
+import DefaultModal from './DefaultModal'
 
 const MODAL_COMPONENTS = {
-  'NESTED_JSON_MODAL': NestedJsonModal
+  'DEFAULT_MODAL': DefaultModal
 }
 
 const ModalRoot = ({ modalType, modalProps }) => {
