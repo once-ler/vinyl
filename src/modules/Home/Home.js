@@ -2,6 +2,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import compose from 'recompose/compose';
+import withHandlers from 'recompose/withHandlers';
 import styled from 'styled-components';
 import Row from '../../components/Row/Row';
 import Cell from '../../components/Cell/Cell';
@@ -10,6 +11,8 @@ import ResponsiveRow from '../../components/Row/ResponsiveRow';
 import ResponsiveCell from '../../components/Cell/ResponsiveCell';
 import { media } from '../../components/Setting/Setting';
 import FlexGrow from '../../components/FlexGrow/FlexGrow';
+import Button from '../../components/Button/Button';
+import { showModal } from '../Modal/Action';
 
 const HomeRow = styled(ResponsiveRow) `
   min-height: 180px;
@@ -37,7 +40,7 @@ const Presentation = props => (
   <Container>
     <h1>Home</h1>
     <HomeRow wrap between center>
-      <HomeCell margin>Test</HomeCell>
+      <HomeCell margin><Button onClick={props.onClick}>Show Modal</Button></HomeCell>
       <HomeCell margin>Test</HomeCell>
       <HomeCell margin>Test</HomeCell>
     </HomeRow>
@@ -59,10 +62,15 @@ const Presentation = props => (
 );
 
 const connectFunc = connect(
-  state => ({ oauth2: state.oauth2 }),
+  state => ({ oauth2: state.oauth2, modal: state.modal }),
   dispatch => ({ dispatch })
 );
 
+const enanceWithHandlers = withHandlers({
+  onClick: props => event => props.dispatch(showModal('DEFAULT_MODAL', { title: 'Hello', content: 'World' }))
+});
+
 export default compose(
-  connectFunc
+  connectFunc,
+  enanceWithHandlers
 )(Presentation);

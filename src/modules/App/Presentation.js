@@ -9,6 +9,7 @@ import ResponsiveCell from '../../components/Cell/ResponsiveCell';
 import Container from '../../components/Container/Container';
 import { media } from '../../components/Setting/Setting';
 import { NavRow, NavCell, LogoCell, navAction } from '../Nav';
+import Modal from '../Modal/Modal'; 
 const logoImage = require('../../../static/vinyl.svg');
 
 const BetterLink = styled(Link) `
@@ -51,5 +52,6 @@ export default props => (
     <ResponsiveRow>
       {props.children}
     </ResponsiveRow>
+    <Modal></Modal>
   </Container>
 );

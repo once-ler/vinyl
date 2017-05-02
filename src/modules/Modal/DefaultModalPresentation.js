@@ -44,7 +44,7 @@ const ModalClose = styled.div`
   color: #fff;
 
   &:before {
-    content: '\2715';
+    content: '\00D7';
   }
 `;
 
@@ -68,10 +68,9 @@ const Presentation = props => {
     <TransitionSpring endValue willEnter willLeave>
       {currentValue =>
         <div>
-          {Object.keys(currentValue).map(key => {
-            renderModal(props, currentValue[key]);
-          };
-        )}
+          {Object.keys(currentValue).map(key =>
+            renderModal(props, currentValue[key])
+          )}
         </div>
       }
     </TransitionSpring>
