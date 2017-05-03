@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { TransitionSpring, presets } from 'react-motion';
+import { TransitionMotion, presets } from 'react-motion';
 import styled from 'styled-components';
 
 const Overlay = styled.div`
@@ -61,19 +61,20 @@ const renderModal = (props, anim) => {
   );
 };
 
+// https://github.com/chenglou/react-motion/issues/287
 const Presentation = props => {
   const { modal: {modalIsOpen: shown}, endValue, willEnter, renderModal, willLeave } = props;
 
   return (
-    <TransitionSpring endValue willEnter willLeave>
-      {currentValue =>
+    <TransitionMotion styles={[{key: '', style: {}, data: {}}]} willEnter willLeave>
+      { (interpolated) =>
         <div>
-          {Object.keys(currentValue).map(key =>
-            renderModal(props, currentValue[key])
+          { interpolated.map(({ key, style, data }) =>
+            renderModal(props, interpolated[key])
           )}
         </div>
       }
-    </TransitionSpring>
+    </TransitionMotion>
   );
 };
 
