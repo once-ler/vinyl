@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import withProps from 'recompose/withProps';
 import withHandlers from 'recompose/withHandlers';
 import compose from 'recompose/compose';
+import {spring} from 'react-motion';
 import {hideModal} from './Action';
 import Presentation from './DefaultModalPresentation';
 
@@ -22,23 +23,23 @@ const enhanceWithHandlers = withHandlers({
 const enhanceWithProps = withProps(
   ownerProps => ({
     willEnter: () => ({
-      scale: { val: .9 },
-      opacity: { val: .5 }
+      scale: spring(0.75),
+      opacity: spring(0.5)
     }),
     willLeave: (key, value, endValue, currentValue, currentSpeed) => ({
-      scale: { val: .9 },
-      opacity: { val: 0 }
+      scale: spring(0, { stiffness: 1000, damping: 40 }),
+      opacity: spring(0, { stiffness: 1000, damping: 40 })
     }),
-    endValue: () => {
+    getEndValue: () => {
       const { modal: {modalIsOpen: shown} } = ownerProps;
 
-      if (!shown) return {};
-
-      return {
+      return (!shown)
+      ? {}
+      : {
         modal: {
-          scale: { val: 1, config: presets.wobbly },
-          opacity: { val: 1, config: presets.stiff }
-        }
+          scale: spring(1, { stiffness: 1500, damping: 40 }),
+          opacity: spring(1, { stiffness: 1500, damping: 40 }),
+        },
       };
     }
   })
