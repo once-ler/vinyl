@@ -8,7 +8,7 @@ const initialState = {
 }
 
 export const showModal = (modalType, modalProps) => ({type: SHOW_MODAL, modalType, modalProps});
-export const hideModal = () => ({ type: HIDE_MODAL });
+export const hideModal = (modalType) => ({ type: HIDE_MODAL, modalType });
 
 export default function modal(state = initialState, action) {
   switch (action.type) {

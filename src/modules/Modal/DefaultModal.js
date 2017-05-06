@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import withProps from 'recompose/withProps';
 import withHandlers from 'recompose/withHandlers';
 import compose from 'recompose/compose';
+import toClass from 'recompose/toClass';
 import {spring} from 'react-motion';
 import {hideModal} from './Action';
 import Presentation from './DefaultModalPresentation';
@@ -20,34 +21,27 @@ const enhanceWithHandlers = withHandlers({
   onClose: props => event => props.dispatch(hideModal())
 });
 
+// https://codepen.io/anon/pen/wzdBoa?editors=0010#0
 const enhanceWithProps = withProps(
   ownerProps => ({
     willEnter: () => ({
-      scale: spring(0.1, { stiffness: 1000, damping: 40 }),
-      opacity: spring(0.5)
+      scale: 0,
+      opacity: 0
     }),
-    willLeave: (key, value, endValue, currentValue, currentSpeed) => { console.log(key); return ({
-      scale: spring(0, { stiffness: 1000, damping: 40 }),
-      opacity: spring(0, { stiffness: 1000, damping: 40 })
+    willLeave: () => ({
+      scale: spring(0, { stiffness: 200, damping: 26 }),
+      opacity: spring(0, { stiffness: 300, damping: 40 })
+    }),
+    getStyles: () => ({
+      opacity: spring(1, { stiffness: 300, damping: 40 }),
+      scale: spring(1, { stiffness: 1500, damping: 20 })
     })
-    },
-    getEndValue: () => {
-      const { modal: {modalIsOpen: shown} } = ownerProps;
-
-      return (!shown)
-      ? {}
-      : {
-        modal: {
-          scale: spring(1, { stiffness: 1500, damping: 40 }),
-          opacity: spring(1, { stiffness: 1500, damping: 40 }),
-        },
-      };
-    }
   })
 );
 
 export default compose(
   connectFunc,
   enhanceWithProps,
-  enhanceWithHandlers
+  enhanceWithHandlers,
+  toClass
 )(Presentation);
