@@ -10,16 +10,15 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 999;
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
   overflow: auto;
-  visibility: hidden;
-  opacity: 0;
+  opacity: 0.5;
   transition: visibility 0s linear 0.35s, opacity 0.35s linear;
 `;
 
 const ModalContent = styled.div`
+  z-index: 999;
   width: 50%;
   padding: 50px;
   border-radius: 3px;
@@ -52,6 +51,11 @@ const ModalClose = styled.div`
   }
 `;
 
+const defaultStyles = () => ({
+  opacity: 0,
+  scale: 0
+});
+
 const getStyles = () => ({
   opacity: spring(1),
   scale: spring(1)
@@ -59,23 +63,22 @@ const getStyles = () => ({
 
 // https://github.com/chenglou/react-motion/issues/287
 const Presentation = props => {
-  const { modal: {modalIsOpen: shown, modalProps}, endValue, willEnter, willLeave } = props;
-  console.log(shown)
+  const { modal: {modalIsOpen: shown, modalProps}, endValue, willEnter, willLeave, onClose } = props;
+  console.log(shown);
   return (
-    <TransitionMotion styles={[{key: 't', style: getStyles(), data: { modalProps }}]} willEnter={willEnter} willLeave={willLeave}>
+    <TransitionMotion
+      defaultStyles={[{key: 't', style: defaultStyles()}]}
+      styles={[{key: 't', style: getStyles(), data: { modalProps }}]} willEnter={willEnter} willLeave={willLeave}>
       { (interpolated) => {
         return (<div>
           { interpolated.map(({ key, style, data }) => {
-            console.log(ModalContent)
-            return
-              <Overlay onClick={onClose} style={{ opacity: style.opacity }}>
-                <ModalContent style={{ transform: `scale(${style.scale})` }}>
+            return <ModalContent key={`${key}-modal`} style={{ transform: `scale(${style.scale})`, opacity: style.opacity }}>
                   <ModalClose onClick={onClose}></ModalClose>
                   {data.content}
                 </ModalContent>
-              </Overlay>
           }
           )}
+          <Overlay onClick={onClose} />
         </div>)
       }
     }

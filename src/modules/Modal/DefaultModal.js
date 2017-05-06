@@ -23,13 +23,14 @@ const enhanceWithHandlers = withHandlers({
 const enhanceWithProps = withProps(
   ownerProps => ({
     willEnter: () => ({
-      scale: spring(0.75),
+      scale: spring(0.1, { stiffness: 1000, damping: 40 }),
       opacity: spring(0.5)
     }),
-    willLeave: (key, value, endValue, currentValue, currentSpeed) => ({
+    willLeave: (key, value, endValue, currentValue, currentSpeed) => { console.log(key); return ({
       scale: spring(0, { stiffness: 1000, damping: 40 }),
       opacity: spring(0, { stiffness: 1000, damping: 40 })
-    }),
+    })
+    },
     getEndValue: () => {
       const { modal: {modalIsOpen: shown} } = ownerProps;
 
