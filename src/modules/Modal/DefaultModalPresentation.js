@@ -52,7 +52,7 @@ const ModalClose = styled.div`
 
 // https://github.com/chenglou/react-motion/issues/287
 const Presentation = props => {
-  const { modal: {modalIsOpen: shown, modalProps}, endValue, willEnter, willLeave, getStyles, onClose } = props;
+  const { modal: {modalIsOpen: shown, modalProps}, willEnter, willLeave, getStyles, onClose } = props;
   return (
     <TransitionMotion
       styles={!shown ? [] : [{key: 't', style: getStyles(), data: { modalProps }}]} willEnter={willEnter} willLeave={willLeave}>
