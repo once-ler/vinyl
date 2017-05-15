@@ -13,6 +13,7 @@ import { media } from '../../components/Setting/Setting';
 import FlexGrow from '../../components/FlexGrow/FlexGrow';
 import Button from '../../components/Button/Button';
 import { showModal } from '../Modal/Action';
+import SlideContainer from '../../components/Container/SlideContainer';
 
 const HomeRow = styled(ResponsiveRow) `
   min-height: 180px;
@@ -36,7 +37,7 @@ const NormalCell = styled(Cell) `
 `;
 
 const Presentation = props => (
-  <FlexGrow>
+  <SlideContainer>
   <Container>
     <h1>Home</h1>
     <HomeRow wrap between center>
@@ -58,7 +59,7 @@ const Presentation = props => (
       <NormalCell growBasis={2} stretch>Test</NormalCell>
     </HomeRow>
   </Container>
-  </FlexGrow>
+  </SlideContainer>
 );
 
 const connectFunc = connect(
