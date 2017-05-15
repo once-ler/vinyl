@@ -37,7 +37,7 @@ const NormalCell = styled(Cell) `
 `;
 
 const Presentation = props => (
-  <SlideContainer>
+  <SlideContainer {...props}>
   <Container>
     <h1>Home</h1>
     <HomeRow wrap between center>
