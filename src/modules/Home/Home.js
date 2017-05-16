@@ -38,7 +38,6 @@ const NormalCell = styled(Cell) `
 
 const Presentation = props => (
   <SlideContainer {...props}>
-  <Container>
     <h1>Home</h1>
     <HomeRow wrap between center>
       <HomeCell margin><Button onClick={props.onClick}>Show Modal</Button></HomeCell>
@@ -58,7 +57,6 @@ const Presentation = props => (
       <NormalCell growBasis={4}>Test</NormalCell>
       <NormalCell growBasis={2} stretch>Test</NormalCell>
     </HomeRow>
-  </Container>
   </SlideContainer>
 );
 
