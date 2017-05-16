@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { TransitionMotion, Motion, spring } from 'react-motion';
+import { Motion, spring } from 'react-motion';
 import styled from 'styled-components';
 import withProps from 'recompose/withProps';
 import Container from './Container';
