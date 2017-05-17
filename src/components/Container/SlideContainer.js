@@ -6,13 +6,13 @@ import Container from './Container';
 
 const Slide = styled(Container)`
   width: 100%;
-  transform: ${props => `translate3d(${props.x}em, 0, 0)`};
+  transform: ${props => `translate3d(${props.x}%, 0, 0)`};
 `;
 
 const enhanceWithProps = withProps(
   ownerProps => ({
     defaultStyle: {
-      x: -100, opacity: 0
+      x: +100, opacity: 0
     },
     style: {
       opacity: spring(1, { stiffness: 10, damping: 10 }),
