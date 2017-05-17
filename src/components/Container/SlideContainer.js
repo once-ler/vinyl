@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Motion, spring } from 'react-motion';
+import { TransitionMotion, Motion, spring } from 'react-motion';
 import styled from 'styled-components';
 import withProps from 'recompose/withProps';
 import Container from './Container';
@@ -12,11 +12,11 @@ const Slide = styled(Container)`
 const enhanceWithProps = withProps(
   ownerProps => ({
     defaultStyle: {
-      x: +100, opacity: 0
+      x: +200, opacity: 0
     },
     style: {
       opacity: spring(1, { stiffness: 10, damping: 10 }),
-      x: spring(0, { stiffness: 350, damping: 15 })
+      x: spring(0, { stiffness: 150, damping: 15 })
     }
   })
 );

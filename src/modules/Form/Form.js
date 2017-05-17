@@ -9,6 +9,7 @@ import SubmitButton from '../../components/Button/SubmitButton';
 import Legend from '../../components/Legend/Legend';
 import FormComponent from '../../components/Form/Form';
 import Container from '../../components/Container/Container';
+import SlideContainer from '../../components/Container/SlideContainer';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
 import FlexGrow from '../../components/FlexGrow/FlexGrow';
 
@@ -22,7 +23,7 @@ const Form = props => {
   const { firstName, lastName, phone, homeAddress, homeState, homeZip, submit, error } = props;
 
   return (
-    <FlexGrow>      
+    <SlideContainer {...props}>      
       <Container backgroundColor="#fefefe">
         <FormComponent
           onSubmit={submit(submitAction)}>
@@ -90,7 +91,7 @@ const Form = props => {
         </FormComponent>
         <h1>{error}</h1>      
       </Container>
-    </FlexGrow>
+    </SlideContainer>
   );
 };
 
