@@ -1,12 +1,12 @@
 import React from 'react';
 import Container from '../../components/Container/Container';
-import FlexGrow from '../../components/FlexGrow/FlexGrow';
+import SlideContainer from '../../components/Container/SlideContainer';
 import ScrollSync from '../../components/ScrollSync/ScrollSync';
 
 export default props => (
-  <FlexGrow>
+  <SlideContainer direction="down">
     <Container fontFamily={props.fontFamily} fontSize={props.fontSize}>
       <ScrollSync {...props}/>
     </Container>
-  </FlexGrow>
+  </SlideContainer>
 );

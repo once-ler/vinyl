@@ -9,7 +9,7 @@ import { updateOauth2Config } from './Action';
 import SubmitButton from '../../components/Button/SubmitButton';
 import CenteredContainer from '../../components/Container/CenteredContainer';
 import CenteredCell from '../../components/Cell/CenteredCell';
-import FlexGrow from '../../components/FlexGrow/FlexGrow';
+import SlideContainer from '../../components/Container/SlideContainer';
 import Legend from '../../components/Legend/Legend';
 import FormComponent from '../../components/Form/Form';
 import ValidatedInput from '../../components/Input/ValidatedInput';
@@ -76,7 +76,7 @@ const Login = props => {
 };
 
 const Presentation = props => (
-  <FlexGrow>
+  <SlideContainer direction="up">
     <CenteredContainer backgroundColor="#fefefe">
       <CenteredCell>
       <div style={{width:'500px', overflow: 'hidden'}}>{JSON.stringify(props.oauth2, null, '  ')}</div>
@@ -85,7 +85,7 @@ const Presentation = props => (
         <Login {...props} />     
       </CenteredCell>
     </CenteredContainer>
-  </FlexGrow>);
+  </SlideContainer>);
 
 const mapDispatchToProps = dispatch => ({
   login: props => login(props)(dispatch),

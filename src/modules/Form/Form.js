@@ -11,7 +11,6 @@ import FormComponent from '../../components/Form/Form';
 import Container from '../../components/Container/Container';
 import SlideContainer from '../../components/Container/SlideContainer';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
-import FlexGrow from '../../components/FlexGrow/FlexGrow';
 
 const submitAction = data => (dispatch, getState) => dispatch({ type: 'SUBMIT_REQUEST', data });
 

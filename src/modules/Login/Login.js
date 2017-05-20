@@ -7,7 +7,7 @@ import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
 import {login} from './Middleware';
 import CenteredContainer from '../../components/Container/CenteredContainer';
 import CenteredCell from '../../components/Cell/CenteredCell';
-import FlexGrow from '../../components/FlexGrow/FlexGrow';
+import SlideContainer from '../../components/Container/SlideContainer';
 import Legend from '../../components/Legend/Legend';
 import FormComponent from '../../components/Form/Form';
 import ValidatedInput from '../../components/Input/ValidatedInput';
@@ -35,7 +35,7 @@ const validateNotEmpty = input => !input ? 'Required.' : undefined;
 const Presentation = props => {
   const { onSubmit, submit, error, loginError } = props;
   return (
-    <FlexGrow>
+    <SlideContainer direction="up">
     <CenteredContainer backgroundColor="#fefefe">
       <CenteredCell>
         <FormComponent
@@ -69,7 +69,7 @@ const Presentation = props => {
         </FormComponent>
       </CenteredCell>
     </CenteredContainer>
-    </FlexGrow>
+    </SlideContainer>
   );
 };
 
