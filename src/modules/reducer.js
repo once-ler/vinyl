@@ -9,6 +9,7 @@ import profile from './Form/Action';
 import resources from './ScrollSync/Action';
 import calendar from './Calendar/Action';
 import modal from './Modal/Action';
+import upload from './FileUpload/Action';
 
 export default {
   routing: routerReducer,
@@ -20,5 +21,6 @@ export default {
   resources,
   calendar,
   oauth2,
-  modal
+  modal,
+  upload
 };

@@ -10,8 +10,8 @@ import Container from '../../components/Container/Container';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
 import ResponsiveCell from '../../components/Cell/ResponsiveCell';
 import { media } from '../../components/Setting/Setting';
-import FlexGrow from '../../components/FlexGrow/FlexGrow';
 import Button from '../../components/Button/Button';
+import FileUpload from '../FileUpload/FileUpload';
 import { showModal } from '../Modal/Action';
 import SlideContainer from '../../components/Container/SlideContainer';
 
@@ -41,7 +41,7 @@ const Presentation = props => (
     <h1>Home</h1>
     <HomeRow wrap between center>
       <HomeCell margin><Button onClick={props.onClick}>Show Modal</Button></HomeCell>
-      <HomeCell margin>Test</HomeCell>
+      <HomeCell margin><FileUpload /></HomeCell>
       <HomeCell margin>Test</HomeCell>
     </HomeRow>
     <HomeRow wrapCenter center>

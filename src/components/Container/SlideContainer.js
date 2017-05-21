@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { TransitionMotion, Motion, spring } from 'react-motion';
 import styled from 'styled-components';
 import withProps from 'recompose/withProps';
