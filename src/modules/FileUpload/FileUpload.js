@@ -2,6 +2,9 @@ import React from 'react';
 import {connect, bindActionCreators} from 'react-redux';
 import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
 import Dropzone from 'react-dropzone';
+import toClass from 'recompose/toClass';
+import withHandlers from 'recompose/withHandlers';
+import compose from 'recompose/compose';
 
 import {uploadDocumentRequest} from './Action';
 import Legend from '../../components/Legend/Legend';
@@ -34,9 +37,12 @@ const renderDropzoneInput = (field) => {
   );
 }
 
+const enahceRenderDropzoneInput = toClass(renderDropzoneInput);
+
 const submitAction1 = data => (dispatch, getState) => dispatch({ type: 'SUBMIT_REQUEST', data });
 
-const submitAction = data => (dispatch, getState) => {
+const submitAction = data => { console.log(data); return (dispatch, getState) => {
+  console.log(dispatch);
   const body = new FormData();
   Object.keys(data).forEach(( key ) => {
     body.append(key, data[ key ]);
@@ -52,25 +58,26 @@ const submitAction = data => (dispatch, getState) => {
   .then(res => console.log(res))
   .catch(err => console.error(err));
 };
+};
 
 const Presentation = props => {
   const {onSubmit, submit, error, reset} = props;
-
+  
   return (
     <SlideContainer {...props}>      
       <Container backgroundColor="#fefefe">
         <FormComponent
-          onSubmit={submit(submitAction)}>
-          <ResponsiveRow><Legend>Personal</Legend></ResponsiveRow>
+          onSubmit={onSubmit}>
+          <ResponsiveRow><Legend>Upload Form</Legend></ResponsiveRow>
           <ResponsiveRow>
           <Field
             name="files"
-            component={renderDropzoneInput}
+            component={enahceRenderDropzoneInput}
             type="file"
           />
           </ResponsiveRow>
           <ResponsiveRow middle center>
-          <Submit component={ SubmitButton }>Save</Submit>
+          <Submit component={ SubmitButton }>Upload</Submit>
           </ResponsiveRow>
           <ResponsiveRow middle center>
           <button onClick={reset}>
@@ -82,11 +89,31 @@ const Presentation = props => {
     </SlideContainer>);
 };
 
-const connectedComponent = connect(
+const mapDispatchToProps = dispatch => ({
+  dispatch,
+  submitAction
+});
+
+const connectFunc = connect(
   state => ({
     files: state.upload.files
   }),
-  { submitAction }
-)(Presentation);
+  mapDispatchToProps
+);
 
-export default SimplerForm({id: 'upload'})(connectedComponent);
+const enhanceWithForm = SimplerForm({id: 'upload'});
+
+const enhanceWithHandlers = withHandlers({
+  onSubmit: props => event => {
+    const {submit, reset, dispatch, submitAction, files} = props;
+    const capture = submit(submitAction);
+    capture(event);
+  }
+});
+
+export default compose(
+  connectFunc,
+  enhanceWithForm,
+  enhanceWithHandlers,
+  toClass  
+)(Presentation);

@@ -75,5 +75,6 @@ const Presentation = props => {
 
 export default compose(
   connectFunc,
-  SimplerForm({id: 'login'})
-)(toClass(Presentation));
+  SimplerForm({id: 'login'}),
+  toClass
+)(Presentation);
