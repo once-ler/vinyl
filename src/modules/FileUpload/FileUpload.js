@@ -1,38 +1,92 @@
 import React from 'react';
 import {connect, bindActionCreators} from 'react-redux';
-import withHandlers from 'recompose/withHandlers';
-import compose from 'recompose/compose';
+import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
+import Dropzone from 'react-dropzone';
+
 import {uploadDocumentRequest} from './Action';
-import FileUpload from '../../components/FileUpload/FileUpload';
+import Legend from '../../components/Legend/Legend';
+import SubmitButton from '../../components/Button/SubmitButton';
+import Container from '../../components/Container/Container';
+import FormComponent from '../../components/Form/Form';
+import ResponsiveRow from '../../components/Row/ResponsiveRow';
+import SlideContainer from '../../components/Container/SlideContainer';
 
-const mapDispatchToProps = dispatch => ({
-  uploadDocumentRequest, dispatch
-});
+// import FileUpload from '../../components/FileUpload/FileUpload';
 
-const connectFunc = connect(
-  state => ({upload: state.upload}),
-  mapDispatchToProps
-);
+const renderDropzoneInput = (field) => {
+  const files = field.value;
+  return (
+    <div>
+      <Dropzone
+        name={field.name}
+        onDrop={( filesToUpload, e ) => field.onChange(filesToUpload)}
+      >
+        <div>Try dropping some files here, or click to select files to upload.</div>
+      </Dropzone>
+      {field.error &&
+        <span className="error">{field.error}</span>}
+      {files && Array.isArray(files) && (
+        <ul>
+          { files.map((file, i) => <li key={i}>{file.name}</li>) }
+        </ul>
+      )}
+    </div>
+  );
+}
 
-const enhanceWithHandlers = withHandlers({
-  handleFileUpload: props => ({files}) => {
-    const file = files[0];
-    uploadDocumentRequest({
-       file,
-       name: 'Awesome Cat Pic'
-    });
-  },
-  onChange: props => event => {
-    const { handleFileUpload, multiple } = props;
-    let data = event.target.files;
-    if (!multiple) {
-      data = data[0];
-    }
-    handleFileUpload(data);
-  }  
-});
+const submitAction1 = data => (dispatch, getState) => dispatch({ type: 'SUBMIT_REQUEST', data });
 
-export default compose(
-  connectFunc,
-  enhanceWithHandlers
-)(FileUpload);
+const submitAction = data => (dispatch, getState) => {
+  const body = new FormData();
+  Object.keys(data).forEach(( key ) => {
+    body.append(key, data[ key ]);
+  });
+
+  console.info('POST', body, data);
+  console.info('This is expected to fail:');
+  fetch(`http://example.com/send/`, {
+    method: 'POST',
+    body: body,
+  })
+  .then(res => res.json())
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+};
+
+const Presentation = props => {
+  const {onSubmit, submit, error, reset} = props;
+
+  return (
+    <SlideContainer {...props}>      
+      <Container backgroundColor="#fefefe">
+        <FormComponent
+          onSubmit={submit(submitAction)}>
+          <ResponsiveRow><Legend>Personal</Legend></ResponsiveRow>
+          <ResponsiveRow>
+          <Field
+            name="files"
+            component={renderDropzoneInput}
+            type="file"
+          />
+          </ResponsiveRow>
+          <ResponsiveRow middle center>
+          <Submit component={ SubmitButton }>Save</Submit>
+          </ResponsiveRow>
+          <ResponsiveRow middle center>
+          <button onClick={reset}>
+            Clear Values
+          </button>
+          </ResponsiveRow>
+        </FormComponent>
+      </Container>
+    </SlideContainer>);
+};
+
+const connectedComponent = connect(
+  state => ({
+    files: state.upload.files
+  }),
+  { submitAction }
+)(Presentation);
+
+export default SimplerForm({id: 'upload'})(connectedComponent);

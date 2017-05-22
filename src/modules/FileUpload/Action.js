@@ -31,6 +31,7 @@ export function uploadDocumentRequest({ file, name }) {
 }
 
 const initialState = {
+  files: []
 };
 
 export default function upload(state = initialState, action) {
