@@ -32,8 +32,17 @@ const renderDropzoneInput1 = (field) => {
   );
 }
 
+let files_ = [];
+
+const handleDestroy = ({text, dispatch}) => e => {
+  e.preventDefault();
+  console.log([text, dispatch, e.target]);
+  files_.splice(files_.indexOf(text), 1);
+};
+
 const renderDropzoneInput = (field) => {
   const files = field.value;
+  if (files) files_ = files;
   return (
     <div>
       <Dropzone
@@ -45,7 +54,7 @@ const renderDropzoneInput = (field) => {
       {field.error &&
         <span className="error">{field.error}</span>}
       {files && Array.isArray(files) && (
-        <List list={files.map(file => file.name)} />
+        <List list={files.map(file => file.name)} handleDestroy={handleDestroy} dispatch={field.dispatch} />
       )}
     </div>
   );

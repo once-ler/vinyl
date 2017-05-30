@@ -49,13 +49,13 @@ const ListLine = styled.li`
   &:last-child {
     border-bottom: none;
   }
-  > ${DestroyButton} {
+  &:hover > ${DestroyButton} {
     display: block;
   }
 `;
 
-export default ({ list }) => (
+export default ({ list, handleDestroy, dispatch }) => { console.log(handleDestroy); return (
   <ListContainer>
-    {list.map((text, i) => <ListLine key={i}><ListItem>{text}</ListItem><DestroyButton /></ListLine>)}
+    {list.map((text, i) => <ListLine key={i}><ListItem>{text}</ListItem><DestroyButton onClick={handleDestroy({ text, dispatch })} /></ListLine>)}
   </ListContainer>
-);
+)};
