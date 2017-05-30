@@ -9,8 +9,9 @@ import Container from '../Container/Container';
 import FormComponent from '../Form/Form';
 import ResponsiveRow from '../Row/ResponsiveRow';
 import SlideContainer from '../Container/SlideContainer';
+import List from '../List/List';
 
-const renderDropzoneInput = (field) => {
+const renderDropzoneInput1 = (field) => {
   const files = field.value;
   return (
     <div>
@@ -26,6 +27,25 @@ const renderDropzoneInput = (field) => {
         <ul>
           { files.map((file, i) => <li key={i}>{file.name}</li>) }
         </ul>
+      )}
+    </div>
+  );
+}
+
+const renderDropzoneInput = (field) => {
+  const files = field.value;
+  return (
+    <div>
+      <Dropzone
+        name={field.name}
+        onDrop={( filesToUpload, e ) => field.onChange(filesToUpload)}
+      >
+        <div>Try dropping some files here, or click to select files to upload.</div>
+      </Dropzone>
+      {field.error &&
+        <span className="error">{field.error}</span>}
+      {files && Array.isArray(files) && (
+        <List list={files.map(file => file.name)} />
       )}
     </div>
   );

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const ListItem = styled.label`
@@ -28,6 +29,9 @@ const DestroyButton = styled.button`
   font-size: 30px;
   color: #cc9a9a;
   margin-bottom: 11px;
+  background: none;
+  border: 0;
+  padding: 0;
   transition: color 0.2s ease-out;
   &:hover {
     color: #af5b5e;
@@ -49,3 +53,9 @@ const ListLine = styled.li`
     display: block;
   }
 `;
+
+export default ({ list }) => (
+  <ListContainer>
+    {list.map((text, i) => <ListLine key={i}><ListItem>{text}</ListItem><DestroyButton /></ListLine>)}
+  </ListContainer>
+);

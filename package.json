@@ -58,6 +58,6 @@
     "redux-implicit-oauth2": "^1.0.1",
     "rx-web-js": "once-ler/rx-web-js#master",
     "simpler-redux-form": "^0.3.9",
-    "styled-components": "^1.4.4"
+    "styled-components": "^2.0.0"
   }
 }
