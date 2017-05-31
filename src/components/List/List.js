@@ -54,8 +54,8 @@ const ListLine = styled.li`
   }
 `;
 
-export default ({ list, handleDestroy, dispatch }) => { console.log(handleDestroy); return (
+export default ({ list, handleDestroy, ...rest }) => { console.log(handleDestroy); return (
   <ListContainer>
-    {list.map((text, i) => <ListLine key={i}><ListItem>{text}</ListItem><DestroyButton onClick={handleDestroy({ text, dispatch })} /></ListLine>)}
+    {list.map((text, i) => <ListLine key={i}><ListItem>{text}</ListItem><DestroyButton onClick={handleDestroy({ text, ...rest })} /></ListLine>)}
   </ListContainer>
 )};
