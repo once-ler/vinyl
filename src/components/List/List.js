@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import {TransitionMotion, spring, presets} from 'react-motion';
+import withProps from 'recompose/withProps';
 
 const ListItem = styled.label`
   white-space: pre;
@@ -33,12 +35,13 @@ const DestroyButton = styled.button`
   border: 0;
   padding: 0;
   transition: color 0.2s ease-out;
+  cursor: pointer;
   &:hover {
     color: #af5b5e;
   }
   &:after {
     content: '×';
-  }
+  }  
 `;
 
 const ListLine = styled.li`
@@ -54,8 +57,48 @@ const ListLine = styled.li`
   }
 `;
 
-export default ({ list, handleDestroy, ...rest }) => { console.log(handleDestroy); return (
-  <ListContainer>
-    {list.map((text, i) => <ListLine key={i}><ListItem>{text}</ListItem><DestroyButton onClick={handleDestroy({ text, ...rest })} /></ListLine>)}
-  </ListContainer>
-)};
+const enhanceWithProps = withProps(
+  ownerProps => ({
+    willEnter: () => ({
+      height: 0,
+      opacity: 1
+    }),
+    willLeave: () => ({
+      height: spring(0),
+      opacity: spring(0)
+    }),
+    getStyles: () => (ownerProps.list.map((item, i) => ({
+      ...item,
+      style: {
+        height: spring(60, presets.gentle),
+        opacity: spring(1, presets.gentle)
+      }
+    }))),
+    getDefaultStyles: () => (
+      ownerProps.list.map(item => ({ ...item, style: {height: 0, opacity: 1} }))
+    )
+  })
+);
+
+const Presentation = ({ list, handleDestroy, getDefaultStyles, getStyles, willEnter, willLeave }) => (
+  <TransitionMotion
+    defaultStyles={getDefaultStyles()}
+    styles={getStyles()}
+    willLeave={willLeave}
+    willEnter={willEnter}>
+    {styles =>
+      {
+      return <ListContainer>
+        {styles.map(({key, style, data: {text}}) =>   
+          <ListLine key={key} style={style}>
+            <ListItem>{text}</ListItem>
+            <DestroyButton onClick={handleDestroy({ text })} />
+          </ListLine>
+        )}
+      </ListContainer>
+      }
+    }
+  </TransitionMotion>
+);
+
+export default enhanceWithProps(Presentation);

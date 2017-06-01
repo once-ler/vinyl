@@ -4,35 +4,6 @@ import styled from 'styled-components';
 import withProps from 'recompose/withProps';
 import Container from './Container';
 
-const Slide1 = styled(Container)`
-  width: 100%;
-  transform: ${props => `translate3d(${props.x}%, 0, 0)`};
-  opacity: ${props => props.opacity};
-`;
-
-const enhanceWithProps1 = withProps(
-  ownerProps => ({
-    defaultStyle: {
-      x: +200, opacity: 0
-    },
-    style: {
-      opacity: spring(1, { stiffness: 10, damping: 10 }),
-      x: spring(0, { stiffness: 150, damping: 15 })
-    }
-  })
-);
-
-const Presentation1 = props => {
-  const {defaultStyle, style, children, direction} = props;
-  return (
-    <Motion
-      defaultStyle={defaultStyle}
-      style={style}
-    >{style => (<Slide x={style.x}>{children}</Slide>)}
-    </Motion>
-  );
-};
-
 const Slide = styled(Container)`
   width: 100%;
   transform: ${props => `translate3d(${props.style.x}%, ${props.style.y}%, 0)`};
