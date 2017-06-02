@@ -13,20 +13,32 @@ const DefaultRow = styled(Row) `
   background-color: ${props => props.theme.tertiary};
   margin-bottom: 10px;
   box-shadow: 0 8px 6px -6px #777;
+  overflow: hidden;  
+  /*
   ${media.tablet `
     height: ${props => props.nav && props.nav.collapse ? '65px' : '100%'};
     overflow: hidden;
     justify-content: flex-start;    
   `}
+  */
 `;
 
 // dispatch() passed from parent App.
-const NavRow = props => {
+const NavRow1 = props => {
   const { children, dispatch, ...rest } = props;
   return (
     <DefaultRow {...rest}>
     {children}
     <NavIcon onClick={e => dispatch(toggle())}/>
+    </DefaultRow>
+  );
+};
+
+const NavRow = props => {
+  const { children, dispatch, ...rest } = props;
+  return (
+    <DefaultRow {...rest}>
+    {children}
     </DefaultRow>
   );
 };

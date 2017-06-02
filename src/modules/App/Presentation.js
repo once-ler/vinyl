@@ -23,6 +23,13 @@ const BetterLink = styled(Link) `
   color: ${props => props.theme.main};
 `;
 
+const StyledPager = styled(ViewPager)`
+margin-right: 10px;
+  @media only screen and (min-width: 800px) {
+    width: 40%;
+  }
+`;
+
 const Presentation1 = props => (
   <Container>
     <NavRow wrap end>
@@ -63,15 +70,15 @@ class Presentation extends Component {
   render() {
     return (
       <Container>
-        <Row>
+        <NavRow>
           <LogoCell>
           <img src={logoImage}/>
           </LogoCell>
-          <ViewPager tag="main">
+          <StyledPager tag="main">
             <Frame className="frame">
               <Track
                 ref={c => this.frame = c}
-                viewsToShow={2}
+                viewsToShow={3.25}
                 align={0}
                 className="frame"
               >
@@ -112,8 +119,8 @@ class Presentation extends Component {
                 </View>
               </Track>
             </Frame>
-          </ViewPager>
-        </Row>
+          </StyledPager>
+        </NavRow>
         <ResponsiveRow>
           {this.props.children}
         </ResponsiveRow>
