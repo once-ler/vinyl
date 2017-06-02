@@ -20,12 +20,12 @@ const BetterLink = styled(Link) `
   padding: 0.5em 0;
   cursor: pointer;
   text-decoration: none;
-  color: ${props => props.theme.main};
+  color: ${props => props.theme.tertiary || '#fefefe'};
 `;
 
 const StyledPager = styled(ViewPager)`
 margin-right: 10px;
-  @media only screen and (min-width: 800px) {
+  @media only screen and (min-width: 790px) {
     width: 40%;
   }
 `;
@@ -78,7 +78,7 @@ class Presentation extends Component {
             <Frame className="frame">
               <Track
                 ref={c => this.frame = c}
-                viewsToShow={3.25}
+                viewsToShow={2.25}
                 align={0}
                 className="frame"
               >

@@ -22,7 +22,7 @@ export const LogoCell = styled.div `
 `;
 
 const DefaultCell = styled.div `
-  min-width: 160px;
+  min-width: 300px;
   min-height: 60px;
   /*background-color: ${props => props.theme.secondary};*/
   border-radius: 5px;
