@@ -1,4 +1,4 @@
-import FormData from 'form-data';
+// import FormData from 'form-data';
 import axios from 'axios';
 
 export const UPLOAD_DOCUMENT_SUCCESS = 'UPLOAD_DOCUMENT_SUCCESS';

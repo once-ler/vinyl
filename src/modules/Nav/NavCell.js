@@ -24,7 +24,10 @@ export const LogoCell = styled.div `
 const DefaultCell = styled.div `
   min-width: 120px;
   min-height: 60px;
-  background-color: ${props => props.theme.secondary};
+  /*background-color: ${props => props.theme.secondary};*/
+  border-radius: 5px;
+  color: ${ p => `${p.theme.tertiary || '#777'}` };
+  background-image: ${p => `linear-gradient(to right, ${p.theme.secondary}, ${p.theme.main})`};
   margin: 10px;
   ${media.tablet `
     flex: 1 100%;

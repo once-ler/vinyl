@@ -72,7 +72,7 @@ class Presentation extends Component {
               <Track
                 ref={c => this.frame = c}
                 viewsToShow={2}
-                infinite
+                align={0}
                 className="frame"
               >
                 <View>
