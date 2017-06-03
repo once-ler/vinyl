@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import withHandlers from 'recompose/withHandlers';
 import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
-import _ from 'lodash';
+import debounce from 'lodash/debounce';
 import Presentation from '../../components/Suggest/Suggest';
 import * as suggestActions from './Action';
 
@@ -23,22 +23,22 @@ const connectFunc = connect(
   })
 );
 
-const enhanceWithProps = withProps(ownerProps => ({
+const enhanceWithProps = withProps(props => ({
   getSuggestions: (value, { debounce } = {}) => {
-    const cri = this.createMatchQuery(this.props.suggestMatchQueryFunc, value);
+    const cri = props.createMatchQuery(props.suggestMatchQueryFunc, value);
     if (debounce === true) {
-      this.debouncedLoadSuggestions(cri);
+      debouncedLoadSuggestions(cri);
     } else {
-      this.props.fetchSuggest(cri);
+      props.fetchSuggest(cri);
     }
   },
   createMatchQuery: (f, v = null) => {
     const query = f(v);
-    const {database, modelName} = this.props;
+    const {database, modelName} = props;
     return Object.assign({params: query}, { database, modelName });
   },
   escapeRegexCharacters: str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
-  debouncedLoadSuggestions: _.debounce(this.props.fetchSuggest, 100)  
+  debouncedLoadSuggestions: debounce(props.fetchSuggest, 100)  
 }));
 
 const enhanceWithHandlers = withHandlers({
@@ -62,6 +62,6 @@ const enhanceWithHandlers = withHandlers({
 
 export default compose(
   connectFunc,
-  withProps,
-  withHandlers
+  enhanceWithProps,
+  enhanceWithHandlers
 )(Presentation);

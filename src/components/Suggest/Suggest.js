@@ -7,7 +7,7 @@ import withHandlers from 'recompose/withHandlers';
 const enhanceWithHandlers = withHandlers({
   renderSuggestion: props => (suggestion, { value, valueBeforeUpDown }) => {
     const suggest = JSON.stringify(suggestion, null, '  ');
-    const query = (valueBeforeUpDown || value || this.props.value).trim();
+    const query = (valueBeforeUpDown || value || props.value).trim();
     const matches = match(suggest, query);
     const parts = parse(suggest, matches);
     return (
@@ -48,7 +48,7 @@ const Presentation = ({
   return (
     <div className="app-container">
       <Autosuggest suggestions={viewDefSuggest && viewDefSuggest.data ? viewDefSuggest.data : []}
-                   onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
+                   onSuggestionsUpdateRequested={onSuggestionsUpdateRequested}
                    onSuggestionSelected={onSuggestionSelected}
                    getSuggestionValue={getSuggestionValueFunc}
                    renderSuggestion={renderSuggestion}

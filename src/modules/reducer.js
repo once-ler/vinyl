@@ -10,6 +10,7 @@ import resources from './ScrollSync/Action';
 import calendar from './Calendar/Action';
 import modal from './Modal/Action';
 import upload from './FileUpload/Action';
+import suggest from './Suggest/Action';
 
 export default {
   routing: routerReducer,
@@ -22,5 +23,6 @@ export default {
   calendar,
   oauth2,
   modal,
-  upload
+  upload,
+  suggest
 };
