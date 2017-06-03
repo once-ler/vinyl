@@ -12,6 +12,7 @@ import Form from './modules/Form/Form';
 import NotFound from './modules/NotFound/NotFound';
 import ScrollSync from './modules/ScrollSync/ScrollSync';
 import Calendar from './modules/Calendar/Calendar';
+import Suggest from './modules/Suggest/Suggest';
 
 export default (store: any) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -40,6 +41,7 @@ export default (store: any) => {
       <Route path="/protected" onEnter={requireLogin} component={Protected} >
         { /*  */ }
       </Route>
+      <Route path="/suggest" component={Suggest} />
       <Route path="/form" component={Form} />
       <Route path="/login" component={Login} />
       <Route path="/oauth2login" component={Oauth2Login} />

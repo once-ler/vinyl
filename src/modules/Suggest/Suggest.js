@@ -1,5 +1,8 @@
-import React, { PropTypes, Component } from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
+import withHandlers from 'recompose/withHandlers';
+import withProps from 'recompose/withProps';
+import compose from 'recompose/compose';
 import _ from 'lodash';
 import Presentation from '../../components/Suggest/Suggest';
 import * as suggestActions from './Action';
@@ -54,27 +57,6 @@ const enhanceWithHandlers = withHandlers({
     const {createMatchQuery, onSuggestSelectedMatchQueryFunc, updateSelected} = props;
     const cri = createMatchQuery(onSuggestSelectedMatchQueryFunc, suggestionValue);
     updateSelected(cri);
-  },
-  renderSuggestion: props => (suggestion, { value, valueBeforeUpDown }) => {
-    const suggest = JSON.stringify(suggestion, null, '  ');
-    const query = (valueBeforeUpDown || value || this.props.value).trim();
-    const matches = AutosuggestHighlight.match(suggest, query);
-    const parts = AutosuggestHighlight.parse(suggest, matches);
-    return (
-      <span>
-        <span>
-          {
-            parts.map((part, index) => {
-              const className = part.highlight ? 'highlight' : null;
-
-              return (
-                <span className={className} key={index}>{part.text}</span>
-              );
-            })
-          }
-        </span>
-      </span>
-    );
   }
 });
 

@@ -5,7 +5,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import ApiClient from '../../../helpers/ApiClient';
+import ApiClient from '../../helpers/ApiClient';
 const apiClient = new ApiClient();
 
 const FETCH_VIEW_DEF_SUGGEST = 'ops2/viewDefSuggest/FETCH_VIEW_DEF_SUGGEST';

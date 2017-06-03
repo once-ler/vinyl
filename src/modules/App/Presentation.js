@@ -88,6 +88,11 @@ class Presentation extends Component {
                 </NavCell>
                 </View>
                 <View>
+                <NavCell>
+                <BetterLink to="/suggest">Suggest</BetterLink>
+                </NavCell>
+                </View>
+                <View>
                 <NavCell margin>
                 <BetterLink to="/protected">Protected</BetterLink>
                 </NavCell>
