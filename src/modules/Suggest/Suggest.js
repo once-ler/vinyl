@@ -18,6 +18,8 @@ const connectFunc = connect(
     updateInputValue: state.suggest.updateInputValue,
     getSuggestionValue: state.suggest.getSuggestionValue,
     suggestMatchQuery: state.suggest.suggestMatchQuery,
+    database: state.suggest.database,
+    modelName: state.suggest.modelName,
     load: state.suggest.load
   }),
   dispatch => bindActionCreators(suggestActions, dispatch)
@@ -39,12 +41,19 @@ const enhanceWithProps = withProps(props => ({
 }));
 
 const enhanceWithHandlers = withHandlers({
-  onChange: ({updateInputValue, emptySuggestInputMatchQuery, defaultSuggestions}) => (e, { newValue }) => {
+  onChange: ({
+    updateInputValue,
+    emptySuggestInputMatchQuery,
+    defaultSuggestions,
+    debouncedLoadSuggestions,
+    database,
+    modelName
+  }) => (e, { newValue }) => {
     updateInputValue(newValue);
     const value = newValue.trim();
     if (value === '') {
       defaultSuggestions(value);
-      debouncedLoadSuggestions(emptySuggestInputMatchQuery);
+      debouncedLoadSuggestions({...emptySuggestInputMatchQuery, database, modelName});
     }
   },
   onSuggestionsFetchRequested: ({getSuggestions}) => ({ value, reason }) => {

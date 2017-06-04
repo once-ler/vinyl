@@ -5,7 +5,7 @@ import axios from 'axios';
 const methods = [ 'get', 'post', 'put', 'patch', 'del' ];
 
 const formatUrl = (path: string): string => {
-  if (~path.indexOf('jsonplaceholder')) return path;
+  if (~path.indexOf('jsonplaceholder') || ~path.indexOf('graphqlhub')) return path;
   const adjustedPath = path[0] !== '/' ? `/${path}` : path;
   return adjustedPath;
 };
@@ -37,13 +37,11 @@ class _ApiClient extends Object {
         if (headers) {
           Object.assign(cfg.headers, headers);
         }
-
-        if (query && variables) {
+        
+        if (query || variables) {
           cfg.data = {
             query,
-            variables: {
-              ...variables
-            }
+            variables
           };
         }
 
