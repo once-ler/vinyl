@@ -32,9 +32,10 @@ const Presentation = ({
   loadingSuggest,
   viewDefSuggest,
   value,
-  getSuggestionValueFunc,
-  onSuggestionsUpdateRequested,
+  getSuggestionValue,
+  onSuggestionsFetchRequested,
   onSuggestionSelected,
+  onSuggestionsClearRequested,
   onChange,
   renderSuggestion
 }) => {
@@ -48,9 +49,10 @@ const Presentation = ({
   return (
     <div className="app-container">
       <Autosuggest suggestions={viewDefSuggest && viewDefSuggest.data ? viewDefSuggest.data : []}
-                   onSuggestionsUpdateRequested={onSuggestionsUpdateRequested}
+                   onSuggestionsFetchRequested={onSuggestionsFetchRequested}
                    onSuggestionSelected={onSuggestionSelected}
-                   getSuggestionValue={getSuggestionValueFunc}
+                   onSuggestionsClearRequested={onSuggestionsClearRequested}
+                   getSuggestionValue={getSuggestionValue}
                    renderSuggestion={renderSuggestion}
                    inputProps={inputProps} />
       <div className="status">

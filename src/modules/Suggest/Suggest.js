@@ -1,4 +1,5 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import withHandlers from 'recompose/withHandlers';
 import withProps from 'recompose/withProps';
@@ -15,30 +16,26 @@ const connectFunc = connect(
     loadingSuggest: state.suggest.loadingSuggest,
     clearSuggestions: state.suggest.clearSuggestions,
     updateInputValue: state.suggest.updateInputValue,
+    getSuggestionValue: state.suggest.getSuggestionValue,
+    suggestMatchQuery: state.suggest.suggestMatchQuery,
     load: state.suggest.load
   }),
-  mapDispatchToProps => dispatch => ({
-    ...suggestActions,
-    dispatch
-  })
+  dispatch => bindActionCreators(suggestActions, dispatch)
 );
 
 const enhanceWithProps = withProps(props => ({
   getSuggestions: (value, { debounce } = {}) => {
-    const cri = props.createMatchQuery(props.suggestMatchQueryFunc, value);
+    const {suggestMatchQuery, database, modelName} = props;
+    const params = suggestMatchQuery(value);
+    const cri = { params, database, modelName };
     if (debounce === true) {
       debouncedLoadSuggestions(cri);
     } else {
       props.fetchSuggest(cri);
     }
   },
-  createMatchQuery: (f, v = null) => {
-    const query = f(v);
-    const {database, modelName} = props;
-    return Object.assign({params: query}, { database, modelName });
-  },
-  escapeRegexCharacters: str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
-  debouncedLoadSuggestions: debounce(props.fetchSuggest, 100)  
+  debouncedLoadSuggestions: debounce(props.fetchSuggest, 100),
+  escapeRegexCharacters: str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }));
 
 const enhanceWithHandlers = withHandlers({
@@ -50,14 +47,16 @@ const enhanceWithHandlers = withHandlers({
       props.defaultSuggestions(cri);
     }
   },
-  onSuggestionsUpdateRequested: props => ({ value, reason }) => {
+  onSuggestionsFetchRequested: props => ({ value, reason }) => {
+    console.log(props);
     props.getSuggestions(value, { debounce: reason === 'type' });
   },
   onSuggestionSelected: props => (e, { suggestionValue }) => {
     const {createMatchQuery, onSuggestSelectedMatchQueryFunc, updateSelected} = props;
     const cri = createMatchQuery(onSuggestSelectedMatchQueryFunc, suggestionValue);
     updateSelected(cri);
-  }
+  },
+  onSuggestionsClearRequested: props => () => props.clearSuggestions()
 });
 
 export default compose(

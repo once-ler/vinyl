@@ -15,13 +15,23 @@ const FETCH_SUGGEST_SUCCESS = 'vinyl/suggest/FETCH_SUGGEST_SUCCESS';
 const FETCH_SUGGEST_FAIL = 'vinyl/suggest/FETCH_SUGGEST_FAIL';
 const UPDATE_INPUT_VALUE = 'vinyl/suggest/UPDATE_INPUT_VALUE';
 const DEFAULT_SUGGEST = 'vinyl/suggest/DEFAULT_SUGGEST';
+const CLEAR_SUGGEST = 'vinyl/suggest/CLEAR_SUGGEST';
 export const VIEW_DEF_SUGGEST_SELECTED = 'vinyl/suggest/VIEW_DEF_SUGGEST_SELECTED';
 
 const initialState = {
   data: [],
   loadedSuggest: false,
   value: '',
-  selected: ''
+  selected: '',
+  getSuggestionValue: suggestion => suggestion.id,
+  suggestMatchQuery: value => ({
+    limit: 10,
+    match: {
+    'id': {
+      $regex: value,
+      $options: 'i'
+    }}
+  })
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -63,6 +73,8 @@ export default function reducer(state = initialState, action = {}) {
         data: null,
         selected: action.value
       };
+    case CLEAR_SUGGEST:
+      return initialState;
     default:
       return state;
   }
@@ -88,6 +100,8 @@ export const updateInputValue = value => ({ type: UPDATE_INPUT_VALUE, value });
 export const updateSelected = value => ({ type: VIEW_DEF_SUGGEST_SELECTED, value });
 
 export const defaultSuggestions = value => ({ type: DEFAULT_SUGGEST, value });
+
+export const clearSuggestions = value => ({ type: CLEAR_SUGGEST, value });
 
 /*
 export const defaultSelectedEpic = action$ =>
