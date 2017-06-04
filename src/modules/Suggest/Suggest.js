@@ -25,13 +25,13 @@ const connectFunc = connect(
 
 const enhanceWithProps = withProps(props => ({
   getSuggestions: (value, { debounce } = {}) => {
-    const {suggestMatchQuery, database, modelName} = props;
+    const {suggestMatchQuery, database, modelName, fetchSuggest} = props;
     const params = suggestMatchQuery(value);
     const cri = { params, database, modelName };
     if (debounce === true) {
       debouncedLoadSuggestions(cri);
     } else {
-      props.fetchSuggest(cri);
+      fetchSuggest(cri);
     }
   },
   debouncedLoadSuggestions: debounce(props.fetchSuggest, 100),
@@ -39,24 +39,22 @@ const enhanceWithProps = withProps(props => ({
 }));
 
 const enhanceWithHandlers = withHandlers({
-  onChange: props => (e, { newValue }) => {
-    props.updateInputValue(newValue);
+  onChange: ({updateInputValue, emptySuggestInputMatchQuery, defaultSuggestions}) => (e, { newValue }) => {
+    updateInputValue(newValue);
     const value = newValue.trim();
     if (value === '') {
-      const cri = props.createMatchQuery(props.emptySuggestInputMatchQueryFunc);
-      props.defaultSuggestions(cri);
+      defaultSuggestions(value);
+      debouncedLoadSuggestions(emptySuggestInputMatchQuery);
     }
   },
-  onSuggestionsFetchRequested: props => ({ value, reason }) => {
-    console.log(props);
-    props.getSuggestions(value, { debounce: reason === 'type' });
+  onSuggestionsFetchRequested: ({getSuggestions}) => ({ value, reason }) => {
+    getSuggestions(value, { debounce: reason === 'type' });
   },
-  onSuggestionSelected: props => (e, { suggestionValue }) => {
-    const {createMatchQuery, onSuggestSelectedMatchQueryFunc, updateSelected} = props;
-    const cri = createMatchQuery(onSuggestSelectedMatchQueryFunc, suggestionValue);
+  onSuggestionSelected: ({onSuggestSelectedMatchQuery, updateSelected}) => (e, { suggestionValue }) => {
+    const cri = onSuggestSelectedMatchQuery(suggestionValue);
     updateSelected(cri);
   },
-  onSuggestionsClearRequested: props => () => props.clearSuggestions()
+  onSuggestionsClearRequested: ({clearSuggestions}) => () => clearSuggestions()
 });
 
 export default compose(

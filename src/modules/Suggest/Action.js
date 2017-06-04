@@ -1,22 +1,10 @@
-/*
-import {Observable} from 'rxjs';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
-import ApiClient from '../../helpers/ApiClient';
-const apiClient = new ApiClient();
-*/
-
-const FETCH_SUGGEST = 'vinyl/suggest/FETCH_SUGGEST';
-const FETCH_SUGGEST_SUCCESS = 'vinyl/suggest/FETCH_SUGGEST_SUCCESS';
-const FETCH_SUGGEST_FAIL = 'vinyl/suggest/FETCH_SUGGEST_FAIL';
-const UPDATE_INPUT_VALUE = 'vinyl/suggest/UPDATE_INPUT_VALUE';
-const DEFAULT_SUGGEST = 'vinyl/suggest/DEFAULT_SUGGEST';
-const CLEAR_SUGGEST = 'vinyl/suggest/CLEAR_SUGGEST';
-export const VIEW_DEF_SUGGEST_SELECTED = 'vinyl/suggest/VIEW_DEF_SUGGEST_SELECTED';
+const FETCH_SUGGEST = 'FETCH_SUGGEST';
+const FETCH_SUGGEST_SUCCESS = 'FETCH_SUGGEST_SUCCESS';
+const FETCH_SUGGEST_FAIL = 'FETCH_SUGGEST_FAIL';
+const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
+const DEFAULT_SUGGEST = 'DEFAULT_SUGGEST';
+const CLEAR_SUGGEST = 'CLEAR_SUGGEST';
+export const VIEW_DEF_SUGGEST_SELECTED = 'VIEW_DEF_SUGGEST_SELECTED';
 
 const initialState = {
   data: [],
@@ -31,7 +19,12 @@ const initialState = {
       $regex: value,
       $options: 'i'
     }}
-  })
+  }),
+  emptySuggestInputMatchQuery: {
+    limit: 10
+  },
+  database: '',
+  modelName: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -42,11 +35,12 @@ export default function reducer(state = initialState, action = {}) {
         loadingSuggest: true
       };
     case FETCH_SUGGEST_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
         loadingSuggest: false,
         loadedSuggest: true,
-        data: action.result,
+        data: action.payload,
         errorSuggest: null
       };
     case FETCH_SUGGEST_FAIL:
@@ -80,9 +74,13 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const fetchSuggest = (options) => { const {database, modelName, params} = options; return { type: FETCH_SUGGEST, database, modelName, params }; };
+export const fetchSuggest = (options) => { console.log(options); const {database, modelName, params} = options; return { type: FETCH_SUGGEST, database, modelName, params }; };
 export const fetchSuggestSuccess = result => ({ type: FETCH_SUGGEST_SUCCESS, result });
 export const fetchSuggestFailed = error => ({ type: FETCH_SUGGEST_FAIL, error });
+export const updateInputValue = value => ({ type: UPDATE_INPUT_VALUE, value });
+export const updateSelected = value => ({ type: VIEW_DEF_SUGGEST_SELECTED, value });
+export const defaultSuggestions = value => ({ type: DEFAULT_SUGGEST, value });
+export const clearSuggestions = value => ({ type: CLEAR_SUGGEST, value });
 
 /*
 export const fetchSuggestEpic = action$ =>
@@ -95,14 +93,6 @@ export const fetchSuggestEpic = action$ =>
         .catch(error => Observable.of(fetchSuggestFailed(error)));
     });
 */
-export const updateInputValue = value => ({ type: UPDATE_INPUT_VALUE, value });
-
-export const updateSelected = value => ({ type: VIEW_DEF_SUGGEST_SELECTED, value });
-
-export const defaultSuggestions = value => ({ type: DEFAULT_SUGGEST, value });
-
-export const clearSuggestions = value => ({ type: CLEAR_SUGGEST, value });
-
 /*
 export const defaultSelectedEpic = action$ =>
   action$.ofType(DEFAULT_SUGGEST)
