@@ -7,18 +7,19 @@ import withHandlers from 'recompose/withHandlers';
 const enhanceWithHandlers = withHandlers({
   renderSuggestion: props => (suggestion, { value, valueBeforeUpDown }) => {
     const suggest = JSON.stringify(suggestion, null, '  ');
-    const query = (valueBeforeUpDown || value || props.value).trim();
+    const query = (props.value || valueBeforeUpDown || value ).trim();
     const matches = match(suggest, query);
     const parts = parse(suggest, matches);
+    
     return (
       <span>
         <span>
           {
             parts.map((part, index) => {
-              const className = part.highlight ? 'highlight' : null;
-
+              // const className = part.highlight ? 'highlight' : null;
+              const highlightStyle = part.highlight ? {background: 'yellow'} : null;
               return (
-                <span className={className} key={index}>{part.text}</span>
+                <span style={highlightStyle} key={index}>{part.text}</span>
               );
             })
           }
@@ -30,11 +31,10 @@ const enhanceWithHandlers = withHandlers({
 
 const Presentation = ({
   loadingSuggest,
-  viewDefSuggest,
+  suggestions,
   value,
   getSuggestionValue,
   onSuggestionsFetchRequested,
-  onSuggestionSelected,
   onSuggestionsClearRequested,
   onChange,
   renderSuggestion
@@ -45,12 +45,10 @@ const Presentation = ({
     onChange
   };
   const status = (loadingSuggest ? 'Loading...' : 'Type to load suggestions');
-
   return (
     <div className="app-container">
-      <Autosuggest suggestions={viewDefSuggest && viewDefSuggest.data ? viewDefSuggest.data : []}
+      <Autosuggest suggestions={suggestions || []}
                    onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                   onSuggestionSelected={onSuggestionSelected}
                    onSuggestionsClearRequested={onSuggestionsClearRequested}
                    getSuggestionValue={getSuggestionValue}
                    renderSuggestion={renderSuggestion}

@@ -24,7 +24,8 @@ const initialState = {
     limit: 10
   },
   database: '',
-  modelName: ''
+  modelName: '',
+  getSuggestions: ({payload}) => (payload.hn.topStories)
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -35,15 +36,15 @@ export default function reducer(state = initialState, action = {}) {
         loadingSuggest: true
       };
     case FETCH_SUGGEST_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         loadingSuggest: false,
         loadedSuggest: true,
-        data: action.payload,
+        data: state.getSuggestions(action),
         errorSuggest: null
       };
     case FETCH_SUGGEST_FAIL:
+      console.error(action);
       return {
         ...state,
         loadingSuggest: false,

@@ -66,11 +66,11 @@ export const fetchSuggest = new Middleware(
       }
     `
     }),
-  (task) => {console.info(task.store.getState());}
+  (task) => {}
 );
 
   export const defaultSuggest = new Middleware(
   'DEFAULT_SUGGEST',
   task => apiClient.post(`https://jsonplaceholder.typicode.com/posts`, {}),
-  (task) => {console.info(task.store.getState());}
+  (task) => {}
 );
