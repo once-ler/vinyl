@@ -11,7 +11,6 @@ const initialState = {
   loadedSuggest: false,
   value: '',
   selected: '',
-  getSuggestionValue: suggestion => suggestion.id,
   suggestMatchQuery: value => ({
     limit: 10,
     match: {
@@ -53,6 +52,7 @@ export default function reducer(state = initialState, action = {}) {
         errorSuggest: action.error
       };
     case UPDATE_INPUT_VALUE:
+      console.log(action.value);
       return {
         ...state,
         value: action.value
@@ -69,7 +69,10 @@ export default function reducer(state = initialState, action = {}) {
         selected: action.value
       };
     case CLEAR_SUGGEST:
-      return initialState;
+      return {
+        ...state,
+        data: null
+      };
     default:
       return state;
   }

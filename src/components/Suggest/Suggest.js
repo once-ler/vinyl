@@ -6,7 +6,8 @@ import withHandlers from 'recompose/withHandlers';
 
 const enhanceWithHandlers = withHandlers({
   renderSuggestion: props => (suggestion, { value, valueBeforeUpDown }) => {
-    const suggest = JSON.stringify(suggestion, null, '  ');
+    // const suggest = JSON.stringify(suggestion, null, '  ');
+    const {title: suggest} = suggestion;
     const query = (props.value || valueBeforeUpDown || value ).trim();
     const matches = match(suggest, query);
     const parts = parse(suggest, matches);
@@ -36,8 +37,10 @@ const Presentation = ({
   getSuggestionValue,
   onSuggestionsFetchRequested,
   onSuggestionsClearRequested,
+  onSuggestionSelected,
   onChange,
-  renderSuggestion
+  renderSuggestion,
+  clearInput
 }) => {
   const inputProps = {
     placeholder: 'search...',
@@ -46,14 +49,16 @@ const Presentation = ({
   };
   const status = (loadingSuggest ? 'Loading...' : 'Type to load suggestions');
   return (
-    <div className="app-container">
+    <div>
       <Autosuggest suggestions={suggestions || []}
                    onSuggestionsFetchRequested={onSuggestionsFetchRequested}
                    onSuggestionsClearRequested={onSuggestionsClearRequested}
+                   onSuggestionSelected={onSuggestionSelected}
                    getSuggestionValue={getSuggestionValue}
                    renderSuggestion={renderSuggestion}
                    inputProps={inputProps} />
-      <div className="status">
+      <span><button onClick={clearInput}>Clear</button></span>
+      <div>
         <strong>Status:</strong> {status}
       </div>
     </div>

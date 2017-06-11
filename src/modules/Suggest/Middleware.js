@@ -46,6 +46,20 @@ stories(storyType: $storyType) {
     }
   }
 }
+
+{
+  hn {
+    topStories(limit: 5) {
+      title,
+      score,
+      url,
+      timeISO,
+      by {
+        id
+      }
+    }
+  }
+}
 */
 export const fetchSuggest = new Middleware(
   'FETCH_SUGGEST',
@@ -55,12 +69,7 @@ export const fetchSuggest = new Middleware(
         hn {
           topStories(limit: 5) {
             title,
-            score,
-            url,
-            timeISO,
-            by {
-              id
-            }
+            url
           }
         }
       }

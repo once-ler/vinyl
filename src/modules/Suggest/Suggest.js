@@ -51,7 +51,9 @@ const enhanceWithHandlers = withHandlers({
   }) => (e, { newValue }) => {
     updateInputValue(newValue);
     const value = newValue.trim();
+    console.log(newValue);
     if (value === '') {
+      console.log('defaultSuggestions called');
       defaultSuggestions(value);
       debouncedLoadSuggestions({...emptySuggestInputMatchQuery, database, modelName});
     }
@@ -59,11 +61,15 @@ const enhanceWithHandlers = withHandlers({
   onSuggestionsFetchRequested: ({getSuggestions}) => ({ value, reason }) => {
     getSuggestions(value, { debounce: reason === 'type' });
   },
-  onSuggestionSelected: ({onSuggestSelectedMatchQuery, updateSelected}) => (e, { suggestionValue }) => {
-    const cri = onSuggestSelectedMatchQuery(suggestionValue);
-    updateSelected(cri);
+  onSuggestionSelected: ({onSuggestSelectedMatchQuery, updateSelected, updateInputValue}) => (e, { suggestion, suggestionValue }) => {
+    console.info(suggestion);
+    // const cri = onSuggestSelectedMatchQuery(suggestionValue);
+    // updateSelected(cri);
+    // setTimeout(100, () => updateInputValue(suggestionValue));
   },
-  onSuggestionsClearRequested: ({clearSuggestions}) => () => clearSuggestions()
+  onSuggestionsClearRequested: ({clearSuggestions}) => () => clearSuggestions(),
+  getSuggestionValue: ({onSuggestionSelected}) => suggestion => { return suggestion.title; },
+  clearInput: ({updateInputValue}) => e => { e.preventDefault(); updateInputValue(''); }
 });
 
 export default compose(
