@@ -35,12 +35,17 @@ module.exports = {
         bypass: function () {
           return '/static/index.html';
         }
+      },
+      '/api/search.json': {
+        target: 'https://www.reddit.com',
+        secure: false,
+        changeOrigin: true
       }
     }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
