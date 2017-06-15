@@ -60,7 +60,30 @@ stories(storyType: $storyType) {
     }
   }
 }
+
+parseForSuggestions: ({payload}) => (payload.hn.topStories),
+parseForErrors: ({payload}) => (payload.error)
 */
+
+/*
+Mongo:
+{
+  suggestMatchQuery: value => ({
+    limit: 10,
+    match: {
+    'id': {
+      $regex: value,
+      $options: 'i'
+    }}
+  }),
+  emptySuggestInputMatchQuery: {
+    limit: 10
+  },
+  database: '',
+  modelName: ''
+}
+*/
+
 export const fetchSuggest = new Middleware(
   'FETCH_SUGGEST',
   task => apiClient.post(`https://www.graphqlhub.com/graphql`, {
