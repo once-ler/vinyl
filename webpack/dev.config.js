@@ -14,11 +14,11 @@ module.exports = {
     path: path.resolve(__dirname, '../static/dist')
   },
   resolve: {
-    modulesDirectories: [
+    modules: [
       'src',
       'node_modules'
     ],
-    extensions: ['', '.js', '.json', '.jsx']
+    extensions: ['.js', '.json', '.jsx']
   },
   performance: {
     maxAssetSize: 1000000,
@@ -60,7 +60,7 @@ module.exports = {
         exclude: /node_modules(?!\/simpler-redux-form)/, 
         loader: 'babel-loader'
       },
-      { test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file?hash=sha512&digest=hex&name=[hash].[ext]'] },
+      { test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file-loader?hash=sha512&digest=hex&name=[hash].[ext]'] },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
