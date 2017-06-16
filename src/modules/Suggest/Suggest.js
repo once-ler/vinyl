@@ -42,10 +42,10 @@ const enhanceWithHandlers = withHandlers({
     const value = newValue.trim();
     if (value === '') {
       defaultSuggestions(value);
-      debouncedLoadSuggestions({...emptySuggestQuery, suggestType});
+      debouncedLoadSuggestions({...emptySuggestQuery, value, suggestType});
     }
   },
-  onSuggestionsFetchRequested: ({debouncedLoadSuggestions, suggestQuery, suggestType, dispatchBySuggestType}) => ({ value, reason }) => debouncedLoadSuggestions({...suggestQuery, suggestType}),
+  onSuggestionsFetchRequested: ({debouncedLoadSuggestions, suggestQuery, suggestType, dispatchBySuggestType, value}) => ({ value, reason }) => debouncedLoadSuggestions({...suggestQuery, value, suggestType}),
   onSuggestionSelected: ({updateSelected}) => (e, { suggestion, suggestionValue }) => updateSelected(suggestion),
   onSuggestionsClearRequested: ({clearSuggestions}) => () => clearSuggestions(),
   clearInput: ({updateInputValue}) => e => { e.preventDefault(); updateInputValue(''); }

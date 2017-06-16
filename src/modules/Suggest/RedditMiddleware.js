@@ -19,11 +19,17 @@ data
 
 export const fetchSuggest = new Middleware(
   'reddit',
-  task => apiClient.get(`/api/reddit/search.json?q=cats&syntax=plain&type=sr&restrict_sr=true&include_facets=false&limit=10&sr_detail=false`),
+  task => apiClient.get(`/api/reddit/search.json?q=title:${task.value}&syntax=plain&restrict_sr=true&include_facets=false&limit=10&sr_detail=false`),
   (task) => task.store.dispatch(fetchSuggestSuccess(task.data))
 );
 
-  export const defaultSuggest = new Middleware(
+export const fetchSuggestSelected = new Middleware(
+  'redditSelected',
+  task => apiClient.get(`/api/reddit/search.json?q=author:${task.value}&syntax=plain&restrict_sr=false&include_facets=true&limit=10&sr_detail=true`),
+  (task) => task.store.dispatch(fetchSuggestSuccess(task.data))
+);
+
+export const defaultSuggest = new Middleware(
   'DEFAULT_SUGGEST',
   task => apiClient.post(`https://jsonplaceholder.typicode.com/posts`, {}),
   (task) => {}
