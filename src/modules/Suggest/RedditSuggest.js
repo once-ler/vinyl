@@ -24,7 +24,7 @@ const RedditSuggest = enhanceWithProps(Suggest);
 
 const connectFunc = connect(
   state => ({
-    selected: state.suggest.selected
+    dataSelected: state.suggest.dataSelected
   }),
   dispatch => bindActionCreators(suggestActions, dispatch)
 );
