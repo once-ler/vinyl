@@ -36,8 +36,11 @@ module.exports = {
           return '/static/index.html';
         }
       },
-      '/api/search.json': {
+      '/api/reddit/**': {
         target: 'https://www.reddit.com',
+        pathRewrite: {
+          '^/api/reddit': ''
+        },
         secure: false,
         changeOrigin: true
       }

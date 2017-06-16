@@ -2,9 +2,9 @@ import withProps from 'recompose/withProps';
 import Suggest from './Suggest';
 
 const enhanceWithProps = withProps(props => ({
-  parseForSuggestions: ({payload}) => (payload.hn.topStories),
+  parseForSuggestions: ({payload}) => (payload.children),
   parseForErrors: () => {},
-  getSuggestionValue: suggestion => suggestion.title,
+  getSuggestionValue: suggestion => suggestion.data.public_description,
   suggestMatchQuery: {},
   emptySuggestQuery: {}
 }));

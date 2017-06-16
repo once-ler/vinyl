@@ -8,12 +8,18 @@ ref:
 https://www.reddit.com/search.json?q=cats&syntax=plain&type=user&restrict_sr=true&include_facets=false&limit=10&sr_detail=false
 
 https://www.reddit.com/search.json?q=cats&syntax=plain&type=sr&restrict_sr=true&include_facets=false&limit=10&sr_detail=false
+
+data
+  children
+    data
+      public_description
+      title
 */
 
 export const fetchSuggest = new Middleware(
   'FETCH_SUGGEST',
-  task => apiClient.get(`/api/search.json?q=cats&syntax=plain&type=sr&restrict_sr=true&include_facets=false&limit=10&sr_detail=false`),
-  (task) => {}
+  task => apiClient.get(`/api/reddit/search.json?q=cats&syntax=plain&type=sr&restrict_sr=true&include_facets=false&limit=10&sr_detail=false`),
+  (task) => {console.log(task)}
 );
 
   export const defaultSuggest = new Middleware(
