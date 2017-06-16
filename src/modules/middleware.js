@@ -7,8 +7,6 @@ export default [
   authUser,
   fetchUser,
   logoutUser,
-  fetchSuggest,
-  defaultSuggest,
   redditSuggest,
   defaultRedditSuggest
 ];

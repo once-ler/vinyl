@@ -15,7 +15,8 @@ const enhanceWithDefaultProps = defaultProps({
   parseForErrors: ({payload}) => payload.error,
   getSuggestionValue: suggestion => suggestion.title,
   suggestMatchQuery: {},
-  emptySuggestQuery: {}
+  emptySuggestQuery: {},
+  suggestType: ''
 }); 
 
 const connectFunc = connect(
@@ -36,15 +37,15 @@ const enhanceWithProps = withProps(props => ({
 }));
 
 const enhanceWithHandlers = withHandlers({
-  onChange: ({updateInputValue, emptySuggestQuery, defaultSuggestions, debouncedLoadSuggestions}) => (e, { newValue }) => {
+  onChange: ({updateInputValue, emptySuggestQuery, defaultSuggestions, debouncedLoadSuggestions, suggestType, dispatchBySuggestType}) => (e, { newValue }) => {
     updateInputValue(newValue);
     const value = newValue.trim();
     if (value === '') {
       defaultSuggestions(value);
-      debouncedLoadSuggestions({...emptySuggestQuery});
+      debouncedLoadSuggestions({...emptySuggestQuery, suggestType});
     }
   },
-  onSuggestionsFetchRequested: ({debouncedLoadSuggestions, suggestQuery}) => ({ value, reason }) => debouncedLoadSuggestions({...suggestQuery}),
+  onSuggestionsFetchRequested: ({debouncedLoadSuggestions, suggestQuery, suggestType, dispatchBySuggestType}) => ({ value, reason }) => debouncedLoadSuggestions({...suggestQuery, suggestType}),
   onSuggestionSelected: ({updateSelected}) => (e, { suggestion, suggestionValue }) => updateSelected(suggestion),
   onSuggestionsClearRequested: ({clearSuggestions}) => () => clearSuggestions(),
   clearInput: ({updateInputValue}) => e => { e.preventDefault(); updateInputValue(''); }

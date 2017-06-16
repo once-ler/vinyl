@@ -6,7 +6,8 @@ const enhanceWithProps = withProps(props => ({
   parseForErrors: () => {},
   getSuggestionValue: suggestion => suggestion.data.public_description,
   suggestMatchQuery: {},
-  emptySuggestQuery: {}
+  emptySuggestQuery: {},
+  suggestType: 'reddit'
 }));
 
 export default enhanceWithProps(Suggest);

@@ -11,7 +11,7 @@ const initialState = {
   loading: false,
   value: '',
   selected: '', // Purpose is to trigger another Action that will download detailed data for suggestion.
-  error: null  
+  error: null
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -25,7 +25,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: false,
-        data: action,
+        data: {...action},
         error: null
       };
     case FETCH_SUGGEST_FAIL:
@@ -61,8 +61,8 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const fetchSuggest = params => ({ ...params, type: FETCH_SUGGEST });
-export const fetchSuggestSuccess = result => ({ type: FETCH_SUGGEST_SUCCESS, result });
+export const fetchSuggest = params => params.suggestType ? ({...params, type: params.suggestType}) : ({ ...params, type: FETCH_SUGGEST });
+export const fetchSuggestSuccess = payload => ({ type: FETCH_SUGGEST_SUCCESS, payload });
 export const fetchSuggestFailed = error => ({ type: FETCH_SUGGEST_FAIL, error });
 export const updateInputValue = value => ({ type: UPDATE_INPUT_VALUE, value });
 export const updateSelected = value => ({ type: SUGGEST_SELECTED, value });

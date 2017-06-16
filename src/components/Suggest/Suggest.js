@@ -6,7 +6,8 @@ import withHandlers from 'recompose/withHandlers';
 
 const enhanceWithHandlers = withHandlers({
   renderSuggestion: props => (suggestion, { value, valueBeforeUpDown }) => {
-    const {title: suggest} = suggestion;
+    // const {title: suggest} = suggestion;
+    const suggest = props.getSuggestionValue(suggestion);
     const query = (props.value || valueBeforeUpDown || value ).trim();
     const matches = match(suggest, query);
     const parts = parse(suggest, matches);
