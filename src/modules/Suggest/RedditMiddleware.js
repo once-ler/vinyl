@@ -1,6 +1,6 @@
 import ApiClient from '../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
-import {fetchSuggestSuccess} from './Action';
+import {fetchSuggestSuccess, fetchSuggestSelectedSuccess} from './Action';
 
 const apiClient: Axios = new ApiClient();
 
@@ -25,8 +25,8 @@ export const fetchSuggest = new Middleware(
 
 export const fetchSuggestSelected = new Middleware(
   'redditSelected',
-  task => apiClient.get(`/api/reddit/search.json?q=author:${task.value}&syntax=plain&restrict_sr=false&include_facets=true&limit=10&sr_detail=true`),
-  (task) => task.store.dispatch(fetchSuggestSuccess(task.data))
+  task => apiClient.get(`/api/reddit/search.json?q=author:${task.author}&syntax=plain&restrict_sr=false&include_facets=true&limit=10&sr_detail=true`),
+  (task) => task.store.dispatch(fetchSuggestSelectedSuccess(task.data))
 );
 
 export const defaultSuggest = new Middleware(

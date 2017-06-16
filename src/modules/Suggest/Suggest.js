@@ -14,9 +14,11 @@ const enhanceWithDefaultProps = defaultProps({
   parseForSuggestions: ({payload}) => payload.data,
   parseForErrors: ({payload}) => payload.error,
   getSuggestionValue: suggestion => suggestion.title,
+  afterSuggestionSelected: suggestion => suggestion,
   suggestMatchQuery: {},
   emptySuggestQuery: {},
-  suggestType: ''
+  suggestType: '',
+  suggestSelectedType: ''
 }); 
 
 const connectFunc = connect(
@@ -24,9 +26,7 @@ const connectFunc = connect(
     value: state.suggest.value,
     suggestions: state.suggest.data,
     error: state.suggest.error,
-    loading: state.suggest.loading,
-    clearSuggestions: state.suggest.clearSuggestions,
-    updateInputValue: state.suggest.updateInputValue
+    loading: state.suggest.loading
   }),
   dispatch => bindActionCreators(suggestActions, dispatch)
 );
@@ -46,7 +46,11 @@ const enhanceWithHandlers = withHandlers({
     }
   },
   onSuggestionsFetchRequested: ({debouncedLoadSuggestions, suggestQuery, suggestType, dispatchBySuggestType, value}) => ({ value, reason }) => debouncedLoadSuggestions({...suggestQuery, value, suggestType}),
-  onSuggestionSelected: ({updateSelected}) => (e, { suggestion, suggestionValue }) => updateSelected(suggestion),
+  onSuggestionSelected: ({updateSelected, afterSuggestionSelected, suggestSelectedType, fetchSuggestSelected}) => (e, { suggestion, suggestionValue }) => {
+    updateSelected(suggestion);
+    const maybeModifiedSuggestion = afterSuggestionSelected(suggestion);
+    fetchSuggestSelected({...maybeModifiedSuggestion, suggestSelectedType})
+  },
   onSuggestionsClearRequested: ({clearSuggestions}) => () => clearSuggestions(),
   clearInput: ({updateInputValue}) => e => { e.preventDefault(); updateInputValue(''); }
 });
