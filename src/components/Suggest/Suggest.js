@@ -3,6 +3,8 @@ import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import withHandlers from 'recompose/withHandlers';
+import SlideContainer from '../Container/SlideContainer';
+import theme from './theme';
 
 const enhanceWithHandlers = withHandlers({
   renderSuggestion: props => (suggestion, { value, valueBeforeUpDown }) => {
@@ -50,19 +52,20 @@ const Presentation = ({
   };
   const status = (loading ? 'Loading...' : 'Type to load suggestions');
   return (
-    <div>
+    <SlideContainer direction="right">
       <Autosuggest suggestions={suggestions ? parseForSuggestions(suggestions) : []}
                    onSuggestionsFetchRequested={onSuggestionsFetchRequested}
                    onSuggestionsClearRequested={onSuggestionsClearRequested}
                    onSuggestionSelected={onSuggestionSelected}
                    getSuggestionValue={getSuggestionValue}
                    renderSuggestion={renderSuggestion}
-                   inputProps={inputProps} />
+                   inputProps={inputProps}
+                   theme={theme} />
       <span><button onClick={clearInput}>Clear</button></span>
       <div>
         <strong>Status:</strong> {status}
       </div>
-    </div>
+    </SlideContainer>
   );
 };
 

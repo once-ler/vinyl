@@ -23,9 +23,10 @@ const enhanceWithProps = withProps(props => ({
 
 const RedditSuggest = enhanceWithProps(Suggest);
 
-
 const connectFunc = connect(
-  state => ({suggestedData: state.suggest.suggestedData}),
+  state => ({
+    suggestedData: state.suggest.suggestedData
+  }),
   dispatch => bindActionCreators(suggestActions, dispatch)
 );
 
@@ -53,8 +54,12 @@ const RedditScrollSync = compose(
 const Presentation = props => (
   <Container style={{width: '100%'}}>
     <Row><RedditSuggest /></Row>
-    <Row><RedditScrollSync /></Row>
+    <Row>{ props.suggestedData && props.suggestedData.payload && <RedditScrollSync /> }</Row>
   </Container>
 );
 
-export default Presentation;
+const Wrapper = compose(
+  connectFunc
+)(Presentation);
+
+export default Wrapper;

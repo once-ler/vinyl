@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {TransitionMotion, spring, presets} from 'react-motion';
 import withProps from 'recompose/withProps';
 
-const ListItem = styled.label`
+export const ListItem = styled.label`
   white-space: pre;
   word-break: break-word;
   padding: 15px 60px 15px 15px;
@@ -13,7 +13,21 @@ const ListItem = styled.label`
   transition: color 0.4s;
 `;
 
-const ListContainer = styled.ul`
+const ListContainer = styled.div`
+  display: block;
+  position: absolute;
+  top: 51px;
+  width: 280px;
+  /* border: 1px solid #aaa; */
+  background-color: #fff;
+  font-weight: 300;
+  font-size: 16px;
+  /* border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px; */
+  z-index: 2;
+`;
+
+const List = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
@@ -50,7 +64,7 @@ const ListLine = styled.li`
   box-shadow: 0 -1px 0 #ededed;
   overflow: hidden;
   &:last-child {
-    border-bottom: none;
+    box-shadow: 0 2px 4px #aaa;;
   }
   &:hover > ${DestroyButton} {
     display: block;
@@ -88,13 +102,15 @@ const Presentation = ({ list, handleDestroy, getDefaultStyles, getStyles, willEn
     willEnter={willEnter}>
     {styles =>
       {
-      return <ListContainer>
-        {styles.map(({key, style, data: {text}}) =>   
-          <ListLine key={key} style={style}>
-            <ListItem>{text}</ListItem>
-            <DestroyButton onClick={handleDestroy({ text })} />
-          </ListLine>
-        )}
+      return <ListContainer> 
+        <List>
+          {styles.map(({key, style, data: {text}}) =>   
+            <ListLine key={key} style={style}>
+              <ListItem>{text}</ListItem>
+              { handleDestroy && <DestroyButton onClick={handleDestroy({ text })} />}
+            </ListLine>
+          )}
+        </List>
       </ListContainer>
       }
     }
