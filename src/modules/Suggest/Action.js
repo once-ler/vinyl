@@ -90,7 +90,7 @@ export const fetchSuggest = params => params.suggestType ? ({...params, type: pa
 export const fetchSuggestSelected = params => params.suggestSelectedType ? ({...params, type: params.suggestSelectedType}) : ({ ...params, type: FETCH_SUGGEST_SELECTED });
 export const fetchSuggestSuccess = payload => ({ type: FETCH_SUGGEST_SUCCESS, payload });
 export const fetchSuggestSelectedSuccess = payload => ({ type: FETCH_SUGGEST_SELECTED_SUCCESS, payload });
-export const fetchSuggestSelectedError = () => ({ type: FETCH_SUGGEST_SELECTED_ERROR });
+export const fetchSuggestSelectedFail = () => ({ type: FETCH_SUGGEST_SELECTED_FAIL });
 export const fetchSuggestFailed = error => ({ type: FETCH_SUGGEST_FAIL, error });
 export const updateInputValue = value => ({ type: UPDATE_INPUT_VALUE, value });
 export const updateSelected = value => ({ type: SUGGEST_SELECTED, value });

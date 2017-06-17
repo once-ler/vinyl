@@ -11,4 +11,8 @@ export default styled.div`
   flex-direction: column;
   text-align: left;
   padding: 0 .5em;
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

@@ -6,6 +6,8 @@ import compose from 'recompose/compose';
 import Suggest from './Suggest';
 import ScrollSync from '../ScrollSync/ScrollSync';
 import Cell from '../ScrollSync/Cell';
+import Container from '../../components/Container/Container';
+import Row from '../../components/Row/Row'; 
 import * as suggestActions from './Action';
 
 const enhanceWithProps = withProps(props => ({
@@ -23,21 +25,20 @@ const RedditSuggest = enhanceWithProps(Suggest);
 
 
 const connectFunc = connect(
-  state => ({
-    dataSelected: state.suggest.dataSelected
-  }),
+  state => ({suggestedData: state.suggest.suggestedData}),
   dispatch => bindActionCreators(suggestActions, dispatch)
 );
 
 const enhanceScrollSync = withProps(props => ({
   renderBodyCell: ({ columnIndex, key, rowIndex, style }) => {
-    if (columnIndex < 1) return;
+    if (columnIndex < 1 || !props.suggestedData || !props.suggestedData.payload[rowIndex]) return;
+    
     return (
       <Cell
         key={key}
         style={style}
       >
-        ABC
+        {props.suggestedData.payload[rowIndex][columnIndex]}
       </Cell>
     );
     // return renderLeftSideCell({ columnIndex, key, rowIndex, style });
@@ -50,10 +51,10 @@ const RedditScrollSync = compose(
 )(ScrollSync);
 
 const Presentation = props => (
-  <div>
-    <RedditSuggest />
-    <RedditScrollSync />
-  </div>
+  <Container style={{width: '100%'}}>
+    <Row><RedditSuggest /></Row>
+    <Row><RedditScrollSync /></Row>
+  </Container>
 );
 
 export default Presentation;

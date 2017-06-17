@@ -1,6 +1,6 @@
 import ApiClient from '../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
-import {fetchSuggestSuccess, fetchSuggestSelectedSuccess, fetchSuggestSelectedError} from './Action';
+import {fetchSuggestSuccess, fetchSuggestSelectedSuccess, fetchSuggestSelectedFail} from './Action';
 
 const apiClient: Axios = new ApiClient();
 
@@ -25,13 +25,13 @@ export const fetchSuggest = new Middleware(
 
 export const fetchSuggestSelected = new Middleware(
   'redditSelected',
-  task => apiClient.get(`/api/reddit/search.json?q=author:${task.author}&syntax=plain&restrict_sr=false&include_facets=true&limit=10&sr_detail=true`),
+  task => apiClient.get(`/api/reddit/search.json?q=author:${task.author}&syntax=plain&restrict_sr=false&include_facets=false&limit=10&sr_detail=false`),
   (task) => {
-    if (!task.data.payload || !task.data.payload.children) {
-      return task.store.dispatch(fetchSuggestSelectedError());
-      
-    const keys = Object.keys(task.data.payload.children);
-    const list = task.data.payload.children.map((d => keys.map(k => d[k]));
+    if (!task.data || !task.data.children || task.data.children.length === 0) {
+      return task.store.dispatch(fetchSuggestSelectedFail());
+    }
+    const keys = Object.keys(task.data.children[0].data);
+    const list = task.data.children.map((d => keys.map(k => typeof d.data[k] === 'object' ? JSON.stringify(d.data[k]) : d.data[k] )));
     task.store.dispatch(fetchSuggestSelectedSuccess(list));
   }
 );
