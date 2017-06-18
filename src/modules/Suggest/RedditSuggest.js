@@ -6,12 +6,13 @@ import compose from 'recompose/compose';
 import Suggest from './Suggest';
 import ScrollSync from '../ScrollSync/ScrollSync';
 import Cell from '../ScrollSync/Cell';
+import HeaderCell from '../ScrollSync/HeaderCell';
 import Container from '../../components/Container/Container';
 import Row from '../../components/Row/Row'; 
 import * as suggestActions from './Action';
 
 const enhanceWithProps = withProps(props => ({
-  parseForSuggestions: ({payload}) => { console.log(payload); return (payload.children)},
+  parseForSuggestions: ({payload}) => (payload ? payload.children: []),
   parseForErrors: () => {},
   getSuggestionValue: suggestion => suggestion.data.title,
   afterSuggestionSelected: suggestion => suggestion,
@@ -30,7 +31,7 @@ const connectFunc = connect(
   dispatch => bindActionCreators(suggestActions, dispatch)
 );
 
-const enhanceScrollSync = withProps(props => ({
+const enhanceScrollSyncWithProps = withProps(props => ({
   renderBodyCell: ({ columnIndex, key, rowIndex, style }) => {
     if (columnIndex < 1 || !props.suggestedData || !props.suggestedData.payload[rowIndex]) return;
     
@@ -42,19 +43,34 @@ const enhanceScrollSync = withProps(props => ({
         {props.suggestedData.payload[rowIndex][columnIndex]}
       </Cell>
     );
-    // return renderLeftSideCell({ columnIndex, key, rowIndex, style });
+  },
+  renderHeaderCell: ({ columnIndex, key, rowIndex, style }) => {
+    if (columnIndex < 1) return;
+
+    return (
+      <HeaderCell
+        key={key}
+        style={style}
+      >
+        {`XYZ${columnIndex}`}
+      </HeaderCell>
+    );
   }
 }));
 
 const RedditScrollSync = compose(
   connectFunc,
-  enhanceScrollSync
+  enhanceScrollSyncWithProps
 )(ScrollSync);
 
 const Presentation = props => (
-  <Container style={{width: '100%'}}>
-    <Row><RedditSuggest /></Row>
-    <Row>{ props.suggestedData && props.suggestedData.payload && <RedditScrollSync /> }</Row>
+  <Container style={{width: '100%', position: 'relative'}}>    
+    <Container style={{width: '100%', position: 'absolute', zIndex: 2}}>
+      <RedditSuggest />
+    </Container>
+    <Container style={{width: '100%', position: 'absolute', zIndex: 1}}>
+      <RedditScrollSync top={30} />
+    </Container>
   </Container>
 );
 

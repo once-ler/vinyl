@@ -12,7 +12,8 @@ const mapDispatchToProps = dispatch => ({
 
 const connectFunc = connect(
   state => ({
-    list: state.resources.list
+    list: state.scrollsync.list,
+    columns: state.scrollsync.columns
   }),
   mapDispatchToProps
 );

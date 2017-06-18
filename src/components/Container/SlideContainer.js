@@ -40,7 +40,7 @@ const enhanceWithProps = withProps(
       defaultStyle: { y: -200, opacity: 0, x: 0 },
       style: {
         opacity: spring(1, { stiffness: 20, damping: 10 }),
-        y: spring(0, { stiffness: 150, damping: 15 }),
+        y: spring(ownerProps.top || 0, { stiffness: 150, damping: 15 }),
         x: 0
       }
     }

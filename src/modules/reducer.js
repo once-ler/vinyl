@@ -6,7 +6,7 @@ import auth from './Login/Action';
 import theme from './App/Action';
 import nav from './Nav/Action';
 import profile from './Form/Action';
-import resources from './ScrollSync/Action';
+import scrollsync from './ScrollSync/Action';
 import calendar from './Calendar/Action';
 import modal from './Modal/Action';
 import upload from './FileUpload/Action';
@@ -19,7 +19,7 @@ export default {
   auth,
   nav,
   profile,
-  resources,
+  scrollsync,
   calendar,
   oauth2,
   modal,

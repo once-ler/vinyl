@@ -29,7 +29,7 @@ export default {
     fontSize: '20px',
     borderBottomLeftRadius: '2px',
     borderBottomRightRadius: '2px',
-    zIndex: '2 !important'   
+    zIndex: '9 !important'   
   },
   suggestionsContainer: {
     display: 'none'
@@ -37,7 +37,7 @@ export default {
   suggestionsList: {
     margin: 0,
     padding: 0,
-    listStyleType: 'none'    
+    listStyleType: 'none'
   },
   suggestion: {
     cursor: 'pointer',

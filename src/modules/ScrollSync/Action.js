@@ -2,7 +2,8 @@
 const LONG_LIST = 'LONG_LIST_RELOAD';
 const LONG_LIST_REFERSH = 'LONG_LIST_REFERSH';
 const initialState = {
-  list: []
+  list: [],
+  columns: []
 };
 
 const resources = (state = initialState, action) => {

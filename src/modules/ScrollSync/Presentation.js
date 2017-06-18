@@ -4,7 +4,7 @@ import SlideContainer from '../../components/Container/SlideContainer';
 import ScrollSync from '../../components/ScrollSync/ScrollSync';
 
 export default props => (
-  <SlideContainer direction="down">
+  <SlideContainer direction="down" top={props.top}>
     <Container fontFamily={props.fontFamily} fontSize={props.fontSize}>
       <ScrollSync {...props}/>
     </Container>

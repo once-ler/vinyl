@@ -25,7 +25,7 @@ export const fetchSuggest = new Middleware(
 
 export const fetchSuggestSelected = new Middleware(
   'redditSelected',
-  task => apiClient.get(`/api/reddit/search.json?q=author:${task.author}&syntax=plain&restrict_sr=false&include_facets=false&limit=10&sr_detail=false`),
+  task => apiClient.get(`/api/reddit/search.json?q=title:${task.data.title}&syntax=plain&restrict_sr=false&include_facets=false&limit=10&sr_detail=false`),
   (task) => {
     if (!task.data || !task.data.children || task.data.children.length === 0) {
       return task.store.dispatch(fetchSuggestSelectedFail());
