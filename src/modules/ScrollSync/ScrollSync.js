@@ -18,7 +18,10 @@ const connectFunc = connect(
   mapDispatchToProps
 );
 
+const enhanceRenderBodyCell = props => <renderBodyCellPure {...props} />;
+
 export default compose(
+  connectFunc,
   defaultProps({
     renderBodyCell,
     renderLeftSideCell,
@@ -35,6 +38,5 @@ export default compose(
     overscanRowCount: 5,
     rowHeight: 40,
     rowCount: 100
-  }),
-  connectFunc
+  })
 )(Presentation);

@@ -7,7 +7,7 @@ import lifecycle from 'recompose/lifecycle';
 import withPropsOnChange from 'recompose/withPropsOnChange';
 import { navAction } from '../Nav';
 import Presentation from './Presentation';
-import { listAction } from '../ScrollSync';
+import { scrollSyncActions } from '../ScrollSync';
 
 const mapDispatchToProps = dispatch => ({
   dispatch
@@ -48,7 +48,7 @@ const enhanceWithLifecycle = lifecycle({
   },
   componentDidMount() {
     // For tests
-    this.props.dispatch(listAction.add([{a: 1, b: 2}]));
+    this.props.dispatch(scrollSyncActions.setList([{a: 1, b: 2}]));
   }
 });
 

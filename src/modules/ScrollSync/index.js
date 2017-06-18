@@ -1,2 +1,2 @@
-export * as listAction from './Action';
+export * as scrollSyncActions from './Action';
 export default from './ScrollSync';

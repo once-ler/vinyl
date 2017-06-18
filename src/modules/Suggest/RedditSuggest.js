@@ -58,10 +58,12 @@ const enhanceScrollSyncWithProps = withProps(props => ({
   }
 }));
 
-const RedditScrollSync = compose(
+const RedditScrollSync1 = compose(
   connectFunc,
   enhanceScrollSyncWithProps
 )(ScrollSync);
+
+const RedditScrollSync = connectFunc(ScrollSync);
 
 const Presentation = props => (
   <Container style={{width: '100%', position: 'relative'}}>    
@@ -69,7 +71,7 @@ const Presentation = props => (
       <RedditSuggest />
     </Container>
     <Container style={{width: '100%', position: 'absolute', zIndex: 1}}>
-      <RedditScrollSync top={30} />
+      <RedditScrollSync top={30} list={props.suggestedData} />
     </Container>
   </Container>
 );
