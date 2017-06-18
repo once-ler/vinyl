@@ -26,7 +26,8 @@ const RedditSuggest = enhanceWithProps(Suggest);
 
 const connectFunc = connect(
   state => ({
-    suggestedData: state.suggest.suggestedData
+    suggestedData: state.suggest.suggestedData,
+    columns: state.suggest.columns
   }),
   dispatch => bindActionCreators(suggestActions, dispatch)
 );
@@ -34,7 +35,6 @@ const connectFunc = connect(
 const enhanceScrollSyncWithProps = withProps(props => ({
   renderBodyCell: ({ columnIndex, key, rowIndex, style }) => {
     if (columnIndex < 1 || !props.suggestedData || !props.suggestedData.payload[rowIndex]) return;
-    
     return (
       <Cell
         key={key}
@@ -52,18 +52,18 @@ const enhanceScrollSyncWithProps = withProps(props => ({
         key={key}
         style={style}
       >
-        {`XYZ${columnIndex}`}
+        {props.columns[columnIndex] || `C${columnIndex}`}
       </HeaderCell>
     );
   }
 }));
 
-const RedditScrollSync1 = compose(
+const RedditScrollSync = compose(
   connectFunc,
   enhanceScrollSyncWithProps
 )(ScrollSync);
 
-const RedditScrollSync = connectFunc(ScrollSync);
+// const RedditScrollSync = connectFunc(ScrollSync);
 
 const Presentation = props => (
   <Container style={{width: '100%', position: 'relative'}}>    
@@ -71,7 +71,7 @@ const Presentation = props => (
       <RedditSuggest />
     </Container>
     <Container style={{width: '100%', position: 'absolute', zIndex: 1}}>
-      <RedditScrollSync top={30} list={props.suggestedData} />
+      <RedditScrollSync top={30} />
     </Container>
   </Container>
 );

@@ -3,11 +3,8 @@ import withProps from 'recompose/withProps';
 import Cell from './Cell';
 import HeaderCell from './HeaderCell';
 
-export const renderBodyCell = ({ columnIndex, key, rowIndex, style, list }) => {
+export const renderBodyCell = ({ columnIndex, key, rowIndex, style }) => {
   if (columnIndex < 1) return;
-
-  console.log(list);
-
   return renderLeftSideCell({ columnIndex, key, rowIndex, style });
 };
 

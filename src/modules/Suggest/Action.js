@@ -8,6 +8,7 @@ const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
 const DEFAULT_SUGGEST = 'DEFAULT_SUGGEST';
 const CLEAR_SUGGEST = 'CLEAR_SUGGEST';
 const SUGGEST_SELECTED = 'SUGGEST_SELECTED';
+const SUGGEST_COLUMNS = 'SUGGEST_COLUMNS';
 
 const initialState = {
   data: null,
@@ -16,7 +17,8 @@ const initialState = {
   selected: '', // Purpose is to trigger another Action that will download detailed data for suggestion.
   error: null,
   suggestedData: null,
-  suggestedError: null
+  suggestedError: null,
+  columns: []
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -46,7 +48,6 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case FETCH_SUGGEST_SELECTED_SUCCESS:
-      console.log(action);
       return {
         ...state,
         loading: false,
@@ -81,6 +82,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         data: null
       };
+    case SUGGEST_COLUMNS:
+      return {
+        ...state,
+        columns: action.columns
+      };
     default:
       return state;
   }
@@ -96,3 +102,4 @@ export const updateInputValue = value => ({ type: UPDATE_INPUT_VALUE, value });
 export const updateSelected = value => ({ type: SUGGEST_SELECTED, value });
 export const defaultSuggestions = value => ({ type: DEFAULT_SUGGEST, value });
 export const clearSuggestions = value => ({ type: CLEAR_SUGGEST, value });
+export const setColumns = columns => ({ type: SUGGEST_COLUMNS, columns });

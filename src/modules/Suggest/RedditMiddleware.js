@@ -1,7 +1,6 @@
 import ApiClient from '../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
-import {fetchSuggestSuccess, fetchSuggestSelectedSuccess, fetchSuggestSelectedFail} from './Action';
-import * as scrollSyncActions from '../ScrollSync/Action';
+import {fetchSuggestSuccess, fetchSuggestSelectedSuccess, fetchSuggestSelectedFail, setColumns} from './Action';
 
 const apiClient: Axios = new ApiClient();
 
@@ -34,8 +33,7 @@ export const fetchSuggestSelected = new Middleware(
     const keys = Object.keys(task.data.children[0].data);
     const list = task.data.children.map((d => keys.map(k => typeof d.data[k] === 'object' ? JSON.stringify(d.data[k]) : d.data[k] )));
     task.store.dispatch(fetchSuggestSelectedSuccess(list));
-    scrollSyncActions.setList(list);
-    scrollSyncActions.setColumns(keys);
+    task.store.dispatch(setColumns(keys));
   }
 );
 

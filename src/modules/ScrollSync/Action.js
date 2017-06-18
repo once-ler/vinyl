@@ -24,6 +24,7 @@ const reducer = (state = initialState, action) => {
 };
 
 export const setList = list => {
+  console.log(list);
   return {
     type: SCROLLSYNC_LIST,
     list
