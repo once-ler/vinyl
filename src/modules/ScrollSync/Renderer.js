@@ -13,7 +13,7 @@ export const renderLeftSideCell = ({ columnIndex, key, rowIndex, style }) => (
     key={key}
     style={style}
   >
-    {`R${rowIndex}, C${columnIndex}`}
+    <span style={{margin: 'auto'}}>{ columnIndex > 0 ? `R${rowIndex}, C${columnIndex}` : rowIndex }</span>
   </Cell>
 );
 
@@ -28,7 +28,7 @@ export const renderLeftHeaderCell = ({ columnIndex, key, rowIndex, style }) => (
     key={key}
     style={style}
   >
-    {`C${columnIndex}`}
+    {columnIndex > 0 ? `C${columnIndex}` : ''}
   </HeaderCell>
 );
 

@@ -4,7 +4,7 @@ import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import withHandlers from 'recompose/withHandlers';
 import SlideContainer from '../Container/SlideContainer';
-import theme from './theme';
+import SuggestTheme from './SuggestTheme';
 
 const enhanceWithHandlers = withHandlers({
   renderSuggestion: props => (suggestion, { value, valueBeforeUpDown }) => {
@@ -43,7 +43,8 @@ const Presentation = ({
   onChange,
   renderSuggestion,
   clearInput,
-  parseForSuggestions
+  parseForSuggestions,
+  theme
 }) => {
   const inputProps = {
     placeholder: 'search...',
@@ -60,7 +61,7 @@ const Presentation = ({
                    getSuggestionValue={getSuggestionValue}
                    renderSuggestion={renderSuggestion}
                    inputProps={inputProps}
-                   theme={theme} />
+                   theme={SuggestTheme(theme)} />
       <span><button onClick={clearInput}>Clear</button></span>
       <div>
         <strong>Status:</strong> {status}

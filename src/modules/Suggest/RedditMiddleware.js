@@ -1,6 +1,6 @@
 import ApiClient from '../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
-import {fetchSuggestSuccess, fetchSuggestSelectedSuccess, fetchSuggestSelectedFail, setColumns} from './Action';
+import * as suggestActions from './Action';
 
 const apiClient: Axios = new ApiClient();
 
@@ -19,21 +19,27 @@ data
 
 export const fetchSuggest = new Middleware(
   'reddit',
-  task => apiClient.get(`/api/reddit/search.json?q=title:${task.value}&syntax=plain&restrict_sr=true&include_facets=false&limit=10&sr_detail=false`),
-  (task) => task.store.dispatch(fetchSuggestSuccess(task.data))
+  task => {
+    task.store.dispatch(suggestActions.fetchSuggest({}));
+    return apiClient.get(`/api/reddit/search.json?q=title:${task.value}&syntax=plain&restrict_sr=true&include_facets=false&limit=10&sr_detail=false`);
+  },
+  (task) => task.store.dispatch(suggestActions.fetchSuggestSuccess(task.data))
 );
 
 export const fetchSuggestSelected = new Middleware(
   'redditSelected',
-  task => apiClient.get(`/api/reddit/search.json?q=title:${task.data.title}&syntax=plain&restrict_sr=false&include_facets=false&limit=10&sr_detail=false`),
+  task => {
+    task.store.dispatch(suggestActions.fetchSuggestSelected({}));
+    return apiClient.get(`/api/reddit/search.json?q=title:${task.data.title}&syntax=plain&restrict_sr=false&include_facets=false&limit=10&sr_detail=false`);
+  },
   (task) => {
     if (!task.data || !task.data.children || task.data.children.length === 0) {
-      return task.store.dispatch(fetchSuggestSelectedFail());
+      return task.store.dispatch(suggestActions.fetchSuggestSelectedFail());
     }
     const keys = Object.keys(task.data.children[0].data);
     const list = task.data.children.map((d => keys.map(k => typeof d.data[k] === 'object' ? JSON.stringify(d.data[k]) : d.data[k] )));
-    task.store.dispatch(fetchSuggestSelectedSuccess(list));
-    task.store.dispatch(setColumns(keys));
+    task.store.dispatch(suggestActions.fetchSuggestSelectedSuccess(list));
+    task.store.dispatch(suggestActions.setColumns(keys));
   }
 );
 
