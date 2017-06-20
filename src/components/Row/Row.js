@@ -115,6 +115,10 @@ const Row = styled.div `
   ${p => p.padding && `
     padding: ${p.padding};
   `}
+
+  ${p => p.opacity && `
+    opacity: ${p.opacity};
+  `}
 `;
 
 Row.defaultProps = {

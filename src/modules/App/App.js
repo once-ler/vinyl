@@ -18,7 +18,8 @@ const connectFunc = connect(
     nav: state.nav,
     user: state.auth.user,
     routing: state.routing,
-    theme: state.theme
+    theme: state.theme,
+    progress: state.progress
   }),
   mapDispatchToProps
 );
@@ -34,7 +35,6 @@ const enhanceWithLifecycle = lifecycle({
     }
   },
   componentWillUpdate(nextProps, nextState) {
-    console.log(nextProps);
     // Collapse responsive nav once user has selected next link.
     if (!this.props.nav.collapse) {
       this.props.dispatch(navAction.reset());

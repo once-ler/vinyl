@@ -5,7 +5,8 @@ const HIDE_PROGRESS = 'HIDE_PROGRESS';
 
 const initialState = {
   percent: -1,
-  intervalTime: 200
+  intervalTime: 200,
+  loading: false
 };
 
 export default (state = {}, action) => {
@@ -14,7 +15,8 @@ export default (state = {}, action) => {
       Progress.show();
       return {
         ...state,
-        ...action
+        ...action,
+        loading: true
       };
     case HIDE_PROGRESS:
       Progress.hide();

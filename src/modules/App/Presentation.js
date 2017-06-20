@@ -69,7 +69,7 @@ const Presentation1 = props => (
 class Presentation extends Component {
   
   render() {
-    const {percent, intervalTime} = this.props;
+    const {progress} = this.props;
     return (
       <Container>
         <Progress.Component
