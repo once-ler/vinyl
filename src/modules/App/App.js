@@ -34,6 +34,7 @@ const enhanceWithLifecycle = lifecycle({
     }
   },
   componentWillUpdate(nextProps, nextState) {
+    console.log(nextProps);
     // Collapse responsive nav once user has selected next link.
     if (!this.props.nav.collapse) {
       this.props.dispatch(navAction.reset());

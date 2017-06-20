@@ -13,6 +13,7 @@ import Modal from '../Modal/Modal';
 const logoImage = require('../../../static/vinyl.svg');
 import { ViewPager, Frame, Track, View } from 'react-view-pager';
 import toClass from 'recompose/toClass';
+import Progress from "react-progress-2";
 
 const BetterLink = styled(Link) `
   color: sandybrown;
@@ -68,8 +69,12 @@ const Presentation1 = props => (
 class Presentation extends Component {
   
   render() {
+    const {percent, intervalTime} = this.props;
     return (
       <Container>
+        <Progress.Component
+          style={{backgroundColor: '#fefefe'}}
+        />
         <NavRow>
           <LogoCell>
           <img src={logoImage}/>

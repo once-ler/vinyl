@@ -1,9 +1,10 @@
 /* @flow */
-import { routerReducer } from 'react-router-redux';
+import { routerReducer as routing } from 'react-router-redux';
 import { reducer as form } from 'simpler-redux-form';
-import { authReducer as oauth2 } from 'redux-implicit-oauth2'
+import { authReducer as oauth2 } from 'redux-implicit-oauth2';
 import auth from './Login/Action';
-import theme from './App/Action';
+import theme from './App/ThemeAction';
+import progress from './App/ProgressAction';
 import nav from './Nav/Action';
 import profile from './Form/Action';
 import scrollsync from './ScrollSync/Action';
@@ -13,8 +14,9 @@ import upload from './FileUpload/Action';
 import suggest from './Suggest/Action';
 
 export default {
-  routing: routerReducer,
+  routing,
   theme,
+  progress,
   form,
   auth,
   nav,

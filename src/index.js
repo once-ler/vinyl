@@ -8,6 +8,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import createStore from './createStore';
 import getRoutes from './routes';
 import './globalStyles';
+import 'react-progress-2/main.css';
 
 const store = createStore(browserHistory, window.__data || {});
 const history = syncHistoryWithStore(browserHistory, store);
