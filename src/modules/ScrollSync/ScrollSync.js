@@ -13,7 +13,8 @@ const mapDispatchToProps = dispatch => ({
 const connectFunc = connect(
   state => ({
     list: state.scrollsync.list,
-    columns: state.scrollsync.columns
+    columns: state.scrollsync.columns,
+    progress: state.progress
   }),
   mapDispatchToProps
 );
@@ -35,5 +36,6 @@ export default compose(
     overscanRowCount: 5,
     rowHeight: 40,
     rowCount: 100  
-  })
+  }),
+  connectFunc
 )(Presentation);

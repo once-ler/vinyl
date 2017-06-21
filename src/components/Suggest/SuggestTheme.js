@@ -6,7 +6,7 @@ export default theme => {
     },
     containerOpen: 'react-autosuggest__container--open',
     input: {
-      width: '240px',
+      width: '90%',
       height: '30px',
       padding: '10px 20px',
       fontWeight: 300,
@@ -28,10 +28,15 @@ export default theme => {
       width: '100%',
       backgroundColor: '#fff',
       fontWeight: 300,
-      fontSize: '20px',
+      fontSize: '14px',
       borderBottomLeftRadius: '2px',
       borderBottomRightRadius: '2px',
-      zIndex: '9 !important'   
+      zIndex: '9 !important',
+      zoom: 1,
+      WebkitTransition: '200ms ease-in',
+      msTransition: '200ms ease-in',
+      OTransition: '200ms ease-in',
+      transition: '200ms ease-in'
     },
     suggestionsContainer: {
       display: 'none'
@@ -42,11 +47,12 @@ export default theme => {
       listStyleType: 'none'
     },
     suggestion: {
+      zoom: 1,
       cursor: 'pointer',
       padding: '10px 8px',
-      height: '28px',
+      maxHeight: '56px',
       borderTop: '1px solid #ddd',
-      whiteSpace: 'nowrap',
+      whiteSpace: 'wrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       WebkitTransition: '200ms ease-in',
@@ -55,10 +61,11 @@ export default theme => {
       transition: '200ms ease-in'
     },
     suggestionFirst: {
-      borderTop: '0'
+      borderTop: '2px solid #ddd'
     },
     suggestionHighlighted: {
       backgroundColor: theme.secondary || 'aliceblue',
+      fontWeight: 500,
       color: '#fff'
     },
     sectionContainer: { borderTop: '1px dashed #ccc' },

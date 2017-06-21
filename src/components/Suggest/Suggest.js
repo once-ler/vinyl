@@ -4,22 +4,22 @@ import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import withHandlers from 'recompose/withHandlers';
 import SlideContainer from '../Container/SlideContainer';
+import Row from '../Row/Row';
+import Button from '../Button/Button';
 import SuggestTheme from './SuggestTheme';
 
 const enhanceWithHandlers = withHandlers({
   renderSuggestion: props => (suggestion, { value, valueBeforeUpDown }) => {
-    // const {title: suggest} = suggestion;
     const suggest = props.getSuggestionValue(suggestion);
     const query = (props.value || valueBeforeUpDown || value ).trim();
     const matches = match(suggest, query);
     const parts = parse(suggest, matches);
-    
+
     return (
-      <span>
+      <div>
         <span>
           {
             parts.map((part, index) => {
-              // const className = part.highlight ? 'highlight' : null;
               const highlightStyle = part.highlight ? {background: 'yellow'} : null;
               return (
                 <span style={highlightStyle} key={index}>{part.text}</span>
@@ -27,7 +27,7 @@ const enhanceWithHandlers = withHandlers({
             })
           }
         </span>
-      </span>
+      </div>
     );
   }
 });
@@ -51,9 +51,10 @@ const Presentation = ({
     value,
     onChange
   };
-  const status = (loading ? 'Loading...' : 'Type to load suggestions');
+  // const status = (loading ? 'Loading...' : 'Type to load suggestions');
   return (
     <SlideContainer direction="right">
+      <Row middle>
       <Autosuggest suggestions={suggestions ? parseForSuggestions(suggestions) : []}
                    onSuggestionsFetchRequested={onSuggestionsFetchRequested}
                    onSuggestionsClearRequested={onSuggestionsClearRequested}
@@ -61,11 +62,12 @@ const Presentation = ({
                    getSuggestionValue={getSuggestionValue}
                    renderSuggestion={renderSuggestion}
                    inputProps={inputProps}
-                   theme={SuggestTheme(theme)} />
-      <span><button onClick={clearInput}>Clear</button></span>
-      <div>
-        <strong>Status:</strong> {status}
-      </div>
+                   theme={SuggestTheme(theme)}
+                   focusInputOnSuggestionClick={false} />
+      <Button onClick={clearInput} clear>
+        Clear
+      </Button>
+      </Row>
     </SlideContainer>
   );
 };

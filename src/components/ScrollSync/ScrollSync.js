@@ -16,17 +16,16 @@ export default ({
     renderLeftSideCell,
     renderHeaderCell,
     renderLeftHeaderCell,
-    list
+    list,
+    progress
   }) => (
     <ScrollSync>
       {({ clientHeight, clientWidth, onScroll, scrollHeight, scrollLeft, scrollTop, scrollWidth }) => {
         const x = scrollLeft / (scrollWidth - clientWidth)
         const y = scrollTop / (scrollHeight - clientHeight)
         
-        // console.log(list);
-
         return (
-          <GridRow>
+          <GridRow opacity={progress.loading ? 0.3 : 1}>
             <LeftSideGrid
               overscanColumnCount={overscanColumnCount}
               overscanRowCount={overscanRowCount}
