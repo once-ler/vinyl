@@ -10,8 +10,10 @@ export default ({
   options,
   searchable,
   value,
-  valueKey
+  valueKey,
+  style
 }) => (
+  <div style={{style}}>
   <VirtualizedSelect
     labelKey={labelKey}
     onChange={onChange}
@@ -24,4 +26,5 @@ export default ({
     value={value}
     valueKey={valueKey}
   />
+  </div>
 );
