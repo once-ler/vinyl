@@ -5,10 +5,12 @@ import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
 import Suggest from './Suggest';
 import ScrollSync from '../ScrollSync/ScrollSync';
+import Select from '../Select/Select';
 import Cell from '../ScrollSync/Cell';
 import HeaderCell from '../ScrollSync/HeaderCell';
 import Container from '../../components/Container/Container';
-import Row from '../../components/Row/Row'; 
+import Row from '../../components/Row/Row';
+import RowCell from '../../components/Cell/Cell';
 import * as suggestActions from './Action';
 
 const connectFunc = connect(
@@ -71,13 +73,24 @@ const RedditScrollSync = compose(
 // const RedditScrollSync = connectFunc(ScrollSync);
 
 const Presentation = props => (
-  <Container style={{width: '100%', position: 'relative'}}>    
-    <Container style={{width: '100%', position: 'absolute', zIndex: 2}}>
+  <Container style={{width: '100%', position: 'relative'}}>
+    <Row>
+    <RowCell>
+    <Container style={{width: '100%', position: 'absolute', zIndex: 3}}>
+      <Select />
+    </Container>
+    </RowCell>
+    <RowCell>
+    <Container style={{width: '100%', position: 'absolute', top: 30, zIndex: 2}}>
       <RedditSuggest />
     </Container>
+    </RowCell>
+    </Row>
+    <Row>
     <Container style={{width: '100%', position: 'absolute', zIndex: 1}}>
       <RedditScrollSync top={30} />
     </Container>
+    </Row>
   </Container>
 );
 

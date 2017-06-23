@@ -12,6 +12,7 @@ import calendar from './Calendar/Action';
 import modal from './Modal/Action';
 import upload from './FileUpload/Action';
 import suggest from './Suggest/Action';
+import select from './Select/Action';
 
 export default {
   routing,
@@ -26,5 +27,6 @@ export default {
   oauth2,
   modal,
   upload,
-  suggest
+  suggest,
+  select
 };
