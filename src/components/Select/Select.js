@@ -13,7 +13,7 @@ export default ({
   valueKey,
   style
 }) => (
-  <div style={{style}}>
+  <div style={{...style}}>
   <VirtualizedSelect
     labelKey={labelKey}
     onChange={onChange}

@@ -15,23 +15,26 @@ const connectFunc = connect(
   state => ({
     globalValue: state.select.value    
   }),
-  dispatch => bindActionCreators(selectActions)
+  dispatch => bindActionCreators(selectActions, dispatch)
 );
 
 const enhanceWithState = withState('value', 'setValue', '');
 
-const enhanceWithProps = withProps(props => ({
+const enhanceWithProps = withProps(({value}) => ({
   searchable: true,
-  labelKey: 'interest',
-  valueKey: 'interest',
+  labelKey: 'name',
+  valueKey: 'name',
   optionRenderer,
-  options
+  options,
+  value
 }));
 
+
+
 const enhanceWithHandlers = withHandlers({
-  onChange: ({selectActions, setValue}) => ({value}) => {
+  onChange: ({updateSelected, setValue}) => value => {
     setValue(value);
-    selectActions.updateSelected(value);
+    updateSelected(value);
   },
   optionHeight: () => ({ option }) => option.type === 'header' ? 25 : 35
 });

@@ -53,7 +53,7 @@ const Presentation = ({
   };
   // const status = (loading ? 'Loading...' : 'Type to load suggestions');
   return (
-    <SlideContainer direction="right">
+    <SlideContainer direction="right" style={{maxWidth: '420px'}}>
       <Row middle>
       <Autosuggest suggestions={suggestions ? parseForSuggestions(suggestions) : []}
                    onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -64,8 +64,8 @@ const Presentation = ({
                    inputProps={inputProps}
                    theme={SuggestTheme(theme)}
                    focusInputOnSuggestionClick={false} />
-      <Button onClick={clearInput} clear>
-        Clear
+      <Button onClick={clearInput} clear style={{minWidth: '27px', marginLeft: '40px'}}>
+        X
       </Button>
       </Row>
     </SlideContainer>

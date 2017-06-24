@@ -2,11 +2,11 @@ export default theme => {
   
   return {
     container: {
-      position: 'relative', width: '480px'
+      position: 'relative', width: '100%'
     },
     containerOpen: 'react-autosuggest__container--open',
     input: {
-      width: '90%',
+      width: '100%',
       height: '30px',
       padding: '10px 20px',
       fontWeight: 300,
@@ -26,6 +26,7 @@ export default theme => {
       position: 'absolute',
       top: '51px',
       width: '100%',
+      minWidth: '320px',
       backgroundColor: '#fff',
       fontWeight: 300,
       fontSize: '14px',

@@ -8,7 +8,7 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case UPDATE_SELECTED:
       return {
-
+        value: action.value
       };
     default:
       return state;
