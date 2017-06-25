@@ -13,30 +13,29 @@ import options from './Options';
 
 const connectFunc = connect(
   state => ({
-    globalValue: state.select.value    
+    globalValue: state.select.value,
+    theme: state.theme  
   }),
   dispatch => bindActionCreators(selectActions, dispatch)
 );
 
 const enhanceWithState = withState('value', 'setValue', '');
 
-const enhanceWithProps = withProps(({value}) => ({
+const enhanceWithProps = withProps(({value, theme}) => ({
   searchable: true,
   labelKey: 'name',
   valueKey: 'name',
-  optionRenderer,
+  optionRenderer: optionRenderer(theme),
   options,
   value
 }));
-
-
 
 const enhanceWithHandlers = withHandlers({
   onChange: ({updateSelected, setValue}) => value => {
     setValue(value);
     updateSelected(value);
   },
-  optionHeight: () => ({ option }) => option.type === 'header' ? 25 : 35
+  optionHeight: () => ({ option }) => option.type === 'header' ? 35 : 40
 });
 
 const Presentation = props => (
