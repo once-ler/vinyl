@@ -7,4 +7,7 @@ injectGlobal`
   body {
     
   }
+  *:focus {
+    outline: none;
+  }
 `;
