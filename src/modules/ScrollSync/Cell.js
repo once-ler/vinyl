@@ -4,14 +4,25 @@ export default styled.div`
   display: flex;
   flex-direction: column;
   align-items: left;
-  justify-content: center;
+  justify-content: flex-start;
   border-bottom: 1px solid #eee;
   border-right: 1px solid #eee;
   width: 100%;
   height: 100%;
   text-align: left;
-  width: 250px;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  hyphens: auto;
   overflow: hidden;
-  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+  &:hover {
+    border: 1px solid seagreen;
+    z-index: 99;
+    background-color: yellow;
+    width: ${props => { const { style: { width }, contentSize } = props;  const r = contentSize / width; return r > 1 ? width * 2.5 : width; }}px !important;
+    height: ${props => { const { style: { width, height }, contentSize } = props;  const r = contentSize / width;; return r > 1 ? 140 : height; }}px !important;
+    overflow: ${props => { const { style: { width }, contentSize } = props;  const r = contentSize / width;; return r > 1 ? 'scroll' : 'hidden'; }} !important;
+    margin: ${props => { const { style: { width }, contentSize } = props;  const r = contentSize / width;; return r > 1 ? '15px 0px 0px 15px' : '0'; }} !important;
+  }
 `;

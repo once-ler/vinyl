@@ -27,7 +27,7 @@ export default compose(
     renderLeftHeaderCell
   }),
   withProps({
-    columnWidth: 75,
+    columnWidth: 120,
     columnCount: 50,
     fontFamily: `'Trebuchet MS', Helvetica, sans-serif`,
     fontSize: '0.8em',
@@ -35,7 +35,7 @@ export default compose(
     overscanColumnCount: 0,
     overscanRowCount: 5,
     rowHeight: 40,
-    rowCount: 100  
+    rowCount: 20
   }),
   connectFunc
 )(Presentation);

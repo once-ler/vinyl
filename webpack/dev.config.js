@@ -6,6 +6,7 @@ module.exports = {
   devtool: 'eval',
   context: path.resolve(__dirname, '..'),
   entry: [
+    'babel-polyfill',
     './src/index.js'
   ],
   output: {

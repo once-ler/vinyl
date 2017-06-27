@@ -5,4 +5,6 @@ export default styled(Cell) `
   text-align: center;
   font-weight: bold;
   white-space: wrap;
+  align-items: center;
+  justify-content: space-around;
 `;

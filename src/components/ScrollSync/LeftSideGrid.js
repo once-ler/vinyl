@@ -14,7 +14,7 @@ export default ({
   renderLeftSideCell,
   rowHeight,
   rowCount,
-  scrollTop  
+  scrollTop
 }) => (
   <div>
     <LeftSideGridColumn

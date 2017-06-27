@@ -17,7 +17,8 @@ export default ({
   overscanColumnCount,
   overscanRowCount,
   renderHeaderCell,
-  scrollLeft  
+  scrollLeft,
+  renderRowHeight
 }) => (
   <GridColumn>
     <AutoSizer disableHeight>
@@ -48,7 +49,7 @@ export default ({
             cellRenderer={renderBodyCell}
             rowHeight={rowHeight}
             rowCount={rowCount}
-            width={width}
+            width={width}            
           />
         </RightSideGridColumn>
         </div>
