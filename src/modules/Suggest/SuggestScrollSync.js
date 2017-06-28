@@ -4,7 +4,7 @@ import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
 import connectFunc from './Connect';
 import ScrollSync from '../ScrollSync/ScrollSync';
-import Cell from '../ScrollSync/Cell';
+import {Div, TextArea} from '../ScrollSync/Cell';
 import HeaderCell from '../ScrollSync/HeaderCell';
 
 const enhanceScrollSyncWithProps = withProps(props => ({
@@ -12,6 +12,16 @@ const enhanceScrollSyncWithProps = withProps(props => ({
     if (columnIndex < 1 || !props.suggestedData || !props.suggestedData.payload[rowIndex]) return;
     
     const content = props.suggestedData.payload[rowIndex][columnIndex];
+    return (
+      <TextArea
+        key={key}
+        style={style}
+        contentSize={typeof content === 'string' ? content.length * 5 : -1}
+        value={content}
+        readOnly
+      />
+    );
+
     return (
       <Cell
         key={key}
