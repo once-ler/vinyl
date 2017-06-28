@@ -20,10 +20,10 @@ export const Div = styled.div`
     border: 1px solid seagreen;
     z-index: 99;
     background-color: yellow;
-    width: ${props => { const { style: { width }, contentSize } = props;  const r = contentSize / width; return r > 1 ? width * 2.5 : width; }}px !important;
-    height: ${props => { const { style: { width, height }, contentSize } = props;  const r = contentSize / width;; return r > 1 ? 140 : height; }}px !important;
-    overflow: ${props => { const { style: { width }, contentSize } = props;  const r = contentSize / width;; return r > 1 ? 'scroll' : 'hidden'; }} !important;
-    margin: ${props => { const { style: { width }, contentSize } = props;  const r = contentSize / width;; return r > 1 ? '15px 0px 0px 15px' : '0'; }} !important;
+    width: ${props => { const { style: { width }, contentSize } = props; const r = contentSize / width; return r > 1 ? width * 2.5 : width; }}px !important;
+    height: ${props => { const { style: { width, height }, contentSize } = props; const r = contentSize / width;; return r > 1 ? 140 : height; }}px !important;
+    overflow: ${props => { const { style: { width }, contentSize } = props; const r = contentSize / width; return r > 1 ? 'scroll' : 'hidden'; }} !important;
+    margin: ${props => { const { style: { width }, contentSize } = props; const r = contentSize / width; return r > 1 ? '15px 0px 0px 15px' : '0'; }} !important;
   }
 `;
 
@@ -43,11 +43,18 @@ export const TextArea = styled.textarea`
     border: 1px solid seagreen;
     z-index: 99;
     background-color: yellow;
-    width: ${props => { const { style: { width }, contentSize } = props;  const r = contentSize / width; return r > 1 ? width * 2.5 : width; }}px !important;
-    height: ${props => { const { style: { width, height }, contentSize } = props;  const r = contentSize / width;; return r > 1 ? height * 2.5 : height; }}px !important;    
-  &:not(:hover) {
-    width: ${props => props.style.width} !important;
-    height: ${props => props.style.height} !important;
+    width: ${props => { const { style: { width }, contentSize } = props; const r = contentSize / width; return r > 1 ? width * 2.5 : width; }}px !important;
+    height: ${props => { const { style: { width, height }, contentSize } = props; const r = contentSize / width; return r > 1 ? height * 2.5 : height; }}px !important;
+    margin: ${props => {
+      const { style: { width }, contentSize, columnIndex, columnCount, gridWidth } = props;
+      const r = contentSize / width;
+      const t = r > 1 ? width * 2.5 : width;
+      if (t == width) return '0';
+      const s = (columnCount - columnIndex) * width;
+      // console.log([s,t,(gridWidth/2) - width]);
+      // console.log([t, gridWidth])
+      console.log(props.style)
+      return s > t ? '15px 0px 0px 15px' : '15px 0px 0px -' + (width * 1.85) + 'px'; }} !important;
   }
 `;
 

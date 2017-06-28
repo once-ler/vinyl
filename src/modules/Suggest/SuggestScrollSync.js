@@ -11,7 +11,10 @@ const enhanceScrollSyncWithProps = withProps(props => ({
   renderBodyCell: ({ columnIndex, key, parent, rowIndex, style }) => {
     if (columnIndex < 1 || !props.suggestedData || !props.suggestedData.payload[rowIndex]) return;
     
-    const content = props.suggestedData.payload[rowIndex][columnIndex];
+    const { suggestedData: { payload } } = props;
+    const { props: { columnCount, width: gridWidth } } = parent;
+    const content = payload[rowIndex][columnIndex];
+    
     return (
       <TextArea
         key={key}
@@ -19,17 +22,11 @@ const enhanceScrollSyncWithProps = withProps(props => ({
         contentSize={typeof content === 'string' ? content.length * 5 : -1}
         value={content}
         readOnly
+        rowIndex={rowIndex}
+        columnIndex={columnIndex}
+        columnCount={columnCount}
+        gridWidth={gridWidth}
       />
-    );
-
-    return (
-      <Cell
-        key={key}
-        style={style}
-        contentSize={typeof content === 'string' ? content.length * 5 : -1}
-      >
-        <span style={{padding: '0 5px'}}>{content}</span>
-      </Cell>
     );
   },
   renderHeaderCell: ({ columnIndex, key, rowIndex, style }) => {
@@ -50,3 +47,4 @@ export default compose(
   connectFunc,
   enhanceScrollSyncWithProps
 )(ScrollSync);
+;

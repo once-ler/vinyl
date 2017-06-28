@@ -43,7 +43,7 @@ export const fetchSuggestSelected = new Middleware(
       return task.store.dispatch(suggestActions.fetchSuggestSelectedFail());
     }
     const keys = Object.keys(task.data.children[0].data);
-    const list = task.data.children.map((d => keys.map(k => typeof d.data[k] === 'object' ? JSON.stringify(d.data[k]) : d.data[k] )));
+    const list = task.data.children.map((d => keys.map(k => typeof d.data[k] === 'object' ? JSON.stringify(d.data[k], null, '  ') : d.data[k] )));
     task.store.dispatch(suggestActions.fetchSuggestSelectedSuccess(list));
     task.store.dispatch(suggestActions.setColumns(keys));
     task.store.dispatch(progressActions.hideProgress());
