@@ -9,9 +9,9 @@ import createStore from './createStore';
 import getRoutes from './routes';
 import './globalStyles';
 import 'react-progress-2/main.css';
-import 'react-select/dist/react-select.css'
-import 'react-virtualized/styles.css'
-import 'react-virtualized-select/styles.css'
+import 'react-select/dist/react-select.css';
+import 'react-virtualized/styles.css';
+import 'react-virtualized-select/styles.css';
 
 const store = createStore(browserHistory, window.__data || {});
 const history = syncHistoryWithStore(browserHistory, store);
