@@ -4,7 +4,7 @@ import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
 import connectFunc from './Connect';
 import ScrollSync from '../ScrollSync/ScrollSync';
-import {Div, TextArea, Resizable, Tether} from '../ScrollSync/Cell';
+import {Div, TextArea, Collapse} from '../ScrollSync/Cell';
 import HeaderCell from '../ScrollSync/HeaderCell';
 
 const enhanceScrollSyncWithProps = withProps(props => ({
@@ -15,8 +15,19 @@ const enhanceScrollSyncWithProps = withProps(props => ({
     const { props: { columnCount, width: gridWidth}, state: { scrollLeft: gridScrollLeft } } = parent;
     const content = payload[rowIndex][columnIndex];
     const {width, height} = style;
-    const delta = content.length * 5 / width;
+    const delta = content ? content.length * 5 / width : 0;
     if (delta > 1) {
+      return (
+        <div
+          key={key}
+          style={style}
+        >
+        <Collapse          
+          content={content}
+        />
+        </div>
+      );
+
       return (
         <TextArea
           key={key}
