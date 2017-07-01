@@ -5,8 +5,10 @@ import {Collapse as ReactCollapse} from 'react-collapse';
 import withState from 'recompose/withState';
 import withHandlers from 'recompose/withHandlers';
 import compose from 'recompose/compose';
+import './Style.css';
 
-const DefaultDiv = styled.div`
+export const DefaultDiv = styled.div`
+  position: relative;
   border-bottom: 1px solid #eee;
   border-right: 1px solid #eee;
   width: 100%;
@@ -18,6 +20,13 @@ const DefaultDiv = styled.div`
     z-index: 99;
     background-color: yellow;
   }
+`;
+
+const TopDiv = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 100 !important;
 `;
 
 export const Div = styled.div`
@@ -84,8 +93,8 @@ export const TextArea = styled.textarea`
 const enhanceCollapseWithState = withState('isOpened', 'setOpen', false);
 const enhanceCollapseWithHandlers = withHandlers({ onCheckboxChange: ({setOpen}) => ({target: {checked}}) => setOpen(checked) });
 const CollapsePresentation = ({content, isOpened, onCheckboxChange}) => (
-  <DefaultDiv style={{zIndex: '100'}}>
-    <label>
+  <div>
+    <label style={{position: 'relative', zIndex: 1}}>
       More:
       <input
         type="checkbox"
@@ -93,13 +102,13 @@ const CollapsePresentation = ({content, isOpened, onCheckboxChange}) => (
         onChange={onCheckboxChange} />
     </label>    
     <ReactCollapse
+      className="ReactCollapse--collapse"
       isOpened={isOpened}
       springConfig={presets.wobbly}
-      style={{width: 200, border: '1px solid red'}}
     >
-      <div>{content}</div>
+      <div className="ReactCollapse--content">{content}</div>
     </ReactCollapse>    
-  </DefaultDiv>
+  </div>
 );
 
 export const Collapse = compose(

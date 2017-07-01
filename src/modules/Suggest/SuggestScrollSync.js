@@ -4,7 +4,7 @@ import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
 import connectFunc from './Connect';
 import ScrollSync from '../ScrollSync/ScrollSync';
-import {Div, TextArea, Collapse} from '../ScrollSync/Cell';
+import {DefaultDiv, Div, TextArea, Collapse} from '../ScrollSync/Cell';
 import HeaderCell from '../ScrollSync/HeaderCell';
 
 const enhanceScrollSyncWithProps = withProps(props => ({
@@ -22,9 +22,9 @@ const enhanceScrollSyncWithProps = withProps(props => ({
           key={key}
           style={style}
         >
-        <Collapse          
-          content={content}
-        />
+          <Collapse          
+            content={content}
+          />
         </div>
       );
 
