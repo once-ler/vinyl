@@ -4,7 +4,7 @@ import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
 import connectFunc from './Connect';
 import ScrollSync from '../ScrollSync/ScrollSync';
-import {DefaultDiv, Div, TextArea, Collapse} from '../ScrollSync/Cell';
+import {Div, Collapse} from '../ScrollSync/Cell';
 import HeaderCell from '../ScrollSync/HeaderCell';
 
 const enhanceScrollSyncWithProps = withProps(props => ({
@@ -16,8 +16,9 @@ const enhanceScrollSyncWithProps = withProps(props => ({
     const content = payload[rowIndex][columnIndex];
     const {width, height} = style;
     const delta = content ? content.length * 5 / width : 0;
-    if (delta > 1) {
-      return (
+    
+    return delta > 1 ?
+      (
         <div
           key={key}
           style={style}
@@ -26,24 +27,8 @@ const enhanceScrollSyncWithProps = withProps(props => ({
             content={content}
           />
         </div>
-      );
-
-      return (
-        <TextArea
-          key={key}
-          style={style}
-          contentSize={typeof content === 'string' ? content.length * 5 : -1}
-          value={content}
-          readOnly
-          rowIndex={rowIndex}
-          columnIndex={columnIndex}
-          columnCount={columnCount}
-          gridWidth={gridWidth}
-          gridScrollLeft={gridScrollLeft}
-        />
-      );
-    } else {
-      return (
+      ) :
+      (
         <Div
           key={key}
           style={style}
@@ -51,8 +36,7 @@ const enhanceScrollSyncWithProps = withProps(props => ({
         >
           <div >{content}</div>
         </Div>
-      );
-    }
+      );    
   },
   renderHeaderCell: ({ columnIndex, key, rowIndex, style }) => {
     if (columnIndex < 1) return;

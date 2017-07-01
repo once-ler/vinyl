@@ -1,6 +1,6 @@
 {
   "name": "vinyl",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -57,6 +57,7 @@
     "react": "^15.5.4",
     "react-autosuggest": "^9.0.1",
     "react-big-calendar": "^0.13.0",
+    "react-collapse": "^4.0.2",
     "react-dom": "^15.5.4",
     "react-dropzone": "^3.13.1",
     "react-motion": "^0.5.0",
