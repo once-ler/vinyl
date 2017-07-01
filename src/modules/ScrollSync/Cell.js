@@ -5,7 +5,6 @@ import {Collapse as ReactCollapse} from 'react-collapse';
 import withState from 'recompose/withState';
 import withHandlers from 'recompose/withHandlers';
 import compose from 'recompose/compose';
-import './Style.css';
 
 export const Div = styled.div`
   display: flex;
@@ -22,7 +21,7 @@ export const Div = styled.div`
   word-break: break-all;
   hyphens: auto;
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all 0.4s ease;
   &:hover {
     border: 1px solid seagreen;
     z-index: 99;
@@ -30,24 +29,44 @@ export const Div = styled.div`
   }
 `;
 
+const Link = styled.a`
+  text-decoration: none;
+  color: ${props => props.theme.secondary};
+`;
+
+const ReactCollapsePresentation = styled(ReactCollapse)`
+  position: absolute;
+  max-width: 320px;
+  max-height: 200px;
+  z-index: 101 !important;
+  box-shadow: 5px 8px 6px #777;
+`;
+
+const ReactCollapseContent = styled.div`
+  position: relative;  
+  background: yellow;
+  padding: 8px;
+  overflow: auto;
+`;
+
 const enhanceCollapseWithState = withState('isOpened', 'setOpen', false);
-const enhanceCollapseWithHandlers = withHandlers({ onCheckboxChange: ({setOpen}) => ({target: {checked}}) => setOpen(checked) });
-const CollapsePresentation = ({content, isOpened, onCheckboxChange}) => (
-  <div>
+
+const enhanceCollapseWithHandlers = withHandlers({
+  onClick: ({setOpen, isOpened}) => e => { e.preventDefault(); setOpen(!isOpened) },
+  onCheckboxChange: ({setOpen}) => ({target: {checked}}) => setOpen(checked)
+});
+
+const CollapsePresentation = ({content, isOpened, onCheckboxChange, onClick}) => (
+  <div style={{marginLeft: '3px'}}>
     <label style={{position: 'relative', zIndex: 1}}>
-      More:
-      <input
-        type="checkbox"
-        checked={isOpened}
-        onChange={onCheckboxChange} />
+      { !isOpened && `${content.slice(0, 10)}...`} <Link href="#" onClick={onClick}>{isOpened ? 'Less' : 'More' }</Link>      
     </label>    
-    <ReactCollapse
-      className="ReactCollapse--collapse"
+    <ReactCollapsePresentation
       isOpened={isOpened}
       springConfig={presets.wobbly}
     >
-      <div className="ReactCollapse--content">{content}</div>
-    </ReactCollapse>    
+      <ReactCollapseContent>{content}</ReactCollapseContent>
+    </ReactCollapsePresentation>    
   </div>
 );
 
