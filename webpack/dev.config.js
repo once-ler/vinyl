@@ -44,6 +44,14 @@ module.exports = {
         },
         secure: false,
         changeOrigin: true
+      },
+      '/api/pubmed/**': {
+        target: 'https://eutils.ncbi.nlm.nih.gov',
+        pathRewrite: {
+          '^/api/pubmed': ''
+        },
+        secure: false,
+        changeOrigin: true
       }
     }
   },

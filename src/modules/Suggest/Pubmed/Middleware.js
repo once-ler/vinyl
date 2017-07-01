@@ -1,7 +1,7 @@
-import ApiClient from '../../helpers/ApiClient';
+import ApiClient from '../../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
-import * as suggestActions from './Action';
-import * as progressActions from '../App/ProgressAction';
+import * as suggestActions from '../Action';
+import * as progressActions from '../../App/ProgressAction';
 
 const apiClient: Axios = new ApiClient();
 
@@ -40,24 +40,32 @@ data
 */
 
 export const fetchSuggest = new Middleware(
-  'reddit',
+  'pubmed',
   task => {
     task.store.dispatch(progressActions.showProgress());
     task.store.dispatch(suggestActions.fetchSuggest({}));
-    return apiClient.get(`/api/reddit/search.json?q=title:${task.value}&syntax=plain&restrict_sr=true&include_facets=false&limit=10&sr_detail=false`);
+    return apiClient.get(`/api/pubmed/entrez/eutils/esearch.fcgi?db=pubmed&retmax=10&retmode=json&field=title&term=${task.value}`);
   },
-  (task) => {
-    task.store.dispatch(suggestActions.fetchSuggestSuccess(task.data));
+  async task => {
+    // Get the id's.
+    const { esearchresult: {idlist} } = task;
+
+    if (typeof idlist === 'undefined' || idlist.length === 0)
+      return task.store.dispatch(progressActions.hideProgress());
+
+    // Get summaries for all id's.
+    const summaries = await apiClient.get(`/api/pubmed/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id=${idlist.join()}`);
+    task.store.dispatch(suggestActions.fetchSuggestSuccess(summaries.data));
     task.store.dispatch(progressActions.hideProgress());
   }
 );
 
 export const fetchSuggestSelected = new Middleware(
-  'redditSelected',
+  'pubmedSelected',
   task => {
     task.store.dispatch(progressActions.showProgress());
     task.store.dispatch(suggestActions.fetchSuggestSelected({}));
-    return apiClient.get(`/api/reddit/search.json?q=title:${task.data.title}&syntax=plain&restrict_sr=false&include_facets=false&limit=10&sr_detail=false`);
+    return apiClient.get(`/api/pubmed/search.json?q=title:${task.data.title}&syntax=plain&restrict_sr=false&include_facets=false&limit=10&sr_detail=false`);
   },
   (task) => {
     if (!task.data || !task.data.children || task.data.children.length === 0) {

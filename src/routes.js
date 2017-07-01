@@ -12,7 +12,7 @@ import Form from './modules/Form/Form';
 import NotFound from './modules/NotFound/NotFound';
 import ScrollSync from './modules/ScrollSync/ScrollSync';
 import Calendar from './modules/Calendar/Calendar';
-import Suggest from './modules/Suggest/RedditSuggest';
+import Suggest from './modules/Suggest/App';
 
 export default (store: any) => {
   const requireLogin = (nextState, replace, cb) => {

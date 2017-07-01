@@ -24,7 +24,7 @@ const enhanceWithState = withState('value', 'setValue', '');
 const enhanceWithProps = withProps(({value, theme}) => ({
   searchable: true,
   labelKey: 'name',
-  valueKey: 'name',
+  valueKey: 'value',
   optionRenderer: optionRenderer(theme),
   options,
   value
