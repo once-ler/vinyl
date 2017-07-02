@@ -10,9 +10,13 @@ import HeaderCell from '../ScrollSync/HeaderCell';
 const enhanceScrollSyncWithProps = withProps(props => ({
   renderBodyCell: ({ columnIndex, key, parent, rowIndex, style }) => {
     if (columnIndex < 1 || !props.suggestedData || !props.suggestedData.payload[rowIndex]) return;
-        
+    
+    // Try for better performance.
+    const { state: {isScrolling, scrollTop, scrollLeft} } = parent;
+    if (!isScrolling && scrollLeft > 0)
+      return (<div key={key} style={style} >...</div>);
+
     const { suggestedData: { payload } } = props;
-    const { props: { columnCount, width: gridWidth}, state: { scrollLeft: gridScrollLeft } } = parent;
     const content = payload[rowIndex][columnIndex];
     const {width, height} = style;
     const delta = content ? content.length * 5 / width : 0;
@@ -32,7 +36,6 @@ const enhanceScrollSyncWithProps = withProps(props => ({
         <Div
           key={key}
           style={style}
-          contentSize={typeof content === 'string' ? content.length * 5 : -1}
         >
           <div >{content}</div>
         </Div>
