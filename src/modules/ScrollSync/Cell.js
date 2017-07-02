@@ -40,6 +40,7 @@ const ReactCollapsePresentation = styled(ReactCollapse)`
   max-height: 200px;
   z-index: 101 !important;
   box-shadow: 5px 8px 6px #777;
+  text-align: left;
 `;
 
 const ReactCollapseContent = styled.div`
@@ -57,7 +58,7 @@ const enhanceCollapseWithHandlers = withHandlers({
 });
 
 const CollapsePresentation = ({content, isOpened, onCheckboxChange, onClick}) => (
-  <div style={{marginLeft: '3px'}}>
+  <div style={{marginLeft: '3px', textAlign: 'right'}}>
     <label style={{position: 'relative', zIndex: 1}}>
       { !isOpened && `${content.slice(0, 10)}...`} <Link href="#" onClick={onClick}>{isOpened ? 'Less' : 'More' }</Link>      
     </label>    

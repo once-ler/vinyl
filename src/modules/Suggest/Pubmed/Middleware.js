@@ -1,3 +1,4 @@
+/* @flow */
 import ApiClient from '../../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
 import * as suggestActions from '../Action';
@@ -39,6 +40,26 @@ data
 
 */
 
+const processResult = async (task, additionalSuccessCallback, additionalFailureCallback) => {
+   // Get the id's.
+  const { esearchresult: {idlist} } = task;
+
+  if (typeof idlist === 'undefined' || idlist.length === 0) {
+    if (typeof additionalFailureCallback === 'function') additionalFailureCallback();
+    return task.store.dispatch(progressActions.hideProgress());
+  }
+
+  // Get summaries for all id's.
+  const summaries = await apiClient.get(`/api/pubmed/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id=${idlist.join()}`);
+  const results = idlist.map(id => summaries.data.result[id]);
+  
+  task.store.dispatch(suggestActions.fetchSuggestSuccess(results));
+  task.store.dispatch(progressActions.hideProgress());
+
+  if (typeof additionalSuccessCallback === 'function')
+    additionalSuccessCallback(results);
+}
+
 export const fetchSuggest = new Middleware(
   'pubmed',
   task => {
@@ -46,18 +67,7 @@ export const fetchSuggest = new Middleware(
     task.store.dispatch(suggestActions.fetchSuggest({}));
     return apiClient.get(`/api/pubmed/entrez/eutils/esearch.fcgi?db=pubmed&retmax=10&retmode=json&field=title&term=${task.value}`);
   },
-  async task => {
-    // Get the id's.
-    const { esearchresult: {idlist} } = task;
-
-    if (typeof idlist === 'undefined' || idlist.length === 0)
-      return task.store.dispatch(progressActions.hideProgress());
-
-    // Get summaries for all id's.
-    const summaries = await apiClient.get(`/api/pubmed/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id=${idlist.join()}`);
-    task.store.dispatch(suggestActions.fetchSuggestSuccess(summaries.data));
-    task.store.dispatch(progressActions.hideProgress());
-  }
+  processResult
 );
 
 export const fetchSuggestSelected = new Middleware(
@@ -65,18 +75,18 @@ export const fetchSuggestSelected = new Middleware(
   task => {
     task.store.dispatch(progressActions.showProgress());
     task.store.dispatch(suggestActions.fetchSuggestSelected({}));
-    return apiClient.get(`/api/pubmed/search.json?q=title:${task.data.title}&syntax=plain&restrict_sr=false&include_facets=false&limit=10&sr_detail=false`);
+    return apiClient.get(`/api/pubmed/entrez/eutils/esearch.fcgi?db=pubmed&retmax=10&retmode=json&field=source&term=${task.source}`);
   },
-  (task) => {
-    if (!task.data || !task.data.children || task.data.children.length === 0) {
-      return task.store.dispatch(suggestActions.fetchSuggestSelectedFail());
-    }
-    const keys = Object.keys(task.data.children[0].data);
-    const list = task.data.children.map((d => keys.map(k => typeof d.data[k] === 'object' ? JSON.stringify(d.data[k]) : d.data[k] )));
-    task.store.dispatch(suggestActions.fetchSuggestSelectedSuccess(list));
-    task.store.dispatch(suggestActions.setColumns(keys));
-    task.store.dispatch(progressActions.hideProgress());
-  }
+  task => processResult(
+    task,
+    results => {
+      const keys = Object.keys(results[0]);
+      const list = results.map(d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k]) : d[k] ));
+      task.store.dispatch(suggestActions.fetchSuggestSelectedSuccess(list));
+      task.store.dispatch(suggestActions.setColumns(keys));
+    },
+    () => task.store.dispatch(suggestActions.fetchSuggestSelectedFail())
+  )
 );
 
 export const defaultSuggest = new Middleware(

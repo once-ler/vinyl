@@ -4,9 +4,9 @@ import connectFunc from '../Connect';
 import Suggest from '../Suggest';
 
 const enhanceSuggestWithProps = withProps(props => ({
-  parseForSuggestions: ({payload}) => (payload ? payload.children: []),
+  parseForSuggestions: ({payload}) => (payload ? payload: []),
   parseForErrors: () => {},
-  getSuggestionValue: suggestion => suggestion.data.title,
+  getSuggestionValue: suggestion => suggestion.title,
   afterSuggestionSelected: suggestion => suggestion,
   suggestMatchQuery: {},
   emptySuggestQuery: {},

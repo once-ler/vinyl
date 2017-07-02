@@ -40,6 +40,7 @@ export const fetchSuggestSelected = new Middleware(
   },
   (task) => {
     if (!task.data || !task.data.children || task.data.children.length === 0) {
+      task.store.dispatch(progressActions.hideProgress());
       return task.store.dispatch(suggestActions.fetchSuggestSelectedFail());
     }
     const keys = Object.keys(task.data.children[0].data);
