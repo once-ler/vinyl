@@ -5,6 +5,7 @@ import {Collapse as ReactCollapse} from 'react-collapse';
 import withState from 'recompose/withState';
 import withHandlers from 'recompose/withHandlers';
 import compose from 'recompose/compose';
+import Portal from 'react-portal';
 
 export const Div = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ export const Div = styled.div`
   word-break: break-all;
   hyphens: auto;
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: all 0.2s ease;
   &:hover {
     border: 1px solid seagreen;
     z-index: 99;
@@ -41,6 +42,7 @@ const ReactCollapsePresentation = styled(ReactCollapse)`
   z-index: 101 !important;
   box-shadow: 5px 8px 6px #777;
   text-align: left;
+  overflow: visible;
 `;
 
 const ReactCollapseContent = styled.div`
@@ -50,29 +52,43 @@ const ReactCollapseContent = styled.div`
   overflow: auto;
 `;
 
-const enhanceCollapseWithState = withState('isOpened', 'setOpen', false);
-
 const enhanceCollapseWithHandlers = withHandlers({
-  onClick: ({setOpen, isOpened}) => e => { e.preventDefault(); setOpen(!isOpened) },
+  onClick: ({setOpen, isOpened, setLeft, setTop}) => e => { e.preventDefault();
+    const bodyRect = document.body.getBoundingClientRect();
+    const targetRect = e.target.getBoundingClientRect();
+    const top = targetRect.top - bodyRect.top;
+    const left = targetRect.left - bodyRect.left;
+    console.log([top, left]); 
+    setLeft(left);
+    setTop(top);
+    setOpen(!isOpened) },
   onCheckboxChange: ({setOpen}) => ({target: {checked}}) => setOpen(checked)
 });
 
-const CollapsePresentation = ({content, isOpened, onCheckboxChange, onClick}) => (
+const CollapsePresentation = ({content, isOpened, onCheckboxChange, onClick, top, left}) => { return (
   <div style={{marginLeft: '3px', textAlign: 'right'}}>
     <label style={{position: 'relative', zIndex: 1}}>
       { !isOpened && `${content.slice(0, 10)}...`} <Link href="#" onClick={onClick}>{isOpened ? 'Less' : 'More' }</Link>      
-    </label>    
+    </label>
+    <Portal
+      closeOnOutsideClick
+      isOpen={isOpened}
+    >
     <ReactCollapsePresentation
       isOpened={isOpened}
       springConfig={presets.wobbly}
     >
       <ReactCollapseContent>{content}</ReactCollapseContent>
-    </ReactCollapsePresentation>    
+    </ReactCollapsePresentation>
+    </Portal>
   </div>
 );
+}
 
 export const Collapse = compose(
-  enhanceCollapseWithState,
+  withState('isOpened', 'setOpen', false),
+  withState('top', 'setTop', 0),
+  withState('left', 'setLeft', 0),
   enhanceCollapseWithHandlers
 )(CollapsePresentation);
 

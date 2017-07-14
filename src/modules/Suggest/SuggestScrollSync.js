@@ -4,7 +4,7 @@ import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
 import connectFunc from './Connect';
 import ScrollSync from '../ScrollSync/ScrollSync';
-import {Div, Collapse} from '../ScrollSync/Cell';
+import {Div, Collapse, Textarea} from '../ScrollSync/Cell';
 import HeaderCell from '../ScrollSync/HeaderCell';
 
 const enhanceScrollSyncWithProps = withProps(props => ({
@@ -12,9 +12,9 @@ const enhanceScrollSyncWithProps = withProps(props => ({
     if (columnIndex < 1 || !props.suggestedData || !props.suggestedData.payload[rowIndex]) return;
     
     // Try for better performance.
-    const { state: {isScrolling, scrollTop, scrollLeft} } = parent;
-    if (!isScrolling && scrollLeft > 0)
-      return (<div key={key} style={style} >...</div>);
+    // const { state: {isScrolling, scrollTop, scrollLeft}, props: {height: gridHeight} } = parent;
+    // if (!isScrolling && scrollLeft > 0)
+    //  return (<div key={key} style={style} >...</div>);
 
     const { suggestedData: { payload } } = props;
     const content = payload[rowIndex][columnIndex];
@@ -27,7 +27,7 @@ const enhanceScrollSyncWithProps = withProps(props => ({
           key={key}
           style={style}
         >
-          <Collapse          
+          <Collapse
             content={content}
           />
         </div>
@@ -37,7 +37,7 @@ const enhanceScrollSyncWithProps = withProps(props => ({
           key={key}
           style={style}
         >
-          <div >{content}</div>
+          <div style={{padding: '5px 0 0 5px'}}>{content}</div>
         </Div>
       );    
   },

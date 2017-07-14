@@ -24,18 +24,16 @@ export default compose(
     renderBodyCell,
     renderLeftSideCell,
     renderHeaderCell,
-    renderLeftHeaderCell
-  }),
-  withProps({
-    columnWidth: 120,
+    renderLeftHeaderCell,
     columnCount: 50,
+    rowCount: 20,
+    columnWidth: 120,    
     fontFamily: `'Trebuchet MS', Helvetica, sans-serif`,
     fontSize: '0.8em',
     height: 300,
     overscanColumnCount: 0,
     overscanRowCount: 5,
-    rowHeight: 40,
-    rowCount: 20
+    rowHeight: 40
   }),
   connectFunc
 )(Presentation);

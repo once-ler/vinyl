@@ -9,6 +9,8 @@ const DEFAULT_SUGGEST = 'DEFAULT_SUGGEST';
 const CLEAR_SUGGEST = 'CLEAR_SUGGEST';
 const SUGGEST_SELECTED = 'SUGGEST_SELECTED';
 const SUGGEST_COLUMNS = 'SUGGEST_COLUMNS';
+const SUGGEST_COLUMN_COUNT = 'SUGGEST_COLUMN_COUNT';
+const SUGGEST_ROW_COUNT = 'SUGGEST_ROW_COUNT';
 
 const initialState = {
   data: null,
@@ -18,7 +20,9 @@ const initialState = {
   error: null,
   suggestedData: null,
   suggestedError: null,
-  columns: []
+  columns: [],
+  columnCount: 50,
+  rowCount: 20
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -87,6 +91,16 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         columns: action.columns
       };
+    case SUGGEST_COLUMN_COUNT:
+      return {
+        ...state,
+        columnCount: action.columnCount
+      };
+    case SUGGEST_ROW_COUNT:
+      return {
+        ...state,
+        rowCount: action.rowCount
+      };
     default:
       return state;
   }
@@ -103,3 +117,5 @@ export const updateSelected = value => ({ type: SUGGEST_SELECTED, value });
 export const defaultSuggestions = value => ({ type: DEFAULT_SUGGEST, value });
 export const clearSuggestions = value => ({ type: CLEAR_SUGGEST, value });
 export const setColumns = columns => ({ type: SUGGEST_COLUMNS, columns });
+export const setColumnCount = columnCount => ({ type: SUGGEST_COLUMN_COUNT, columnCount });
+export const setRowCount = rowCount => ({ type: SUGGEST_ROW_COUNT, rowCount });
