@@ -53,33 +53,34 @@ const ReactCollapseContent = styled.div`
 `;
 
 const enhanceCollapseWithHandlers = withHandlers({
-  onClick: ({setOpen, isOpened, setLeft, setTop}) => e => { e.preventDefault();
+  onClick: ({setOpen, isOpened, setLeft, setTop}) => e => {
+    e.preventDefault();
     const bodyRect = document.body.getBoundingClientRect();
     const targetRect = e.target.getBoundingClientRect();
     const top = targetRect.top - bodyRect.top;
     const left = targetRect.left - bodyRect.left;
-    console.log([top, left]); 
     setLeft(left);
-    setTop(top);
+    setTop(25 + top);
     setOpen(!isOpened) },
   onCheckboxChange: ({setOpen}) => ({target: {checked}}) => setOpen(checked)
 });
 
 const CollapsePresentation = ({content, isOpened, onCheckboxChange, onClick, top, left}) => { return (
   <div style={{marginLeft: '3px', textAlign: 'right'}}>
-    <label style={{position: 'relative', zIndex: 1}}>
+    <label style={{position: 'relative', display: 'flex', justifyContent: 'space-around', zIndex: 1}}>
       { !isOpened && `${content.slice(0, 10)}...`} <Link href="#" onClick={onClick}>{isOpened ? 'Less' : 'More' }</Link>      
     </label>
     <Portal
-      closeOnOutsideClick
-      isOpen={isOpened}
-    >
-    <ReactCollapsePresentation
       isOpened={isOpened}
-      springConfig={presets.wobbly}
     >
-      <ReactCollapseContent>{content}</ReactCollapseContent>
-    </ReactCollapsePresentation>
+      <ReactCollapsePresentation
+        isOpened={isOpened}
+        springConfig={presets.wobbly}
+        forceInitialAnimation={true}
+        style={{top, left}}
+      >
+        <ReactCollapseContent>{content}</ReactCollapseContent>
+      </ReactCollapsePresentation>
     </Portal>
   </div>
 );
