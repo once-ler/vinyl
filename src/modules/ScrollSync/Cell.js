@@ -5,7 +5,7 @@ import {Collapse as ReactCollapse} from 'react-collapse';
 import withState from 'recompose/withState';
 import withHandlers from 'recompose/withHandlers';
 import compose from 'recompose/compose';
-import Portal from 'react-portal';
+import Portal from 'react-portal-minimal';
 
 export const Div = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export const Div = styled.div`
   word-break: break-all;
   hyphens: auto;
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
   &:hover {
     border: 1px solid seagreen;
     z-index: 99;
@@ -42,11 +42,13 @@ const ReactCollapsePresentation = styled(ReactCollapse)`
   z-index: 101 !important;
   box-shadow: 5px 8px 6px #777;
   text-align: left;
-  overflow: visible;
+  overflow: hidden;
 `;
 
 const ReactCollapseContent = styled.div`
-  position: relative;  
+  position: relative;
+  border-top: 1px solid #777;
+  border-left: 1px solid #777;
   background: yellow;
   padding: 8px;
   overflow: auto;
@@ -66,23 +68,23 @@ const enhanceCollapseWithHandlers = withHandlers({
 });
 
 const CollapsePresentation = ({content, isOpened, onCheckboxChange, onClick, top, left}) => { return (
-  <div style={{marginLeft: '3px', textAlign: 'right'}}>
+  <Div style={{marginLeft: '3px', textAlign: 'right'}}>
     <label style={{position: 'relative', display: 'flex', justifyContent: 'space-around', zIndex: 1}}>
       { !isOpened && `${content.slice(0, 10)}...`} <Link href="#" onClick={onClick}>{isOpened ? 'Less' : 'More' }</Link>      
     </label>
-    <Portal
-      isOpened={isOpened}
-    >
-      <ReactCollapsePresentation
-        isOpened={isOpened}
-        springConfig={presets.wobbly}
-        forceInitialAnimation={true}
-        style={{top, left}}
-      >
-        <ReactCollapseContent>{content}</ReactCollapseContent>
-      </ReactCollapsePresentation>
-    </Portal>
-  </div>
+    { isOpened ?
+      <Portal>
+        <ReactCollapsePresentation
+          isOpened={isOpened}
+          springConfig={presets.wobbly}
+          forceInitialAnimation={true}
+          style={{top, left}}
+        >
+          <ReactCollapseContent>{content}</ReactCollapseContent>
+        </ReactCollapsePresentation>
+      </Portal> : null
+    }
+  </Div>
 );
 }
 
