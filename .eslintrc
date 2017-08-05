@@ -9,8 +9,7 @@
 
   "plugins": [
     "babel",
-    "flowtype",
-    "eslint-plugin-inferno"
+    "flowtype"
   ],
 
   "parserOptions": {
