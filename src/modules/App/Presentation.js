@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Portal from 'react-portal';
 import styled from 'styled-components';
 import { Link } from 'react-router';
 import { logout } from '../Login/Action';
