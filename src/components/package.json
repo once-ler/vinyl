@@ -1,0 +1,16 @@
+{
+  "name": "vinyl-components",
+  "version": "0.2.3",
+  "description": "Presenation Components for vinyl",
+  "main": "dist/vinyl-components.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "PureComponents",
+    "React",
+    "styled-components"
+  ],
+  "author": "Henry Tao",
+  "license": "MIT"
+}
