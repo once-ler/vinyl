@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && npm run lint && webpack --progress --colors --display-error-details --config webpack/prod.config.js",
+    "build:components": "webpack --progress --colors --display-error-details --config src/components/webpack.prod.config.js",
     "check": "flow check",
     "clean": "rimraf dist",
     "lint": "eslint src",
