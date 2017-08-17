@@ -1,8 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var BASE_DIR = process.cwd();
-var COMPONENT_FILE = 'vinyl-components';
-var COMPONENT_NAME = 'VinylComponents';
+var COMPONENT_FILE = 'vinyl-scrollsync-module';
+var COMPONENT_NAME = 'VinylScrollSyncModule';
 var plugins = [
   new webpack.LoaderOptionsPlugin({
     minimize: true,
@@ -27,19 +27,14 @@ var plugins = [
   })
 ];
 
-function getPackageMain() {
-  return require(path.resolve(BASE_DIR, 'package.json')).main;
-}
-
 COMPONENT_FILE += '.min';
 
 var config = {
-  devtool: 'sourcemap',
-  // entry: path.resolve(BASE_DIR, getPackageMain()),
+  devtool: 'source-map',
   context: path.resolve(__dirname, '.'),
   entry: ['./index.js'],
   output: {
-    path: path.join(__dirname, '/../../dist'),
+    path: path.join(__dirname, '/../../../dist'),
     publicPath: 'dist/',
     filename: COMPONENT_FILE + '.js',
     sourceMapFilename: COMPONENT_FILE + '.map',
@@ -81,18 +76,24 @@ var config = {
       commonjs: 'react-virtualized',
       amd: 'react-virtualized',
     },
-    'react-virtualized-select': {
-      root: 'ReactVirtualizedSelect',
-      commonjs2: 'react-virtualized-select',
-      commonjs: 'react-virtualized-select',
-      amd: 'react-virtualized-select',
-    },
     'react-motion': {
       root: 'ReactMotion',
       commonjs2: 'react-motion',
       commonjs: 'react-motion',
       amd: 'react-motion',
-    },    
+    },
+    'react-collapse': {
+      root: 'ReactCollapse',
+      commonjs2: 'react-collapse',
+      commonjs: 'react-collapse',
+      amd: 'react-collapse',
+    },
+    'react-redux': {
+      root: 'ReactRedux',
+      commonjs2: 'react-redux',
+      commonjs: 'react-redux',
+      amd: 'react-redux',
+    },   
   },
 };
 

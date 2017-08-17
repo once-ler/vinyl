@@ -6,8 +6,13 @@
   "scripts": {
     "build": "npm run clean && npm run lint && webpack --progress --colors --display-error-details --config webpack/prod.config.js",
     "build:components": "webpack --progress --colors --display-error-details --config src/components/webpack.prod.config.js",
+    "build:scrollsync:module": "webpack --progress --colors --display-error-details --config src/modules/scrollsync/webpack.prod.config.js",
+    "build:suggest:module": "webpack --progress --colors --display-error-details --config src/modules/suggest/webpack.prod.config.js",
     "check": "flow check",
     "clean": "rimraf dist",
+    "explore:components": "source-map-explorer dist/vinyl-components.min.js dist/vinyl-components.min.map",
+    "explore:scrollsync:module": "source-map-explorer dist/vinyl-scrollsync-module.min.js dist/vinyl-scrollsync-module.min.map",
+    "explore:suggest:module": "source-map-explorer dist/vinyl-suggest-module.min.js dist/vinyl-suggest-module.min.map",
     "lint": "eslint src",
     "start": "webpack-dev-server --colors --inline --hot --no-info --config webpack/dev.config.js --host 0.0.0.0 --port 3000",
     "test": "npm run check && npm run build && npm run testonly",

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default styled.div `
+export const HeaderCell = styled.div `
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -11,3 +11,5 @@ export default styled.div `
   width: 100%;
   height: 100%;
 `;
+
+export default HeaderCell;

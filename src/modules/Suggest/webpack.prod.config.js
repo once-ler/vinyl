@@ -1,8 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var BASE_DIR = process.cwd();
-var COMPONENT_FILE = 'vinyl-components';
-var COMPONENT_NAME = 'VinylComponents';
+var COMPONENT_FILE = 'vinyl-suggest-module';
+var COMPONENT_NAME = 'VinylSuggestModule';
 var plugins = [
   new webpack.LoaderOptionsPlugin({
     minimize: true,
@@ -27,19 +27,14 @@ var plugins = [
   })
 ];
 
-function getPackageMain() {
-  return require(path.resolve(BASE_DIR, 'package.json')).main;
-}
-
 COMPONENT_FILE += '.min';
 
 var config = {
-  devtool: 'sourcemap',
-  // entry: path.resolve(BASE_DIR, getPackageMain()),
+  devtool: 'source-map',
   context: path.resolve(__dirname, '.'),
   entry: ['./index.js'],
   output: {
-    path: path.join(__dirname, '/../../dist'),
+    path: path.join(__dirname, '/../../../dist'),
     publicPath: 'dist/',
     filename: COMPONENT_FILE + '.js',
     sourceMapFilename: COMPONENT_FILE + '.map',
@@ -75,24 +70,30 @@ var config = {
       commonjs: 'styled',
       amd: 'styled',
     },
-    'react-virtualized': {
-      root: 'ReactVirtualized',
-      commonjs2: 'react-virtualized',
-      commonjs: 'react-virtualized',
-      amd: 'react-virtualized',
-    },
-    'react-virtualized-select': {
-      root: 'ReactVirtualizedSelect',
-      commonjs2: 'react-virtualized-select',
-      commonjs: 'react-virtualized-select',
-      amd: 'react-virtualized-select',
-    },
     'react-motion': {
       root: 'ReactMotion',
       commonjs2: 'react-motion',
       commonjs: 'react-motion',
       amd: 'react-motion',
-    },    
+    },
+    'react-redux': {
+      root: 'ReactRedux',
+      commonjs2: 'react-redux',
+      commonjs: 'react-redux',
+      amd: 'react-redux',
+    },
+    'react-autosuggest': {
+      root: 'ReactAutosuggest',
+      commonjs2: 'react-autosuggest',
+      commonjs: 'react-autosuggest',
+      amd: 'react-autosuggest',
+    },
+    'redux': {
+      root: 'Redux',
+      commonjs2: 'redux',
+      commonjs: 'redux',
+      amd: 'redux',
+    },
   },
 };
 

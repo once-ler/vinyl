@@ -19,7 +19,7 @@ const enhanceWithDefaultProps = defaultProps({
   emptySuggestQuery: {},
   suggestType: '',
   suggestSelectedType: ''
-}); 
+});
 
 const connectFunc = connect(
   state => ({
