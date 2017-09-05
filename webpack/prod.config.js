@@ -6,7 +6,33 @@ module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: {
     app: [ './src/index.js' ],
-    vendor: ['axios', 'react', 'react-dom', 'react-router', 'react-redux', 'redux', 'rxjs', 'redux-observable']
+    vendor: [
+      'axios',
+      'react',
+      'react-dom',
+      'react-router',
+      'react-redux',
+      'react-router-redux',
+      'redux',
+      'rxjs',
+      'autosuggest-highlight',
+      'history',
+      'ie-version',
+      'moment',
+      'react-autosuggest',
+      'react-collapse',
+      'react-dropzone',
+      'react-motion',
+      'react-portal-minimal',
+      'react-progress-2',
+      'react-view-pager',
+      'react-virtualized',
+      'react-virtualized-select',
+      'recompose',
+      'redux-implicit-oauth2',
+      'simpler-redux-form',
+      'styled-components'
+    ]
   },
   output: {
     filename: '[name]-[chunkhash].js',
