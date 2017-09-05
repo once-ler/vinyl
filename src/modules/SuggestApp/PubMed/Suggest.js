@@ -1,5 +1,4 @@
-import withProps from 'recompose/withProps';
-import compose from 'recompose/compose';
+import {withProps, compose} from 'recompose';
 import connectFunc from '../Connect';
 import Suggest from '../../Suggest';
 

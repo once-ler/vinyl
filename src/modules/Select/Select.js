@@ -1,12 +1,8 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import withState from 'recompose/withState';
-import withProps from 'recompose/withProps';
-import withHandlers from 'recompose/withHandlers';
-import compose from 'recompose/compose';
+import {withState, withProps, withHandlers,compose} from 'recompose';
 import Select from '../../components/Select/Select';
-import Container from '../../components/Container/Container';
 import * as selectActions from './Action';
 import optionRenderer from './OptionRenderer';
 import options from './Options';
