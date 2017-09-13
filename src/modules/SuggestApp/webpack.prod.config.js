@@ -3,9 +3,9 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  context: path.resolve(__dirname, '..'),
+  context: path.resolve(__dirname, '../../../'),
   entry: {
-    app: [ './src/index.js' ],
+    app: [ './src/modules/SuggestApp/index.js' ],
     vendor: [
       'axios',
       'react',
@@ -37,18 +37,19 @@ module.exports = {
   output: {
     filename: '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, './examples/suggestApp')
   },
+  // progress: true,
   resolve: {
     modules: [
       'src',
       'node_modules'
     ],
-    extensions: [.js', '.json', '.jsx']
+    extensions: ['.js', '.json', '.jsx']
   },  
   plugins: [
     // new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
+    new webpack.optimize.CommonsChunkPlugin(["vendor", "vendor.bundle.js"]),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -61,9 +62,9 @@ module.exports = {
       }
     }),
     new HtmlWebpackPlugin({
-      title: 'vinyl',
+      title: 'vinyl-suggest-app',
       filename: 'index.html',
-      template: 'static/index.html'
+      template: './static/index.html'
     }),
   ],
   module: {

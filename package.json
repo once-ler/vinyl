@@ -9,6 +9,7 @@
     "build:scrollsync:module": "webpack --progress --colors --display-error-details --config src/modules/scrollsync/webpack.prod.config.js",
     "build:suggest:module": "webpack --progress --colors --display-error-details --config src/modules/suggest/webpack.prod.config.js",
     "build:select:module": "webpack --progress --colors --display-error-details --config src/modules/select/webpack.prod.config.js",
+    "build:suggest:app": "rimraf examples/suggestApp && webpack --progress --colors --display-error-details --config src/modules/SuggestApp/webpack.prod.config.js",
     "check": "flow check",
     "clean": "rimraf dist",
     "explore:components": "source-map-explorer dist/vinyl-components.min.js dist/vinyl-components.min.map",
