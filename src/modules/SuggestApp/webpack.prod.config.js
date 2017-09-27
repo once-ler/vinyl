@@ -15,7 +15,6 @@ module.exports = {
       'react-router-redux',
       'redux',
       'rxjs',
-      'autosuggest-highlight',
       'history',
       'ie-version',
       'moment',
@@ -37,7 +36,7 @@ module.exports = {
   output: {
     filename: '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    path: path.resolve(__dirname, './examples/suggestApp')
+    path: path.resolve(__dirname, '../../../examples/suggestApp')
   },
   // progress: true,
   resolve: {
@@ -50,7 +49,7 @@ module.exports = {
   plugins: [
     // new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin(["vendor", "vendor.bundle.js"]),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')

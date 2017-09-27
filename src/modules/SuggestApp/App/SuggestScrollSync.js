@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
 import connectFunc from './Connect';
-import ScrollSync, {Div, Collapse, HeaderCell} from '../ScrollSync';
+import ScrollSync, {Div, Collapse, HeaderCell} from '../../ScrollSync';
 
 
 const enhanceScrollSyncWithProps = withProps(props => ({

@@ -1,8 +1,8 @@
 /* @flow */
-import ApiClient from '../../../helpers/ApiClient';
+import ApiClient from '../../../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
-import {suggestActions} from '../../Suggest';
-import * as progressActions from '../../App/ProgressAction';
+import {suggestActions} from '../../../Suggest';
+import * as progressActions from '../../../App/ProgressAction';
 
 const apiClient: Axios = new ApiClient();
 

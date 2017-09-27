@@ -1,6 +1,6 @@
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as suggestActions from './Action';
+import * as suggestActions from '../../Suggest/Action';
 
 export default connect(
   state => ({

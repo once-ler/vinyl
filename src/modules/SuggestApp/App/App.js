@@ -1,8 +1,8 @@
 import React from 'react';
-import Container from '../../components/Container/Container';
-import Row from '../../components/Row/Row';
+import Container from '../../../components/Container/Container';
+import Row from '../../../components/Row/Row';
 import connectFunc from './Connect';
-import Select from '../Select';
+import Select from '../../Select';
 import SuggestScrollSync from './SuggestScrollSync';
 import SuggestComponents from './SuggestComponents';
 

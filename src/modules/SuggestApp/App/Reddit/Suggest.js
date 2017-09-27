@@ -1,6 +1,6 @@
 import {withProps, compose} from 'recompose';
 import connectFunc from '../Connect';
-import Suggest from '../../Suggest';
+import Suggest from '../../../Suggest';
 
 const enhanceSuggestWithProps = withProps(props => ({
   parseForSuggestions: ({payload}) => (payload ? payload.children : []),

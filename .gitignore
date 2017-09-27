@@ -5,3 +5,4 @@ flow-typed/
 dist/
 static/dist/
 /**/*.log
+examples/
