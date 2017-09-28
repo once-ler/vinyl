@@ -9,7 +9,8 @@ export default connect(
     columns: state.suggest.columns,
     rowCount: state.suggest.rowCount,
     columnCount: state.suggest.columnCount,
-    theme: state.theme
+    theme: state.theme,
+    progress: state.progress
   }),
   dispatch => bindActionCreators(suggestActions, dispatch)
 );

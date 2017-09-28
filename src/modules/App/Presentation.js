@@ -13,7 +13,7 @@ import Modal from '../Modal/Modal';
 const logoImage = require('../../../static/vinyl.svg');
 import { ViewPager, Frame, Track, View } from 'react-view-pager';
 import toClass from 'recompose/toClass';
-import Progress from "react-progress-2";
+import Progress from 'react-progress-2';
 
 const BetterLink = styled(Link) `
   color: sandybrown;

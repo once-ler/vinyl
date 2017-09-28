@@ -5,12 +5,16 @@ import connectFunc from './Connect';
 import Select from '../../Select';
 import SuggestScrollSync from './SuggestScrollSync';
 import SuggestComponents from './SuggestComponents';
+import Progress from 'react-progress-2';
 
 const Presentation = props => {
   const Suggest = SuggestComponents[props.selectedValue];
 
   return (
     <Container style={{width: '100%', position: 'relative'}}>
+      <Progress.Component
+        style={{backgroundColor: '#fefefe'}}
+      />
       <Container style={{width: '100%', position: 'absolute', zIndex: 3}}>
         <Select style={{maxWidth: '400px'}}/>
       </Container>
