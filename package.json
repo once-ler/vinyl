@@ -51,6 +51,7 @@
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
     "rimraf": "^2.5.4",
+    "rx-web-js": "once-ler/rx-web-js#master",
     "should": "^11.1.2",
     "style-loader": "^0.18.1",
     "tingodb": "^0.5.1",
