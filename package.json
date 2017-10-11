@@ -9,8 +9,8 @@
     "build:scrollsync:module": "webpack --progress --colors --display-error-details --config src/modules/scrollsync/webpack.prod.config.js",
     "build:suggest:module": "webpack --progress --colors --display-error-details --config src/modules/suggest/webpack.prod.config.js",
     "build:select:module": "webpack --progress --colors --display-error-details --config src/modules/select/webpack.prod.config.js",
-    "build:suggest:app": "rimraf examples/suggestApp && webpack --progress --colors --display-error-details --config src/modules/SuggestApp/webpack.prod.config.js",
-    "build:suggest:app:server": "babel src/modules/SuggestApp/server.js --out-file examples/suggestApp/server.js",
+    "build:suggest:app": "rimraf examples/suggestApp && webpack --progress --colors --display-error-details --config src/modules/SuggestApp/webpack.client.config.js",
+    "build:suggest:app:server": "webpack --progress --colors --display-error-details --config src/modules/SuggestApp/webpack.server.config.js",
     "check": "flow check",
     "clean": "rimraf dist",
     "explore:components": "source-map-explorer dist/vinyl-components.min.js dist/vinyl-components.min.map",
@@ -26,7 +26,6 @@
   "author": "Henry Tao",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",

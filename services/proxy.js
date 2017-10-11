@@ -1,6 +1,7 @@
 /* @flow */
 /* eslint no-unused-vars: 0, max-len: 0 */
 import { Server, Route, Proxy, Static } from 'rx-web-js/dist/rx-web.node.min';
+import path from 'path';
 
 const redditProxyAction = Proxy({
   target: 'https://www.reddit.com',
@@ -37,8 +38,7 @@ export default (port: number) => {
   ];
 
   app.statics = [
-    new Static(__dirname)
+    new Static(path.resolve(process.cwd()))
   ];
-
   return app;
 };
