@@ -38,7 +38,7 @@ export default (port: number) => {
   ];
 
   app.statics = [
-    new Static(path.resolve(process.cwd()))
+    new Static('/dist', path.resolve(process.cwd()))
   ];
   return app;
 };
