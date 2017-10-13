@@ -31,7 +31,7 @@ export default (port: number) => {
       redditProxyAction
     ),
     new Route(
-      '/api/pubmed',
+      /^\/api\/pubmed(?:\/|$)/,
       'GET',
       pubMedProxyAction
     )
