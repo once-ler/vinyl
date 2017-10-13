@@ -3,7 +3,7 @@ import connectFunc from '../Connect';
 import Suggest from '../../../Suggest';
 
 const enhanceSuggestWithProps = withProps(props => ({
-  parseForSuggestions: ({payload}) => (payload ? payload.children : []),
+  parseForSuggestions: ({payload}) => (payload && payload.children ? payload.children : []),
   parseForErrors: () => {},
   getSuggestionValue: suggestion => suggestion.data.title,
   afterSuggestionSelected: suggestion => suggestion,

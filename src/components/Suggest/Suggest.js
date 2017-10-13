@@ -51,7 +51,7 @@ const Presentation = ({
     value,
     onChange
   };
-  // const status = (loading ? 'Loading...' : 'Type to load suggestions');
+  
   return (
     <SlideContainer direction="right" style={{maxWidth: '420px'}}>
       <Row middle>
