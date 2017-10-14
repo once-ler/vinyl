@@ -15,6 +15,7 @@ const SUGGEST_ROW_COUNT = 'SUGGEST_ROW_COUNT';
 const initialState = {
   data: null,
   loading: false,
+  lastValue: '',
   value: '',
   selected: '', // Purpose is to trigger another Action that will download detailed data for suggestion.
   error: null,
@@ -82,10 +83,7 @@ export default function reducer(state = initialState, action = {}) {
         selected: action.value
       };
     case CLEAR_SUGGEST:
-      return {
-        ...state,
-        data: null
-      };
+      return { ...initialState, lastValue: state.value };
     case SUGGEST_COLUMNS:
       return {
         ...state,
@@ -115,7 +113,7 @@ export const fetchSuggestFailed = error => ({ type: FETCH_SUGGEST_FAIL, error })
 export const updateInputValue = value => ({ type: UPDATE_INPUT_VALUE, value });
 export const updateSelected = value => ({ type: SUGGEST_SELECTED, value });
 export const defaultSuggestions = value => ({ type: DEFAULT_SUGGEST, value });
-export const clearSuggestions = value => ({ type: CLEAR_SUGGEST, value });
+export const clearSuggestions = () => ({ type: CLEAR_SUGGEST });
 export const setColumns = columns => ({ type: SUGGEST_COLUMNS, columns });
 export const setColumnCount = columnCount => ({ type: SUGGEST_COLUMN_COUNT, columnCount });
 export const setRowCount = rowCount => ({ type: SUGGEST_ROW_COUNT, rowCount });

@@ -5,6 +5,7 @@ import * as suggestActions from '../../Suggest/Action';
 export default connect(
   state => ({
     selectedValue: state.select.value,
+    lastInputValue: state.suggest.lastValue,
     suggestedData: state.suggest.suggestedData,
     columns: state.suggest.columns,
     rowCount: state.suggest.rowCount,

@@ -24,7 +24,7 @@ export const fetchSuggestSelected = new Middleware(
   task => {
     task.store.dispatch(progressActions.showProgress());
     task.store.dispatch(suggestActions.fetchSuggestSelected({}));
-    return apiClient.get(`/api/reddit/search.json?q=title:${task.data.title}&syntax=plain&restrict_sr=false&include_facets=false&limit=10&sr_detail=false`);
+    return apiClient.get(`/api/reddit/search.json?q=subreddit:${task.data.subreddit}&syntax=plain&restrict_sr=false&include_facets=false&limit=10&sr_detail=false`);
   },
   (task) => {
     if (!task.data || !task.data.children || task.data.children.length === 0) {
