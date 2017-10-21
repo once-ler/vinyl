@@ -7,7 +7,8 @@ import LeftSideGridContainer from './LeftSideGridContainer';
 export default ({
   renderLeftHeaderCell,
   columnWidth,
-  rowHeight
+  rowHeight,
+  freezeColumns
 }) => (
   <LeftSideGridContainer
     style={{
@@ -18,12 +19,12 @@ export default ({
   >
     <HeaderGrid
       cellRenderer={renderLeftHeaderCell}
-      width={columnWidth}
+      width={columnWidth + (columnWidth * freezeColumns)}
       height={rowHeight}
       rowHeight={rowHeight}
       columnWidth={columnWidth}
       rowCount={1}
-      columnCount={1}
+      columnCount={1 + freezeColumns}
       backgroundColor="#f0ffff"
     />
   </LeftSideGridContainer>

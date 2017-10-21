@@ -14,7 +14,8 @@ export default ({
   renderLeftSideCell,
   rowHeight,
   rowCount,
-  scrollTop
+  scrollTop,
+  freezeColumns
 }) => (
   <div>
     <LeftSideGridColumn
@@ -22,6 +23,7 @@ export default ({
       columnWidth={columnWidth}
       rowHeight={rowHeight}
       columnWidth={columnWidth}
+      freezeColumns={freezeColumns}
     />
     <LeftSideGridContainer
       style={{
@@ -36,12 +38,12 @@ export default ({
           overscanRowCount={overscanRowCount}
           cellRenderer={renderLeftSideCell}
           columnWidth={columnWidth}
-          columnCount={1}
+          columnCount={1 + freezeColumns}
           height={height - scrollbarSize()}
           rowHeight={rowHeight}
           rowCount={rowCount}
           scrollTop={scrollTop}
-          width={columnWidth}
+          width={columnWidth + (columnWidth * freezeColumns)}
           backgroundColor="#f0ffff"
         />
       </LeftSideGridWrapper>

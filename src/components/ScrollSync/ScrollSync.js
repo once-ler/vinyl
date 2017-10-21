@@ -17,7 +17,8 @@ export default ({
     renderHeaderCell,
     renderLeftHeaderCell,
     list,
-    progress
+    progress,
+    freezeColumns
   }) => (
     <ScrollSync>
       {({ clientHeight, clientWidth, onScroll, scrollHeight, scrollLeft, scrollTop, scrollWidth }) => {
@@ -37,6 +38,7 @@ export default ({
               scrollTop={scrollTop}
               columnWidth={columnWidth}
               height={height}
+              freezeColumns={freezeColumns}
             />
             <RightSideGrid
               columnWidth={columnWidth}

@@ -33,7 +33,8 @@ export default compose(
     height: 300,
     overscanColumnCount: 0,
     overscanRowCount: 5,
-    rowHeight: 40
+    rowHeight: 40,
+    freezeColumns: 0
   }),
   connectFunc
 )(Presentation);

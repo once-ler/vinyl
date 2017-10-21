@@ -32,7 +32,7 @@ const Presentation = props => {
         <Row>{ Suggest && <Suggest /> }<Cell style={{color: props.theme.tertiary, padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden'}}>{props.lastInputValue}</Cell></Row>
       </Container>
       <GradientContainer style={{width: '100%', position: 'absolute', zIndex: 1}}>
-        <SuggestScrollSync top={32} />
+        <SuggestScrollSync top={32} freezeColumns={1}/>
       </GradientContainer>
     </Container>
   );
