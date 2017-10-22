@@ -38,7 +38,6 @@ export const fetchSuggestSelected = new Middleware(
     // const list = task.data.children.map((d => keys.map(k => typeof d.data[k] === 'object' ? JSON.stringify(d.data[k], null, '  ') : d.data[k] )));
     const keys = Object.keys(flist[0]);
     const list = flist.map((d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k], null, '  ') : d[k] )));
-    console.log(keys);
     task.store.dispatch(suggestActions.fetchSuggestSelectedSuccess(list));
     task.store.dispatch(suggestActions.setColumns(keys));
     task.store.dispatch(suggestActions.setColumnCount(keys.length));

@@ -3,6 +3,7 @@ import ApiClient from '../../../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
 import {suggestActions} from '../../../Suggest';
 import * as progressActions from '../../../App/ProgressAction';
+import {freezeList} from '../Util';
 
 const apiClient: Axios = new ApiClient();
 
@@ -46,8 +47,13 @@ export const fetchSuggestSelected = new Middleware(
   task => processResult(
     task,
     results => {
-      const keys = Object.keys(results[0]);
-      const list = results.map(d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k]) : d[k] ));
+      const flist = freezeList(results, [ 'title' ]);
+
+      // const keys = Object.keys(results[0]);
+      // const list = results.map(d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k]) : d[k] ));
+      const keys = Object.keys(flist[0]);
+      const list = flist.map(d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k]) : d[k] ));
+      
       task.store.dispatch(suggestActions.fetchSuggestSelectedSuccess(list));
       task.store.dispatch(suggestActions.setColumns(keys));
       task.store.dispatch(suggestActions.setColumnCount(keys.length));
