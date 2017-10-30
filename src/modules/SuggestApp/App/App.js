@@ -5,8 +5,8 @@ import Row from '../../../components/Row/Row';
 import Cell from '../../../components/Cell/Cell';
 import connectFunc from './Connect';
 import Select from '../../Select';
-import SuggestScrollSync from './SuggestScrollSync';
 import SuggestComponents from './SuggestComponents';
+import ScrollSyncComponents from './ScrollSyncComponents';
 import {suggestActions} from '../../Suggest';
 import Progress from 'react-progress-2';
 
@@ -19,12 +19,11 @@ const GradientContainer = styled(Container)`
 
 const Presentation = props => {
   const Suggest = SuggestComponents[props.selectedValue];
+  const ScrollSync = ScrollSyncComponents[props.selectedValue];
   
   return (
     <Container style={{width: '100%', position: 'relative'}}>
-      <Progress.Component
-        style={{backgroundColor: '#fefefe'}}
-      />
+      <Progress.Component style={{backgroundColor: '#fefefe'}} />
       <Container style={{width: '100%', position: 'absolute', zIndex: 3, backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         <Select style={{maxWidth: '400px'}}/>
       </Container>
@@ -32,7 +31,7 @@ const Presentation = props => {
         <Row>{ Suggest && <Suggest /> }<Cell style={{color: props.theme.tertiary, padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden'}}>{props.lastInputValue}</Cell></Row>
       </Container>
       <GradientContainer style={{width: '100%', position: 'absolute', zIndex: 1}}>
-        <SuggestScrollSync top={32} freezeColumns={1}/>
+        { ScrollSync && <ScrollSync top={32} /> }
       </GradientContainer>
     </Container>
   );
