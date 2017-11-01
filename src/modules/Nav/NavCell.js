@@ -23,8 +23,8 @@ export const LogoCell = styled.div `
 
 const DefaultCell = styled.div `
 display: flex;
-flex-grow: 1;
-min-width: 120px;
+/*flex-grow: 1;*/
+width: 120px;
 min-height: 60px;
 color: ${ p => `${p.theme.tertiary || '#777777'}` };
 background-image: ${p => `linear-gradient(to right, ${p.theme.secondary}, ${p.theme.main})`};

@@ -66,7 +66,7 @@ const Presentation = props => (
       <img src={logoImage}/>
       </LogoCell>
       <NavCell margin>
-      <BetterLink to="/">Home</BetterLink>
+      <BetterLink to="/" onlyActiveOnIndex>Home</BetterLink>
       </NavCell>      
       <NavCell margin>
       <BetterLink to="/protected">Protected</BetterLink>
