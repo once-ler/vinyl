@@ -1,5 +1,6 @@
 export Aside from './Aside/Aside';
 export Button from './Button/Button';
+export BetterLink from './Link/BetterLink';
 export SubmitButton from './Button/SubmitButton';
 export Cell from './Cell/Cell';
 export CenteredCell from './Cell/CenteredCell';

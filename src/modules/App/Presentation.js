@@ -9,48 +9,13 @@ import ResponsiveCell from '../../components/Cell/ResponsiveCell';
 import Container from '../../components/Container/Container';
 import { media } from '../../components/Setting/Setting';
 import { NavRow, NavCell, LogoCell, navAction } from '../Nav';
-import Modal from '../Modal/Modal'; 
-const logoImage = require('../../../static/vinyl.svg');
+import Modal from '../Modal/Modal';
+import BetterLink from '../../components/Link/BetterLink';
 import { ViewPager, Frame, Track, View } from 'react-view-pager';
 import toClass from 'recompose/toClass';
 import Progress from 'react-progress-2';
 
-const activeClassName = 'nav-item-active'
-
-const BetterLink = styled(Link).attrs({
-  activeClassName
-}) `
-  flex-grow: 1;
-  padding: 8px 1rem;
-  position: relative;
-  text-decoration: none;
-  z-index: 100;
-  transition-duration: 0.4s;
-  color: #fbad50;
-  :visited {
-    color: #fbad50;
-  }
-  :hover {
-    background-color: #fbad50;
-    color: #cd486b;
-    box-shadow:         6px 3px 10px 0px rgba(0, 0, 0, 0.4);
-  }
-  &.${activeClassName} {
-    background-image:
-    linear-gradient(
-      165deg, #fbad50, #bc2a8d
-    );
-    color: #fefefe;
-  }
-  /*
-  color: sandybrown;
-  display: block;
-  padding: 0.5em 0;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${props => props.theme.tertiary || '#fefefe'};
-  */
-`;
+const logoImage = require('../../../static/vinyl.svg');
 
 const StyledPager = styled(ViewPager)`
 margin-right: 10px;
