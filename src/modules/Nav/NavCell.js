@@ -22,11 +22,30 @@ export const LogoCell = styled.div `
 `;
 
 const DefaultCell = styled.div `
+display: flex;
+flex-grow: 1;
+min-width: 120px;
+min-height: 60px;
+color: ${ p => `${p.theme.tertiary || '#777777'}` };
+background-image: ${p => `linear-gradient(to right, ${p.theme.secondary}, ${p.theme.main})`};
+margin-top: 10px;
+margin: 10px;
+${media.tablet `
+  flex: 1 100%;
+  max-width: 80%;
+  align-self: flex-start;
+  order: ${props => props.order};
+  `
+}
+order: 0;
+`;
+
+const DefaultCell1 = styled.div `
   min-width: 300px;
   min-height: 60px;
   /*background-color: ${props => props.theme.secondary};*/
   border-radius: 5px;
-  color: ${ p => `${p.theme.tertiary || '#777===---'}` };
+  color: ${ p => `${p.theme.tertiary || '#777777'}` };
   background-image: ${p => `linear-gradient(to right, ${p.theme.secondary}, ${p.theme.main})`};
   margin-top: 10px;
   /* margin: 10px; */

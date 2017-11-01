@@ -15,13 +15,41 @@ import { ViewPager, Frame, Track, View } from 'react-view-pager';
 import toClass from 'recompose/toClass';
 import Progress from 'react-progress-2';
 
-const BetterLink = styled(Link) `
+const activeClassName = 'nav-item-active'
+
+const BetterLink = styled(Link).attrs({
+  activeClassName
+}) `
+  flex-grow: 1;
+  padding: 8px 1rem;
+  position: relative;
+  text-decoration: none;
+  z-index: 100;
+  transition-duration: 0.4s;
+  color: #fbad50;
+  :visited {
+    color: #fbad50;
+  }
+  :hover {
+    background-color: #fbad50;
+    color: #cd486b;
+    box-shadow:         6px 3px 10px 0px rgba(0, 0, 0, 0.4);
+  }
+  &.${activeClassName} {
+    background-image:
+    linear-gradient(
+      165deg, #fbad50, #bc2a8d
+    );
+    color: #fefefe;
+  }
+  /*
   color: sandybrown;
   display: block;
   padding: 0.5em 0;
   cursor: pointer;
   text-decoration: none;
   color: ${props => props.theme.tertiary || '#fefefe'};
+  */
 `;
 
 const StyledPager = styled(ViewPager)`
@@ -31,7 +59,7 @@ margin-right: 10px;
   }
 `;
 
-const Presentation1 = props => (
+const Presentation = props => (
   <Container>
     <NavRow wrap end>
       <LogoCell>
@@ -39,7 +67,7 @@ const Presentation1 = props => (
       </LogoCell>
       <NavCell margin>
       <BetterLink to="/">Home</BetterLink>
-      </NavCell>
+      </NavCell>      
       <NavCell margin>
       <BetterLink to="/protected">Protected</BetterLink>
       </NavCell>
@@ -66,7 +94,7 @@ const Presentation1 = props => (
   </Container>
 );
 
-class Presentation extends Component {
+class PresentationAlt extends Component {
   
   render() {
     const {progress} = this.props;
@@ -91,12 +119,7 @@ class Presentation extends Component {
                 <NavCell margin>
                 <BetterLink to="/">Home</BetterLink>
                 </NavCell>
-                </View>
-                <View>
-                <NavCell>
-                <BetterLink to="/suggest">Suggest</BetterLink>
-                </NavCell>
-                </View>
+                </View>                
                 <View>
                 <NavCell margin>
                 <BetterLink to="/protected">Protected</BetterLink>
