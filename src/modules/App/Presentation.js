@@ -11,6 +11,7 @@ import { media } from '../../components/Setting/Setting';
 import { NavRow, NavCell, LogoCell, navAction } from '../Nav';
 import Modal from '../Modal/Modal';
 import BetterLink from '../../components/Link/BetterLink';
+import NavIcon from '../../components/Icon/NavIcon';
 import { ViewPager, Frame, Track, View } from 'react-view-pager';
 import toClass from 'recompose/toClass';
 import Progress from 'react-progress-2';

@@ -5,12 +5,15 @@ import {css} from 'styled-components';
 export const sizes = {
   laptop: 800,
   tablet: 600,
-  phablet: 376
+  phablet: 376,
+  fromLaptop: 800,
+  fromTablet: 600,
+  fromPhablet: 376
 };
 
 export const media = Object.keys(sizes).reduce((accumulator, label) => {
   accumulator[label] = (...args) => css`
-    @media only screen and (max-width: ${sizes[label]}px) {
+    @media only screen and (${ label.search(/^from/) !== -1 ? 'min' : 'max' }-width: ${sizes[label]}px) {
       ${css(...args)}
     }
   `;

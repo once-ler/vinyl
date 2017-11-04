@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import Row from '../../components/Row/Row';
-import NavIcon from '../../components/Icon/NavIcon';
+import {NavIconCollapse, NavIconOpen} from '../../components/Icon/NavIcon';
 import { media } from '../../components/Setting/Setting';
 import { toggle } from './Action';
 
@@ -41,7 +41,7 @@ const NavRow = props => {
   return (
     <DefaultRow {...rest}>
     {children}
-    <NavIcon onClick={e => dispatch(toggle())}/>
+    { props.nav.collapse ? <NavIconCollapse onClick={e => dispatch(toggle())} /> : <NavIconOpen onClick={e => dispatch(toggle())} /> }
     </DefaultRow>
   );
 };
