@@ -38,14 +38,11 @@ const enhanceWithProps = withProps(props => ({
 
 const enhanceWithHandlers = withHandlers({
   onChange: ({updateInputValue, clearSuggestions}) => (e, { newValue, method }) => {
-    // onChange: ({updateInputValue, emptySuggestQuery, defaultSuggestions, debouncedLoadSuggestions, suggestType, dispatchBySuggestType}) => (e, { newValue, method }) => {
     if (method.search(/^up|down/) !== -1) return;
     
     updateInputValue(newValue);
     const value = newValue.trim();
     if (value === '') {
-      // defaultSuggestions(value);
-      // debouncedLoadSuggestions({...emptySuggestQuery, value, suggestType});
       clearSuggestions();
     }
   },

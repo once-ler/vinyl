@@ -1,9 +1,10 @@
 /* @flow */
 import EnhancedScrollSync from '../EnhancedScrollSync';
 import {withProps} from 'recompose';
+import {freezeColumnNames} from './Middleware';
 
 const enhanceScrollSyncWithProps = withProps(props => ({
-  freezeColumns: 1
+  freezeColumns: freezeColumnNames.length
 }));
 
 export default enhanceScrollSyncWithProps(EnhancedScrollSync);

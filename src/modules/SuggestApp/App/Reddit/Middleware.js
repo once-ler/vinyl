@@ -5,6 +5,8 @@ import {suggestActions} from '../../../Suggest';
 import * as progressActions from '../../../App/ProgressAction';
 import {freezeList} from '../Util';
 
+export const freezeColumnNames = [ 'title' ];
+
 const apiClient: Axios = new ApiClient();
 
 export const fetchSuggest = new Middleware(
@@ -33,7 +35,7 @@ export const fetchSuggestSelected = new Middleware(
       return task.store.dispatch(suggestActions.fetchSuggestSelectedFail());
     }
     const objs = task.data.children.map(d => d.data);
-    const flist = freezeList(objs, [ 'title' ]);
+    const flist = freezeList(objs, freezeColumnNames);
     // const keys = Object.keys(task.data.children[0].data);
     // const list = task.data.children.map((d => keys.map(k => typeof d.data[k] === 'object' ? JSON.stringify(d.data[k], null, '  ') : d.data[k] )));
     const keys = Object.keys(flist[0]);

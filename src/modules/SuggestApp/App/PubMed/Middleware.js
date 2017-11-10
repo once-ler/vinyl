@@ -5,6 +5,8 @@ import {suggestActions} from '../../../Suggest';
 import * as progressActions from '../../../App/ProgressAction';
 import {freezeList} from '../Util';
 
+export const freezeColumnNames = [ 'title' ];
+
 const apiClient: Axios = new ApiClient();
 
 const processResult = async (task, additionalSuccessCallback, additionalFailureCallback) => {
@@ -48,7 +50,7 @@ export const fetchSuggestSelected = new Middleware(
   task => processResult(
     task,
     results => {
-      const flist = freezeList(results, [ 'title' ]);
+      const flist = freezeList(results, freezeColumnNames);
 
       // const keys = Object.keys(results[0]);
       // const list = results.map(d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k]) : d[k] ));
