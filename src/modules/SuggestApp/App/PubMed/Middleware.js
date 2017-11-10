@@ -8,13 +8,14 @@ import {freezeList} from '../Util';
 const apiClient: Axios = new ApiClient();
 
 const processResult = async (task, additionalSuccessCallback, additionalFailureCallback) => {
-   // Get the id's.
-  const { esearchresult: {idlist} } = task;
-
-  if (typeof idlist === 'undefined' || idlist.length === 0) {
+  if (typeof task.esearchresult === 'undefined' || typeof task.esearchresult.idlist === 'undefined' || task.esearchresult.idlist.length === 0) {
     if (typeof additionalFailureCallback === 'function') additionalFailureCallback();
+    task.store.dispatch(suggestActions.fetchSuggestFailed({error: 'No results.'}));
     return task.store.dispatch(progressActions.hideProgress());
   }
+
+  // Get the id's.
+  const { esearchresult: {idlist} } = task;
 
   // Get summaries for all id's.
   const summaries = await apiClient.get(`/api/pubmed/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id=${idlist.join()}`);
@@ -25,7 +26,7 @@ const processResult = async (task, additionalSuccessCallback, additionalFailureC
 
   if (typeof additionalSuccessCallback === 'function')
     additionalSuccessCallback(results);
-}
+};
 
 export const fetchSuggest = new Middleware(
   'pubmed',
@@ -66,5 +67,5 @@ export const fetchSuggestSelected = new Middleware(
 export const defaultSuggest = new Middleware(
   'DEFAULT_SUGGEST',
   task => apiClient.post(`https://jsonplaceholder.typicode.com/posts`, {}),
-  (task) => {}
+  task => {}
 );

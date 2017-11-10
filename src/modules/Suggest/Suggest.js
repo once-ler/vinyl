@@ -37,21 +37,23 @@ const enhanceWithProps = withProps(props => ({
 }));
 
 const enhanceWithHandlers = withHandlers({
-  onChange: ({updateInputValue, emptySuggestQuery, defaultSuggestions, debouncedLoadSuggestions, suggestType, dispatchBySuggestType}) => (e, { newValue, method }) => {
+  onChange: ({updateInputValue, clearSuggestions}) => (e, { newValue, method }) => {
+    // onChange: ({updateInputValue, emptySuggestQuery, defaultSuggestions, debouncedLoadSuggestions, suggestType, dispatchBySuggestType}) => (e, { newValue, method }) => {
     if (method.search(/^up|down/) !== -1) return;
     
     updateInputValue(newValue);
     const value = newValue.trim();
     if (value === '') {
-      defaultSuggestions(value);
-      debouncedLoadSuggestions({...emptySuggestQuery, value, suggestType});
+      // defaultSuggestions(value);
+      // debouncedLoadSuggestions({...emptySuggestQuery, value, suggestType});
+      clearSuggestions();
     }
   },
-  onSuggestionsFetchRequested: ({debouncedLoadSuggestions, suggestQuery, suggestType, dispatchBySuggestType, value}) => ({ value, reason }) => debouncedLoadSuggestions({...suggestQuery, value, suggestType}),
+  onSuggestionsFetchRequested: ({debouncedLoadSuggestions, suggestQuery, suggestType, dispatchBySuggestType, value, loading}) => ({ value, reason }) => !loading && debouncedLoadSuggestions({...suggestQuery, value, suggestType}),
   onSuggestionSelected: ({updateSelected, afterSuggestionSelected, suggestSelectedType, fetchSuggestSelected}) => (e, { suggestion, suggestionValue }) => {
     updateSelected(suggestion);
     const maybeModifiedSuggestion = afterSuggestionSelected(suggestion);
-    fetchSuggestSelected({...maybeModifiedSuggestion, suggestSelectedType})
+    fetchSuggestSelected({...maybeModifiedSuggestion, suggestSelectedType});
   },
   onSuggestionsClearRequested: ({clearSuggestions}) => () => clearSuggestions(),
   clearInput: ({updateInputValue}) => e => { e.preventDefault(); updateInputValue(''); }

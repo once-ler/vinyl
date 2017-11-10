@@ -78,7 +78,7 @@ export default function reducer(state = initialState, action = {}) {
       };
     case DEFAULT_SUGGEST:
       return {
-        ...state,
+        ...initialState,
         data: null,
         selected: action.value
       };
