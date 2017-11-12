@@ -67,10 +67,10 @@ const enhanceCollapseWithHandlers = withHandlers({
   onCheckboxChange: ({setOpen}) => ({target: {checked}}) => setOpen(checked)
 });
 
-const CollapsePresentation = ({content, isOpened, onCheckboxChange, onClick, top, left}) => { return (
+const CollapsePresentation = ({content, maxChar, isOpened, onCheckboxChange, onClick, top, left}) => { return (
   <Div style={{marginLeft: '3px', textAlign: 'right'}}>
     <label style={{position: 'relative', display: 'flex', justifyContent: 'space-around', zIndex: 1}}>
-      { !isOpened && `${content.slice(0, 10)}...`} <Link href="#" onClick={onClick}>{isOpened ? 'Less' : 'More' }</Link>      
+      { !isOpened && `${content.slice(0, maxChar)}...`} <Link href="#" onClick={onClick}>{isOpened ? 'Less' : 'More' }</Link>      
     </label>
     { isOpened ?
       <Portal>

@@ -27,7 +27,7 @@ export default compose(
     renderLeftHeaderCell,
     columnCount: 50,
     rowCount: 20,
-    columnWidth: 120,    
+    columnWidth: 140,    
     fontFamily: `'Trebuchet MS', Helvetica, sans-serif`,
     fontSize: '0.8em',
     height: 300,

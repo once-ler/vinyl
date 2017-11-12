@@ -19,3 +19,8 @@ export const freezeList = (list: Array<any>, fieldNames: Array<string>) => {
   const flist = list.map(o => unshiftObject(o, fieldNames));
   return addRowIndex(flist);
 };
+
+export const formatCellToDate = ({column, content, search}) => {
+  const rgx = new RegExp(search, 'i');
+  return rgx.test(column) ? (new Date(Math.pow(10, 3) * content).toISOString()).replace(/[TZ]/g, ' ').slice(0, 19) : content;
+};

@@ -4,12 +4,14 @@ import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
 import connectFunc from './Connect';
 import ScrollSync, {Div, Collapse, HeaderCell} from '../../ScrollSync';
+import {formatCellToDate} from './Util';
 
 const renderCell = ({props, columnIndex, key, rowIndex, style}) => {
   const { suggestedData: { payload } } = props;
-  const content = payload[rowIndex][columnIndex];
+  let content = payload[rowIndex][columnIndex];
+  content = formatCellToDate({content, column: props.columns[columnIndex], search: 'created'});
   const {width, height} = style;
-  const delta = content ? content.length * 5 / width : 0;
+  const delta = content ? content.length * 3 / width : 0;
   
   return delta > 1 ?
     (
@@ -19,6 +21,7 @@ const renderCell = ({props, columnIndex, key, rowIndex, style}) => {
       >
         <Collapse
           content={content}
+          maxChar={(Math.ceil(width * 0.09))}
         />
       </div>
     ) :
@@ -38,21 +41,18 @@ const enhanceScrollSyncWithProps = withProps(props => ({
     
     return renderCell({props, columnIndex, key, rowIndex, style});
   },
-  renderHeaderCell: ({ columnIndex, key, rowIndex, style }) => {
-    if (columnIndex < (1 + props.freezeColumns)) return;
-
-    return (
-      <HeaderCell
-        key={key}
-        style={style}
-      >
-        <span style={{padding: '0 5px'}}>{(props.columns[columnIndex] || `C${columnIndex}`).replace(/_/g, ' ')}</span>
-      </HeaderCell>
-    );
-  },
+  renderHeaderCell: ({ columnIndex, key, rowIndex, style }) => (
+    <HeaderCell
+      key={key}
+      style={style}
+    >
+      <span style={{padding: '0 5px'}}>{(props.columns[columnIndex] || `C${columnIndex}`).replace(/_/g, ' ')}</span>
+    </HeaderCell>
+  ),
   renderLeftSideCell: ({ columnIndex, key, rowIndex, style }) => {
     if (columnIndex > 0 && props.suggestedData && props.suggestedData.payload[rowIndex])
       return renderCell({props, columnIndex, key, rowIndex, style});
+
     return (
       <Div
         key={key}
@@ -61,7 +61,15 @@ const enhanceScrollSyncWithProps = withProps(props => ({
         <span style={{margin: 'auto'}}>{ columnIndex > 0 ? `R${rowIndex}, C${columnIndex}` : rowIndex }</span>
       </Div>
     );
-  }
+  },
+  renderLeftHeaderCell: ({ columnIndex, key, rowIndex, style }) => (
+    <HeaderCell
+      key={key}
+      style={style}
+    >
+    <span style={{padding: '0 5px'}}>{(props.columns[columnIndex] || `C${columnIndex}`).replace(/_/g, ' ')}</span>
+    </HeaderCell>
+  )
 }));
 
 export default compose(

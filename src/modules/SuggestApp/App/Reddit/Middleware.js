@@ -5,7 +5,7 @@ import {suggestActions} from '../../../Suggest';
 import * as progressActions from '../../../App/ProgressAction';
 import {freezeList} from '../Util';
 
-export const freezeColumnNames = [ 'title' ];
+export const freezeColumnNames = [ 'author', 'created', 'title' ];
 
 const apiClient: Axios = new ApiClient();
 

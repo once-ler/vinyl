@@ -22,8 +22,8 @@ export default ({
   }) => (
     <ScrollSync>
       {({ clientHeight, clientWidth, onScroll, scrollHeight, scrollLeft, scrollTop, scrollWidth }) => {
-        const x = scrollLeft / (scrollWidth - clientWidth)
-        const y = scrollTop / (scrollHeight - clientHeight)
+        const x = scrollLeft / (scrollWidth - clientWidth);
+        const y = scrollTop / (scrollHeight - clientHeight);
         
         return (
           <GridRow opacity={progress.loading ? 0.3 : 1}>
@@ -31,12 +31,11 @@ export default ({
               overscanColumnCount={overscanColumnCount}
               overscanRowCount={overscanRowCount}
               renderLeftHeaderCell={renderLeftHeaderCell}
-              renderLeftSideCell={renderLeftSideCell}              
+              renderLeftSideCell={renderLeftSideCell}
               columnWidth={columnWidth}
               rowHeight={rowHeight}
               rowCount={rowCount}
               scrollTop={scrollTop}
-              columnWidth={columnWidth}
               height={height}
               freezeColumns={freezeColumns}
             />
@@ -54,7 +53,7 @@ export default ({
               rowCount={rowCount}
             />
           </GridRow>
-        )
+        );
       }}
     </ScrollSync>
   );

@@ -12,6 +12,7 @@ export default ({
   overscanRowCount,
   renderLeftHeaderCell,
   renderLeftSideCell,
+  renderLeftIndexCell,
   rowHeight,
   rowCount,
   scrollTop,
@@ -22,7 +23,6 @@ export default ({
       renderLeftHeaderCell={renderLeftHeaderCell}
       columnWidth={columnWidth}
       rowHeight={rowHeight}
-      columnWidth={columnWidth}
       freezeColumns={freezeColumns}
     />
     <LeftSideGridContainer
