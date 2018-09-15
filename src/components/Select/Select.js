@@ -3,6 +3,7 @@ import VirtualizedSelect from 'react-virtualized-select';
 
 export default ({
   labelKey,
+  multi,
   onChange,
   onInputChange,
   optionHeight,
@@ -15,7 +16,9 @@ export default ({
 }) => (
   <div style={{...style}}>
   <VirtualizedSelect
+    autofocus
     labelKey={labelKey}
+    multi={multi}
     onChange={onChange}
     onInputChange={onInputChange}
     optionHeight={optionHeight || 35}

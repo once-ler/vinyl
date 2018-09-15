@@ -5,7 +5,6 @@ import {withState, withProps, withHandlers,compose} from 'recompose';
 import Select from '../../components/Select/Select';
 import * as selectActions from './Action';
 import optionRenderer from './OptionRenderer';
-import options from './Options';
 
 const connectFunc = connect(
   state => ({
@@ -17,13 +16,14 @@ const connectFunc = connect(
 
 const enhanceWithState = withState('value', 'setValue', '');
 
-const enhanceWithProps = withProps(({value, theme}) => ({
+const enhanceWithProps = withProps(({value, theme, options, multi}) => ({
   searchable: true,
   labelKey: 'name',
   valueKey: 'value',
   optionRenderer: optionRenderer(theme),
   options,
-  value
+  value,
+  multi
 }));
 
 const enhanceWithHandlers = withHandlers({
