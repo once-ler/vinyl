@@ -1,6 +1,12 @@
 /* @flow */
+/* eslint max-len: 0 */
 import pick from 'lodash/pick';
 import omit from 'lodash/omit';
+
+export type MergeFreezeListResult = {
+  list: Array<any>,
+  keys: Array<string>
+};
 
 export const unshiftObject = (obj: any, fieldNames: Array<string>) => {
   if (fieldNames.length === 0) return obj;
@@ -18,6 +24,14 @@ export const freezeList = (list: Array<any>, fieldNames: Array<string>) => {
 
   const flist = list.map(o => unshiftObject(o, fieldNames));
   return addRowIndex(flist);
+};
+
+export const mergeFreezeList = (inlist: Array<any>, fieldNames: Array<string>) => {
+  const flist = freezeList(inlist, fieldNames);
+  const keys = Object.keys(flist[0]);
+  const list = flist.map(d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k]) : d[k] ));
+
+  return {list, keys};
 };
 
 export const formatCellToDate = ({column, content, search}) => {

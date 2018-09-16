@@ -10,6 +10,7 @@ import ScrollSyncComponents from './ScrollSyncComponents';
 import {suggestActions} from '../../Suggest';
 import Progress from 'react-progress-2';
 import options from './SuggestOptions';
+import FreezeColumnsSelect from './Select/EnhanceSelectForFreezeColumns';
 
 const GradientContainer = styled(Container)`
   background-image: ${p => `linear-gradient(to right, ${p.theme.secondary}, ${p.theme.main})`};
@@ -30,6 +31,7 @@ const Presentation = props => {
       </Container>
       <Container style={{position: 'absolute', top: 30, zIndex: 2, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         <Row>{ Suggest && <Suggest /> }<Cell style={{color: props.theme.tertiary, padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden'}}>{props.lastInputValue}</Cell></Row>
+        <Row><FreezeColumnsSelect style={{width: '400px'}} /></Row>
       </Container>
       <GradientContainer style={{width: '100%', position: 'absolute', zIndex: 1}}>
         { ScrollSync && <ScrollSync top={32} /> }

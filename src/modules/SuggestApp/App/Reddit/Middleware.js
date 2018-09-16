@@ -1,11 +1,13 @@
+/* @flow */
+import type { MergeFreezeListResult } from '../Util';
 import ApiClient from '../../../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
-// import * as suggestActions from '../Action';
 import {suggestActions} from '../../../Suggest';
 import * as progressActions from '../../../App/ProgressAction';
-import {freezeList} from '../Util';
+import {mergeFreezeList} from '../Util';
 
-export const freezeColumnNames = [ 'author', 'created', 'title' ];
+// export const freezeColumnNames = [ 'author', 'created', 'title' ];
+export const freezeColumnNames = [ 'author' ];
 
 const apiClient: Axios = new ApiClient();
 
@@ -35,11 +37,9 @@ export const fetchSuggestSelected = new Middleware(
       return task.store.dispatch(suggestActions.fetchSuggestSelectedFail());
     }
     const objs = task.data.children.map(d => d.data);
-    const flist = freezeList(objs, freezeColumnNames);
-    // const keys = Object.keys(task.data.children[0].data);
-    // const list = task.data.children.map((d => keys.map(k => typeof d.data[k] === 'object' ? JSON.stringify(d.data[k], null, '  ') : d.data[k] )));
-    const keys = Object.keys(flist[0]);
-    const list = flist.map((d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k], null, '  ') : d[k] )));
+    const result: MergeFreezeListResult = mergeFreezeList(objs, freezeColumnNames);
+    const {list, keys} = result;
+
     task.store.dispatch(suggestActions.fetchSuggestSelectedSuccess(list));
     task.store.dispatch(suggestActions.setColumns(keys));
     task.store.dispatch(suggestActions.setColumnCount(keys.length));

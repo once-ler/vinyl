@@ -1,10 +1,18 @@
 /* @flow */
 import EnhancedScrollSync from '../EnhancedScrollSync';
-import {withProps} from 'recompose';
+import {withProps, compose} from 'recompose';
 import {freezeColumnNames} from './Middleware';
+import {connect} from 'react-redux'
 
-const enhanceScrollSyncWithProps = withProps(props => ({
-  freezeColumns: freezeColumnNames.length
+const connectFunc = connect(
+  state => ({ freezeColumns: state.freezeColumns.columns })
+)
+
+const enhanceScrollSyncWithProps = withProps(({freezeColumns}) => ({
+  freezeColumns: freezeColumns.length || freezeColumnNames.length
 }));
 
-export default enhanceScrollSyncWithProps(EnhancedScrollSync);
+export default compose(
+  connectFunc,
+  enhanceScrollSyncWithProps
+)(EnhancedScrollSync);

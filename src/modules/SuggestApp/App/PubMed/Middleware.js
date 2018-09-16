@@ -1,11 +1,13 @@
 /* @flow */
+import type { MergeFreezeListResult } from '../Util';
 import ApiClient from '../../../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
 import {suggestActions} from '../../../Suggest';
 import * as progressActions from '../../../App/ProgressAction';
-import {freezeList} from '../Util';
+import {freezeList, mergeFreezeList} from '../Util';
 
-export const freezeColumnNames = [ 'lastauthor', 'pubdate', 'fulljournalname', 'title' ];
+// export const freezeColumnNames = [ 'lastauthor', 'pubdate', 'fulljournalname', 'title' ];
+export const freezeColumnNames = [ 'lastauthor' ];
 
 const apiClient: Axios = new ApiClient();
 
@@ -50,17 +52,13 @@ export const fetchSuggestSelected = new Middleware(
   task => processResult(
     task,
     results => {
-      const flist = freezeList(results, freezeColumnNames);
+      const result: MergeFreezeListResult = mergeFreezeList(results, freezeColumnNames);
+      const {list, keys} = result;
 
-      // const keys = Object.keys(results[0]);
-      // const list = results.map(d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k]) : d[k] ));
-      const keys = Object.keys(flist[0]);
-      const list = flist.map(d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k]) : d[k] ));
-      
       task.store.dispatch(suggestActions.fetchSuggestSelectedSuccess(list));
       task.store.dispatch(suggestActions.setColumns(keys));
       task.store.dispatch(suggestActions.setColumnCount(keys.length));
-      task.store.dispatch(suggestActions.setRowCount(list.length));    
+      task.store.dispatch(suggestActions.setRowCount(list.length));
     },
     () => task.store.dispatch(suggestActions.fetchSuggestSelectedFail())
   )
