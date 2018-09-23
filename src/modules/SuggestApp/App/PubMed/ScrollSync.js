@@ -9,7 +9,7 @@ const connectFunc = connect(
 )
 
 const enhanceScrollSyncWithProps = withProps(({freezeColumns}) => ({
-  freezeColumns: freezeColumns.length || freezeColumnNames.length
+  freezeColumns: freezeColumns.length // || freezeColumnNames.length
 }));
 
 export default compose(

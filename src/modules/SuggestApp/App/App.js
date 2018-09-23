@@ -26,15 +26,17 @@ const Presentation = props => {
   return (
     <Container style={{width: '100%', position: 'relative'}}>
       <Progress.Component style={{backgroundColor: '#fefefe'}} />
-      <Container style={{width: '100%', position: 'absolute', zIndex: 3, backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
+      <Container style={{width: '100%', position: 'absolute', zIndex: 4, backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         <Select style={{maxWidth: '400px'}} options={options} />
       </Container>
-      <Container style={{position: 'absolute', top: 30, zIndex: 2, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
+      <Container style={{position: 'absolute', top: 30, zIndex: 3, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         <Row>{ Suggest && <Suggest /> }<Cell style={{color: props.theme.tertiary, padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden'}}>{props.lastInputValue}</Cell></Row>
-        <Row><FreezeColumnsSelect style={{width: '400px'}} /></Row>
+      </Container>
+      <Container style={{position: 'absolute', top: 90, zIndex: 2, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
+        <Row><Cell style={{color: props.theme.tertiary, padding: '6px 8px 0 8px', maxHeight: '45px', overflow: 'hidden'}}>Freeze Columns</Cell>{ Suggest && <FreezeColumnsSelect style={{width: '400px'}} /> }</Row>
       </Container>
       <GradientContainer style={{width: '100%', position: 'absolute', zIndex: 1}}>
-        { ScrollSync && <ScrollSync top={32} /> }
+        { ScrollSync && <ScrollSync top={52} /> }
       </GradientContainer>
     </Container>
   );
