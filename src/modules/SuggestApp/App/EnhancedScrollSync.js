@@ -1,5 +1,4 @@
 import React from 'react';
-// import {connect} from 'react-redux';
 import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
 import connectFunc from './Connect';

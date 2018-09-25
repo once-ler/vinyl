@@ -48,7 +48,9 @@ const enhanceWithHandlers = withHandlers({
 })
 
 const Presentation = props => {
-  const ops = props.columns.sort().map(a => ({name: a, value: a}))
+  const cols = props.columns.slice();
+  const ops = cols.sort().map(a => ({name: a, value: a}))
+  
   return <Select {...props} multi={true} options={ops} />
 }
 

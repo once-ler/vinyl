@@ -31,7 +31,6 @@ export const mergeFreezeList = (inlist: Array<any>, fieldNames: Array<string>) =
   const keys = Object.keys(flist[0]);
   const list = flist.map(d => keys.map(k => typeof d[k] === 'object' ? JSON.stringify(d[k]) : d[k] ));
 
-  // TODO: reorder list and keys, rowId need to be first column.
   return {list, keys};
 };
 
