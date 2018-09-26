@@ -9,11 +9,12 @@ import {connect} from 'react-redux'
 import {withState, withProps, withHandlers, compose} from 'recompose';
 import * as selectActionCreators from './FreezeColumnAction'
 import * as suggestActionCreators from '../../../Suggest/Action'
-import {mergeFreezeList} from '../Util'
+import {mergeFreezeList, unshiftObject} from '../Util'
 
 const connectFunc = connect(
   state => ({
     suggestData: state.suggest.suggestedData,
+    suggestedDataPre: state.suggest.suggestedDataPre,
     columns: state.suggest.columns,
     freezeColumns: state.freezeColumns.columns,
     theme: state.theme
@@ -34,15 +35,18 @@ const enhanceWithProps = withProps(({theme}) => ({
 }))
 
 const enhanceWithHandlers = withHandlers({
-  onChange: ({suggestActions, selectActions, suggestData, setValue}) => value => {
+  onChange: ({suggestActions, selectActions, suggestedDataPre, setValue}) => value => {
     setValue(value)
-    const fset = value.split(',')
+    const fset = value ? value.split(',') : []
+    
     selectActions.changeFreezeColumns(fset)
     
-    const {payload} = suggestData;
+    const {payload} = suggestedDataPre
     const result: MergeFreezeListResult = mergeFreezeList(payload, fset)
-    const {list} = result
+    const {list, keys} = result
+    
     suggestActions.fetchSuggestSelectedSuccess(list)
+    suggestActions.setColumns(keys);
   },
   optionHeight: () => () => 40
 })

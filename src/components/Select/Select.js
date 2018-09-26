@@ -16,7 +16,6 @@ export default ({
 }) => (
   <div style={{...style}}>
   <VirtualizedSelect
-    autofocus
     labelKey={labelKey}
     multi={multi}
     onChange={onChange}

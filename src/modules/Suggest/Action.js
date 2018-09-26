@@ -2,6 +2,7 @@ const FETCH_SUGGEST = 'FETCH_SUGGEST';
 const FETCH_SUGGEST_SUCCESS = 'FETCH_SUGGEST_SUCCESS';
 const FETCH_SUGGEST_FAIL = 'FETCH_SUGGEST_FAIL';
 const FETCH_SUGGEST_SELECTED = 'FETCH_SUGGEST_SELECTED';
+const FETCH_SUGGEST_SELECTED_PRE_SUCCESS = 'FETCH_SUGGEST_SELECTED_PRE_SUCCESS';
 const FETCH_SUGGEST_SELECTED_SUCCESS = 'FETCH_SUGGEST_SELECTED_SUCCESS';
 const FETCH_SUGGEST_SELECTED_FAIL = 'FETCH_SUGGEST_SELECTED_FAIL';
 const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
@@ -19,6 +20,7 @@ const initialState = {
   value: '',
   selected: '', // Purpose is to trigger another Action that will download detailed data for suggestion.
   error: null,
+  suggestedDataPre: null, // Original data response stored in memory for post processing.  (i.e. Run-time freeze columns.)
   suggestedData: null,
   suggestedError: null,
   columns: [],
@@ -52,6 +54,13 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: true
       };
+    case FETCH_SUGGEST_SELECTED_PRE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        suggestedDataPre: {...action},
+        suggestedError: null
+      };  
     case FETCH_SUGGEST_SELECTED_SUCCESS:
       return {
         ...state,
@@ -107,6 +116,7 @@ export default function reducer(state = initialState, action = {}) {
 export const fetchSuggest = params => params.suggestType ? ({...params, type: params.suggestType}) : ({ ...params, type: FETCH_SUGGEST });
 export const fetchSuggestSelected = params => params.suggestSelectedType ? ({...params, type: params.suggestSelectedType}) : ({ ...params, type: FETCH_SUGGEST_SELECTED });
 export const fetchSuggestSuccess = payload => ({ type: FETCH_SUGGEST_SUCCESS, payload });
+export const fetchSuggestSelectedPreSuccess = payload => ({ type: FETCH_SUGGEST_SELECTED_PRE_SUCCESS, payload });
 export const fetchSuggestSelectedSuccess = payload => ({ type: FETCH_SUGGEST_SELECTED_SUCCESS, payload });
 export const fetchSuggestSelectedFail = () => ({ type: FETCH_SUGGEST_SELECTED_FAIL });
 export const fetchSuggestFailed = error => ({ type: FETCH_SUGGEST_FAIL, error });

@@ -4,7 +4,7 @@ import ApiClient from '../../../../helpers/ApiClient';
 import { Middleware } from 'rx-web-js/dist/rx-web.min';
 import {suggestActions} from '../../../Suggest';
 import * as progressActions from '../../../App/ProgressAction';
-import {freezeList, mergeFreezeList} from '../Util';
+import {mergeFreezeList} from '../Util';
 
 // export const freezeColumnNames = [ 'lastauthor', 'pubdate', 'fulljournalname', 'title' ];
 export const freezeColumnNames = [ 'lastauthor' ];
@@ -55,6 +55,7 @@ export const fetchSuggestSelected = new Middleware(
       const result: MergeFreezeListResult = mergeFreezeList(results, freezeColumnNames);
       const {list, keys} = result;
 
+      task.store.dispatch(suggestActions.fetchSuggestSelectedPreSuccess(results));
       task.store.dispatch(suggestActions.fetchSuggestSelectedSuccess(list));
       task.store.dispatch(suggestActions.setColumns(keys));
       task.store.dispatch(suggestActions.setColumnCount(keys.length));

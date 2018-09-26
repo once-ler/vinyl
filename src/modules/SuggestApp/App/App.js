@@ -27,10 +27,10 @@ const Presentation = props => {
     <Container style={{width: '100%', position: 'relative'}}>
       <Progress.Component style={{backgroundColor: '#fefefe'}} />
       <Container style={{width: '100%', position: 'absolute', zIndex: 4, backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
-        <Select style={{maxWidth: '400px'}} options={options} />
+        <Row><Cell style={{color: props.theme.secondary, padding: '6px 8px 0 28px', maxHeight: '45px', overflow: 'hidden'}}>Cloud source</Cell><Select style={{width: '400px'}} options={options} /></Row>
       </Container>
       <Container style={{position: 'absolute', top: 30, zIndex: 3, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
-        <Row>{ Suggest && <Suggest /> }<Cell style={{color: props.theme.tertiary, padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden'}}>{props.lastInputValue}</Cell></Row>
+        <Row style={{padding: '0 0 0 130px'}}>{ Suggest && <Suggest /> }<Cell style={{color: props.theme.tertiary, padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden'}}>{props.lastInputValue}</Cell></Row>
       </Container>
       <Container style={{position: 'absolute', top: 90, zIndex: 2, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         <Row><Cell style={{color: props.theme.tertiary, padding: '6px 8px 0 8px', maxHeight: '45px', overflow: 'hidden'}}>Freeze Columns</Cell>{ Suggest && <FreezeColumnsSelect style={{width: '400px'}} /> }</Row>

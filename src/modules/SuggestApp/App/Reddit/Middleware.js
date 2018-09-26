@@ -40,6 +40,7 @@ export const fetchSuggestSelected = new Middleware(
     const result: MergeFreezeListResult = mergeFreezeList(objs, freezeColumnNames);
     const {list, keys} = result;
 
+    task.store.dispatch(suggestActions.fetchSuggestSelectedPreSuccess(objs));
     task.store.dispatch(suggestActions.fetchSuggestSelectedSuccess(list));
     task.store.dispatch(suggestActions.setColumns(keys));
     task.store.dispatch(suggestActions.setColumnCount(keys.length));
