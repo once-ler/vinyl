@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import lifecycle from 'recompose/lifecycle';
+import compose from 'recompose/compose';
 import Container from '../../../components/Container/Container';
 import Row from '../../../components/Row/Row';
 import Cell from '../../../components/Cell/Cell';
@@ -42,4 +44,25 @@ const Presentation = props => {
   );
 };
 
-export default connectFunc(Presentation);
+const enhanceWithLifecycle = lifecycle({
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.selectedValue && nextProps.selectedValue) {
+      // Reset suggest
+      this.props.clearSuggestions();
+    }
+  },
+  componentWillUpdate(nextProps, nextState) {
+  },
+  componentWillMount() {
+  },
+  componentWillUnmount() {
+    document.body.style.backgroundColor = null;
+  },
+  componentDidMount() {
+  }
+});
+
+export default compose(
+  connectFunc,
+  enhanceWithLifecycle
+)(Presentation);

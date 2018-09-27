@@ -9,7 +9,7 @@ import {connect} from 'react-redux'
 import {withState, withProps, withHandlers, compose} from 'recompose';
 import * as selectActionCreators from './FreezeColumnAction'
 import * as suggestActionCreators from '../../../Suggest/Action'
-import {mergeFreezeList, unshiftObject} from '../Util'
+import {mergeFreezeList} from '../Util'
 
 const connectFunc = connect(
   state => ({
