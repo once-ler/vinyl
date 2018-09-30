@@ -1,6 +1,11 @@
+/* @flow */
+/* eslint max-len: 0 */
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as suggestActions from '../../Suggest/Action';
+import * as selectActions from '../../Select/Action';
+import * as scrollSyncActions from '../../ScrollSync/Action';
+import * as freezeColumnsActions from './Select/FreezeColumnAction';
 
 export default connect(
   state => ({
@@ -13,5 +18,5 @@ export default connect(
     theme: state.theme,
     progress: state.progress
   }),
-  dispatch => bindActionCreators(suggestActions, dispatch)
+  dispatch => bindActionCreators({...suggestActions, ...selectActions, ...scrollSyncActions, ...freezeColumnsActions}, dispatch)
 );

@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import styled from 'styled-components';
 import lifecycle from 'recompose/lifecycle';
@@ -34,11 +35,13 @@ const Presentation = props => {
       <Container style={{position: 'absolute', top: 30, zIndex: 3, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         <Row style={{padding: '0 0 0 130px'}}>{ Suggest && <Suggest /> }<Cell style={{color: props.theme.tertiary, padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden'}}>{props.lastInputValue}</Cell></Row>
       </Container>
-      <Container style={{position: 'absolute', top: 90, zIndex: 2, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
-        <Row><Cell style={{color: props.theme.tertiary, padding: '6px 8px 0 8px', maxHeight: '45px', overflow: 'hidden'}}>Freeze Columns</Cell>{ Suggest && <FreezeColumnsSelect style={{width: '400px'}} /> }</Row>
-      </Container>
+        { props.suggestedData &&
+        <Container style={{position: 'absolute', top: 90, zIndex: 2, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
+          <Row><Cell style={{color: props.theme.tertiary, padding: '6px 8px 0 8px', maxHeight: '45px', overflow: 'hidden'}}>Freeze Columns</Cell><FreezeColumnsSelect style={{width: '400px'}} /></Row> 
+        </Container>
+        }
       <GradientContainer style={{width: '100%', position: 'absolute', zIndex: 1}}>
-        { ScrollSync && <ScrollSync top={52} /> }
+        { ScrollSync && <ScrollSync top={props.suggestedData ? 48 : 34} /> }
       </GradientContainer>
     </Container>
   );
@@ -46,9 +49,9 @@ const Presentation = props => {
 
 const enhanceWithLifecycle = lifecycle({
   componentWillReceiveProps(nextProps) {
-    if (!this.props.selectedValue && nextProps.selectedValue) {
-      // Reset suggest
+    if (this.props.selectedValue !== nextProps.selectedValue) {
       this.props.clearSuggestions();
+      this.props.resetFreezeColumns();
     }
   },
   componentWillUpdate(nextProps, nextState) {
@@ -56,7 +59,7 @@ const enhanceWithLifecycle = lifecycle({
   componentWillMount() {
   },
   componentWillUnmount() {
-    document.body.style.backgroundColor = null;
+    document.body.style.backgroundColor = '#ffffff';
   },
   componentDidMount() {
   }

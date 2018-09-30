@@ -92,7 +92,10 @@ export default function reducer(state = initialState, action = {}) {
         selected: action.value
       };
     case CLEAR_SUGGEST:
-      return { ...initialState, lastValue: state.value };
+      return {
+        ...initialState,
+        lastValue: state.value
+      };
     case SUGGEST_COLUMNS:
       return {
         ...state,
