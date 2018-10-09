@@ -13,6 +13,7 @@ import NotFound from './modules/NotFound/NotFound';
 import ScrollSync from './modules/ScrollSync/ScrollSync';
 import Calendar from './modules/Calendar/Calendar';
 // import Suggest from './modules/Suggest/App';
+import CaPatientNameComponents from './modules/CaPatient/CaPatientNameComponents';
 
 export default (store: any) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -43,6 +44,7 @@ export default (store: any) => {
       </Route>
       { /* <Route path="/suggest" component={Suggest} /> */ }
       <Route path="/form" component={Form} />
+      <Route path="/native" component={CaPatientNameComponents} />
       <Route path="/login" component={Login} />
       <Route path="/oauth2login" component={Oauth2Login} />
       <Route path="/scrollsync" component={ScrollSync} />

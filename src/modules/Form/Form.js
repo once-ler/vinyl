@@ -2,15 +2,19 @@
 /* eslint max-len: 0 */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
+// import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
+import { Form as FormComponent, Field, Submit } from 'easy-react-form';
 import ValidatedInput from '../../components/Input/ValidatedInput';
 import BorderedValidatedInput from '../../components/Input/BorderedValidatedInput';
 import SubmitButton from '../../components/Button/SubmitButton';
 import Legend from '../../components/Legend/Legend';
-import FormComponent from '../../components/Form/Form';
+// import FormComponent from '../../components/Form/Form';
 import Container from '../../components/Container/Container';
 import SlideContainer from '../../components/Container/SlideContainer';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
+
+// TODO.  This is a stub for deprecated simpler-redux-form.
+const submit = f => {}
 
 const submitAction = data => (dispatch, getState) => dispatch({ type: 'SUBMIT_REQUEST', data });
 
@@ -19,7 +23,7 @@ const validateLastName = lastName => !lastName ? 'Last name is required.' : unde
 const validatePhone = phone => !phone ? 'Phone number is required.' : undefined;
 
 const Form = props => {
-  const { firstName, lastName, phone, homeAddress, homeState, homeZip, submit, error } = props;
+  const { firstName, lastName, phone, homeAddress, homeState, homeZip, error } = props;
 
   return (
     <SlideContainer {...props}>      
@@ -108,4 +112,5 @@ const connectedComponent = connect(
   { submitAction }
 )(Form);
 
-export default SimplerForm({id: 'profile'})(connectedComponent);
+// export default SimplerForm({id: 'profile'})(connectedComponent);
+export default connectedComponent;

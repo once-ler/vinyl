@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Form as SimplerForm, } from 'simpler-redux-form';
+// import { Form as SimplerForm, } from 'simpler-redux-form';
+// import { Form as SimplerForm, } from 'easy-react-form';
 import toClass from 'recompose/toClass';
 import compose from 'recompose/compose';
 import withProps from 'recompose/withProps';
@@ -42,7 +43,7 @@ const connectFunc = connect(
 
 export default compose(
   connectFunc,
-  SimplerForm({id: 'upload'}),
+  // SimplerForm({id: 'upload'}),
   toClass,
   enhanceWithProps  
 )(Presentation);

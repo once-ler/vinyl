@@ -1,6 +1,6 @@
 /* @flow */
 import { routerReducer as routing } from 'react-router-redux';
-import { reducer as form } from 'simpler-redux-form';
+// import { reducer as form } from 'simpler-redux-form';
 import { authReducer as oauth2 } from 'redux-implicit-oauth2';
 import auth from './Login/Action';
 import theme from './App/ThemeAction';
@@ -13,12 +13,13 @@ import modal from './Modal/Action';
 import upload from './FileUpload/Action';
 import suggest from './Suggest/Action';
 import select from './Select/Action';
+import caPatient from './CaPatient/CaPatientAction'
 
 export default {
   routing,
   theme,
   progress,
-  form,
+  // form,
   auth,
   nav,
   profile,
@@ -28,5 +29,6 @@ export default {
   modal,
   upload,
   suggest,
-  select
+  select,
+  caPatient
 };

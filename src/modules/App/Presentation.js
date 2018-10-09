@@ -41,6 +41,9 @@ const Presentation = props => (
       <BetterLink to="/form">Form</BetterLink>
       </NavCell>
       <NavCell margin>
+      <BetterLink to="/native">Native</BetterLink>
+      </NavCell>
+      <NavCell margin>
       <BetterLink to="/scrollsync">ScrollSync</BetterLink>
       </NavCell>
       <NavCell margin>

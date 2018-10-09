@@ -2,6 +2,21 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+/*
+Remove select/datepicker (for now)
+sed -i 's/select:/\/\/ select:/' node_modules/tcomb-form-native/lib/templates/bootstrap/index.js
+sed -i 's/datepicker:/\/\/ datepicker:/' node_modules/tcomb-form-native/lib/templates/bootstrap/index.js
+or
+echo 'export default () => <input type="date" />' > node_modules/tcomb-form-native/lib/templates/bootstrap/datepicker.js
+echo 'export default () => <select />' > node_modules/tcomb-form-native/lib/templates/bootstrap/select.js
+
+// NOT NEEDED BELOW
+sed -i 's/module.exports =/export default /' node_modules/tcomb-form-native/lib/index.js
+sed -i 's/module.exports =/export default /' node_modules/tcomb-form-native/lib/components.js
+sed -i 's/module.exports =/export default /' node_modules/tcomb-form-native/lib/templates/bootstrap/index.js
+sed -i 's/module.exports =/export default /' node_modules/tcomb-form-native/lib/stylesheets/bootstrap.js
+sed -i 's/module.exports =/export default /' node_modules/tcomb-form-native/index.js
+*/
 module.exports = {
   devtool: 'eval',
   context: path.resolve(__dirname, '..'),
@@ -15,6 +30,9 @@ module.exports = {
     path: path.resolve(__dirname, '../static/dist')
   },
   resolve: {
+    alias: {
+      'react-native': 'react-native-web'
+    },
     modules: [
       'src',
       'node_modules'
@@ -74,7 +92,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules(?!\/simpler-redux-form)/, 
+        exclude: /node_modules(?!\/easy-react-form)(?!\/simpler-redux-form)(?!\/react-native-responsive-grid)(?!\/tcomb-form-native)/, 
         loader: 'babel-loader'
       },
       { test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file-loader?hash=sha512&digest=hex&name=[hash].[ext]'] },

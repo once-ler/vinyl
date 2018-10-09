@@ -3,16 +3,20 @@ import React from 'react';
 import {connect} from 'react-redux';
 import compose from 'recompose/compose';
 import toClass from 'recompose/toClass';
-import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
+// import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
+import { Form as FormComponent, Field, Submit } from 'easy-react-form';
 import {login} from './Middleware';
 import CenteredContainer from '../../components/Container/CenteredContainer';
 import CenteredCell from '../../components/Cell/CenteredCell';
 import SlideContainer from '../../components/Container/SlideContainer';
 import Legend from '../../components/Legend/Legend';
-import FormComponent from '../../components/Form/Form';
+// import FormComponent from '../../components/Form/Form';
 import ValidatedInput from '../../components/Input/ValidatedInput';
 import SubmitButton from '../../components/Button/SubmitButton';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
+
+// TODO.  This is a stub for deprecated simpler-redux-form.
+const submit = f => {}
 
 const mapDispatchToProps = dispatch => ({
   dispatch,
@@ -33,7 +37,7 @@ const submitAction = data => (dispatch, getState) => {
 const validateNotEmpty = input => !input ? 'Required.' : undefined;
 
 const Presentation = props => {
-  const { onSubmit, submit, error, loginError } = props;
+  const { onSubmit, error, loginError } = props;
   return (
     <SlideContainer direction="up">
     <CenteredContainer backgroundColor="#fefefe">
@@ -75,6 +79,6 @@ const Presentation = props => {
 
 export default compose(
   connectFunc,
-  SimplerForm({id: 'login'}),
+  // SimplerForm({id: 'login'}),
   toClass
 )(Presentation);

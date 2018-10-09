@@ -1,16 +1,20 @@
 import React from 'react';
-import { Field, Submit } from 'simpler-redux-form';
+// import { Field, Submit } from 'simpler-redux-form';
+import { Form as FormComponent, Field, Submit } from 'easy-react-form';
 import Legend from '../Legend/Legend';
 import SubmitButton from '../Button/SubmitButton';
 import Button from '../Button/Button';
 import Container from '../Container/Container';
-import FormComponent from '../Form/Form';
+// import FormComponent from '../Form/Form';
 import ResponsiveRow from '../Row/ResponsiveRow';
 import SlideContainer from '../Container/SlideContainer';
 
 import RenderDropzoneInput from './RenderDropzoneInput';
 
-export default ({submitAction, validateNotEmpty, submit, error, reset, dispatch}) => (
+// TODO.  This is a stub for deprecated simpler-redux-form.
+const submit = f => {}
+
+export default ({submitAction, validateNotEmpty, error, reset, dispatch}) => (
   <SlideContainer>      
     <Container backgroundColor="#fefefe">
       <FormComponent

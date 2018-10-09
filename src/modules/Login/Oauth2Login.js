@@ -3,7 +3,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import compose from 'recompose/compose';
 import toClass from 'recompose/toClass';
-import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
+// import { Form as SimplerForm, Field, Submit } from 'simpler-redux-form';
+import { Form as FormComponent, Field, Submit } from 'easy-react-form';
 import {login, logout} from 'redux-implicit-oauth2';
 import { updateOauth2Config } from './Action';
 import SubmitButton from '../../components/Button/SubmitButton';
@@ -11,9 +12,12 @@ import CenteredContainer from '../../components/Container/CenteredContainer';
 import CenteredCell from '../../components/Cell/CenteredCell';
 import SlideContainer from '../../components/Container/SlideContainer';
 import Legend from '../../components/Legend/Legend';
-import FormComponent from '../../components/Form/Form';
+// import FormComponent from '../../components/Form/Form';
 import ValidatedInput from '../../components/Input/ValidatedInput';
 import ResponsiveRow from '../../components/Row/ResponsiveRow';
+
+// TODO.  This is a stub for deprecated simpler-redux-form.
+const submit = f => {}
 
 const config = {
   url: 'https://localhost:4444/dialog/authorize',
@@ -34,7 +38,7 @@ const submitAction = props => data => {
 };
 
 const Login = props => {
-  const { url, client, submit, error, loginError, submitAction, isLoggedIn, login, logout } = props;
+  const { url, client, error, loginError, submitAction, isLoggedIn, login, logout } = props;
 
   if (isLoggedIn) {
     return <SubmitButton onClick={logout}>Logout</SubmitButton>
@@ -108,5 +112,5 @@ const connectFunc = connect(
 
 export default compose(
   connectFunc,
-  SimplerForm({id: 'oauth2login'})
+  // SimplerForm({id: 'oauth2login'})
 )(toClass(Presentation));
