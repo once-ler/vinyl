@@ -14,6 +14,7 @@ import ScrollSync from './modules/ScrollSync/ScrollSync';
 import Calendar from './modules/Calendar/Calendar';
 // import Suggest from './modules/Suggest/App';
 import CaPatientNameComponents from './modules/CaPatient/CaPatientNameComponents';
+import CaPatientIdType from './modules/CaPatient/CaPatientIdType';
 
 export default (store: any) => {
   const requireLogin = (nextState, replace, cb) => {

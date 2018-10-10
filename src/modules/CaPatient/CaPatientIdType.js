@@ -1,11 +1,10 @@
 /* @flow */
 import React from 'react'
-import setStatic from 'recompose/setStatic'
 import withProps from 'recompose/withProps'
 import compose from 'recompose/compose'
 import { Row, Column as Col, Grid} from 'react-native-responsive-grid'
 import {View, Platform} from 'react-native'
-import {CaPatientNameComponents} from './CaPatientTypes'
+import {CaPatientIdType} from './CaPatientTypes'
 import connectFunc from './ConnectFunc'
 import Form from '../../components/Form/Native/Form'
 import {doneButton, doneButtonDisabled} from './CaPatientButtons'
@@ -24,16 +23,13 @@ const flexLayout = Platform.OS === 'web' ?
     <SlideContainer>      
       <Container backgroundColor="#fefefe">
         <FormComponent>
-          <ResponsiveRow><Legend>Personal</Legend></ResponsiveRow>
+          <ResponsiveRow><Legend>Patient Id Type</Legend></ResponsiveRow>
           <ResponsiveRow>
-            <FormCell growBasis={3}>
-              <View>{locals.inputs.firstName}</View>
-            </FormCell>
             <FormCell growBasis={2}>
-              <View>{locals.inputs.middleName}</View>
+              <View>{locals.inputs.type}</View>
             </FormCell>
             <FormCell growBasis={3}>
-              <View>{locals.inputs.lastName}</View>
+              <View>{locals.inputs.id}</View>
             </FormCell>
           </ResponsiveRow>
         </FormComponent>
@@ -47,15 +43,12 @@ const flexLayout = Platform.OS === 'web' ?
     <Row>
       <Col size={90} offset={6} >
         <Row>
-          <Col size={40} smSize={100}>
-            <View>{locals.inputs.firstName}</View>
-          </Col>
-          <Col size={20} smSize={100}>
-            <View>{locals.inputs.middleName}</View>
-          </Col>
           <Col size={30} smSize={100}>
-            <View>{locals.inputs.lastName}</View>
-          </Col> 
+            <View>{locals.inputs.type}</View>
+          </Col>
+          <Col size={40} smSize={100}>
+            <View>{locals.inputs.id}</View>
+          </Col>
         </Row>
       </Col>
     </Row>
@@ -63,19 +56,13 @@ const flexLayout = Platform.OS === 'web' ?
   )
 }
 
-const enhanceWithStatic = setStatic(
-  'navigatorButtons', {
-    rightButtons: [doneButton]
-  }
-)
-
 const enhanceWithProps = withProps(({caPatient}) => {
   const { form: { isLoading } } = caPatient
   
   return {
-    classOf: CaPatientNameComponents,
+    classOf: CaPatientIdType,
     onSubmit: ({formValues, onCaPatientFormFieldChange, navigator}) => e => {
-      onCaPatientFormFieldChange('nameComponents', formValues)
+      onCaPatientFormFieldChange('ids', formValues)
       // Go back to previous page.
       // navigator.pop({animated: true, animationType: 'fade'})
     },
@@ -84,16 +71,13 @@ const enhanceWithProps = withProps(({caPatient}) => {
       xauto: 'placeholders',
       fields: {
         firstName: {
-          label: 'First Name',
+          label: 'Patient ID Type',
+          nullOption: {value: '', text: 'Choose the patient id type'},
           editable: !isLoading
         },
-        middleName: {
-          label: 'MI',
-          maxLength: 12,
-          editable: !isLoading
-        },
-        lastName: {
-          label: 'Last Name',
+        id: {
+          label: 'ID',
+          maxLength: 20,
           editable: !isLoading
         }
       }
@@ -102,7 +86,6 @@ const enhanceWithProps = withProps(({caPatient}) => {
 })
 
 export default compose(
-  // enhanceWithStatic,
   connectFunc,
   enhanceWithProps
 )(Form)

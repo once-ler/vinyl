@@ -7,8 +7,10 @@ Remove select/datepicker (for now)
 sed -i 's/select:/\/\/ select:/' node_modules/tcomb-form-native/lib/templates/bootstrap/index.js
 sed -i 's/datepicker:/\/\/ datepicker:/' node_modules/tcomb-form-native/lib/templates/bootstrap/index.js
 or
-echo 'export default () => <input type="date" />' > node_modules/tcomb-form-native/lib/templates/bootstrap/datepicker.js
-echo 'export default () => <select />' > node_modules/tcomb-form-native/lib/templates/bootstrap/select.js
+echo -e "import React from 'react'\nexport default () => <input type='date' />" > node_modules/tcomb-form-native/lib/templates/bootstrap/datepicker.js
+echo -e "import React from 'react'\nexport default () => <select />" > node_modules/tcomb-form-native/lib/templates/bootstrap/select.js
+
+cp src/components/Form/Native/Select.js node_modules/tcomb-form-native/lib/templates/bootstrap/select.js
 
 // NOT NEEDED BELOW
 sed -i 's/module.exports =/export default /' node_modules/tcomb-form-native/lib/index.js

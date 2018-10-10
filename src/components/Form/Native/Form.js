@@ -8,9 +8,12 @@ import withState from 'recompose/withState'
 import withHandlers from 'recompose/withHandlers'
 import compose from 'recompose/compose'
 import cloneDeep from 'lodash.clonedeep'
-import {Text, ScrollView, View, TouchableHighlight} from 'react-native'
+import {Text, ScrollView, View, TouchableHighlight, Platform} from 'react-native'
 import styles from './Styles'
 import {doneButton, doneButtonDisabled} from './Buttons'
+// Web
+import Container from '../../../components/Container/Container';
+import ResponsiveRow from '../../../components/Row/ResponsiveRow';
 
 const {form: {Form}} = t
 
@@ -52,12 +55,12 @@ const enhanceWithHandlers = withHandlers(({onSubmit, onNavigatorEvent}) => {
       value = value || nextValue
 
       // {formValues} is passed from previous screen in native.
-      let id = "TEST"
-      id = formValues ? formValues.id : id
+      let _id = "0"
+      _id = formValues ? formValues._id : _id
 
       if (value) {
         // Set pseudo id from passedFields.
-        setFormValues({...value, id})
+        setFormValues({...value, _id})
         setFormIsValid(true)
         navigator && navigator.setButtons({rightButtons: [doneButton]})
       } else {
@@ -86,19 +89,32 @@ const Presentation = ({
   styles,
   formValues
 }) => {
+  const _form = (<Form
+    ref={onRef}
+    type={classOf}
+    options={options}
+    value={formValues}
+    onChange={onChange}
+  />)
+
   // Late binding.
-  return (
-    <ScrollView keyboardShouldPersistTaps={'handled'}>
-    <View style={styles.container}>
-      <Form
-        ref={onRef}
-        type={classOf}
-        options={options}
-        value={formValues}
-        onChange={onChange}
-      />
-    </View>
-    </ScrollView>
+  return ( 
+    Platform.OS === 'web' ?
+    (
+      <Container style={{flex:1}}>
+        <ResponsiveRow>
+          {_form}
+        </ResponsiveRow>
+      </Container>
+    )
+    :
+    (
+      <ScrollView keyboardShouldPersistTaps={'handled'}>
+      <View style={styles.container}>
+      {_form}  
+      </View>
+      </ScrollView>
+    )
   )
 }
 

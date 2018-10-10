@@ -1,6 +1,6 @@
 /* @flow */
 import t from 'tcomb-form-native'
-const { String, Boolean, Number, Date, maybe: Option, struct: Class, list: List } = t
+const { String, Boolean, Number, Date, maybe: Option, struct: Class, list: List, enums: Enumeration } = t
 
 export const CaPatientPhoneInfo = Class({
   number: String,
@@ -11,10 +11,15 @@ export const CaPatientEmailInfo = Class({
   email: String,
   type: String
 })
- 
+
+const CaPatientIdTypeEnum = Enumeration({
+  B: 'Enum B',
+  V: 'Enum V'
+});
+
 export const CaPatientIdType = Class({
  id: String,
- type: String
+ type: CaPatientIdTypeEnum
 })
  
 export const CaPatientNameComponents = Class({
