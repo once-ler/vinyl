@@ -13,6 +13,7 @@ export const CaPatientEmailInfo = Class({
 })
 
 const CaPatientIdTypeEnum = Enumeration({
+  MRN: 'MRN',
   B: 'Enum B',
   V: 'Enum V'
 });
@@ -24,10 +25,10 @@ export const CaPatientIdType = Class({
  
 export const CaPatientNameComponents = Class({
   academic: Option(String),
-  firstName: String,
+  firstName: Option(String),
   givenName: Option(String),
   initials: Option(String),
-  lastName: String,
+  lastName: Option(String),
   lastNameFromSpouse: Option(String),
   lastNamePrefix: Option(String),
   middleName: Option(String),
@@ -44,35 +45,35 @@ export const CaPatientNameComponentsList = Class({
 })
  
 export const CaPatientAddress = Class({
-  city: String,
+  city: Option(String),
   country: Option(String),
   county: Option(String),
   district: Option(String),
   email: List(CaPatientEmailInfo),
   houseNumber: Option(String),
   phoneNumbers: List(CaPatientPhoneInfo),
-  postalCode: String,
-  state: String,
+  postalCode: Option(String),
+  state: Option(String),
   street: List(String),
   type: Option(String)
 })
  
 export const CaPatientCareTeamMember = Class({
   ids: List(CaPatientIdType),
-  name: String,
-  type: String
+  name: Option(String),
+  type: Option(String)
 })
  
 export const CaPatientEmergencyContact = Class({
   legalGuardian: Option(String),
-  name: String,
+  name: Option(String),
   phoneNumbers: List(CaPatientPhoneInfo),
-  relation: String
+  relation: Option(String)
 })
  
 export const CaPatientEmploymentInformation = Class({
-  employerName: String,
-  occupation: String,
+  employerName: Option(String),
+  occupation: Option(String),
   phoneNumbers: List(CaPatientPhoneInfo)
 })
  
@@ -82,11 +83,11 @@ export const CaPatient = Class({
   careTeam: List(CaPatientCareTeamMember),
   confidentialName: Option(String),
   createDate: Option(Date),
-  dateOfBirth: Date,
+  dateOfBirth: Option(Date),
   emergencyContacts: List(CaPatientEmergencyContact),
   employmentInformation: Option(CaPatientEmploymentInformation),
   ethnicity: List(String),
-  gender: String,
+  gender: Option(String),
   historicalIds: List(CaPatientIdType),
   homeDeployment: Option(String),
   id: Option(String),

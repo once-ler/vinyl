@@ -51,7 +51,7 @@ const Presentation = ({navigator, caPatient}) => {
       <TableView>
       <Section header="Name Components">
           {
-            caPatient.form.nameComponents.fields.map((a, id) => (
+            caPatient.form.nameComponents.fields.map((a, _id) => (
               <Cell
                 key={Math.random()}
                 cellStyle="Basic"
@@ -60,7 +60,7 @@ const Presentation = ({navigator, caPatient}) => {
                 onPress={
                   () => navigator.push({
                     screen: 'example.CaPatientNameComponents',
-                    passProps: {passedFields: {...a, id}}
+                    passProps: {passedFields: {...a, _id}}
                   })
                 }
                 contentContainerStyle={{ flex: 1 }}
