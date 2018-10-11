@@ -8,6 +8,9 @@ import withPropsOnChange from 'recompose/withPropsOnChange';
 import { navAction } from '../Nav';
 import Presentation from './Presentation';
 import { scrollSyncActions } from '../ScrollSync';
+// Test
+import * as caPatientActions from '../CaPatient/CaPatientAction';
+import {sampleCaPatient} from '../CaPatient/CaPatientInitialState'
 
 const mapDispatchToProps = dispatch => ({
   dispatch
@@ -50,6 +53,7 @@ const enhanceWithLifecycle = lifecycle({
   componentDidMount() {
     // For tests
     this.props.dispatch(scrollSyncActions.setList([{a: 1, b: 2}]));
+    this.props.dispatch(caPatientActions.fetchCaPatientFulfilled(sampleCaPatient))
   }
 });
 
