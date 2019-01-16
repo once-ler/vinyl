@@ -4,6 +4,7 @@ var BASE_DIR = process.cwd();
 var COMPONENT_FILE = 'vinyl-scrollsync-module';
 var COMPONENT_NAME = 'VinylScrollSyncModule';
 var plugins = [
+  new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.bundle.js'}),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
@@ -13,6 +14,7 @@ var plugins = [
       'NODE_ENV': JSON.stringify('production')
     }
   }),
+  /*
   new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,
     beautify: false,
@@ -25,6 +27,7 @@ var plugins = [
     },
     comments: false
   })
+  */
 ];
 
 COMPONENT_FILE += '.min';
@@ -32,7 +35,35 @@ COMPONENT_FILE += '.min';
 var config = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '.'),
-  entry: ['./index.js'],
+  entry: { app: ['./index.js'],
+  vendor: [
+      // 'axios',
+      'react',
+      'react-dom',
+      // 'react-router',
+      'react-redux',
+      // 'react-router-redux',
+      'redux',
+      // 'rxjs',
+      // 'autosuggest-highlight',
+      // 'history',
+      // 'ie-version',
+      // 'moment',
+      // 'react-autosuggest',
+      'react-collapse',
+      // 'react-dropzone',
+      'react-motion',
+      'react-portal-minimal',
+      // 'react-progress-2',
+      // 'react-view-pager',
+      'react-virtualized',
+      // 'react-virtualized-select',
+      'recompose',
+      // 'redux-implicit-oauth2',
+      // 'easy-react-form',
+      'styled-components'
+    ]
+  },
   output: {
     path: path.join(__dirname, '/../../../dist'),
     publicPath: 'dist/',
@@ -51,6 +82,7 @@ var config = {
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
   },
+  /**
   externals: {
     'react': {
       root: 'React',
@@ -66,9 +98,9 @@ var config = {
     },
     'styled-components': {
       root: 'Styled',
-      commonjs2: 'styled',
-      commonjs: 'styled',
-      amd: 'styled',
+      commonjs2: 'styled-components',
+      commonjs: 'styled-components',
+      amd: 'styled-components',
     },
     'react-virtualized': {
       root: 'ReactVirtualized',
@@ -93,8 +125,28 @@ var config = {
       commonjs2: 'react-redux',
       commonjs: 'react-redux',
       amd: 'react-redux',
-    },   
+    },
+    'recompose': {
+      root: 'Recompose',
+      commonjs2: 'recompose',
+      commonjs: 'recompose',
+      amd: 'recompose',
+    },
+    'react-portal-minimal': {
+      root: 'ReactPortal',
+      commonjs2: 'react-portal',
+      commonjs: 'react-portal',
+      amd: 'react-portal',
+    },
+    
+    'redux': {
+      root: 'Redux',
+      commonjs2: 'redux',
+      commonjs: 'redux',
+      amd: 'redux',
+    },    
   },
+  **/
 };
 
 module.exports = config;
