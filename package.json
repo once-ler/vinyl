@@ -1,6 +1,6 @@
 {
   "name": "vinyl",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -68,6 +68,8 @@
     "ie-version": "^0.1.0",
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.22.2",
+    "preact": "^8.4.2",
+    "preact-compat": "^3.18.4",
     "react": "^16.5.2",
     "react-art": "^16.5.2",
     "react-autosuggest": "^9.0.1",

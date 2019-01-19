@@ -14,7 +14,7 @@ var plugins = [
       'NODE_ENV': JSON.stringify('production')
     }
   }),
-  /*
+  
   new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,
     beautify: false,
@@ -27,7 +27,7 @@ var plugins = [
     },
     comments: false
   })
-  */
+  
 ];
 
 COMPONENT_FILE += '.min';
@@ -81,6 +81,10 @@ var config = {
   plugins: plugins,
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
+    alias: {
+			'react': 'preact-compat',
+			'react-dom': 'preact-compat'
+    },
   },
   /**
   externals: {
