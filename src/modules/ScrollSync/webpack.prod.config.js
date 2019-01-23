@@ -53,7 +53,7 @@ var config = {
       'react-collapse',
       // 'react-dropzone',
       'react-motion',
-      'react-portal-minimal',
+      // 'react-portal-minimal',
       'react-progress-2',
       // 'react-view-pager',
       'react-virtualized',
@@ -75,7 +75,12 @@ var config = {
   module: {
     loaders: [
       { test: /\.(js|jsx)/, exclude: /node_modules/, loader: 'babel-loader'},
-      { test: /\.css$/, loader: 'style-loader!css-loader'} 
+      { test: /\.css$/, loader: 'style-loader!css-loader'},
+      {
+        test: /\.ttf$/,
+        loader: "url-loader", // or directly file-loader
+        // include: path.resolve(__dirname, "node_modules/react-native-vector-icons"),
+      },
     ],
   },
   plugins: plugins,
