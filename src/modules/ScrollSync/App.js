@@ -101,5 +101,5 @@ const EnhancedScrollSync = compose(
 export default () =>
   <div>
     <Progress.Component />
-    <EnhancedScrollSync />
+    <ScrollSync />
   </div>
