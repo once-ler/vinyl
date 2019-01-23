@@ -14,7 +14,7 @@ var plugins = [
       'NODE_ENV': JSON.stringify('production')
     }
   }),
-  
+  /*
   new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,
     beautify: false,
@@ -27,7 +27,7 @@ var plugins = [
     },
     comments: false
   })
-  
+  */
 ];
 
 COMPONENT_FILE += '.min';
@@ -35,7 +35,7 @@ COMPONENT_FILE += '.min';
 var config = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '.'),
-  entry: { app: ['./index.js'],
+  entry: { app: ['./entry.js'],
   vendor: [
       // 'axios',
       'react',
@@ -54,7 +54,7 @@ var config = {
       // 'react-dropzone',
       'react-motion',
       'react-portal-minimal',
-      // 'react-progress-2',
+      'react-progress-2',
       // 'react-view-pager',
       'react-virtualized',
       // 'react-virtualized-select',
@@ -79,6 +79,11 @@ var config = {
     ],
   },
   plugins: plugins,
+  node: {
+    net: 'empty',
+    tls: 'empty',
+    dns: 'empty'
+  },
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
     alias: {
@@ -92,13 +97,13 @@ var config = {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
-      amd: 'react',
+      amd: 'React',
     },
     'react-dom': {
       root: 'ReactDom',
       commonjs2: 'react-dom',
       commonjs: 'react-dom',
-      amd: 'react-dom',
+      amd: 'ReactDom',
     },
     'styled-components': {
       root: 'Styled',

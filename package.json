@@ -1,6 +1,6 @@
 {
   "name": "vinyl",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -92,7 +92,7 @@
     "recompose": "^0.23.5",
     "redux": "^3.6.0",
     "redux-implicit-oauth2": "^1.0.1",
-    "styled-components": "3.4.10",
+    "styled-components": "^2.0.0",
     "tcomb-form-native": "^0.6.19"
   }
 }
