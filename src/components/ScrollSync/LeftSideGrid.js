@@ -16,7 +16,9 @@ export default ({
   rowHeight,
   rowCount,
   scrollTop,
-  freezeColumns
+  freezeColumns,
+  leftSideHeaderBackgroundColor,
+  leftCornerHeaderBackgroundColor
 }) => (
   <div>
     <LeftSideGridColumn
@@ -24,6 +26,7 @@ export default ({
       columnWidth={columnWidth}
       rowHeight={rowHeight}
       freezeColumns={freezeColumns}
+      backgroundColor={leftCornerHeaderBackgroundColor || '#ffc1c1'}
     />
     <LeftSideGridContainer
       style={{
@@ -44,7 +47,7 @@ export default ({
           rowCount={rowCount}
           scrollTop={scrollTop}
           width={columnWidth + (columnWidth * freezeColumns)}
-          backgroundColor="#f0ffff"
+          backgroundColor={leftSideHeaderBackgroundColor || '#c1ffc1'}
         />
       </LeftSideGridWrapper>
     </LeftSideGridContainer>

@@ -18,7 +18,10 @@ export default ({
     renderLeftHeaderCell,
     list,
     progress,
-    freezeColumns
+    freezeColumns,
+    leftSideHeaderBackgroundColor,
+    leftCornerHeaderBackgroundColor,
+    topHeaderBackgroundColor
   }) => (
     <ScrollSync>
       {({ clientHeight, clientWidth, onScroll, scrollHeight, scrollLeft, scrollTop, scrollWidth }) => {
@@ -38,6 +41,8 @@ export default ({
               scrollTop={scrollTop}
               height={height}
               freezeColumns={freezeColumns}
+              leftSideHeaderBackgroundColor={leftSideHeaderBackgroundColor}
+              leftCornerHeaderBackgroundColor={leftCornerHeaderBackgroundColor}
             />
             <RightSideGrid
               columnWidth={columnWidth}
@@ -51,6 +56,7 @@ export default ({
               overscanRowCount={overscanRowCount}
               renderBodyCell={renderBodyCell}
               rowCount={rowCount}
+              topHeaderBackgroundColor={topHeaderBackgroundColor}
             />
           </GridRow>
         );

@@ -8,7 +8,8 @@ export default ({
   renderLeftHeaderCell,
   columnWidth,
   rowHeight,
-  freezeColumns
+  freezeColumns,
+  backgroundColor
 }) => (
   <LeftSideGridContainer
     style={{
@@ -25,7 +26,7 @@ export default ({
       columnWidth={columnWidth}
       rowCount={1}
       columnCount={1 + freezeColumns}
-      backgroundColor="#f0ffff"
+      backgroundColor={backgroundColor || '#ffc1c1'}
     />
   </LeftSideGridContainer>
 );

@@ -18,7 +18,8 @@ export default ({
   overscanRowCount,
   renderHeaderCell,
   scrollLeft,
-  renderRowHeight
+  renderRowHeight,
+  topHeaderBackgroundColor
 }) => (
   <GridColumn>
     <AutoSizer disableHeight>
@@ -35,7 +36,7 @@ export default ({
             rowCount={1}
             scrollLeft={scrollLeft}
             width={width - scrollbarSize()}
-            backgroundColor="#f0ffff"
+            backgroundColor={topHeaderBackgroundColor || '#ffc1c1'}
           />
         </RightSideGridColumn>
         <RightSideGridColumn width={width} height={height}>

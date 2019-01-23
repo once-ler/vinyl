@@ -37,10 +37,10 @@ const reducer = (state = initialState, action) => {
     case SCROLLSYNC_MERGE_FREEZELIST:
       const result: MergeFreezeListResult = mergeFreezeList(action.list, action.keys);
       const {list: newList, keys} = result;
-
+      
       return {
         ...state,
-        newList,
+        list: newList,
         columns: keys,
         columnCount: keys.length,
         rowCount: newList.length,

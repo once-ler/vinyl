@@ -43,6 +43,7 @@ const ReactCollapsePresentation = styled(ReactCollapse)`
   box-shadow: 5px 8px 6px #777;
   text-align: left;
   overflow: hidden;
+  padding: 5px 15px;
 `;
 
 const ReactCollapseContent = styled.div`
