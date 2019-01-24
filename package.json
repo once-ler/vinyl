@@ -45,6 +45,7 @@
     "eslint-plugin-babel": "^4.0.0",
     "eslint-plugin-flowtype": "^2.29.2",
     "eslint-plugin-import": "^2.2.0",
+    "file-loader": "^3.0.1",
     "flow-bin": "^0.37.4",
     "html-webpack-plugin": "^2.26.0",
     "micro": "^7.3.3",
