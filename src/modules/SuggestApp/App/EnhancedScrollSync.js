@@ -2,8 +2,21 @@ import React from 'react';
 import withProps from 'recompose/withProps';
 import compose from 'recompose/compose';
 import connectFunc from './Connect';
-import ScrollSync, {Div, Collapse, HeaderCell} from '../../ScrollSync';
+import ScrollSync, {Div, Collapse, HeaderCell, Presentation as ScrollSyncPresentation} from '../../ScrollSync';
 import {formatCellToDate} from './Util';
+
+const baseProps = withProps({
+  columnCount: 50,
+  rowCount: 20,
+  columnWidth: 140,    
+  fontFamily: `Helvetica, Arial, sans-serif`,
+  fontSize: '0.8em',
+  height: 300,
+  overscanColumnCount: 0,
+  overscanRowCount: 5,
+  rowHeight: 40,
+  freezeColumns: 0
+})
 
 const renderCell = ({props, columnIndex, key, rowIndex, style}) => {
   const { suggestedData: { payload } } = props;
@@ -72,6 +85,7 @@ const enhanceScrollSyncWithProps = withProps(props => ({
 }));
 
 export default compose(
+  baseProps,
   connectFunc,
   enhanceScrollSyncWithProps
-)(ScrollSync);
+)(ScrollSyncPresentation);

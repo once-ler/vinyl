@@ -29,7 +29,8 @@ module.exports = {
       'react-virtualized-select',
       'recompose',
       'redux-implicit-oauth2',
-      'simpler-redux-form',
+      'easy-react-form',
+      // 'simpler-redux-form',
       'styled-components'
     ]
   },

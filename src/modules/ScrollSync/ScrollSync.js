@@ -23,7 +23,7 @@ const connectFunc = connect(
   mapDispatchToProps
 );
 
-const baseProps = defaultProps({
+const baseProps = withProps({
   columnCount: 50,
   rowCount: 20,
   columnWidth: 140,    

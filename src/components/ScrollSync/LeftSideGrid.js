@@ -47,7 +47,7 @@ export default ({
           rowCount={rowCount}
           scrollTop={scrollTop}
           width={columnWidth + (columnWidth * freezeColumns)}
-          backgroundColor={leftSideHeaderBackgroundColor || '#c1ffc1'}
+          backgroundColor={leftSideHeaderBackgroundColor || '#f8f8ff'}
         />
       </LeftSideGridWrapper>
     </LeftSideGridContainer>
