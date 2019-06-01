@@ -4,7 +4,6 @@ export default theme => {
     container: {
       position: 'relative', width: '100%'
     },
-    containerOpen: 'react-autosuggest__container--open',
     input: {
       width: '100%',
       height: '30px',
