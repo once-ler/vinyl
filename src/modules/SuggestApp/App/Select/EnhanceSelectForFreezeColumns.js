@@ -38,13 +38,13 @@ const enhanceWithHandlers = withHandlers({
   onChange: ({suggestActions, selectActions, suggestedDataPre, setValue}) => value => {
     setValue(value)
     const fset = value ? value.split(',') : []
-    
+  
     selectActions.changeFreezeColumns(fset)
     
     const {payload} = suggestedDataPre
     const result: MergeFreezeListResult = mergeFreezeList(payload, fset)
     const {list, keys} = result
-    
+   
     suggestActions.fetchSuggestSelectedSuccess(list)
     suggestActions.setColumns(keys);
   },

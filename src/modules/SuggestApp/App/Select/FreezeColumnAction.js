@@ -5,13 +5,13 @@ const CHANGE_FREEZE_COLUMNS = 'CHANGE_FREEZE_COLUMNS'
 const RESET_FREEZE_COLUMNS = 'RESET_FREEZE_COLUMNS'
 
 const initialState = {
-  columns: []
+  columns: [], columnCount: 0
 }
 
 export default (state: any = initialState, action: any) => {
   switch (action.type) {
     case CHANGE_FREEZE_COLUMNS:
-      return {...state, columns: action.columns}
+      return {...state, columns: action.columns, columnCount: action.columns.length}
     case RESET_FREEZE_COLUMNS:
       return initialState
     default:

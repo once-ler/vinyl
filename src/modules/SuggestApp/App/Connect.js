@@ -16,7 +16,8 @@ export default connect(
     rowCount: state.suggest.rowCount,
     columnCount: state.suggest.columnCount,
     theme: state.theme,
-    progress: state.progress
+    progress: state.progress,
+    freezeColumns: state.freezeColumns.columnCount
   }),
   dispatch => bindActionCreators({...suggestActions, ...selectActions, ...scrollSyncActions, ...freezeColumnsActions}, dispatch)
 );
