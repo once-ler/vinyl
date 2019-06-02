@@ -22,7 +22,33 @@ const processResult = async (task, additionalSuccessCallback, additionalFailureC
   const { esearchresult: {idlist} } = task;
 
   // Get summaries for all id's.
-  const summaries = await apiClient.get(`/api/pubmed/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id=${idlist.join()}`);
+  const summaries = await apiClient.get(`/api/pubmed/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id=${idlist.join()}`)
+    .catch((error) => {
+      // Error
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        // console.log(error.response.data);
+        // PubMed responds with status 429 (Too Many Requests)
+        console.log(error.response.status);
+        // console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message);
+      }
+    })
+  
+  if (typeof summaries === 'undefined') {
+    task.store.dispatch(progressActions.hideProgress());
+    // TODO: Need to alert user.
+    return;
+  }  
+
   const results = idlist.map(id => summaries.data.result[id]);
   
   task.store.dispatch(suggestActions.fetchSuggestSuccess(results));
