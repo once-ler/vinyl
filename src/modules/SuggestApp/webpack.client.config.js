@@ -38,7 +38,7 @@ module.exports = {
     filename: '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].js',
     path: path.resolve(__dirname, '../../../examples/suggestApp/suggest'),
-    publicPath: '/suggest/'
+    publicPath: '/vinyl/examples/suggest/'
   },
   // progress: true,
   resolve: {
