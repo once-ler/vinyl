@@ -14,6 +14,7 @@ import {suggestActions} from '../../Suggest';
 import Progress from 'react-progress-2';
 import options from './SuggestOptions';
 import FreezeColumnsSelect from './Select/EnhanceSelectForFreezeColumns';
+import Modal from '../../Modal/Modal'
 
 const GradientContainer = styled(Container)`
   background-image: ${p => `linear-gradient(to right, ${p.theme.secondary}, ${p.theme.main})`};
@@ -28,6 +29,7 @@ const Presentation = props => {
   
   return (
     <Container style={{width: '100%', position: 'relative'}}>
+      <Modal></Modal>
       <Progress.Component style={{backgroundColor: '#fefefe'}} />
       <Container style={{width: '100%', position: 'absolute', zIndex: 4, backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         <Row><Cell style={{color: props.theme.secondary, padding: '6px 8px 0 28px', maxHeight: '45px', overflow: 'hidden'}}>Cloud source</Cell><Select style={{width: '400px'}} options={options} /></Row>

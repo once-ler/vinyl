@@ -3,6 +3,7 @@ import { TransitionMotion, spring } from 'react-motion';
 import styled from 'styled-components';
 
 const Overlay = styled.div`
+  z-index: 99;
   position: fixed;
   top: 0;
   right: 0;
@@ -18,6 +19,7 @@ const Overlay = styled.div`
 `;
 
 const ModalContent = styled.div`
+  z-index: 99;
   width: 50%;
   padding: 50px;
   border-radius: 3px;
