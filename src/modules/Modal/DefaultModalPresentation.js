@@ -32,6 +32,16 @@ const ModalContent = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 `;
 
+const ModalTitle = styled.div`
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: block;
+  line-height: 18px;
+  color: crimson;
+  font-weight: 500;
+`;
+
 const ModalClose = styled.div`
   position: absolute;
   top: 8px;
@@ -40,12 +50,13 @@ const ModalClose = styled.div`
   width: 24px;
   height: 24px;
   padding: 5px;
-  line-height: 18px;
+  line-height: 24px;
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
   background: #F34261;
   color: #fff;
+  font-size: 2em;
 
   &:before {
     content: '\00D7';
@@ -63,6 +74,7 @@ const Presentation = props => {
           {shown && <Overlay onClick={onClose} />}
           { interpolated.map(({ key, style, data }) => (
             <ModalContent key={`${key}-modal`} style={{ transform: `scale(${style.scale})`, opacity: style.opacity }}>
+              <ModalTitle>{data.modalProps.title}</ModalTitle>
               <ModalClose onClick={onClose}></ModalClose>
               {data.modalProps.content}
             </ModalContent>

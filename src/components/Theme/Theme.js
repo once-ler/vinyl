@@ -3,7 +3,7 @@ export const greenTheme = {
   main: 'slategray',
   secondary: 'rosybrown',
   tertiary: 'lightyellow',
-  fontFamily: 'Georgia, serif',
+  fontFamily: 'Helvetica, Arial, sans-serif;',
   fontSize: '1em',
   backgroundColor: 'papayawhip'
 };
