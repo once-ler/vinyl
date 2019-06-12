@@ -12,11 +12,20 @@ import {
   defaultSuggest as defaultPubmedSuggest
 } from './App/PubMed/Middleware';
 
+import {
+  fetchSuggest as customLoggingSuggest,
+  fetchSuggestSelected as customLoggingSelectedSuggest,
+  defaultSuggest as defaultCustomLoggingSuggest
+} from './App/CustomLoggingSearch/Middleware';
+
 export default [
   redditSuggest,
   redditSelectedSuggest,
   defaultRedditSuggest,
   pubmedSuggest,
   pubmedSelectedSuggest,
-  defaultPubmedSuggest
+  defaultPubmedSuggest,
+  customLoggingSuggest,
+  customLoggingSelectedSuggest,
+  defaultCustomLoggingSuggest
 ];
