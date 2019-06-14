@@ -11,33 +11,54 @@ import {
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import AutoComplete from '../../../../components/AutoComplete/Native/AutoComplete'
-import * as suggestActions from '../Suggest/SuggestAction'  
+import Container from '../../../../components/Container/Container';
+import Row from '../../../../components/Row/Row';
+import Cell from '../../../../components/Cell/Cell';
+import * as suggestActions from '../Suggest/SuggestAction'
+import * as listActions from '../List/FlatListAction'
 import withHandlers from 'recompose/withHandlers'
 import defaultProps from 'recompose/defaultProps'
 import compose from 'recompose/compose'
+
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+}
 
 // User need to override searchUrl and parseForSuggestions as needed
 const enhanceWithDefaultProps = defaultProps({
   placeholder: 'Enter item to search',
   searchUrl: 'http://mygene.info/v2/query?species=human&q=',
   parseForSuggestions: data => data && data.hits ? data.hits : [],
+  keyExtractor: (item, index) => item._id.toString(),
   onTagsChange: tags => tags
 })
 
 const connectFunc = connect(
   state => ({
-    suggest: state.suggest,
+    value: state.suggest.value,
+    lastValue: state.suggest.lastValue,
     data: state.suggest.data,
     tagsSelected: state.suggest.tagsSelected
   }),
-  dispatch => bindActionCreators(suggestActions, dispatch)
+  dispatch => bindActionCreators({...suggestActions, ...listActions}, dispatch)
 )
 
-// const enhanceWithTagsSelectedState = withState('tagsSelected', 'setTagsSelected', [])
-
 const enhanceWithHandlers = withHandlers({
-  handleOnChange: ({searchUrl, fetchSuggest}) => text =>
-    fetchSuggest({ url: `${searchUrl}${text}` }),
+  handleOnChange: ({searchUrl, fetchSuggest, updateInputValue}) => text => {
+    updateInputValue(text)
+    fetchSuggest({ url: `${searchUrl}${text}` })
+  },
   handleDelete: ({tagsSelected, onTagsChange, updateTagsSelected}) => index => {
     tagsSelected.splice(index, 1)
     // setTagsSelected(tagsSelected)
@@ -52,10 +73,12 @@ const enhanceWithHandlers = withHandlers({
   }
 })
 
-const Presentation = ({data, query, tagsSelected, handleAddition, handleDelete, handleOnChange, parseForSuggestions,
-  renderTags, renderSuggestion, renderSeparator, placeholder}) => {
-  const d = data && data.hits ? data.hits : []
-console.log(d)
+const Presentation = ({data, value, lastValue, tagsSelected, handleAddition, handleDelete, handleOnChange, parseForSuggestions,
+  renderTags, renderSuggestion, renderSeparator, placeholder, keyExtractor, 
+  fetchSuggestSelected, updateInputValue, clearSuggestions, listFetch}) => {
+  
+  const d = parseForSuggestions(data)
+
   return (
   <View style={styles.container}>
     <View style={styles.autocompleteContainer}>
@@ -64,16 +87,24 @@ console.log(d)
         autoCorrect={false}
         containerStyle={styles.autocompleteContainer}
         data={d}
-        defaultValue={query}
-        keyExtractor={(item, index) => item._id.toString()}
+        defaultValue={lastValue}
+        value={value}
+        keyExtractor={keyExtractor}
         itemHeight={20}
         maxItems={10}
-        onChangeText={handleOnChange}
-        placeholder="Enter gene symbol"
+        onChangeText={debounce(handleOnChange, 200, true)}
+        placeholder={placeholder}
         renderItem={({index, item}) => {
           const {taxid, symbol, name, entrezgene, _id} = item
-          console.log(taxid)
-          return (<TouchableOpacity onPress={() => this.setState({ query: name, genes: [] })}>
+          
+          return (<TouchableOpacity onPress={() => {
+            // this.setState({ query: name, genes: [] })
+            fetchSuggestSelected({value: name})
+            updateInputValue(name)
+            clearSuggestions()
+
+            listFetch(name)
+            }}>
             <Text style={styles.itemText}>{_id} {taxid} {symbol} {name})</Text>
             </TouchableOpacity>
           )
@@ -81,6 +112,7 @@ console.log(d)
         renderSeparator={renderSeparator}
       />
     </View>
+    <View style={styles.lastValueContainer}><Text>{lastValue}</Text></View>
   </View>
 )
 }
@@ -97,13 +129,22 @@ const styles = StyleSheet.create({
     flex: 1,
     left: 20,
     position: 'absolute',
-    right: 20,
+    // right: 20,
     top: 0,
+    maxWidth: 250,
     zIndex: 1
   },
   itemText: {
     fontSize: 15,
     margin: 2
+  },
+  lastValueContainer: {
+    flex: 1,
+    left: 20,
+    position: 'absolute',
+    // right: 20,
+    top: 50,
+    maxWidth: 250
   },
   label: {
     color: "#614b63",

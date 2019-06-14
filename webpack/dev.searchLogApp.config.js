@@ -7,7 +7,7 @@ module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: [
     'babel-polyfill',
-    './src/modules/SearchLogApp/index.js'
+    './src/modules/SearchLogApp/index.dev.js'
   ],
   output: {
     filename: '[name]-[hash].js',
@@ -77,7 +77,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules(?!\/simpler-redux-form)/, 
+        exclude: /node_modules(?!\/react-native-responsive-grid)/, 
         loader: 'babel-loader'
       },
       { test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file-loader?hash=sha512&digest=hex&name=[hash].[ext]'] },

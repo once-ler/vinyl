@@ -38,7 +38,7 @@ const randomUsers = (count = 10) => {
 
 const fakePromise = willReject => {
   return new Promise((resolve, reject) => {
-    if (willReject || j > 20) {
+    if (willReject || j > 100) {
       reject([])
     }
     resolve(randomUsers(10))
@@ -66,3 +66,29 @@ export const listFetchReachedEndEpic = action$ =>
     ofType(LIST_FETCH_REACHED_END),
     mergeMap(() => of({type:LIST_FETCH}))  
   )
+
+  /*
+  retstart
+  /api/pubmed/entrez/eutils/esearch.fcgi?db=pubmed&retmax=10&retmode=json&field=source&term=${task.source}
+  */
+
+/*
+export const fetchSuggestEpic = (action$, state$) =>
+  action$.pipe(
+    ofType(FETCH_SUGGEST_SELECTED),
+    mergeMap(action => {
+        const src = typeof action.promise !== 'undefined' ? from(action.promise) : ajax(action.url)
+        
+        return src.pipe(
+          map(d => fetchSuggestSuccess(d.hasOwnProperty('response') ? d.response : d)),
+          takeUntil(action$.pipe(ofType(FETCH_SUGGEST_SELECTED_CANCELLED))),
+          catchError(error => of({
+            type: FETCH_SUGGEST_SELECTED_REJECTED,
+            payload: error,
+            error: true
+          }))
+        )
+      }
+    )
+  )  
+*/

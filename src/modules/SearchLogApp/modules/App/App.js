@@ -9,6 +9,7 @@ import Cell from '../../../../components/Cell/Cell';
 import {connectFunc} from './Connect';
 import Select from '../../../Select/Select';
 import AutoComplete from '../AutoComplete/AutoComplete'
+import FlatListTab from '../List/FlatListTab'
 import Progress from 'react-progress-2';
 import options from './SuggestOptions';
 import Modal from '../../../Modal/Modal'
@@ -16,26 +17,30 @@ import Modal from '../../../Modal/Modal'
 const GradientContainer = styled(Container)`
   background-image: ${p => `linear-gradient(to right, ${p.theme.secondary}, ${p.theme.main})`};
   width: 100%;
+  height: 100%;
   position: absolute;
-  z-index: 1;
+  padding: 30px 50px;
+  z-index: 0;
 `;
 
 const Presentation = props => {
   return (
-    <Container style={{width: '100%', position: 'relative'}}>
+    <Container style={{flex: 1, width: '100%', height: '500px', position: 'relative'}}>
       <Modal></Modal>
       <Progress.Component style={{backgroundColor: '#fefefe'}} />
       <Container style={{width: '100%', position: 'absolute', zIndex: 4, backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         <Row><Cell style={{color: props.theme.secondary, padding: '6px 8px 0 28px', maxHeight: '45px', overflow: 'hidden'}}>Cloud source</Cell><Select style={{width: '400px'}} options={options} /></Row>
       </Container>
-      <GradientContainer style={{position: 'absolute', top: 30, zIndex: 3, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
+      <Container style={{position: 'absolute', top: 30, zIndex: 3, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         
         <Row style={{padding: '0 0 0 130px'}}><AutoComplete /><Cell style={{color: props.theme.tertiary, padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden'}}>{props.lastInputValue}</Cell></Row>
         
-      </GradientContainer>
-      <GradientContainer style={{width: '100%', position: 'absolute', top: 120, zIndex: 1}}>
-        <div>Hey</div>
-      </GradientContainer>
+      </Container>
+      <Container style={{width: '100%', position: 'absolute', top: 120, zIndex: 2}}>
+        <div>Here</div>
+        <FlatListTab />  
+      </Container>
+      
     </Container>
   );
 };

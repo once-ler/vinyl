@@ -6,6 +6,7 @@ export const FETCH_SUGGEST_SELECTED = 'FETCH_SUGGEST_SELECTED';
 export const FETCH_SUGGEST_SELECTED_PRE_SUCCESS = 'FETCH_SUGGEST_SELECTED_PRE_SUCCESS';
 export const FETCH_SUGGEST_SELECTED_SUCCESS = 'FETCH_SUGGEST_SELECTED_SUCCESS';
 export const FETCH_SUGGEST_SELECTED_FAIL = 'FETCH_SUGGEST_SELECTED_FAIL';
+export const FETCH_SUGGEST_SELECTED_CANCELLED = 'FETCH_SUGGEST_SELECTED_CANCELLED';
 export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
 export const DEFAULT_SUGGEST = 'DEFAULT_SUGGEST';
 export const CLEAR_SUGGEST = 'CLEAR_SUGGEST';
@@ -15,6 +16,7 @@ export const SUGGEST_COLUMN_COUNT = 'SUGGEST_COLUMN_COUNT';
 export const SUGGEST_ROW_COUNT = 'SUGGEST_ROW_COUNT';
 export const TAGS_SELECTED = 'TAGS_SELECTED';
 export const FETCH_SUGGEST_REJECTED = 'FETCH_SUGGEST_REJECTED'
+export const FETCH_SUGGEST_SELECTED_REJECTED = 'FETCH_SUGGEST_SELECTED_REJECTED'
 
 const initialState = {
   data: {},
@@ -67,6 +69,7 @@ export default function reducer(state = initialState, action = {}) {
     case FETCH_SUGGEST_SELECTED:
       return {
         ...state,
+        selected: action.value,
         loading: true
       };
     case FETCH_SUGGEST_SELECTED_PRE_SUCCESS:
@@ -90,6 +93,13 @@ export default function reducer(state = initialState, action = {}) {
         suggestedData: null,
         suggestedError: action
       };
+    case FETCH_SUGGEST_SELECTED_CANCELLED:
+      return {
+        ...state,
+        loading: false,
+        data: null,
+        error: null
+      }  
     case UPDATE_INPUT_VALUE:
       return {
         ...state,
@@ -109,7 +119,8 @@ export default function reducer(state = initialState, action = {}) {
     case CLEAR_SUGGEST:
       return {
         ...initialState,
-        lastValue: state.value
+        lastValue: state.value,
+        selected: state.value
       };
     case SUGGEST_COLUMNS:
       return {

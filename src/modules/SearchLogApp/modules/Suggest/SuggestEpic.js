@@ -26,7 +26,7 @@ export const fetchSuggestEpic = (action$, state$) =>
 
 /* 
 // can also check d.xhr.responseHeaders
-export const fetchSuggesEpic = (action$, state$) =>
+export const fetchSuggestEpic = (action$, state$) =>
   action$.pipe(
     ofType(FETCH_SUGGEST),
     mergeMap(action =>

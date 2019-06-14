@@ -7,13 +7,14 @@ export const LIST_FETCH_REJECTED = 'LIST_FETCH_REJECTED'
 
 const initialState = {
   refreshing: false,
-  filter: {},
+  filter: null,
   payload: []
 }
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case LIST_FETCH:
+      console.log(action)
       return {...state, filter: action.filter, refreshing: true}
     case LIST_FETCH_SUCCESS:
       const payload = state.payload.concat(action.payload)
