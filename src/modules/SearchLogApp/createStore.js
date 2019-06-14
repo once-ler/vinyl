@@ -10,7 +10,6 @@ import rootEpic from './modules/epic'
 export default function createStore(data = {}) {
   // redux related book keeping
   const epicMiddleware = createEpicMiddleware()
-  epicMiddleware.run(rootEpic)
   const middleware = [epicMiddleware]
   const finalReducer = combineReducers({ ...reducer })
 
@@ -29,5 +28,7 @@ export default function createStore(data = {}) {
     })    
   }
 
+  epicMiddleware.run(rootEpic)
+  
   return store;
 }

@@ -17,7 +17,7 @@ export const TAGS_SELECTED = 'TAGS_SELECTED';
 export const FETCH_SUGGEST_REJECTED = 'FETCH_SUGGEST_REJECTED'
 
 const initialState = {
-  data: [],
+  data: {},
   loading: false,
   lastValue: '',
   value: '',
@@ -35,14 +35,14 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case FETCH_SUGGEST:
-      // console.log(action)
+      console.log(action)
       return {
         ...state,
         ...action,
         loading: true
       };
     case FETCH_SUGGEST_SUCCESS:
-    // console.log(action)  
+    console.log(action)  
     return {
         ...state,
         loading: false,
@@ -50,7 +50,7 @@ export default function reducer(state = initialState, action = {}) {
         error: null
       };
     case FETCH_SUGGEST_FAIL:
-    //console.log(action)
+    console.log(action)
       return {
         ...state,
         loading: false,

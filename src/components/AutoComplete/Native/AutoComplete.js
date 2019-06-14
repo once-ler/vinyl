@@ -126,7 +126,6 @@ class Autocomplete extends Component {
     } = this.props;
     
     const height = Math.min(itemHeight*data.length,maxItems*itemHeight)
-    // console.log(height)
     return (
       <FlatList
         ref={(resultList) => { this.resultList = resultList; }}

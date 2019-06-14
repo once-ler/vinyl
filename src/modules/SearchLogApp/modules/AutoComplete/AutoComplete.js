@@ -4,16 +4,14 @@ import React  from 'react';
 import {
   StyleSheet,
   View,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
 
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-// import AutoTags from '../../components/AutoTags/AutoTags';
 import AutoComplete from '../../../../components/AutoComplete/Native/AutoComplete'
 import * as suggestActions from '../Suggest/SuggestAction'  
-// import withState from 'recompose/withState'
-// import withProps from 'recompose/withProps'
 import withHandlers from 'recompose/withHandlers'
 import defaultProps from 'recompose/defaultProps'
 import compose from 'recompose/compose'
@@ -56,7 +54,8 @@ const enhanceWithHandlers = withHandlers({
 
 const Presentation = ({data, query, tagsSelected, handleAddition, handleDelete, handleOnChange, parseForSuggestions,
   renderTags, renderSuggestion, renderSeparator, placeholder}) => {
-  
+  const d = data && data.hits ? data.hits : []
+console.log(d)
   return (
   <View style={styles.container}>
     <View style={styles.autocompleteContainer}>
@@ -64,7 +63,7 @@ const Presentation = ({data, query, tagsSelected, handleAddition, handleDelete, 
         autoCapitalize="none"
         autoCorrect={false}
         containerStyle={styles.autocompleteContainer}
-        data={data}
+        data={d}
         defaultValue={query}
         keyExtractor={(item, index) => item._id.toString()}
         itemHeight={20}
@@ -73,6 +72,7 @@ const Presentation = ({data, query, tagsSelected, handleAddition, handleDelete, 
         placeholder="Enter gene symbol"
         renderItem={({index, item}) => {
           const {taxid, symbol, name, entrezgene, _id} = item
+          console.log(taxid)
           return (<TouchableOpacity onPress={() => this.setState({ query: name, genes: [] })}>
             <Text style={styles.itemText}>{_id} {taxid} {symbol} {name})</Text>
             </TouchableOpacity>
