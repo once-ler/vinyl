@@ -3,6 +3,7 @@ import {
   FlatList,
   Text,
   ScrollView,
+  
   TouchableHighlight,
   View,
   StyleSheet,
@@ -26,11 +27,27 @@ setBreakPoints({
 class FlatListTab extends Component {
   constructor(props) {
     super(props)
-    props.listFetch()
+    // props.listFetch()
+    this.state = {
+      stickyHeaderIndices: []
+    }
   }
 
   static propTypes = {
     listStyle: ListView.propTypes.style
+  }
+
+  componentWillMount() {
+    var arr = [];
+    this.props.data.map(obj => {
+      if (obj.header) {
+        arr.push(this.props.data.indexOf(obj))
+      }
+    })
+    arr.push(0);
+    this.setState({
+      stickyHeaderIndices: arr
+    })
   }
 
   onEndReached = () => {
@@ -39,6 +56,10 @@ class FlatListTab extends Component {
 
   onRefresh = () => {
     this.props.listFetch()
+  }
+
+  renderHeader = () => {
+    return <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}><Text>Header</Text></View>
   }
 
   render() {
@@ -50,7 +71,14 @@ class FlatListTab extends Component {
 
     const {selected, data, listStyle} = this.props
 
-    return (
+    //   Object.keys(data[0]).map(a => (<Text>{a}</Text>))
+        
+    const keys = data.length > 0 ? Object.keys(data[0]) : []
+    
+    return data.length > 0 && (
+        <View>
+        <View>
+        </View>  
         <FlatList
           data={data}
           initialNumToRender={10}
@@ -59,60 +87,23 @@ class FlatListTab extends Component {
           refreshing={this.props.refreshing}
           onRefresh={this.onRefresh}
           style={[styles.list, listStyle]}
+          // ListHeaderComponent={this.renderHeader}
+          stickyHeaderIndices={this.state.stickyHeaderIndices}
+          numColumns={keys.length}
           renderItem={
             ({ item }) => {
               
               return (
-                <View><Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.firstName}</Text></View>
+                <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+                  <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.firstName}</Text>
+                  <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.lastName}</Text>
+                </View>
+
               )
               
-              return (
-              <View>
-              <Grid>{(state, setState) => (
-                <Row key={item.key} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-                  <Col size={90} offset={6} >
-                    <Row>
-                      <Col size={30} smSize={100}>
-                        <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
-                        <Row>
-                          <Col size={5}>
-                            <Text>*</Text>
-                          </Col>
-                          <Col smSize={60} size={87.5} offset={2.5}>
-                            <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>{item.job}</Text>
-                          </Col>
-                        </Row>
-                      </Col>                      
-                      
-                      <Col size={60} smSize={100}>
-                      <Row>
-                        <Col size={25} smSize={100}>
-                          <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.firstName}</Text>
-                        </Col>
-                        <Col size={25} smSize={100}>
-                          <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.lastName}</Text>
-                        </Col>
-                        <Col size={25} smSize={100}>
-                          <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.date}</Text>
-                        </Col> 
-                      </Row>
-                      </Col>
-                    </Row>    
-                  </Col>
-                  <Col size={8} offset={-6} hAlign='right'>
-                        <Text>{item.index}</Text>
-                        <TouchableHighlight onPress={onPress}>
-                          <View>
-                          </View>
-                        </TouchableHighlight>
-                  </Col>
-                </Row>
-                )}
-                </Grid>
-                </View>
-              )
             }}
         />
+        </View>
     )
   }
 }
