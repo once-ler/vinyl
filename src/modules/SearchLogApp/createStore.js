@@ -15,7 +15,6 @@ export default function createStore(data = {}) {
   let store
 
   if (process.env.NODE_ENV !== 'production' && module.hot) {
-    console.log('here')
     store = _createStore(finalReducer, compose(
       applyMiddleware(...middleware),
       DevTools.instrument()

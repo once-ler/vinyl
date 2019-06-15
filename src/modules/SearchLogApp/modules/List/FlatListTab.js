@@ -3,7 +3,6 @@ import {
   FlatList,
   Text,
   ScrollView,
-  
   TouchableHighlight,
   View,
   StyleSheet,
@@ -36,7 +35,7 @@ class FlatListTab extends Component {
   static propTypes = {
     listStyle: ListView.propTypes.style
   }
-
+  /*
   componentWillMount() {
     var arr = [];
     this.props.data.map(obj => {
@@ -49,6 +48,7 @@ class FlatListTab extends Component {
       stickyHeaderIndices: arr
     })
   }
+  */
 
   onEndReached = () => {
     this.props.listFetchReachedEnd()
@@ -62,6 +62,8 @@ class FlatListTab extends Component {
     return <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}><Text>Header</Text></View>
   }
 
+  parseForSuggestions = data => (data && data.hits ? data.hits : [])
+  
   render() {
     const onPress = () => {
       this.props.navigator.push({
@@ -70,29 +72,105 @@ class FlatListTab extends Component {
     }
 
     const {selected, data, listStyle} = this.props
-
-    //   Object.keys(data[0]).map(a => (<Text>{a}</Text>))
-        
-    const keys = data.length > 0 ? Object.keys(data[0]) : []
     
-    return data.length > 0 && (
-        <View>
+    const d = this.parseForSuggestions(data)
+    
+    const keys = (d.length > 0) ? Object.keys(d[0]) : []
+    
+    console.log(data)
+
+    return d.length > 0 && (
+        <View style={[styles.listContainer]}>
         <View>
         </View>  
         <FlatList
           data={data}
           initialNumToRender={10}
-          onEndReachedThreshold={1}
+          onEndReachedThreshold={2}
           onEndReached={this.onEndReached}
           refreshing={this.props.refreshing}
           onRefresh={this.onRefresh}
           style={[styles.list, listStyle]}
           // ListHeaderComponent={this.renderHeader}
-          stickyHeaderIndices={this.state.stickyHeaderIndices}
-          numColumns={keys.length}
+          // stickyHeaderIndices={[0]}
+          // stickyHeaderIndices={this.state.stickyHeaderIndices}
+          // numColumns={keys.length}
           renderItem={
             ({ item }) => {
               
+              // return (
+              //   <Grid>{(state, setState) => {
+              
+              return (<View key={item.key}
+                style={{flex: 1, flexDirection: 'row', padding: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 5}}>
+                <View style={[{flex: 1, flexDirection: 'column'}]}>
+                  <Text style={{fontSize: 12, color: '#0a0a0a', lineHeight: 10}}>{item.key}</Text>
+                </View>  
+                <View style={[{flex: 1, flexDirection: 'column'}]}>
+                  <Text style={{fontSize: 12, color: '#0a0a0a', lineHeight: 10}}>{item.firstName}</Text>
+                </View>  
+                <View style={[{flex: 1, flexDirection: 'column'}]}>
+                  <Text style={{fontSize: 12, color: '#0a0a0a', lineHeight: 10}}>{item.lastName}</Text>
+                </View>  
+                
+                </View>
+              )
+              
+                // }}
+                // </Grid>
+              // )
+
+              // return (
+                // <Grid>{(state, setState) => {
+                // console.log(state)  
+                return (
+                <Row key={item.key}
+                  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+                  <Col size={90} offset={6} >
+                    <Row>
+                      <Col size={30} smSize={100}>
+                        <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
+                        <Row >
+                          <Col size={5}>
+                            <Text>*</Text>
+                          </Col>
+                          <Col smSize={60} size={87.5} offset={2.5}>
+                            <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>{item.job}</Text>
+                          </Col>
+                        </Row>
+                      </Col>                      
+                      
+                      <Col size={60} smSize={100}>
+                      <Row>
+                        <Col size={25} smSize={100}>
+                          <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.firstName}</Text>
+                        </Col>
+                        <Col size={25} smSize={100}>
+                          <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.lastName}</Text>
+                        </Col>
+                        <Col size={25} smSize={100}>
+                          <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.date}</Text>
+                        </Col> 
+                      </Row>
+                      </Col>
+                    </Row>    
+                  </Col>
+                  <Col size={8} offset={-6} hAlign='right'>
+                        <Text>{item.index}</Text>
+                        <TouchableHighlight onPress={onPress}>
+                          <View></View>
+                        </TouchableHighlight>
+                  </Col>
+                </Row>
+                )
+                  // }
+                  // }
+                // </Grid>
+              // )
+
+
+
+
               return (
                 <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
                   <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.firstName}</Text>
@@ -114,15 +192,16 @@ const border = {
 }
 
 const styles = StyleSheet.create({
+  listContainer: {
+    flex: 1
+  },
   list: {
     ...border,
     backgroundColor: 'white',
     borderTopWidth: 0,
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    left: 0,
-    right: 0,
-    height: 300
+    height: ScreenInfo().height
   }
 })
 

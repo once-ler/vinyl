@@ -35,13 +35,17 @@ function debounce(func, wait, immediate) {
 	};
 }
 
-// User need to override searchUrl and parseForSuggestions as needed
+// User need to override searchUrl and parseForSuggestions and onSelected as needed
 const enhanceWithDefaultProps = defaultProps({
   placeholder: 'Enter item to search',
   searchUrl: 'http://mygene.info/v2/query?species=human&q=',
   parseForSuggestions: data => data && data.hits ? data.hits : [],
   keyExtractor: (item, index) => item._id.toString(),
-  onTagsChange: tags => tags
+  onTagsChange: tags => tags,
+  onSelected: (filter, offset = 0, limit = 10) => {
+    return `http://mygene.info/v3/query?q=${filter.replace(/\s/g, '%20')}&fields=all&from=${offset}&size=${limit}`
+    // return `/api/pubmed/entrez/eutils/esearch.fcgi?db=pubmed&retstart=${offset}&retmax=${limit}&retmode=json&field=title&term=${filter}`
+  }
 })
 
 const connectFunc = connect(
@@ -75,7 +79,7 @@ const enhanceWithHandlers = withHandlers({
 
 const Presentation = ({data, value, lastValue, tagsSelected, handleAddition, handleDelete, handleOnChange, parseForSuggestions,
   renderTags, renderSuggestion, renderSeparator, placeholder, keyExtractor, 
-  fetchSuggestSelected, updateInputValue, clearSuggestions, listFetch}) => {
+  fetchSuggestSelected, updateInputValue, clearSuggestions, listFetch, listReset, onSelected}) => {
   
   const d = parseForSuggestions(data)
 
@@ -103,7 +107,11 @@ const Presentation = ({data, value, lastValue, tagsSelected, handleAddition, han
             updateInputValue(name)
             clearSuggestions()
 
-            listFetch(name)
+            // Construct url, page
+            const url = onSelected(name)
+            console.log(url)
+            listReset()
+            listFetch({url})
             }}>
             <Text style={styles.itemText}>{_id} {taxid} {symbol} {name})</Text>
             </TouchableOpacity>
@@ -112,7 +120,7 @@ const Presentation = ({data, value, lastValue, tagsSelected, handleAddition, han
         renderSeparator={renderSeparator}
       />
     </View>
-    <View style={styles.lastValueContainer}><Text>{lastValue}</Text></View>
+    <View style={styles.lastValueContainer}><Text style={[styles.itemText, {width: 250, paddingLeft: 3}]}>{lastValue}</Text></View>
   </View>
 )
 }
@@ -126,6 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   autocompleteContainer: {
+    backgroundColor: '#F5FCFF',
     flex: 1,
     left: 20,
     position: 'absolute',
@@ -140,11 +149,13 @@ const styles = StyleSheet.create({
   },
   lastValueContainer: {
     flex: 1,
-    left: 20,
-    position: 'absolute',
     // right: 20,
+    position: 'absolute',
     top: 50,
-    maxWidth: 250
+    left: 40,
+    maxWidth: 250,
+    alignItems: "flex-end", 
+    justifyContent: "flex-end"
   },
   label: {
     color: "#614b63",

@@ -10,13 +10,14 @@ import {of, from} from 'rxjs'
 import {
   map, 
   catchError, 
-  switchMap, 
   mergeMap, 
+  takeUntil,
+  switchMap,
   filter, 
   debounceTime, 
-  distinctUntilChanged, 
-  takeUntil 
+  distinctUntilChanged   
 } from 'rxjs/operators'
+import { ajax } from 'rxjs/ajax'
 import { ofType } from 'redux-observable'
 import faker from 'faker'
 
@@ -38,7 +39,7 @@ const randomUsers = (count = 10) => {
 
 const fakePromise = willReject => {
   return new Promise((resolve, reject) => {
-    if (willReject || j > 100) {
+    if (willReject || j > 30) {
       reject([])
     }
     resolve(randomUsers(10))
@@ -48,16 +49,23 @@ const fakePromise = willReject => {
 export const listFetchEpic = (action$, state$) =>
   action$.pipe(
     ofType(LIST_FETCH),
-    mergeMap(action =>
-      from(fakePromise(false)).pipe(
-        map(d => listFetchFullfilled(d)),
-        takeUntil(action$.pipe(ofType(LIST_FETCH_CANCELLED))),
-        catchError(error => of({
-          type: LIST_FETCH_REJECTED,
-          payload: error,
-          error: true
-        }))
-      )
+    mergeMap(action => {
+      console.log(action.url)
+      const src = typeof action.promise !== 'undefined' ? from(action.promise) : 
+        (action.url ? ajax(action.url) : from(fakePromise(true)))
+        
+      // from(fakePromise(false)).pipe(
+      return src.pipe(
+          map(d => listFetchFullfilled(d.hasOwnProperty('response') ? d.response : d)),
+          takeUntil(action$.pipe(ofType(LIST_FETCH_CANCELLED))),
+          catchError(error => of({
+            type: LIST_FETCH_REJECTED,
+            payload: error,
+            error: true
+          }))
+        )
+
+      }
     )
   )
 
