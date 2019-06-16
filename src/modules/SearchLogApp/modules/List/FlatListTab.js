@@ -29,8 +29,6 @@ class FlatListTab extends Component {
     super(props)
     this.state = {
       stickyHeaderIndices: [],
-      offset: 0,
-      limit: 10,
       total: 0
     }
   }
@@ -39,6 +37,8 @@ class FlatListTab extends Component {
     data: PropTypes.array,
     refreshing: PropTypes.bool,
     selected: PropTypes.string,
+    offset: PropTypes.number,
+    limit: PropTypes.number,
     listStyle: ListView.propTypes.style,
     renderItem: PropTypes.func,
     onSelected: PropTypes.func,
@@ -49,8 +49,10 @@ class FlatListTab extends Component {
     data: [],
     refreshing: false,
     selected: '',
+    offset: 0,
+    limit: 10,
     // Function to create next url.
-    onSelected: (filter, offset = 0, limit = 10) => {
+    onSelected: ({filter, offset, limit}) => {
       return `http://mygene.info/v3/query?q=${filter.replace(/\s/g, '%20')}&fields=all&from=${offset}&size=${limit}`
       // return `/api/pubmed/entrez/eutils/esearch.fcgi?db=pubmed&retstart=${offset}&retmax=${limit}&retmode=json&field=title&term=${filter}`
     },
@@ -85,7 +87,7 @@ class FlatListTab extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.selected !== this.props.selected) {
-      this.onEndOfData()
+      this.onReset()
       this.onRefresh()
     }
   }
@@ -102,37 +104,29 @@ class FlatListTab extends Component {
 
   getUrl = () => {
     const filter = this.props.selected
-    return this.props.onSelected(filter)
+    return this.props.onSelected({filter})
   }
 
-  onEndOfData = () => {
+  onReset = () => {
     this.props.listReset()
   }
+
+  onEndOfData = () => this.props.listCancel()
 
   renderHeader = () => {
     return <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}><Text>Header</Text></View>
   }
 
   render() {
-    /*
-    const onPress = () => {
-      this.props.navigator.push({
-        screen: 'example.SubView'
-      })
-    }
-    */
-
-    const {data, listStyle} = this.props
+    const {data, parseForSuggestions, listStyle, refreshing, renderItem} = this.props
     
-    const d = this.props.parseForSuggestions(data)
-    
-    const b = data.map(a => this.props.parseForSuggestions(a)).flat()
+    const b = data.map(a => parseForSuggestions(a)).flat()
 
     // const keys = (d.length > 0) ? Object.keys(d[0]) : []
     
-    console.log(b)
+    this.setState({total: b.length})
 
-    return d.length > 0 && (
+    return b.length > 0 && (
         <View style={[styles.listContainer]}>
         <View>
         </View>  
@@ -141,14 +135,14 @@ class FlatListTab extends Component {
           initialNumToRender={10}
           onEndReachedThreshold={2}
           onEndReached={this.onEndReached}
-          refreshing={this.props.refreshing}
+          refreshing={refreshing}
           onRefresh={this.onRefresh}
           style={[styles.list, listStyle]}
           // ListHeaderComponent={this.renderHeader}
           // stickyHeaderIndices={[0]}
           // stickyHeaderIndices={this.state.stickyHeaderIndices}
           // numColumns={keys.length}
-          renderItem={this.props.renderItem}
+          renderItem={renderItem}
         />
         </View>
     )
