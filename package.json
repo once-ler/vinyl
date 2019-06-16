@@ -20,7 +20,7 @@
     "lint": "eslint src",
     "start": "webpack-dev-server --colors --inline --hot --no-info --config webpack/dev.config.js --host 0.0.0.0 --port 8000",
     "start:suggest:app": "webpack-dev-server --colors --inline --hot --no-info --config webpack/dev.suggestApp.config.js --host 0.0.0.0 --port 8000",
-    "start:seaonEndOfDatarch:log:app": "webpack-dev-server --colors --inline --hot --no-info --config webpack/dev.searchLogApp.config.js --host 0.0.0.0 --port 8000",
+    "start:search:log:app": "webpack-dev-server --colors --inline --hot --no-info --config webpack/dev.searchLogApp.config.js --host 0.0.0.0 --port 8000",
     "test": "npm run check && npm run build && npm run testonly",
     "testonly": "mocha --require resources/mocha-bootload src/**/__tests__/**/*.js",
     "watch:mongo-service": "./node_modules/.bin/nodemon --exec c:/node7/node --harmony-async-await services/mongodb",
