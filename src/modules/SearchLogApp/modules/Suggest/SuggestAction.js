@@ -37,14 +37,12 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case FETCH_SUGGEST:
-      console.log(action)
       return {
         ...state,
         ...action,
         loading: true
       };
     case FETCH_SUGGEST_SUCCESS:
-    console.log(action)  
     return {
         ...state,
         loading: false,
@@ -52,7 +50,6 @@ export default function reducer(state = initialState, action = {}) {
         error: null
       };
     case FETCH_SUGGEST_FAIL:
-    console.log(action)
       return {
         ...state,
         loading: false,
@@ -148,7 +145,6 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export const fetchSuggest = params => {
-  console.log(params)
   return params.suggestType ? ({...params, type: params.suggestType}) : ({ ...params, type: FETCH_SUGGEST });
 }
 export const fetchSuggestSelected = params => params.suggestSelectedType ? ({...params, type: params.suggestSelectedType}) : ({ ...params, type: FETCH_SUGGEST_SELECTED });

@@ -37,17 +37,20 @@ class FlatListTab extends Component {
     data: PropTypes.array,
     refreshing: PropTypes.bool,
     selected: PropTypes.string,
+    listStyle: ListView.propTypes.style,
+    renderItem: PropTypes.func,
+    onSelected: PropTypes.func,
+    // reducer
     offset: PropTypes.number,
     limit: PropTypes.number,
-    listStyle: ListView.propTypes.style,
     listFetchReachedEnd: PropTypes.func,
     listFetch: PropTypes.func,
     listReset: PropTypes.func,
     listCancel: PropTypes.func,
     listUpdateTotal: PropTypes.func,
-    renderItem: PropTypes.func,
-    onSelected: PropTypes.func,
-    parseForSuggestions: PropTypes.func
+    listUpdateDownloaded: PropTypes.func,
+    parseForSuggestions: PropTypes.func,
+    parseForExpectedTotal: PropTypes.func
   }
 
   static defaultProps = {
@@ -61,22 +64,35 @@ class FlatListTab extends Component {
       return `http://mygene.info/v3/query?q=${filter.replace(/\s/g, '%20')}&fields=all&from=${offset}&size=${limit}`
       // return `/api/pubmed/entrez/eutils/esearch.fcgi?db=pubmed&retstart=${offset}&retmax=${limit}&retmode=json&field=title&term=${filter}`
     },
-    // Function to extract the array from the HTTP response
-    parseForSuggestions: data => (data && data.hits ? data.hits : []),
+    
     renderItem: ({item}) => {
-      console.log(item)
       return (<View key={item.key} style={[styles.listRow]}>
           <View style={[styles.listColumn]}>
+            <Text style={[styles.listText]}>{item._id}</Text>
+          </View>
+          <View style={[styles.listColumn]}>
+            <Text style={[styles.listText]}>{item.taxid}</Text>
+          </View>
+          <View style={[styles.listColumn]}>
             <Text style={[styles.listText]}>{item.name}</Text>
+          </View>
+          <View style={[styles.listColumn]}>
+            <Text style={[styles.listText]}>{item.symbol}</Text>
+          </View>
+          <View style={[styles.listColumn]}>
+            <Text style={[styles.listText]}>{item.type_of_gene}</Text>
+          </View>
+          <View style={[styles.listColumn]}>
+            <Text style={[styles.listText]}>{JSON.stringify(item.refseq, null, 2)}</Text>
           </View>
         </View>
       )
     }
 
   }
-  
-  /*
+
   componentWillMount() {
+    /*
     var arr = [];
     this.props.data.map(obj => {
       if (obj.header) {
@@ -87,8 +103,8 @@ class FlatListTab extends Component {
     this.setState({
       stickyHeaderIndices: arr
     })
+    */
   }
-  */
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.selected !== this.props.selected) {
@@ -119,26 +135,38 @@ class FlatListTab extends Component {
   onEndOfData = () => this.props.listCancel()
 
   renderHeader = () => {
-    return <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}><Text>Header</Text></View>
+    const {data} = this.props
+
+    if (data.length === 0)
+      return null
+    
+    const keys = Object.keys(data[0])  
+    
+    return (<View style={[styles.listRow]}>
+      {
+        keys.map(a => {
+          (
+            <View style={[styles.listColumn]}>
+              <Text style={[styles.listText]}>{a}</Text>
+            </View>
+          )
+        })
+      }
+    </View>)
+
   }
 
   render() {
-    const {data, parseForSuggestions, listStyle, refreshing, renderItem, listUpdateTotal} = this.props
+    const {data, listStyle, refreshing, renderItem} = this.props
     
-    const b = data.map(a => parseForSuggestions(a)).flat()
-
-    // const keys = (d.length > 0) ? Object.keys(d[0]) : []
-    
-    listUpdateTotal(b.length)
-
-    return b.length > 0 && (
+    return data.length > 0 && (
         <View style={[styles.listContainer]}>
         <View>
         </View>  
         <FlatList
-          data={b}
+          data={data}
           initialNumToRender={10}
-          onEndReachedThreshold={2}
+          onEndReachedThreshold={1}
           onEndReached={this.onEndReached}
           refreshing={refreshing}
           onRefresh={this.onRefresh}
@@ -163,10 +191,10 @@ const styles = StyleSheet.create({
   listRow: {
     flex: 1, 
     flexDirection: 'row', 
-    padding: '6%', 
+    padding: '2%', 
     backgroundColor: 'white', 
     borderBottomColor: 'lightgray', 
-    borderBottomWidth: 5
+    borderBottomWidth: 2
   },
   listColumn: {
     flex: 1, 
@@ -194,7 +222,7 @@ const connectFunc = connect(
   state => ({
     selected: state.suggest.selected,
     refreshing: state.list.refreshing, 
-    data: state.list.payload,
+    data: state.list.data,
     offset: state.list.offset,
     limit: state.list.limit
   }),
