@@ -40,6 +40,11 @@ class FlatListTab extends Component {
     offset: PropTypes.number,
     limit: PropTypes.number,
     listStyle: ListView.propTypes.style,
+    listFetchReachedEnd: PropTypes.func,
+    listFetch: PropTypes.func,
+    listReset: PropTypes.func,
+    listCancel: PropTypes.func,
+    listUpdateTotal: PropTypes.func,
     renderItem: PropTypes.func,
     onSelected: PropTypes.func,
     parseForSuggestions: PropTypes.func
@@ -103,8 +108,8 @@ class FlatListTab extends Component {
   }
 
   getUrl = () => {
-    const filter = this.props.selected
-    return this.props.onSelected({filter})
+    const {selected: filter, offset, limit} = this.props
+    return this.props.onSelected({filter, offset, limit})
   }
 
   onReset = () => {
@@ -118,13 +123,13 @@ class FlatListTab extends Component {
   }
 
   render() {
-    const {data, parseForSuggestions, listStyle, refreshing, renderItem} = this.props
+    const {data, parseForSuggestions, listStyle, refreshing, renderItem, listUpdateTotal} = this.props
     
     const b = data.map(a => parseForSuggestions(a)).flat()
 
     // const keys = (d.length > 0) ? Object.keys(d[0]) : []
     
-    this.setState({total: b.length})
+    listUpdateTotal(b.length)
 
     return b.length > 0 && (
         <View style={[styles.listContainer]}>
@@ -189,7 +194,9 @@ const connectFunc = connect(
   state => ({
     selected: state.suggest.selected,
     refreshing: state.list.refreshing, 
-    data: state.list.payload
+    data: state.list.payload,
+    offset: state.list.offset,
+    limit: state.list.limit
   }),
   dispatch => bindActionCreators({...listActions, ...suggesActions}, dispatch)
 )
