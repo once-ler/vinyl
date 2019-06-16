@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   FlatList,
   Text,
@@ -11,30 +12,62 @@ import {
 import {connect} from 'react-redux'
 import compose from 'recompose/compose'
 import {bindActionCreators} from 'redux'
-
 import { Row, Column as Col, Grid, ScreenInfo, setBreakPoints} from 'react-native-responsive-grid'
-
 import * as listActions from './FlatListAction'
 import * as suggesActions from '../Suggest/SuggestAction'
 
+/*
 setBreakPoints({
   SMALL_Width: 414,
   MEDIUM_Width: 600,
   LARGE_Width: 1024
 })
+*/
 
 class FlatListTab extends Component {
   constructor(props) {
     super(props)
-    // props.listFetch()
     this.state = {
-      stickyHeaderIndices: []
+      stickyHeaderIndices: [],
+      offset: 0,
+      limit: 10,
+      total: 0
     }
   }
 
   static propTypes = {
-    listStyle: ListView.propTypes.style
+    data: PropTypes.array,
+    refreshing: PropTypes.bool,
+    selected: PropTypes.string,
+    listStyle: ListView.propTypes.style,
+    renderItem: PropTypes.func,
+    onSelected: PropTypes.func,
+    parseForSuggestions: PropTypes.func
   }
+
+  static defaultProps = {
+    data: [],
+    refreshing: false,
+    selected: '',
+    // Function to create next url.
+    onSelected: (filter, offset = 0, limit = 10) => {
+      return `http://mygene.info/v3/query?q=${filter.replace(/\s/g, '%20')}&fields=all&from=${offset}&size=${limit}`
+      // return `/api/pubmed/entrez/eutils/esearch.fcgi?db=pubmed&retstart=${offset}&retmax=${limit}&retmode=json&field=title&term=${filter}`
+    },
+    // Function to extract the array from the HTTP response
+    parseForSuggestions: data => (data && data.hits ? data.hits : []),
+    renderItem: ({item}) => {
+      console.log(item)
+      return (<View key={item.key} style={[styles.listRow]}>
+          <View style={[styles.listColumn]}>
+            <Text style={[styles.listText]}>{item.name}</Text>
+          </View>
+        </View>
+      )
+    }
+
+  }
+  
   /*
   componentWillMount() {
     var arr = [];
@@ -50,41 +83,61 @@ class FlatListTab extends Component {
   }
   */
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.selected !== this.props.selected) {
+      this.onEndOfData()
+      this.onRefresh()
+    }
+  }
+
   onEndReached = () => {
-    this.props.listFetchReachedEnd()
-  };
+    const url = this.getUrl()
+    this.props.listFetchReachedEnd({url})
+  }
 
   onRefresh = () => {
-    this.props.listFetch()
+    const url = this.getUrl()
+    this.props.listFetch({url})
+  }
+
+  getUrl = () => {
+    const filter = this.props.selected
+    return this.props.onSelected(filter)
+  }
+
+  onEndOfData = () => {
+    this.props.listReset()
   }
 
   renderHeader = () => {
     return <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}><Text>Header</Text></View>
   }
 
-  parseForSuggestions = data => (data && data.hits ? data.hits : [])
-  
   render() {
+    /*
     const onPress = () => {
       this.props.navigator.push({
         screen: 'example.SubView'
       })
     }
+    */
 
-    const {selected, data, listStyle} = this.props
+    const {data, listStyle} = this.props
     
-    const d = this.parseForSuggestions(data)
+    const d = this.props.parseForSuggestions(data)
     
-    const keys = (d.length > 0) ? Object.keys(d[0]) : []
+    const b = data.map(a => this.props.parseForSuggestions(a)).flat()
+
+    // const keys = (d.length > 0) ? Object.keys(d[0]) : []
     
-    console.log(data)
+    console.log(b)
 
     return d.length > 0 && (
         <View style={[styles.listContainer]}>
         <View>
         </View>  
         <FlatList
-          data={data}
+          data={b}
           initialNumToRender={10}
           onEndReachedThreshold={2}
           onEndReached={this.onEndReached}
@@ -95,91 +148,7 @@ class FlatListTab extends Component {
           // stickyHeaderIndices={[0]}
           // stickyHeaderIndices={this.state.stickyHeaderIndices}
           // numColumns={keys.length}
-          renderItem={
-            ({ item }) => {
-              
-              // return (
-              //   <Grid>{(state, setState) => {
-              
-              return (<View key={item.key}
-                style={{flex: 1, flexDirection: 'row', padding: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 5}}>
-                <View style={[{flex: 1, flexDirection: 'column'}]}>
-                  <Text style={{fontSize: 12, color: '#0a0a0a', lineHeight: 10}}>{item.key}</Text>
-                </View>  
-                <View style={[{flex: 1, flexDirection: 'column'}]}>
-                  <Text style={{fontSize: 12, color: '#0a0a0a', lineHeight: 10}}>{item.firstName}</Text>
-                </View>  
-                <View style={[{flex: 1, flexDirection: 'column'}]}>
-                  <Text style={{fontSize: 12, color: '#0a0a0a', lineHeight: 10}}>{item.lastName}</Text>
-                </View>  
-                
-                </View>
-              )
-              
-                // }}
-                // </Grid>
-              // )
-
-              // return (
-                // <Grid>{(state, setState) => {
-                // console.log(state)  
-                return (
-                <Row key={item.key}
-                  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-                  <Col size={90} offset={6} >
-                    <Row>
-                      <Col size={30} smSize={100}>
-                        <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
-                        <Row >
-                          <Col size={5}>
-                            <Text>*</Text>
-                          </Col>
-                          <Col smSize={60} size={87.5} offset={2.5}>
-                            <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>{item.job}</Text>
-                          </Col>
-                        </Row>
-                      </Col>                      
-                      
-                      <Col size={60} smSize={100}>
-                      <Row>
-                        <Col size={25} smSize={100}>
-                          <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.firstName}</Text>
-                        </Col>
-                        <Col size={25} smSize={100}>
-                          <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.lastName}</Text>
-                        </Col>
-                        <Col size={25} smSize={100}>
-                          <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.date}</Text>
-                        </Col> 
-                      </Row>
-                      </Col>
-                    </Row>    
-                  </Col>
-                  <Col size={8} offset={-6} hAlign='right'>
-                        <Text>{item.index}</Text>
-                        <TouchableHighlight onPress={onPress}>
-                          <View></View>
-                        </TouchableHighlight>
-                  </Col>
-                </Row>
-                )
-                  // }
-                  // }
-                // </Grid>
-              // )
-
-
-
-
-              return (
-                <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
-                  <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.firstName}</Text>
-                  <Text style={{fontSize: 12, color: '#0a0a0a'}}>{item.lastName}</Text>
-                </View>
-
-              )
-              
-            }}
+          renderItem={this.props.renderItem}
         />
         </View>
     )
@@ -192,6 +161,23 @@ const border = {
 }
 
 const styles = StyleSheet.create({
+  listRow: {
+    flex: 1, 
+    flexDirection: 'row', 
+    padding: '6%', 
+    backgroundColor: 'white', 
+    borderBottomColor: 'lightgray', 
+    borderBottomWidth: 5
+  },
+  listColumn: {
+    flex: 1, 
+    flexDirection: 'column'
+  },
+  listText: {
+    fontSize: 12, 
+    color: '#0a0a0a', 
+    lineHeight: 10
+  },
   listContainer: {
     flex: 1
   },

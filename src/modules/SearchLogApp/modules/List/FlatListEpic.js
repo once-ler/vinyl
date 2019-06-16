@@ -72,7 +72,7 @@ export const listFetchEpic = (action$, state$) =>
 export const listFetchReachedEndEpic = action$ =>
   action$.pipe(
     ofType(LIST_FETCH_REACHED_END),
-    mergeMap(() => of({type:LIST_FETCH}))  
+    mergeMap(action => of({...action, type: LIST_FETCH}))  
   )
 
   /*

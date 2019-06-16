@@ -9,7 +9,8 @@ const initialState = {
   refreshing: false,
   filter: null,
   payload: [],
-  offset: 0
+  offset: 0,
+  limit: 10
 }
 
 export default (state = initialState, action = {}) => {
@@ -22,7 +23,7 @@ export default (state = initialState, action = {}) => {
       return {...state, payload, refreshing: false}
     case LIST_FETCH_REACHED_END:
       console.log('LIST_FETCH_REACHED_END')
-      return state
+      return {...state, ...action}
     case LIST_FETCH_CANCELLED:
       return {...state, refreshing: false}
     case LIST_FETCH_REJECTED:
@@ -42,8 +43,9 @@ export const listFetchFullfilled = (payload) => ({
   payload
 })
 
-export const listFetchReachedEnd = () => ({
-  type: LIST_FETCH_REACHED_END
+export const listFetchReachedEnd = (filter) => ({
+  type: LIST_FETCH_REACHED_END,
+  ...filter
 })
 
 export const listReset = () => ({type: LIST_FETCH_CANCELLED})

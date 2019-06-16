@@ -41,11 +41,7 @@ const enhanceWithDefaultProps = defaultProps({
   searchUrl: 'http://mygene.info/v2/query?species=human&q=',
   parseForSuggestions: data => data && data.hits ? data.hits : [],
   keyExtractor: (item, index) => item._id.toString(),
-  onTagsChange: tags => tags,
-  onSelected: (filter, offset = 0, limit = 10) => {
-    return `http://mygene.info/v3/query?q=${filter.replace(/\s/g, '%20')}&fields=all&from=${offset}&size=${limit}`
-    // return `/api/pubmed/entrez/eutils/esearch.fcgi?db=pubmed&retstart=${offset}&retmax=${limit}&retmode=json&field=title&term=${filter}`
-  }
+  onTagsChange: tags => tags
 })
 
 const connectFunc = connect(
@@ -107,11 +103,14 @@ const Presentation = ({data, value, lastValue, tagsSelected, handleAddition, han
             updateInputValue(name)
             clearSuggestions()
 
+            /*
             // Construct url, page
             const url = onSelected(name)
             console.log(url)
             listReset()
             listFetch({url})
+            */
+
             }}>
             <Text style={styles.itemText}>{_id} {taxid} {symbol} {name})</Text>
             </TouchableOpacity>
