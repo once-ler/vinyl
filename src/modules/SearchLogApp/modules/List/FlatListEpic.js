@@ -50,7 +50,6 @@ export const listFetchEpic = (action$, state$) =>
   action$.pipe(
     ofType(LIST_FETCH),
     mergeMap(action => {
-      console.log(action.url)
       const src = typeof action.promise !== 'undefined' ? from(action.promise) : 
         (action.url ? ajax(action.url) : from(fakePromise(true)))
         

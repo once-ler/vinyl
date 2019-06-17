@@ -16,7 +16,7 @@ import Modal from '../../../Modal/Modal'
 import {ScreenInfo} from 'react-native-responsive-grid'
 
 const GradientContainer = styled(Container)`
-  background-image: ${p => { console.log(p.theme); return `linear-gradient(to right, ${p.theme.secondary || 'rosybrown'}, ${p.theme.main || 'slategray'})`} };
+  background-image: ${p => { return `linear-gradient(to right, ${p.theme.secondary || 'rosybrown'}, ${p.theme.main || 'slategray'})`} };
   /*
   width: 100%;
   height: 100%;
@@ -35,9 +35,9 @@ const Presentation = props => {
         <Row><Cell style={{color: props.theme.secondary, padding: '6px 8px 0 28px', maxHeight: '45px', overflow: 'hidden'}}>Cloud source</Cell><Select style={{width: '300px'}} options={options} /></Row>
       </Container>
       <Container style={{position: 'absolute', top: 50, zIndex: 3, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
-        <Row style={{padding: '0 0 0 130px'}}><AutoComplete /><Cell style={{color: props.theme.tertiary || '#fefefe', padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden'}}>{props.lastInputValue}</Cell></Row>
+        <Row style={{padding: '0 0 0 130px'}}><AutoComplete /><Cell style={{color: props.theme.tertiary || '#fefefe', padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden', minWidth: '250px'}}>{props.lastInputValue}</Cell></Row>
       </Container>
-      <Container style={{width: '100%', position: 'absolute', top: 150, zIndex: 2}}>
+      <Container style={{width: '100%', position: 'absolute', top: 170, zIndex: 2}}>
         <FlatListTab />  
       </Container>
       
