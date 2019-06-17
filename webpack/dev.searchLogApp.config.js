@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+const config = {
   devtool: 'eval',
   context: path.resolve(__dirname, '..'),
   entry: [
@@ -88,3 +88,5 @@ module.exports = {
     ]
   }
 };
+
+module.exports = config

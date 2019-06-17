@@ -1,5 +1,6 @@
 /* @flow */
 import React from 'react';
+import {View, Text, StyleSheet} from 'react-native'
 import styled from 'styled-components';
 import lifecycle from 'recompose/lifecycle';
 import compose from 'recompose/compose';
@@ -31,16 +32,15 @@ const Presentation = props => {
     <GradientContainer style={{flex: 1, width: '100%', height: ScreenInfo().height, position: 'relative'}}>
       <Modal></Modal>
       <Progress.Component style={{backgroundColor: '#fefefe'}} />
-      <Container style={{width: '100%', position: 'absolute', top: 20, zIndex: 4, backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
+      <Container style={{ display: 'none', width: '100%', position: 'absolute', top: 20, zIndex: 4, backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         <Row><Cell style={{color: props.theme.secondary, padding: '6px 8px 0 28px', maxHeight: '45px', overflow: 'hidden'}}>Cloud source</Cell><Select style={{width: '300px'}} options={options} /></Row>
       </Container>
       <Container style={{position: 'absolute', top: 50, zIndex: 3, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
-        <Row style={{padding: '0 0 0 130px'}}><AutoComplete /><Cell style={{color: props.theme.tertiary || '#fefefe', padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden', minWidth: '250px'}}>{props.lastInputValue}</Cell></Row>
+        <Row style={{padding: '0 0 0 130px'}}><AutoComplete /><Cell style={{color: props.theme.tertiary || '#fefefe', padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden', minWidth: '250px', display: 'none'}}>{props.lastInputValue}</Cell></Row>
       </Container>
-      <Container style={{width: '100%', position: 'absolute', top: 170, zIndex: 2}}>
+      <Container style={{width: '100%', position: 'absolute', top: 115, zIndex: 2, backgroundColor: 'transparent'}}>
         <FlatListTab />  
-      </Container>
-      
+      </Container>      
     </GradientContainer>
   );
 };
@@ -69,3 +69,9 @@ export default compose(
   connectFunc,
   enhanceWithLifecycle
 )(Presentation);
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+  row: {flexDirection: 'row'},
+  text: {lineHeight: 10, fontSize: 17, color: '#a0a0a0'}
+})

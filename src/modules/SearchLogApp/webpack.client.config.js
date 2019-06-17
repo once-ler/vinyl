@@ -29,6 +29,7 @@ module.exports = {
       'react-view-pager',
       'react-virtualized',
       'react-virtualized-select',
+      'react-native-responsive-grid',
       'recompose',
       'redux-implicit-oauth2',
       'easy-react-form',
@@ -39,7 +40,7 @@ module.exports = {
     filename: '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].js',
     path: path.resolve(__dirname, '../../../examples/search-log'),
-    publicPath: '/search-log/'
+    publicPath: './'
   },
   // progress: true,
   resolve: {
@@ -76,7 +77,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: /node_modules(?!\/react-native-responsive-grid)/, 
         loader: 'babel-loader'
       },
       {

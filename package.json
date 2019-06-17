@@ -1,6 +1,6 @@
 {
   "name": "vinyl",
-  "version": "0.4.15",
+  "version": "0.4.16",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "build:suggest:module": "webpack --progress --colors --display-error-details --config src/modules/Suggest/webpack.prod.config.js",
     "build:select:module": "webpack --progress --colors --display-error-details --config src/modules/Select/webpack.prod.config.js",
     "build:suggest:app": "rimraf examples/suggestApp && webpack --progress --colors --display-error-details --config src/modules/SuggestApp/webpack.client.config.js",
-    "build:seach:log:app": "rimraf examples/suggest-log && webpack --progress --colors --display-error-details --config src/modules/SearchLogApp/webpack.client.config.js",
+    "build:search:log:app": "rimraf examples/suggest-log && NODE_ENV=production webpack --progress --colors --display-error-details --config src/modules/SearchLogApp/webpack.client.config.js",
     "build:suggest:app:server": "webpack --progress --colors --display-error-details --config src/modules/SuggestApp/webpack.server.config.js",
     "check": "flow check",
     "clean": "rimraf dist",

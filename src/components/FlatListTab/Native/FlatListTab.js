@@ -178,7 +178,8 @@ const styles = StyleSheet.create({
     lineHeight: 10
   },
   listContainer: {
-    flex: 1
+    flex: 1,
+    marginTop: 5
   },
   list: {
     ...border,
