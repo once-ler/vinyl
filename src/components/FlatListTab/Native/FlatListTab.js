@@ -130,7 +130,7 @@ class FlatListTab extends Component {
     
     return data.length > 0 && (
         <View style={[styles.listContainer]}>
-        <View>{renderHeader({keys})}</View>  
+        {renderHeader({keys})}  
         <FlatList
           data={data}
           initialNumToRender={10}
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   listRow: {
     flex: 1, 
     flexDirection: 'row', 
-    padding: '2%', 
+    padding: 15, 
     backgroundColor: 'white', 
     borderBottomColor: 'lightgray', 
     borderBottomWidth: 2

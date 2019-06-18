@@ -35,10 +35,10 @@ const Presentation = props => {
       <Container style={{ display: 'none', width: '100%', position: 'absolute', top: 20, zIndex: 4, backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
         <Row><Cell style={{color: props.theme.secondary, padding: '6px 8px 0 28px', maxHeight: '45px', overflow: 'hidden'}}>Cloud source</Cell><Select style={{width: '300px'}} options={options} /></Row>
       </Container>
-      <Container style={{position: 'absolute', top: 50, zIndex: 3, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
-        <Row style={{padding: '0 0 0 130px'}}><AutoComplete /><Cell style={{color: props.theme.tertiary || '#fefefe', padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden', minWidth: '250px', display: 'none'}}>{props.lastInputValue}</Cell></Row>
+      <Container style={{position: 'absolute', top: 20, zIndex: 3, margin: '12px 0', backgroundColor: 'transparent', padding: '8px 0 0 8px'}}>
+        <Row style={{padding: '0 0 0 90px'}}><AutoComplete /><Cell style={{color: props.theme.tertiary || '#fefefe', padding: '6px 0 0 8px', maxHeight: '45px', overflow: 'hidden', minWidth: '250px', display: 'none'}}>{props.lastInputValue}</Cell></Row>
       </Container>
-      <Container style={{width: '100%', position: 'absolute', top: 115, zIndex: 2, backgroundColor: 'transparent'}}>
+      <Container style={{width: '100%', position: 'absolute', top: 125, zIndex: 2, backgroundColor: 'transparent'}}>
         <FlatListTab />  
       </Container>      
     </GradientContainer>
