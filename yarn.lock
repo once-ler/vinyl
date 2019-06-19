@@ -1038,6 +1038,14 @@
     "@babel/helper-regex" "^7.4.4"
     regexpu-core "^4.5.4"
 
+"@babel/polyfill@7.2.5":
+  version "7.2.5"
+  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.2.5.tgz#6c54b964f71ad27edddc567d065e57e87ed7fa7d"
+  integrity sha512-8Y/t3MWThtMLYr0YNC/Q76tqN1w30+b0uQMeFUYauG2UGTR19zyUtFrAzT23zNtBxPp+LbE5E/nwV/q/r3y6ug==
+  dependencies:
+    core-js "^2.5.7"
+    regenerator-runtime "^0.12.0"
+
 "@babel/preset-env@^7.3.1":
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.4.5.tgz#2fad7f62983d5af563b5f3139242755884998a58"
@@ -7986,9 +7994,9 @@ react-motion@^0.5.0:
     prop-types "^15.5.8"
     raf "^3.1.0"
 
-react-native-responsive-grid@once-ler/react-native-responsive-grid:
+react-native-responsive-grid@eztier/react-native-responsive-grid:
   version "0.41.992"
-  resolved "https://codeload.github.com/once-ler/react-native-responsive-grid/tar.gz/2650c078224039d0219c26d2b2f055211e9f432f"
+  resolved "https://codeload.github.com/eztier/react-native-responsive-grid/tar.gz/2650c078224039d0219c26d2b2f055211e9f432f"
   dependencies:
     opencollective "^1.0.3"
 

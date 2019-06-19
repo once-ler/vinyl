@@ -5,8 +5,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   context: path.resolve(__dirname, '../../../'),
   entry: {
-    app: [ './src/modules/SearchLogApp/index.js' ],
+    app: [ 
+      './src/modules/SearchLogApp/index.js' 
+    ],
     vendor: [
+      '@babel/polyfill',
       'axios',
       'react',
       'react-dom',
