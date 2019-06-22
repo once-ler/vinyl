@@ -7,6 +7,7 @@ module.exports = {
   entry: {
     app: [ './src/modules/SuggestApp/index.js' ],
     vendor: [
+      '@babel/polyfill',
       'axios',
       'react',
       'react-dom',
@@ -37,8 +38,8 @@ module.exports = {
   output: {
     filename: '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    path: path.resolve(__dirname, '../../../examples/suggestApp/suggest'),
-    publicPath: '/vinyl/examples/suggest/'
+    path: path.resolve(__dirname, '../../../examples/suggest'),
+    publicPath: '/static/suggest/'
   },
   // progress: true,
   resolve: {

@@ -18,6 +18,5 @@ export default [
   defaultRedditSuggest,
   pubmedSuggest,
   pubmedSelectedSuggest,
-  defaultPubmedSuggest,
-  customLoggingSuggest
+  defaultPubmedSuggest
 ];
