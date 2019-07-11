@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FlatList, Text, TouchableHighlight, View, StyleSheet, ListView } from 'react-native'
-import { ScreenInfo } from 'react-native-responsive-grid'
+// import { ScreenInfo } from 'react-native-responsive-grid'
 
 class FlatListTab extends Component {
   constructor(props) {
@@ -22,6 +22,10 @@ class FlatListTab extends Component {
     onSelected: PropTypes.func,
     renderHeader: PropTypes.func,
     keys: PropTypes.array,
+    onEndReached: PropTypes.func,
+    onRefresh: PropTypes.func,
+    onEndReachedThreshold: PropTypes.number,
+    initialNumToRender: PropTypes.number,
     // reducer
     offset: PropTypes.number,
     limit: PropTypes.number,
@@ -36,6 +40,7 @@ class FlatListTab extends Component {
   }
 
   static defaultProps = {
+    inverted: false,
     data: [],
     refreshing: false,
     selected: '',
@@ -48,7 +53,7 @@ class FlatListTab extends Component {
       // return `/api/pubmed/entrez/eutils/esearch.fcgi?db=pubmed&retstart=${offset}&retmax=${limit}&retmode=json&field=title&term=${filter}`
     },
 
-    renderHeader: ({keys}) => (<View style={[styles.listRow]}>
+    renderHeader: ({keys}) => keys.length > 0 && (<View style={[styles.listRow]}>
         {
           keys.map(a => {
             return (
@@ -64,6 +69,14 @@ class FlatListTab extends Component {
     renderItem: keys => ({item}) => {
       return (
         <TouchableHighlight>
+        {
+        keys.length === 0 ? 
+        <View key={new Date().getTime + (Math.random() * 100000)}>
+          <View style={[styles.listRow]}>
+            <Text style={[styles.listText]}>{typeof item === 'object' ? JSON.stringify(a, null, 2) : item }</Text>
+          </View>
+        </View>
+        :
         <View key={item.key} style={[styles.listRow]}>
           {
             keys.map(k => {
@@ -76,6 +89,7 @@ class FlatListTab extends Component {
             })
           }
         </View>
+        }        
         </TouchableHighlight>
       )
     }
@@ -123,22 +137,43 @@ class FlatListTab extends Component {
     this.props.listReset()
   }
 
-  onEndOfData = () => this.props.listCancel()
+  onContentSizeChange = () => {}
+
+  onLayout = ref => () => {}
+
+  onEndOfData = ref => () => this.props.listCancel()
 
   render() {
-    const {data, listStyle, refreshing, renderItem, renderHeader, keys} = this.props
+    const {
+      data, 
+      listStyle, 
+      refreshing, 
+      renderItem, 
+      renderHeader, 
+      keys, 
+      onRefresh, 
+      onEndReached, 
+      onEndReachedThreshold, 
+      initialNumToRender, 
+      onContentSizeChange, 
+      onLayout
+    } = this.props
     
     return data.length > 0 && (
         <View style={[styles.listContainer]}>
-        {renderHeader({keys})}  
+        { renderHeader({keys}) }  
         <FlatList
+          ref={ref => this.flatList = ref}
+          onContentSizeChange={onContentSizeChange(this.flatList) || this.onContentSizeChange(this.flatList)}
+          onLayout={onLayout(this.flatList) || this.onLayout(this.flatList)}
           data={data}
-          initialNumToRender={10}
-          onEndReachedThreshold={1}
-          onEndReached={this.onEndReached}
+          initialNumToRender={initialNumToRender || 10}
+          onEndReachedThreshold={onEndReachedThreshold || 10}
+          onEndReached={onEndReached || this.onEndReached}
           refreshing={refreshing}
-          onRefresh={this.onRefresh}
+          onRefresh={onRefresh || this.onRefresh}
           style={[styles.list, listStyle]}
+          // keyExtractor={(item, index) => item ? item.key: index}
           // ListHeaderComponent={this.props.renderHeader}
           // stickyHeaderIndices={[0]}
           // stickyHeaderIndices={this.state.stickyHeaderIndices}
@@ -169,9 +204,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   listText: {
-    fontSize: 12, 
+    fontSize: 14, 
     color: '#0a0a0a', 
-    lineHeight: 10
+    lineHeight: 22
   },
   listHeaderText: {
     color: '#A9A9A9',
@@ -186,8 +221,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopWidth: 0,
     borderLeftWidth: 1,
-    borderRightWidth: 1,
-    height: ScreenInfo().height
+    borderRightWidth: 1
   }
 })
 
