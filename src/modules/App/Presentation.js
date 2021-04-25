@@ -27,7 +27,7 @@ margin-right: 10px;
 
 const Presentation = props => (
   <Container>
-    <NavRow wrap end>
+    <NavRow wrap="true" end="true">
       <LogoCell>
       <img src={logoImage}/>
       </LogoCell>

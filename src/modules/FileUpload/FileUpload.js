@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 // import { Form as SimplerForm, } from 'simpler-redux-form';
-// import { Form as SimplerForm, } from 'easy-react-form';
+import { Form as SimplerForm, } from 'easy-react-form';
 // import toClass from 'recompose/toClass';
 // import compose from 'recompose/compose';
 // import withProps from 'recompose/withProps';
@@ -40,7 +40,9 @@ const FileUploadComponent = props => {
 
   const validateNotEmpty = input => !input ? 'Required.' : undefined
 
-  return <Presentation {...props} />
+  const nextProps = { submitAction, validateNotEmpty, ...props }
+
+  return <Presentation {...nextProps} />
 }
 
 /*
@@ -52,4 +54,4 @@ export default compose(
 )(Presentation);
 */
 
-const connectFunc = connectFunc(FileUploadComponent)
+export default connectFunc(FileUploadComponent)

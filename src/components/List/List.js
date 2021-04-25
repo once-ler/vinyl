@@ -105,7 +105,7 @@ const ListComponent = props => {
     opacity: spring(0)
   })
 
-  const getStyles = () => (ownerProps.list.map((item, i) => ({
+  const getStyles = () => (props.list.map((item, i) => ({
     ...item,
     style: {
       height: spring(60, presets.gentle),
@@ -114,10 +114,11 @@ const ListComponent = props => {
   })))
 
   const getDefaultStyles = () => (
-    ownerProps.list.map(item => ({ ...item, style: {height: 0, opacity: 1} }))
+    props.list.map(item => ({ ...item, style: {height: 0, opacity: 1} }))
   )
 
-  return <Presentation {...props} /> 
+  const nextProps = { willEnter, willLeave, getStyles, getDefaultStyles, ...props }
+  return <Presentation {...nextProps} /> 
 }
 
 export default ListComponent
