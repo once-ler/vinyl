@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Animated, View, TouchableOpacity, Text } from "react-native";
 // Web
-import VirtualizedSelect from 'react-virtualized-select'
+// import VirtualizedSelect from 'react-virtualized-select'
+import Select from 'react-select'
 
 const Presentation = props => {
   const {locals, multi} = props
@@ -10,7 +11,7 @@ const Presentation = props => {
     locals.onChange(selected ? selected.value : selected)
   }
 
-  return <VirtualizedSelect {...props} value={locals.value} labelKey="text" multi={multi} options={locals.options} onChange={onChange} />
+  return <Select {...props} value={locals.value} labelKey="text" isMulti={multi} options={locals.options} onChange={onChange} />
 }
 
 function select(locals) {

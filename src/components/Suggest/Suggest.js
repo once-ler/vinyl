@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import withHandlers from 'recompose/withHandlers';
+// import withHandlers from 'recompose/withHandlers';
 import SlideContainer from '../Container/SlideContainer';
 import Row from '../Row/Row';
 import Button from '../Button/Button';
@@ -71,5 +71,31 @@ const Presentation = ({
     </SlideContainer>
   );
 };
+
+const SuggestComponent = props => {
+  const renderSuggestion = (suggestion, { value, valueBeforeUpDown }) => {
+    const suggest = props.getSuggestionValue(suggestion);
+    const query = (props.value || valueBeforeUpDown || value ).trim();
+    const matches = match(suggest, query);
+    const parts = parse(suggest, matches);
+
+    return (
+      <div>
+        <span>
+          {
+            parts.map((part, index) => {
+              const highlightStyle = part.highlight ? {background: 'yellow'} : null;
+              return (
+                <span style={highlightStyle} key={index}>{part.text}</span>
+              );
+            })
+          }
+        </span>
+      </div>
+    );
+  }
+
+  return <Presentation {...props} />
+}
 
 export default enhanceWithHandlers(Presentation);

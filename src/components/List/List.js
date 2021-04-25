@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {TransitionMotion, spring, presets} from 'react-motion';
-import withProps from 'recompose/withProps';
+// import withProps from 'recompose/withProps';
 
 export const ListItem = styled.label`
   white-space: pre;
@@ -71,29 +71,6 @@ const ListLine = styled.li`
   }
 `;
 
-const enhanceWithProps = withProps(
-  ownerProps => ({
-    willEnter: () => ({
-      height: 0,
-      opacity: 1
-    }),
-    willLeave: () => ({
-      height: spring(0),
-      opacity: spring(0)
-    }),
-    getStyles: () => (ownerProps.list.map((item, i) => ({
-      ...item,
-      style: {
-        height: spring(60, presets.gentle),
-        opacity: spring(1, presets.gentle)
-      }
-    }))),
-    getDefaultStyles: () => (
-      ownerProps.list.map(item => ({ ...item, style: {height: 0, opacity: 1} }))
-    )
-  })
-);
-
 const Presentation = ({ list, handleDestroy, getDefaultStyles, getStyles, willEnter, willLeave }) => (
   <TransitionMotion
     defaultStyles={getDefaultStyles()}
@@ -117,4 +94,30 @@ const Presentation = ({ list, handleDestroy, getDefaultStyles, getStyles, willEn
   </TransitionMotion>
 );
 
-export default enhanceWithProps(Presentation);
+const ListComponent = props => {
+  const willEnter = () => ({
+    height: 0,
+    opacity: 1
+  })
+
+  const willLeave = () => ({
+    height: spring(0),
+    opacity: spring(0)
+  })
+
+  const getStyles = () => (ownerProps.list.map((item, i) => ({
+    ...item,
+    style: {
+      height: spring(60, presets.gentle),
+      opacity: spring(1, presets.gentle)
+    }
+  })))
+
+  const getDefaultStyles = () => (
+    ownerProps.list.map(item => ({ ...item, style: {height: 0, opacity: 1} }))
+  )
+
+  return <Presentation {...props} /> 
+}
+
+export default ListComponent
